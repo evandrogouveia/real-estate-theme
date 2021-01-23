@@ -8,7 +8,25 @@ header{
             font-size: 14px;
         }
         p + p{
-            margin-left: 60px;
+            margin-left: 50px;
+        }
+        .section-left{
+            .fas{
+                color: #C0A162;
+            }
+        }
+        .socials{
+            .nav-link{
+                padding: 0;
+                
+            }
+            .fab{
+                color: #565872;
+                margin-left: 20px;
+                &:hover{
+                    color: #C0A162;
+                }
+            }
         }
     }
     .navbar{
@@ -20,10 +38,44 @@ header{
                 height: 100%;
             }
         }
+        .nav-item{
+            padding: 0 5px;
+        }
+        .nav-item.active{
+            .nav-link{
+                color: #201B18;
+            }
+        }
         .nav-link{
             font-family: 'Rubik', sans-serif;
             font-size: 18px;
             font-weight: 500;
+            color: #5e524c;
+            &:hover{
+                color: #201B18;
+            }
+        }
+        .whats-contact{
+            padding:0px 0px 0px 25px;
+            margin-left: 25px;
+            border-left: 1px solid #ededed;
+            .fab{
+                font-size: 35px;
+                color: #201B18;
+            }
+            .number{
+                margin-left: 10px;
+                p{
+                    margin: 0;
+                    color: #565872;
+                    font-size: 18px;
+                    font-weight: 400;
+                }
+                h5{
+                    font-weight: 500;
+                    color: #201B18;
+                }
+            }
         }
     }
     

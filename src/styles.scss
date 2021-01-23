@@ -2,3 +2,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import './assets/fontawesome-free/css/all.min.css';
+
+.owl-item{
+    height: 700px;
+    img{
+        height: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        background-position: 50% 50%;
+    }
+}
+.owl-theme{
+    .owl-nav{
+        position: absolute;
+        top: 45%;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 25px;
+        [class*=owl-]{
+            font-size: 25px;
+            padding: 4px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all .2s;
+            &:hover{
+                background: rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+} 
+ 
