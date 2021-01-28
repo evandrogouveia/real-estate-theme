@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  scrollPosition;
 
-  constructor() { }
+  constructor(private renderer: Renderer2,) { }
 
   ngOnInit(): void {
+    //FIXAR HEADER
+    this.renderer.listen(window, 'scroll', ($event) => {
+      this.scrollPosition = window.scrollY;
+    });
   }
 
 }

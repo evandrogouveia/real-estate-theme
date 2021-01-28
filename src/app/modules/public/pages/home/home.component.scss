@@ -77,6 +77,7 @@
         }
     }
 }
+
 .section-row-professionals{
     background: #f7f7f7;
     padding: 80px 0;
@@ -130,6 +131,7 @@
         
     }
 }
+
 .section-row-about{
     padding: 80px 0;
     .t-title{
@@ -171,6 +173,7 @@
         }
     }
 }
+
 .section-row-numbers{
     display: flex;
     align-items: center;
@@ -178,7 +181,7 @@
     background-size: cover;
     background-position: bottom;
     height: 250px;
-    margin-bottom: 100px;
+    margin-bottom: 75px;
     position: relative;
     &:before{
         content: "";
@@ -200,4 +203,74 @@
         color: #ffffff;
         font-weight: 400;
     }
+}
+
+.section-row-blog{
+    margin-bottom: 75px;
+    .t-title{
+        p{
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: #a38851;
+            font-family: "Rubik", sans-serif;
+        }
+        h3{
+            font-size: 35px;
+            font-family: "Rubik", sans-serif;
+            font-weight: 600;
+            color: #201B18;
+            margin-bottom: 70px;
+        }
+    }
+    .card{
+        .box-image{
+            overflow: hidden;
+            img{
+                transition: all .5s;
+                &:hover{
+                    transform: scale(1.08);
+                }
+            }
+        }
+        
+        h5{
+            font-family: "Rubik", sans-serif; 
+            color: #201B18;
+        }
+        p{
+            font-size: 16px;
+            color: #565872;
+        }
+        .date{
+            margin-bottom: 18px;
+            i{
+                margin-right: 10px;
+                color: #a38851;
+            }
+            span{
+                font-family: "Rubik", sans-serif; 
+                color: #b0b1b8;
+            }
+        }
+        .btn-readmore{
+            color: #a38851;
+            background-color: #ffffff;
+            text-transform: uppercase;
+            font-family: "Rubik", sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 0;
+            box-shadow: none;
+            transition: all .2s;
+            i{
+                margin-left: 6px;
+            }
+            &:hover{
+                color: #201B18;
+                transform: scale(1.03);
+            }
+        }
+    }
+   
 }
