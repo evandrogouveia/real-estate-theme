@@ -1,0 +1,23 @@
+.entry-banner{
+    background: url('/assets/img/entry-image.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    position: relative;
+    &:after{
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(97, 81, 48, 0.6);
+        top: 0;
+    }
+    .texts{
+        height: 200px;
+        h2{
+            font-family: "Rubik", sans-serif;
+            color: #ffffff;
+            z-index: 5;
+        }
+    }
+}
