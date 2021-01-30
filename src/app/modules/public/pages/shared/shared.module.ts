@@ -5,12 +5,14 @@ import { EntryBannerPagesComponent } from './entry-banner-pages/entry-banner-pag
 
 
 @NgModule({
-  declarations: [ EntryBannerPagesComponent,],
+  declarations: [ 
+    EntryBannerPagesComponent,
+  ],
   imports: [
     CommonModule
   ],
   exports: [
-    EntryBannerPagesComponent
+    EntryBannerPagesComponent,
   ]
 })
 export class SharedModule { }

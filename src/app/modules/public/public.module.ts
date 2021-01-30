@@ -3,21 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { PublicRoutingModule } from './public-routing.module';
 import { PublicComponent } from './public.component';
-import { HeaderComponent } from './pages/header/header.component';
-import { FooterComponent } from './pages/footer/footer.component';
 import { PracticeAreasComponent } from './pages/practice-areas/practice-areas.component';
 import { SharedModule } from './pages/shared/shared.module';
 import { AboutComponent } from './pages/about/about.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 
 
 @NgModule({
   declarations: [
     PublicComponent, 
-    HeaderComponent, 
-    FooterComponent, 
     PracticeAreasComponent,  
-    AboutComponent
+    AboutComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    CarouselModule 
+    CarouselModule ,
+    SharedModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
