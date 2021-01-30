@@ -8,6 +8,8 @@ import { SharedModule } from './pages/shared/shared.module';
 import { AboutComponent } from './pages/about/about.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 
 
@@ -17,7 +19,9 @@ import { FooterComponent } from './pages/footer/footer.component';
     PracticeAreasComponent,  
     AboutComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BlogComponent,
+    ContactComponent
   ],
   imports: [
     CommonModule,
