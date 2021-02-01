@@ -1,0 +1,85 @@
+.section-contact{
+    margin: 50px 0 0px;
+    .wrapper-form-contact{
+        width: 60%;
+        margin: 0 auto 100px;
+        p{
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            color: #6c6c74;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        label{
+            font-family: 'Rubik', sans-serif;
+            color: #6c6c74;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input{
+            border-radius: 0;
+            height: 45px;
+            &:focus{
+                box-shadow: none;
+                border: 1px solid #a38851;
+                color: #a38851;
+            }
+        }
+        textarea{
+            border-radius: 0;
+            resize: none;
+            &:focus{
+                box-shadow: none;
+                border: 1px solid #a38851;
+                color: #a38851;
+            }
+        }
+        button{
+            background-color: #a38851;
+            font-family: 'Rubik', sans-serif;
+            margin-top: 10px;
+            border-radius: 0;
+            width: 200px;
+            height: 45px;
+            color: #ffffff;
+            &:hover{
+                background-color: #c5a462;
+            }
+        }
+    }
+
+    .wrapper-contacts{
+        background-color: #f7f7f7;
+        padding: 60px 0 55px;
+        width: 100%;
+        height: 100%;
+        .contact{
+            text-align: center;
+            i{
+                color: #a38851;
+                font-size: 30px;
+                margin-bottom: 10px;
+            }
+            h4{
+                font-family: "Poppins", sans-serif;
+                font-weight: 600;
+                font-size: 18px;
+                color: #6c6c74;
+                margin-bottom: 3px;
+            }
+            p{
+                color: #201B18;
+                margin-bottom: 0;
+                font-size: 15px;
+            }
+
+        }
+        
+    }
+}
+.whats-icon{
+    background: url('/assets/icons/whatsapp.svg') no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
