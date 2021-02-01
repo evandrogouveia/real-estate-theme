@@ -9,11 +9,13 @@ import { FooterComponent } from './pages/footer/footer.component';
 
 
 
+
 @NgModule({
   declarations: [
     PublicComponent,  
     HeaderComponent,
     FooterComponent,
+   
   ],
   imports: [
     CommonModule,
