@@ -1,0 +1,33 @@
+<nav class="navbar">
+    <div class="navbar-left">
+      <button class="btn btn-light" id="menu-toggle" (click)="toggleSidebar()">
+        <img src="assets/img/admin/menu.svg">
+      </button>
+    </div><!-- /navbar-left -->
+
+    <div class="navbar-right">
+
+      <div class="profile-menu" dropdown>
+        <div class="button-drop" dropdownToggle aria-controls="dropdown-animated">
+          <div class="profile-img">
+            <img src="{{(usuario$ | async)?.avatar ? (usuario$ | async)?.avatar : imageSrc}}" alt="avatar">
+          </div>
+          <span class="username">{{(usuario$ | async)?.nome}}</span>
+          <span class="down-arrow"></span>
+        </div>
+
+        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+          <li class="menuitem">
+            <p>Ações</p>
+          </li>
+          <li class="menuitem">
+            <a routerLink="#">
+              <i class="icon-sair"></i>
+              <span>Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /navbar-right -->
+  </nav>

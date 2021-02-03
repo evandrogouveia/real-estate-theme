@@ -1,0 +1,114 @@
+/*================ NAVBAR ==================*/
+ .navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 5px 20px;
+    height: 60px;
+    z-index: 5;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.16);
+    .navbar-left,
+    .navbar-right{
+        display: flex;
+        position: relative;
+        align-items: center;
+    }
+    .navbar-left{
+        #menu-toggle{
+            border: none;
+            background-color: transparent;
+            padding: 0;
+            &:hover{
+                background-color: transparent;
+            }
+            &:focus{
+                box-shadow: none;
+            }
+        }
+    }
+    .navbar-right{
+        .profile-menu {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            .button-drop{
+                display: flex;
+                align-items: center;
+                .username{
+                    font-size: 16px;
+                    color: #7d7a7a;
+                    margin-left: 7px;
+                }
+                .profile-img{
+                    width: 45px;
+                    height: 45px;
+                    padding: 0;
+                    border-radius: 30px;
+                    border: none;
+                    outline: none;
+                    overflow: hidden;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .down-arrow {
+                    border-color: #666666 transparent;
+                    border-style: solid;
+                    border-width: 5px 5px 0px 5px;
+                    margin-left: 12px;
+                    height: 0px;
+                    width: 0px;
+                    display: block;
+                }
+            }
+            .dropdown-menu{
+                width: 100%;
+                padding: 0px;
+                border: none;
+                box-shadow: 0px 7px 20px -2px rgba(0, 0, 0, 0.16);
+                top: 51px !important;
+                left: -20px !important;
+                border-top-right-radius: 0;
+                border-top-left-radius: 0;
+                cursor: default;
+                .menuitem{
+                    padding: 20px;
+                    p{
+                        font-size: 20px;
+                        font-weight: 500;
+                        color: #2b2b2b;
+                    }
+                    a{
+                        color: #575757;
+                        text-decoration: none;
+                        display: block;
+                        width: 100%;
+                        span{
+                            font-size: 14px;
+                            margin-left: 10px;
+                        }
+                        &:hover span{
+                            color:#c0048e;
+                        }
+
+                    }
+                } 
+                .menuitem + .menuitem{
+                    background: #f7dcf0;
+                    padding-top: 25px;
+                }
+            }
+            
+        }
+    }
+}  
+
+/* ============= MOBILE =================*/
+@media (max-width: 575px) { 
+    .navbar{
+        padding: 5px 10px;
+    }
+}

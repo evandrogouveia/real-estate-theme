@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  show = false;
+  type = 'password';
 
-  constructor() { }
+
+
+  clientForm = this.fb.group({
+    id: [undefined],
+    servico: ['', [Validators.required]],
+    nome: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    telefone: ['', [Validators.required]],
+    password: ['', [Validators.minLength(6)]],
+    fotos: ['']
+  });
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    
   }
 
 }
