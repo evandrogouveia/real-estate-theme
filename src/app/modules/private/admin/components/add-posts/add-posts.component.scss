@@ -1,0 +1,60 @@
+.content-add-posts{
+    .header-post{
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        h4{
+            margin: 0;
+            font-family: "Rubik", sans-serif;
+            font-weight: 400;
+        }
+        a{
+            margin: 0;
+            background: #a38851;
+            font-family: "Rubik", sans-serif;
+            color: #ffffff;
+            margin-left: 30px;
+            border-radius: 5px;
+            transition: all .2s;
+            &:hover{
+                background:#c5a462;
+            }
+        }
+    }
+    .table{
+        background-color: #ffffff;
+        border: 1px solid #ccd0d4;
+        box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    }
+}
+
+.icon-edit{
+    background: url("/assets/img/icons/editar.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    &:hover{
+        background: url("/assets/img/icons/editar-hover.svg");
+        background-repeat: no-repeat;
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+        
+    }
+}
+.icon-delete{
+    background: url("/assets/img/icons/deletar.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin-left: 20px;
+    &:hover{
+        background: url("/assets/img/icons/deletar-hover.svg");
+        background-repeat: no-repeat;
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+    }
+}
