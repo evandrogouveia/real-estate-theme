@@ -7,7 +7,7 @@ import { SidebarService } from '../../services/sidebar.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  imageSrc = 'assets/img/admin/user-empty.svg';
+  imageSrc = 'assets/img/icons/user-empty.svg';
 
   constructor(
     private sidebarService: SidebarService,
