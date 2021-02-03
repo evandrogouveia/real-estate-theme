@@ -115,6 +115,26 @@
         }
     }
 }
+.icon-posts{
+    background: url("/assets/img/icons/alfinete.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+}
+#sidebar-wrapper{
+    .list-group-item{
+        &:hover, &.active{
+            .icon-posts{
+                background: url("/assets/img/icons/alfinete-hover.svg");
+                background-repeat: no-repeat;
+                width: 25px;
+                height: 25px;
+                display: inline-block;
+            }
+        }
+    }
+}
 
 
 /* ============= MOBILE =================*/
