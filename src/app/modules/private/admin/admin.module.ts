@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxBootstrapModule,
   ]
 })
 export class AdminModule { }
