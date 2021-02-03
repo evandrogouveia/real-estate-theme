@@ -5,6 +5,10 @@
       </button>
     </div><!-- /navbar-left -->
 
+    <div class="navbar-center">
+      <img src="assets/img/logo.jpg">
+    </div><!-- /navbar-center -->
+
     <div class="navbar-right">
 
       <div class="profile-menu" dropdown>
@@ -12,7 +16,7 @@
           <div class="profile-img">
             <img src="{{(usuario$ | async)?.avatar ? (usuario$ | async)?.avatar : imageSrc}}" alt="avatar">
           </div>
-          <span class="username">{{(usuario$ | async)?.nome}}</span>
+          <span class="username">Admin</span>
           <span class="down-arrow"></span>
         </div>
 
