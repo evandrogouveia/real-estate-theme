@@ -5,7 +5,7 @@
         <i class="icon-internal-home"></i>
         <span>Home</span>
       </a>
-      <a href="javascript:void(0);" routerLinkActive="active" class="list-group-item"
+      <a href="javascript:void(0);" class="list-group-item"
               (click)="isCollapsedA = !isCollapsedA"
               [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePedidos"
               [ngClass]="{'active' : isCollapsedA}">
@@ -18,8 +18,8 @@
               <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item">
                 <span>Adicionar Post</span>
               </a>
-              <a routerLink="#" routerLinkActive="active" class="list-group-item">
-                  <span>Categoria</span>
+              <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item">
+                  <span>Categorias</span>
               </a>
       </div>
       

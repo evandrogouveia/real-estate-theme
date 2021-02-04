@@ -8,11 +8,19 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
-import { AddPostsComponent } from './components/add-posts/add-posts.component';
+import { AddPostsComponent } from './components/blog/add-posts/add-posts.component';
+import { CategoryComponent } from './components/blog/category/category.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, HeaderComponent, SidebarComponent, AddPostsComponent],
+  declarations: [
+    AdminComponent, 
+    HomeComponent, 
+    HeaderComponent, 
+    SidebarComponent, 
+    AddPostsComponent, 
+    CategoryComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
