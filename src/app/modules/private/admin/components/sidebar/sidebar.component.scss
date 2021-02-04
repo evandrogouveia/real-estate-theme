@@ -145,6 +145,26 @@
         }
     }
 }
+.icon-message-inline{
+    background: url("/assets/img/icons/message-inline.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+}
+#sidebar-wrapper{
+    .list-group-item{
+        &:hover, &.active{
+            .icon-message-inline{
+                background: url("/assets/img/icons/message-inline-hover.svg");
+                background-repeat: no-repeat;
+                width: 25px;
+                height: 25px;
+                display: inline-block;
+            }
+        }
+    }
+}
 .down-arrow{
     background: url("/assets/img/icons/select.svg");
     background-repeat: no-repeat;

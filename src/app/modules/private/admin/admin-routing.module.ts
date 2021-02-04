@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AdminComponent } from './admin.component';
 import { AddPostsComponent } from './components/blog/add-posts/add-posts.component';
 import { CategoryComponent } from './components/blog/category/category.component';
+import { CommentsComponent } from './components/blog/comments/comments.component';
 import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
@@ -13,6 +15,7 @@ const routes: Routes = [
       {path: 'home', component: HomeComponent },
       {path: 'add-posts', component: AddPostsComponent},
       {path: 'add-category', component: CategoryComponent},
+      {path: 'comments', component: CommentsComponent},
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ],
   },

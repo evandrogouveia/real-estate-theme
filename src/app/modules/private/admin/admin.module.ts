@@ -10,6 +10,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
 import { AddPostsComponent } from './components/blog/add-posts/add-posts.component';
 import { CategoryComponent } from './components/blog/category/category.component';
+import { CommentsComponent } from './components/blog/comments/comments.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CategoryComponent } from './components/blog/category/category.component
     HeaderComponent, 
     SidebarComponent, 
     AddPostsComponent, 
-    CategoryComponent
+    CategoryComponent, 
+    CommentsComponent
   ],
   imports: [
     CommonModule,
