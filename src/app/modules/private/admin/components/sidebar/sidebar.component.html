@@ -5,10 +5,24 @@
         <i class="icon-internal-home"></i>
         <span>Home</span>
       </a>
-      <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item">
-        <i class="icon-posts"></i>
+      <a href="javascript:void(0);" routerLinkActive="active" class="list-group-item"
+              (click)="isCollapsedA = !isCollapsedA"
+              [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePedidos"
+              [ngClass]="{'active' : isCollapsedA}">
+        <i class="icon-posts" (click)="toggleSidebar()"></i>
         <span>Posts</span>
+        <span class="down-arrow"></span>
       </a>
+      <div *ngIf="!retract" id="collapsePedidos" class="collapse-menu" [collapse]="!isCollapsedA"
+              [isAnimated]="true">
+              <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item">
+                <span>Adicionar Post</span>
+              </a>
+              <a routerLink="#" routerLinkActive="active" class="list-group-item">
+                  <span>Categoria</span>
+              </a>
+      </div>
+      
     </div>
 
 </div><!-- /#sidebar-wrapper -->

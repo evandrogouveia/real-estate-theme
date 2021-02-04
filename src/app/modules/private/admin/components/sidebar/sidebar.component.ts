@@ -8,7 +8,7 @@ import { SidebarService } from '../../services/sidebar.service';
 })
 export class SidebarComponent implements OnInit {
   retract: string;
-
+  isCollapsedA = false;
   constructor(
     private sidebarService: SidebarService,
   ) { }
@@ -18,6 +18,10 @@ export class SidebarComponent implements OnInit {
       .subscribe(valor => { // setar o valor vindo do service na variável.
         this.retract = valor;
     });
+  }
+
+  toggleSidebar() {
+    this.sidebarService.toggleNavbar();
   }
   
 }
