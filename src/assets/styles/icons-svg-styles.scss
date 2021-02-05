@@ -323,3 +323,26 @@
         right: 2px;
     }
 }
+
+.icon-password{
+	background-image: url("/assets/img/login/ver-closed.svg");
+	background-repeat: no-repeat;
+	width: 25px;
+	height: 25px;
+	display: block;
+	position: absolute;
+	right: 25px;
+    top: 42px;
+	cursor: pointer;
+        &.show-pass{
+            background-image: url("/assets/img/login/ver-opened.svg");
+	        background-repeat: no-repeat;
+	        width: 25px;
+	        height: 25px;
+	        display: block;
+	        position: absolute;
+	        right: 25px;
+            top: 42px;
+	        cursor: pointer;
+        }
+}

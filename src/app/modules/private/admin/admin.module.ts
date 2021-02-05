@@ -12,7 +12,9 @@ import { AddPostsComponent } from './components/blog/add-posts/add-posts.compone
 import { CategoryComponent } from './components/blog/category/category.component';
 import { CommentsComponent } from './components/blog/comments/comments.component';
 import { UsersComponent } from './components/users/users.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
+import { EditHeaderComponent } from './components/edit-theme/edit-header/edit-header.component';
+import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-footer.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     SidebarComponent, 
     AddPostsComponent, 
     CategoryComponent, 
-    CommentsComponent, UsersComponent, EditProfileComponent
+    CommentsComponent, 
+    UsersComponent, 
+    EditProfileComponent, EditHeaderComponent, EditFooterComponent,
   ],
   imports: [
     CommonModule,
