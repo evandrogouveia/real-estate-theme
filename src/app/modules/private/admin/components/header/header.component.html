@@ -17,7 +17,7 @@
             <img src="{{(usuario$ | async)?.avatar ? (usuario$ | async)?.avatar : imageSrc}}" alt="avatar">
           </div>
           <span class="username">Admin</span>
-          <span class="down-arrow"></span>
+          <span class="down-arrow-header"></span>
         </div>
 
         <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
@@ -26,7 +26,7 @@
           </li>
           <li class="menuitem">
             <a routerLink="#">
-              <i class="icon-person"></i>
+              <i class="icon-person-profile"></i>
               <span>Editar perfil</span>
             </a>
           </li>
