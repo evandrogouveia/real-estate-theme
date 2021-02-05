@@ -165,6 +165,46 @@
         }
     }
 }
+.icon-user{
+    background: url("/assets/img/icons/user.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+}
+#sidebar-wrapper{
+    .list-group-item{
+        &:hover, &.active{
+            .icon-user{
+                background: url("/assets/img/icons/user-hover.svg");
+                background-repeat: no-repeat;
+                width: 25px;
+                height: 25px;
+                display: inline-block;
+            }
+        }
+    }
+}
+.icon-theme{
+    background: url("/assets/img/icons/tema.svg");
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+}
+#sidebar-wrapper{
+    .list-group-item{
+        &:hover, &.active{
+            .icon-theme{
+                background: url("/assets/img/icons/tema-hover.svg");
+                background-repeat: no-repeat;
+                width: 25px;
+                height: 25px;
+                display: inline-block;
+            }
+        }
+    }
+}
 .down-arrow{
     background: url("/assets/img/icons/select.svg");
     background-repeat: no-repeat;

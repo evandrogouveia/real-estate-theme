@@ -9,6 +9,8 @@ import { SidebarService } from '../../services/sidebar.service';
 export class SidebarComponent implements OnInit {
   retract: string;
   isCollapsedA = false;
+  isCollapsedB = false;
+  isCollapsedC = false;
   constructor(
     private sidebarService: SidebarService,
   ) { }

@@ -7,16 +7,16 @@
       </a>
       <a href="javascript:void(0);" class="list-group-item"
               (click)="isCollapsedA = !isCollapsedA"
-              [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePedidos"
+              [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePosts"
               [ngClass]="{'active' : isCollapsedA}">
         <i class="icon-posts" (click)="toggleSidebar()"></i>
         <span>Posts</span>
         <span class="down-arrow"></span>
       </a>
-      <div *ngIf="!retract" id="collapsePedidos" class="collapse-menu" [collapse]="!isCollapsedA"
+      <div *ngIf="!retract" id="collapsePosts" class="collapse-menu" [collapse]="!isCollapsedA"
               [isAnimated]="true">
               <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item">
-                <span>Adicionar Post</span>
+                <span>Adicionar post</span>
               </a>
               <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item">
                   <span>Categorias</span>
@@ -26,6 +26,40 @@
         <i class="icon-message-inline"></i>
         <span>Comentários</span>
       </a>
+      <a href="javascript:void(0);" class="list-group-item"
+              (click)="isCollapsedB = !isCollapsedB"
+              [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseUsers"
+              [ngClass]="{'active' : isCollapsedB}">
+        <i class="icon-user" (click)="toggleSidebar()"></i>
+        <span>Usuários</span>
+        <span class="down-arrow"></span>
+      </a>
+      <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedB"
+              [isAnimated]="true">
+              <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item">
+                <span>Adicionar usuário</span>
+              </a>
+              <a routerLink="/private/admin/edit-profile" routerLinkActive="active" class="list-group-item">
+                  <span>Meu perfil</span>
+              </a>
+      </div>
+      <a href="javascript:void(0);" class="list-group-item"
+              (click)="isCollapsedC = !isCollapsedC"
+              [attr.aria-expanded]="!isCollapsedC" aria-controls="collapsePersonalize"
+              [ngClass]="{'active' : isCollapsedC}">
+        <i class="icon-theme" (click)="toggleSidebar()"></i>
+        <span>Personalizar</span>
+        <span class="down-arrow"></span>
+      </a>
+      <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC"
+              [isAnimated]="true">
+              <a routerLink="." routerLinkActive="active" class="list-group-item">
+                <span>Header</span>
+              </a>
+              <a routerLink="." routerLinkActive="active" class="list-group-item">
+                  <span>Footer</span>
+              </a>
+      </div>
       
     </div>
 

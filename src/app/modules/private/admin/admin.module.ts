@@ -11,6 +11,8 @@ import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
 import { AddPostsComponent } from './components/blog/add-posts/add-posts.component';
 import { CategoryComponent } from './components/blog/category/category.component';
 import { CommentsComponent } from './components/blog/comments/comments.component';
+import { UsersComponent } from './components/users/users.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -21,7 +23,7 @@ import { CommentsComponent } from './components/blog/comments/comments.component
     SidebarComponent, 
     AddPostsComponent, 
     CategoryComponent, 
-    CommentsComponent
+    CommentsComponent, UsersComponent, EditProfileComponent
   ],
   imports: [
     CommonModule,
