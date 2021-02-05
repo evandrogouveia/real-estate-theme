@@ -2,41 +2,42 @@
     <div class="content-edit-header">
         <div class="header-title">
             <div class="wrap">
-                <h4>Editar Header</h4>
+                <h4>Editar Cabeçalho</h4>
             </div>
         </div>
 
-        <div class="card edit-topbar">
-            <h5>Topbar</h5>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="title-card">
-                            <p>Contatos</p>
-                        </div>
-                        <div class="card-body">
-                            <form>
+        <div class="card card-edit">
+            <form class="form-topbar">
+                <h5>Topbar</h5>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card card-topbar">
+                            <div class="title-card">
+                                <p>Contatos</p>
+                            </div>
+                            <div class="card-body">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
-                                    <input type="email" class="form-control" id="email" placeholder="ex.: email@email.com">
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="ex.: email@email.com">
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Endereço</label>
-                                    <input type="text" class="form-control" id="address" placeholder="ex.: Avenida das amérias, 1500">
+                                    <input type="text" class="form-control" id="address"
+                                        placeholder="ex.: Avenida das amérias, 1500">
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="title-card">
-                            <p>Redes sociais</p>
-                        </div>
-                        <div class="card-body">
-                            <form>
+                    <div class="col-lg-6">
+                        <div class="card card-topbar">
+                            <div class="title-card">
+                                <p>Redes sociais</p>
+                            </div>
+                            <div class="card-body">
+
                                 <div class="form-group">
-                                    <label for="facebook"><i class="fab fa-facebook-f"></i> Facebook</label>
+                                    <label for="facebook">Facebook</label>
                                     <input type="text" class="form-control" id="facebook" placeholder="Insira o link">
                                 </div>
                                 <div class="form-group">
@@ -51,11 +52,96 @@
                                     <label for="instagram">Instagram</label>
                                     <input type="text" class="form-control" id="instagram" placeholder="Insira o link">
                                 </div>
-                            </form>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-edit">
+            <form class="form-navbar">
+                <h5>Navbar</h5>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card card-navbar">
+                            <div class="title-card">
+                                <p>Logo</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="avatar">
+                                    <img class="img-upload" [src]="imagemSrc" width="100%" height="150px"
+                                        alt="imagem-upload">
+                                    <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
+                                        aria-describedby="nome" placeholder="imagem" (change)="showPreviewImage($event)"
+                                        hidden>
+                                </div>
+                                <button type="button" class="btn btn-alter-logo" (click)="fileUploader.click()">
+                                    Alterar logo
+                                </button>
+                                <p>Tamanho recomendado: 125x90 pixels</p>
+                                <p>Formato recomendado: JPG</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-navbar">
+                            <div class="title-card">
+                                <p>Menu</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="facebook">Posição 1</label>
+                                    <input type="text" class="form-control" id="facebook" placeholder="Insira o nome">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter">Posição 2</label>
+                                    <input type="text" class="form-control" id="twitter" placeholder="Insira o nome">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telegram">Posição 3</label>
+                                    <input type="text" class="form-control" id="telegram" placeholder="Insira o nome">
+                                </div>
+                                <div class="form-group">
+                                    <label for="instagram">Posição 4</label>
+                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o nome">
+                                </div>
+                                <div class="form-group">
+                                    <label for="instagram">Posição 5</label>
+                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o nome">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-navbar">
+                            <div class="title-card">
+                                <p>Whatsapp contato</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="number">Número</label>
+                                    <input type="text" class="form-control" id="number" placeholder="Insira o numero">
+                                </div>
+                                <div class="form-group">
+                                    <label for="link">Link</label>
+                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
         </div>
     </div>
 </section>
