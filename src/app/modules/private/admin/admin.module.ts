@@ -15,7 +15,8 @@ import { UsersComponent } from './components/users/users.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { EditHeaderComponent } from './components/edit-theme/edit-header/edit-header.component';
 import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-footer.component';
-
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-fo
     CategoryComponent, 
     CommentsComponent, 
     UsersComponent, 
-    EditProfileComponent, EditHeaderComponent, EditFooterComponent,
+    EditProfileComponent, 
+    EditHeaderComponent, 
+    EditFooterComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,8 @@ import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-fo
     FormsModule,
     ReactiveFormsModule,
     NgxBootstrapModule,
+    AngularEditorModule,
+    HttpClientModule
   ]
 })
 export class AdminModule { }

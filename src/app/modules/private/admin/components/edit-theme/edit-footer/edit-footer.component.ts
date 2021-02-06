@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-footer',
@@ -8,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class EditFooterComponent implements OnInit {
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  constructor() { }
+  
+
+  footerForm: FormGroup = this.fb.group({
+    htmlContentAddress: [''],
+    htmlContentSocials: [''],
+  });
+
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +35,43 @@ export class EditFooterComponent implements OnInit {
       this.selectedImage = null;
     }
   }
+
+  
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '1rem',
+    placeholder: 'Digite o texto aqui...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      [
+        'insertImage',
+        'insertVideo',
+        'customClasses',
+        'insertUnorderedList',
+        'insertOrderedList',
+      ]
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ],
+    
+  };
 
 }
