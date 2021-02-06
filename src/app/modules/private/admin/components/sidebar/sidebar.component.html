@@ -15,10 +15,10 @@
       </a>
       <div *ngIf="!retract" id="collapsePosts" class="collapse-menu" [collapse]="!isCollapsedA"
               [isAnimated]="true">
-              <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item">
+              <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                 <span>Adicionar post</span>
               </a>
-              <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item">
+              <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                   <span>Categorias</span>
               </a>
       </div>
@@ -36,10 +36,10 @@
       </a>
       <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedB"
               [isAnimated]="true">
-              <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item">
+              <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                 <span>Adicionar usuário</span>
               </a>
-              <a routerLink="/private/admin/edit-profile" routerLinkActive="active" class="list-group-item">
+              <a routerLink="/private/admin/edit-profile" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                   <span>Meu perfil</span>
               </a>
       </div>
@@ -53,10 +53,10 @@
       </a>
       <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC"
               [isAnimated]="true">
-              <a routerLink="/private/admin/edit-header" routerLinkActive="active" class="list-group-item">
+              <a routerLink="/private/admin/edit-header" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                 <span>Cabeçalho</span>
               </a>
-              <a routerLink="/private/admin/edit-footer" routerLinkActive="active" class="list-group-item">
+              <a routerLink="/private/admin/edit-footer" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                   <span>Rodapé</span>
               </a>
       </div>
