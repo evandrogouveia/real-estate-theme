@@ -25,7 +25,7 @@ const routes: Routes = [
       {path: 'edit-profile', component: EditProfileComponent},
       {path: 'edit-header', component: EditHeaderComponent},
       {path: 'edit-footer', component: EditFooterComponent},
-      {path: 'edit-banner-home', component: EditBannerHomeComponent},
+      {path: 'banners', component: EditBannerHomeComponent},
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ],
   },

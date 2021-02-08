@@ -1,1 +1,168 @@
-<p>edit-banner-home works!</p>
+<section>
+    <div class="content-edit-banner">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Adicionar / Editar Banners Home</h4>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <form class="form-banner">
+                <h5>Adicionar banner</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-topbar">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="avatar">
+                                            <img class="img-upload" [src]="imagemSrc" width="100%" height="290px"
+                                                alt="imagem-upload" (click)="fileUploader.click()">
+                                            <input type="file" #fileUploader accept="image/*" class="form-control"
+                                                id="avatar" aria-describedby="nome" placeholder="imagem"
+                                                (change)="showPreviewImage($event)" hidden>
+                                        </div>
+                                        <p>Tamanho recomendado: 1920x750 pixels</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="title">Título</label>
+                                            <input type="email" class="form-control" id="title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descricao">Descrição</label>
+                                            <textarea class="form-control" id="descricao" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="link">Link do botão</label>
+                                            <input type="text" class="form-control" id="link">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Adicionar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-edit">
+            <h5>Banners Home</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </th>
+                            <th scope="col">Imagem</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" src="assets/img/slide-1.jpg" alt="imagem-banner"></td>
+                            <td><a href="#">Insuring Your Future From Today </a></td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" [src]="imagemSrc" alt="imagem-banner"></td>
+                            <td><a href="#">Insuring Your Future From Today </a></td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" [src]="imagemSrc" alt="imagem-banner"></td>
+                            <td><a href="#">Insuring Your Future From Today </a></td>
+                            <td>-</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <h5>Banner Páginas</h5>
+            <form class="form-banner-pages">
+                <div class="table-responsive">
+                    <table class="table table-banner-pages">
+                        <thead>
+                            <tr>
+                                <th scope="col">Imagem</th>
+                                <th scope="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="check" id="check"
+                                            (change)="isChecked($event)">
+                                        <label class="form-check-label" for="check">{{ checked ? 'Ativo' :
+                                            'Inativo'}}</label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="wrap-banner-pages">
+                                        <img class="img-banner-pages" [src]="imagemSrc" alt="imagem-banner">
+                                        <input type="file" #fileUploader accept="image/*" class="form-control"
+                                            id="avatar" aria-describedby="nome" placeholder="imagem"
+                                            (change)="showPreviewImage($event)" hidden>
+                                        <div class="box-icon-picture">
+                                            <p (click)="fileUploader.click()">Alterar imagem</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-recommended">
+                                        <p>Tamanho recomendado: 1920x750 pixels</p>
+                                        <p>/</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
