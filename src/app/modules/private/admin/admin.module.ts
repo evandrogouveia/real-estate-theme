@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { HomeComponent } from './components/painel/home/home.component';
+import { HeaderComponent } from './components/painel/header/header.component';
+import { SidebarComponent } from './components/painel/sidebar/sidebar.component';
 import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
 import { AddPostsComponent } from './components/blog/add-posts/add-posts.component';
 import { CategoryComponent } from './components/blog/category/category.component';
@@ -16,7 +16,8 @@ import { EditProfileComponent } from './components/users/edit-profile/edit-profi
 import { EditHeaderComponent } from './components/edit-theme/edit-header/edit-header.component';
 import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-footer.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { EditBannerHomeComponent } from './components/edit-theme/edit-banner-home/edit-banner-home.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http'
     UsersComponent, 
     EditProfileComponent, 
     EditHeaderComponent, 
-    EditFooterComponent,
+    EditFooterComponent, EditBannerHomeComponent,
   ],
   imports: [
     CommonModule,
