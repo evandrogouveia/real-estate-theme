@@ -17,7 +17,8 @@ import { EditHeaderComponent } from './components/edit-theme/edit-header/edit-he
 import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-footer.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
-import { EditBannerHomeComponent } from './components/edit-theme/edit-banner-home/edit-banner-home.component'
+import { EditBannerHomeComponent } from './components/edit-theme/edit-banner-home/edit-banner-home.component';
+import { EditHomeComponent } from './components/edit-theme/edit-home/edit-home.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { EditBannerHomeComponent } from './components/edit-theme/edit-banner-hom
     UsersComponent, 
     EditProfileComponent, 
     EditHeaderComponent, 
-    EditFooterComponent, EditBannerHomeComponent,
+    EditFooterComponent, EditBannerHomeComponent, EditHomeComponent,
   ],
   imports: [
     CommonModule,
