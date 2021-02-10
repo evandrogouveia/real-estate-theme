@@ -14,8 +14,15 @@ export class EditHomeComponent implements OnInit {
 
   areasForm: FormGroup = this.fb.group({
     htmlContentAddress: [''],
-    htmlContentSocials: [''],
+    htmlContentDescription1: [''],
+    htmlContentDescription2: [''],
+    htmlContentDescription3: [''],
+    htmlContentTexts1: [''],
   });
+  professionalForm: FormGroup = this.fb.group({
+    htmlContentTexts2: [''],
+  });
+
   constructor( private fb: FormBuilder,) { }
 
   ngOnInit(): void {

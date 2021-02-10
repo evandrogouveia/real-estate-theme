@@ -24,7 +24,7 @@
 
                                 <div class="form-group">
                                     <label for="number">Descrição</label>
-                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                    <angular-editor formControlName="htmlContentDescription1" [config]="config"></angular-editor>
                                 </div>
 
                                 <div class="form-group">
@@ -47,7 +47,7 @@
 
                                 <div class="form-group">
                                     <label for="number">Descrição</label>
-                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                    <angular-editor formControlName="htmlContentDescription2" [config]="config"></angular-editor>
                                 </div>
 
                                 <div class="form-group">
@@ -70,7 +70,7 @@
 
                                 <div class="form-group">
                                     <label for="number">Descrição</label>
-                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                    <angular-editor formControlName="htmlContentDescription3" [config]="config"></angular-editor>
                                 </div>
 
                                 <div class="form-group">
@@ -90,7 +90,7 @@
                                 
                                 <div class="form-group">
                                     <label for="number">Textos</label>
-                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                    <angular-editor formControlName="htmlContentTexts1" [config]="config"></angular-editor>
                                 </div>
 
                                 <div class="form-group">
@@ -108,7 +108,7 @@
         </div>
 
         <div class="card card-edit">
-            <form class="form-professional">
+            <form class="form-professional" [formGroup]="professionalForm">
                 <h5>Seção: Profissionais</h5>
 
                 <div class="row">
@@ -121,7 +121,7 @@
                                 
                                 <div class="form-group">
                                     <label for="number">Textos</label>
-                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                    <angular-editor formControlName="htmlContentTexts2" [config]="config"></angular-editor>
                                 </div>
                                 
                             </div>
