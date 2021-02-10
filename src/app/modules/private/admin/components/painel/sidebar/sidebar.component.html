@@ -1,72 +1,84 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper" [ngClass]="retract">
-    <div class="list-group list-group-flush">
-      <a routerLink="/private/admin/home" routerLinkActive="active" class="list-group-item">
-        <i class="icon-internal-home"></i>
+  <div class="list-group list-group-flush">
+    <div class="wrap-menu">
+      <i (click)="home.click()" class="icon-internal-home"></i>
+      <a #home routerLink="/private/admin/home" routerLinkActive="active" class="list-group-item">
         <span>Home</span>
       </a>
-      <a href="javascript:void(0);" class="list-group-item"
-              (click)="isCollapsedA = !isCollapsedA"
-              [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePosts"
-              [ngClass]="{'active' : isCollapsedA}">
-        <i class="icon-posts" (click)="toggleSidebar()"></i>
+    </div>
+
+    <div class="wrap-menu">
+      <i class="icon-posts" (click)="toggleSidebar()"></i>
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedA = !isCollapsedA"
+        [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePosts" [ngClass]="{'active' : isCollapsedA}">
         <span>Posts</span>
         <span class="down-arrow"></span>
       </a>
-      <div *ngIf="!retract" id="collapsePosts" class="collapse-menu" [collapse]="!isCollapsedA"
-              [isAnimated]="true">
-              <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                <span>Adicionar post</span>
-              </a>
-              <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                  <span>Categorias</span>
-              </a>
-      </div>
-      <a routerLink="/private/admin/comments" routerLinkActive="active" class="list-group-item">
-        <i class="icon-message-inline"></i>
+    </div>
+    <div *ngIf="!retract" id="collapsePosts" class="collapse-menu" [collapse]="!isCollapsedA" [isAnimated]="true">
+      <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Adicionar post</span>
+      </a>
+      <a routerLink="/private/admin/add-category" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Categorias</span>
+      </a>
+    </div>
+
+    <div class="wrap-menu">
+      <i (click)="comments.click()" class="icon-message-inline"></i>
+      <a #comments routerLink="/private/admin/comments" routerLinkActive="active" class="list-group-item">
         <span>Comentários</span>
       </a>
-      <a href="javascript:void(0);" class="list-group-item"
-              (click)="isCollapsedB = !isCollapsedB"
-              [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseUsers"
-              [ngClass]="{'active' : isCollapsedB}">
-        <i class="icon-user" (click)="toggleSidebar()"></i>
+    </div>
+
+    <div class="wrap-menu">
+      <i class="icon-user" (click)="toggleSidebar()"></i>
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedB = !isCollapsedB"
+        [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseUsers" [ngClass]="{'active' : isCollapsedB}">
         <span>Usuários</span>
         <span class="down-arrow"></span>
       </a>
-      <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedB"
-              [isAnimated]="true">
-              <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                <span>Adicionar usuário</span>
-              </a>
-              <a routerLink="/private/admin/edit-profile" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                  <span>Meu perfil</span>
-              </a>
-      </div>
-      <a href="javascript:void(0);" class="list-group-item"
-              (click)="isCollapsedC = !isCollapsedC"
-              [attr.aria-expanded]="!isCollapsedC" aria-controls="collapsePersonalize"
-              [ngClass]="{'active' : isCollapsedC}">
-        <i class="icon-theme" (click)="toggleSidebar()"></i>
+    </div>
+    <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedB" [isAnimated]="true">
+      <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
+        <span>Adicionar usuário</span>
+      </a>
+      <a routerLink="/private/admin/edit-profile" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Meu perfil</span>
+      </a>
+    </div>
+
+    <div class="wrap-menu">
+      <i class="icon-theme" (click)="toggleSidebar()"></i>
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedC = !isCollapsedC"
+        [attr.aria-expanded]="!isCollapsedC" aria-controls="collapsePersonalize" [ngClass]="{'active' : isCollapsedC}">
         <span>Personalizar</span>
         <span class="down-arrow"></span>
       </a>
-      <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC"
-              [isAnimated]="true">
-              <a routerLink="/private/admin/edit-theme/edit-banners" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                <span>Banners</span>
-              </a>
-              <a routerLink="/private/admin/edit-theme/edit-header" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                <span>Cabeçalho</span>
-              </a>
-              <a routerLink="/private/admin/edit-theme/edit-home" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                <span>Home</span>
-              </a>
-              <a routerLink="/private/admin/edit-theme/edit-footer" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
-                  <span>Rodapé</span>
-              </a>
-      </div>
-      
     </div>
+    <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC" [isAnimated]="true">
+      <a routerLink="/private/admin/edit-theme/edit-banners" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Banners</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-header" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Cabeçalho</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-home" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Home</span>
+      </a>
+      <a routerLink="/private/admin/edit-theme/edit-footer" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Rodapé</span>
+      </a>
+    </div>
+
+  </div>
 
 </div><!-- /#sidebar-wrapper -->
