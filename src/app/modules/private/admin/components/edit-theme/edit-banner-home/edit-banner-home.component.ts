@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class EditBannerHomeComponent implements OnInit {
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  checked: boolean = false;
+  checked: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
