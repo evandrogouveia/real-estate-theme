@@ -1,1 +1,272 @@
-<p>edit-home works!</p>
+<section>
+    <div class="content-edit-home">
+        <div class="header-title">
+            <div class="wrap">
+                <h4>Editar Home</h4>
+            </div>
+        </div>
+
+        <div class="card card-edit">
+            <form class="form-areas" [formGroup]="areasForm">
+                <h5>Seção: Áreas de atuação</h5>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Área 1</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="link">Título</label>
+                                    <input type="text" class="form-control" id="title" placeholder="Insira o título">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="number">Descrição</label>
+                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="link">Link</label>
+                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Área 2</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="link">Título</label>
+                                    <input type="text" class="form-control" id="title" placeholder="Insira o título">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="number">Descrição</label>
+                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="link">Link</label>
+                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-f">
+                            <div class="title-card">
+                                <p>Área 3</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="link">Título</label>
+                                    <input type="text" class="form-control" id="title" placeholder="Insira o título">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="number">Descrição</label>
+                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="link">Link</label>
+                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card card-f mt-4">
+                            <div class="title-card">
+                                <p>Área inferior</p>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="form-group">
+                                    <label for="number">Textos</label>
+                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="link">Link</label>
+                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-edit">
+            <form class="form-professional">
+                <h5>Seção: Profissionais</h5>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Texto superior</p>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="form-group">
+                                    <label for="number">Textos</label>
+                                    <angular-editor formControlName="htmlContentAddress" [config]="config"></angular-editor>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+
+            <form class="form-professional">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-topbar mt-4">
+                            <div class="title-card">
+                                <p>Adicionar profissionais</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="avatar">
+                                            <img class="img-upload" [src]="imagemSrc" width="100%" height="290px"
+                                                alt="imagem-upload" (click)="fileUploader.click()">
+                                            <input type="file" #fileUploader accept="image/*" class="form-control"
+                                                id="avatar" aria-describedby="nome" placeholder="imagem"
+                                                (change)="showPreviewImage($event)" hidden>
+                                        </div>
+                                        <p>Tamanho recomendado: 255x292 pixels</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="form-group">
+                                            <label for="name">Nome</label>
+                                            <input type="text" class="form-control" id="name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Cargo</label>
+                                            <input type="text" class="form-control" id="role">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Descrição</label>
+                                            <textarea class="form-control" id="description" rows="3"></textarea>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Adicionar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card card-edit">
+            <h5>Profissionais</h5>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </th>
+                            <th scope="col">Imagem</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" src="assets/img/lawyer2.jpg" alt="imagem-banner"></td>
+                            <td><a href="#">BARBARA MAY</a></td>
+                            <td>Sócio-gerente</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" src="assets/img/lawyer2.jpg" alt="imagem-banner"></td>
+                            <td><a href="#">BARBARA MAY</a></td>
+                            <td>Sócio-gerente</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" src="assets/img/lawyer2.jpg" alt="imagem-banner"></td>
+                            <td><a href="#">BARBARA MAY</a></td>
+                            <td>Sócio-gerente</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input type="checkbox">
+                                </div>
+                            </td>
+                            <td><img class="img-banner" src="assets/img/lawyer2.jpg" alt="imagem-banner"></td>
+                            <td><a href="#">BARBARA MAY</a></td>
+                            <td>Sócio-gerente</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                            <td>
+                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

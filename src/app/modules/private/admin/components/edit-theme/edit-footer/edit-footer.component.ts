@@ -35,9 +35,7 @@ export class EditFooterComponent implements OnInit {
       this.selectedImage = null;
     }
   }
-
   
-
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
