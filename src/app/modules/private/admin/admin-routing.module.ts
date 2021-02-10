@@ -8,9 +8,6 @@ import { CommentsComponent } from './components/blog/comments/comments.component
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { HomeComponent } from './components/painel/home/home.component';
 import { UsersComponent } from './components/users/users.component';
-import { EditHeaderComponent } from './components/edit-theme/edit-header/edit-header.component';
-import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-footer.component';
-import { EditBannerHomeComponent } from './components/edit-theme/edit-banner-home/edit-banner-home.component';
 
 const routes: Routes = [
   {
@@ -23,9 +20,7 @@ const routes: Routes = [
       {path: 'comments', component: CommentsComponent},
       {path: 'users', component: UsersComponent},
       {path: 'edit-profile', component: EditProfileComponent},
-      {path: 'edit-header', component: EditHeaderComponent},
-      {path: 'edit-footer', component: EditFooterComponent},
-      {path: 'banners', component: EditBannerHomeComponent},
+      {path: 'edit-theme', loadChildren: () => import('./components/edit-theme/edit-theme.module').then(m => m.EditThemeModule) },
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ],
   },

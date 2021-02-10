@@ -53,13 +53,16 @@
       </a>
       <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC"
               [isAnimated]="true">
-              <a routerLink="/private/admin/banners" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
+              <a routerLink="/private/admin/edit-theme/edit-banners" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                 <span>Banners</span>
               </a>
-              <a routerLink="/private/admin/edit-header" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
+              <a routerLink="/private/admin/edit-theme/edit-header" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                 <span>Cabeçalho</span>
               </a>
-              <a routerLink="/private/admin/edit-footer" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
+              <a routerLink="/private/admin/edit-theme/edit-home" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
+                <span>Home</span>
+              </a>
+              <a routerLink="/private/admin/edit-theme/edit-footer" routerLinkActive="active" class="list-group-item"  (click)="toggleSidebar()">
                   <span>Rodapé</span>
               </a>
       </div>

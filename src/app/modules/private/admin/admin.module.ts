@@ -13,12 +13,9 @@ import { CategoryComponent } from './components/blog/category/category.component
 import { CommentsComponent } from './components/blog/comments/comments.component';
 import { UsersComponent } from './components/users/users.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
-import { EditHeaderComponent } from './components/edit-theme/edit-header/edit-header.component';
-import { EditFooterComponent } from './components/edit-theme/edit-footer/edit-footer.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
-import { EditBannerHomeComponent } from './components/edit-theme/edit-banner-home/edit-banner-home.component';
-import { EditHomeComponent } from './components/edit-theme/edit-home/edit-home.component'
+
 
 @NgModule({
   declarations: [
@@ -31,8 +28,7 @@ import { EditHomeComponent } from './components/edit-theme/edit-home/edit-home.c
     CommentsComponent, 
     UsersComponent, 
     EditProfileComponent, 
-    EditHeaderComponent, 
-    EditFooterComponent, EditBannerHomeComponent, EditHomeComponent,
+    
   ],
   imports: [
     CommonModule,
