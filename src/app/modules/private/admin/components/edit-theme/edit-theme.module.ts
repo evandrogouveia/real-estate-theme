@@ -12,6 +12,7 @@ import { EditFooterComponent } from './edit-footer/edit-footer.component';
 import { EditBannerHomeComponent } from './edit-banner-home/edit-banner-home.component';
 import { EditHomeComponent } from './edit-home/edit-home.component';
 import { EditThemeComponent } from './edit-theme.component';
+import { EditAboutComponent } from './edit-about/edit-about.component';
 
 
 
@@ -21,7 +22,7 @@ import { EditThemeComponent } from './edit-theme.component';
     EditFooterComponent, 
     EditBannerHomeComponent, 
     EditHomeComponent, 
-    EditThemeComponent,
+    EditThemeComponent, EditAboutComponent,
   ],
   imports: [
     CommonModule,
