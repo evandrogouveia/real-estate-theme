@@ -17,7 +17,9 @@
     .card-edit{
         padding: 20px 30px;
         margin-bottom: 20px;
-        .form-areas, .form-professional{
+        .form-areas, 
+        .form-professional, 
+        .form-our-numbers{
             h5{
                 margin-bottom: 20px;
             }
@@ -91,12 +93,76 @@
                         cursor: pointer;
                         margin-bottom: 10px;
                     }
+                    .columns{
+                        display: flex;
+                        div{
+                            border: 1px solid #ddd;
+                            background-color: #f8f8f8;
+                            width: 22%;
+                            height: 250px;
+                            margin-right: 10px;
+                        }
+                    }
                 }
                 &.card-f{
                     min-height: 490px;
                 }
                 &.card-copy{
                     margin-top: 30px;
+                }
+                &.card-columns{
+                    [type="radio"]:checked,
+                    [type="radio"]:not(:checked) {
+                        position: absolute;
+                        left: -9999px;
+                    }
+                    [type="radio"]:checked + label,
+                    [type="radio"]:not(:checked) + label{
+                        position: relative;
+                        padding-left: 28px;
+                        cursor: pointer;
+                        line-height: 20px;
+                        display: inline-block;
+                        color: #555555;
+                    }
+                    [type="radio"]:checked + label{
+                        color: #a38851;
+                    }
+                    [type="radio"]:checked + label:before,
+                    [type="radio"]:not(:checked) + label:before {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 18px;
+                        height: 18px;
+                        border: 1px solid #ccc;
+                        border-radius: 100%;
+                        background: #fff;
+                    }
+                    [type="radio"]:checked + label:after,
+                    [type="radio"]:not(:checked) + label:after {
+                        content: '';
+                        width: 12px;
+                        height: 12px;
+                        background: #a38851;
+                        position: absolute;
+                        top: 3px;
+                        left: 3px;
+                        border-radius: 100%;
+                        -webkit-transition: all 0.2s ease;
+                        transition: all 0.1s ease;
+                    }
+                    [type="radio"]:not(:checked) + label:after {
+                        opacity: 0;
+                        -webkit-transform: scale(0);
+                        transform: scale(0);
+                    }
+                    [type="radio"]:checked + label:after {
+                        opacity: 1;
+                        -webkit-transform: scale(1);
+                        transform: scale(1);
+                    }
                 }
             }
         }
@@ -139,6 +205,111 @@
             .img-banner{
                 width: 130px;
                 height:150px;
+            }
+        }
+        .table-our-numbers{
+            th{
+                &:nth-child(2){
+                    text-align: right;
+                    input[type="checkbox"]{
+                        appearance: none;
+                        width: 45px;
+                        height: 10px;
+                        background: #a7a8a8;
+                        border-radius: 5px;
+                        position: relative;
+                        outline: 0;
+                        cursor: pointer;
+                        transition: all .25s;
+                        top: 1px;
+                    }
+                    input[type="checkbox"]:checked{
+                        background: #a38851;
+                    }
+                    input[type="checkbox"]:before,
+                    input[type="checkbox"]:after{
+                        position: absolute;
+                        content: "";
+                        transition: all .25s;
+                    }
+                    input[type="checkbox"]:before{
+                        width: 25px;
+                        height: 25px;
+                        background: #c5c5c5;
+                        border-radius: 50%;
+                        top: 50%;
+                        left: 0;
+                        transform: translateY(-50%);
+                    }
+                    input[type="checkbox"]:checked:before{
+                        left: calc(100% - 25px);
+                        background: #c5a462;
+                    }
+                      
+                    input[type="checkbox"]:checked:after{
+                        left: 75px;
+                        transform: scale(0);
+                    }
+                    .form-check input:focus{
+                        border: none;
+                    }
+                    .form-check-label{
+                        font-size: 16px;
+                        font-weight: 100;
+                        margin-left: 12px;
+                        color: #999999;
+                        font-family: 'InterUI_Regular', sans-serif;
+                    }
+                    input[type="checkbox"]:checked + .form-check-label{
+                        color: #a38851;
+                    }
+                    
+                }
+            }
+            td{
+                width: 100%;
+                .wrap-our-numbers{
+                    overflow: hidden;
+                    position: relative;
+                    img{
+                        width: 100%;
+                        height: 200px;
+                        object-fit: cover;
+                   }
+                   .box-icon-picture{
+                        position: absolute;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        text-align: center;
+                        opacity: 0;
+                        transition: all .2s;
+                        background: rgba(0,0,0,0.4);
+                        &:hover{
+                            opacity: 1;
+                        }
+                        p{
+                            cursor: pointer;
+                            font-size: 16px;
+                            color: #ffffff;
+                            margin: 0;
+                            position: relative;
+                            top: 80px;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .text-recommended{
+                    display: flex;
+                    p{
+                        margin: 5px 10px 0 0;
+                        color: #999;
+                        font-style: italic;
+                        font-weight: 100;
+                    }
+                }
+                
             }
         }
     }

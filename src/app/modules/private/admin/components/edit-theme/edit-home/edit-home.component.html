@@ -6,6 +6,7 @@
             </div>
         </div>
 
+        <!-- ================================ SEÇÃO AREAS DE ATUAÇÃO ================================ -->
         <div class="card card-edit">
             <form class="form-areas" [formGroup]="areasForm">
                 <h5>Seção: Áreas de atuação</h5>
@@ -18,18 +19,20 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="link">Título</label>
-                                    <input type="text" class="form-control" id="title" placeholder="Insira o título">
+                                    <label for="titlearea1">Título</label>
+                                    <input type="text" class="form-control" id="titlearea1"
+                                        placeholder="Insira o título">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="number">Descrição</label>
-                                    <angular-editor formControlName="htmlContentDescription1" [config]="config"></angular-editor>
+                                    <label for="descriptionarea1">Descrição</label>
+                                    <angular-editor formControlName="htmlContentDescriptionArea1" [config]="config">
+                                    </angular-editor>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="link">Link</label>
-                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                    <label for="linkarea1">Link</label>
+                                    <input type="text" class="form-control" id="linkarea1" placeholder="Insira o link">
                                 </div>
                             </div>
                         </div>
@@ -41,18 +44,20 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="link">Título</label>
-                                    <input type="text" class="form-control" id="title" placeholder="Insira o título">
+                                    <label for="titlearea2">Título</label>
+                                    <input type="text" class="form-control" id="titlearea2"
+                                        placeholder="Insira o título">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="number">Descrição</label>
-                                    <angular-editor formControlName="htmlContentDescription2" [config]="config"></angular-editor>
+                                    <label for="descriptionarea2">Descrição</label>
+                                    <angular-editor formControlName="htmlContentDescriptionArea2" [config]="config">
+                                    </angular-editor>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="link">Link</label>
-                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                    <label for="linkarea2">Link</label>
+                                    <input type="text" class="form-control" id="linkarea2" placeholder="Insira o link">
                                 </div>
                             </div>
                         </div>
@@ -64,18 +69,20 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="link">Título</label>
-                                    <input type="text" class="form-control" id="title" placeholder="Insira o título">
+                                    <label for="titlearea3">Título</label>
+                                    <input type="text" class="form-control" id="titlearea3"
+                                        placeholder="Insira o título">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="number">Descrição</label>
-                                    <angular-editor formControlName="htmlContentDescription3" [config]="config"></angular-editor>
+                                    <label for="descriptionarea3">Descrição</label>
+                                    <angular-editor formControlName="htmlContentDescriptionArea3" [config]="config">
+                                    </angular-editor>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="link">Link</label>
-                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                    <label for="linkarea3">Link</label>
+                                    <input type="text" class="form-control" id="linkarea3" placeholder="Insira o link">
                                 </div>
                             </div>
                         </div>
@@ -87,15 +94,16 @@
                                 <p>Área inferior</p>
                             </div>
                             <div class="card-body">
-                                
+
                                 <div class="form-group">
                                     <label for="number">Textos</label>
-                                    <angular-editor formControlName="htmlContentTexts1" [config]="config"></angular-editor>
+                                    <angular-editor formControlName="htmlContentTextsBottom" [config]="config">
+                                    </angular-editor>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="link">Link</label>
-                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                    <label for="linkbottom">Link</label>
+                                    <input type="text" class="form-control" id="linkbottom" placeholder="Insira o link">
                                 </div>
                             </div>
                         </div>
@@ -107,6 +115,7 @@
             </form>
         </div>
 
+        <!-- ================================ SEÇÃO PROFISSIONAIS ================================ -->
         <div class="card card-edit">
             <form class="form-professional" [formGroup]="professionalForm">
                 <h5>Seção: Profissionais</h5>
@@ -118,16 +127,17 @@
                                 <p>Texto superior</p>
                             </div>
                             <div class="card-body">
-                                
+
                                 <div class="form-group">
-                                    <label for="number">Textos</label>
-                                    <angular-editor formControlName="htmlContentTexts2" [config]="config"></angular-editor>
+                                    <label for="textsupper">Textos</label>
+                                    <angular-editor formControlName="htmlContentTextsUpper" [config]="config">
+                                    </angular-editor>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="d-flex align-items-center justify-content-end">
@@ -135,7 +145,7 @@
                 </div>
             </form>
 
-            <form class="form-professional">
+            <form class="form-professional" [formGroup]="addProfessionalForm">
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -169,7 +179,7 @@
                                             <label for="description">Descrição</label>
                                             <textarea class="form-control" id="description" rows="3"></textarea>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -262,11 +272,262 @@
                                 <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
                             </td>
                         </tr>
-                        
+
                     </tbody>
 
                 </table>
             </div>
         </div>
+
+        <!-- ================================ SEÇÃO OBJETIVO ================================ -->
+        <div class="card card-edit">
+            <form class="form-professional" [formGroup]="objectiveForm">
+                <h5>Seção: Objetivo</h5>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Texto superior</p>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="textsupper">Textos</label>
+                                    <angular-editor formControlName="htmlContentTextsObjective" [config]="config">
+                                    </angular-editor>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card card-topbar mt-4">
+                            <div class="title-card">
+                                <p>Adicionar imagem e textos</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="avatar">
+                                            <img class="img-upload" [src]="imagemSrc" width="100%" height="300px"
+                                                alt="imagem-upload" (click)="fileUploader.click()">
+                                            <input type="file" #fileUploader accept="image/*" class="form-control"
+                                                id="avatar" aria-describedby="nome" placeholder="imagem"
+                                                (change)="showPreviewImage($event)" hidden>
+                                        </div>
+                                        <p>Tamanho recomendado: 540x360 pixels</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="form-group">
+                                            <label for="titleobjective">Título</label>
+                                            <input type="text" class="form-control" id="titleobjective">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descriptionobjective">Descrição</label>
+                                            <textarea class="form-control" id="descriptionobjective"
+                                                rows="7"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ================================ SEÇÃO NOSSOS NÚMEROS================================ -->
+        <div class="card card-edit">
+            <form class="form-our-numbers">
+                <h5>Seção: Nossos números</h5>
+                <div class="table-responsive">
+                    <table class="table table-our-numbers">
+                        <thead>
+                            <tr>
+                                <th scope="col">Imagem</th>
+                                <th scope="col">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="check" id="check"
+                                            (change)="isChecked($event)" checked>
+                                        <label class="form-check-label" for="check">{{ checked ? 'Ativo' :
+                                            'Inativo'}}</label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="wrap-our-numbers">
+                                        <img class="img-banner-pages" [src]="imagemSrc" alt="imagem-banner">
+                                        <input type="file" #fileUploader accept="image/*" class="form-control"
+                                            id="avatar" aria-describedby="nome" placeholder="imagem"
+                                            (change)="showPreviewImage($event)" hidden>
+                                        <div class="box-icon-picture">
+                                            <p (click)="fileUploader.click()">Alterar imagem</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-recommended">
+                                        <p>Tamanho recomendado: 1920x250 pixels</p>
+                                        <p>/</p>
+                                        <p>Formato recomendado: JPG</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Area 1</p>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="qtd1">Quantidade</label>
+                                    <input type="number" class="form-control" id="qtd1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="text1">Texto</label>
+                                    <input type="text" class="form-control" id="text1">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Area 2</p>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="qtd2">Quantidade</label>
+                                    <input type="number" class="form-control" id="qtd2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="text2">Texto</label>
+                                    <input type="text" class="form-control" id="text2">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Area 3</p>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="qtd3">Quantidade</label>
+                                    <input type="number" class="form-control" id="qtd3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="text3">Texto</label>
+                                    <input type="text" class="form-control" id="text3">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Area 4</p>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="qtd4">Quantidade</label>
+                                    <input type="number" class="form-control" id="qtd4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="text4">Texto</label>
+                                    <input type="text" class="form-control" id="text4">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ================================ SEÇÃO BLOG ================================ -->
+        <div class="card card-edit">
+            <form class="form-our-numbers" [formGroup]="blogForm">
+                <h5>Seção: Blog</h5>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="title-card">
+                                <p>Texto superior</p>
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="textsupper">Textos</label>
+                                    <angular-editor formControlName="htmlContentBlog" [config]="config">
+                                    </angular-editor>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="card card-columns mt-4">
+                            <div class="title-card">
+                                <p>Colunas</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input type="radio" id="columnstree" name="radio-group" checked>
+                                        <label for="columnstree">3 Colunas</label>
+                                        <div class="columns">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="radio" id="columnsfour" name="radio-group">
+                                        <label for="columnsfour">4 Colunas</label>
+                                        <div class="columns">
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <button type="submit" class="btn btn-save-form">Salvar</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </section>

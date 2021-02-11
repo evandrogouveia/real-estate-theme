@@ -10,17 +10,30 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 export class EditHomeComponent implements OnInit {
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  
+  checked: boolean = true;
 
   areasForm: FormGroup = this.fb.group({
     htmlContentAddress: [''],
-    htmlContentDescription1: [''],
-    htmlContentDescription2: [''],
-    htmlContentDescription3: [''],
-    htmlContentTexts1: [''],
+    htmlContentDescriptionArea1: [''],
+    htmlContentDescriptionArea2: [''],
+    htmlContentDescriptionArea3: [''],
+    htmlContentTextsBottom: [''],
   });
+
   professionalForm: FormGroup = this.fb.group({
-    htmlContentTexts2: [''],
+    htmlContentTextsUpper: [''],
+  });
+
+  addProfessionalForm: FormGroup = this.fb.group({
+    htmlContentTextsUpper: [''],
+  });
+
+  objectiveForm: FormGroup = this.fb.group({
+    htmlContentTextsObjective: [''],
+  });
+
+  blogForm: FormGroup = this.fb.group({
+    htmlContentBlog: [''],
   });
 
   constructor( private fb: FormBuilder,) { }
@@ -38,6 +51,10 @@ export class EditHomeComponent implements OnInit {
       this.imagemSrc = 'assets/img/icons/user-empty.svg';
       this.selectedImage = null;
     }
+  }
+
+  isChecked(event){
+    this.checked = event.target.checked;
   }
 
   
