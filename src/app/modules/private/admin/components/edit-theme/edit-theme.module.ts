@@ -14,6 +14,7 @@ import { EditHomeComponent } from './edit-home/edit-home.component';
 import { EditThemeComponent } from './edit-theme.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
 import { EditAreasComponent } from './edit-areas/edit-areas.component';
+import { EditContactComponent } from './edit-contact/edit-contact.component';
 
 
 
@@ -23,7 +24,7 @@ import { EditAreasComponent } from './edit-areas/edit-areas.component';
     EditFooterComponent, 
     EditBannerHomeComponent, 
     EditHomeComponent, 
-    EditThemeComponent, EditAboutComponent, EditAreasComponent,
+    EditThemeComponent, EditAboutComponent, EditAreasComponent, EditContactComponent,
   ],
   imports: [
     CommonModule,
