@@ -61,6 +61,10 @@
       </a>
     </div>
     <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC" [isAnimated]="true">
+      <a routerLink="/private/admin/edit-theme/edit-areas" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span>Áreas de atuação</span>
+      </a>
       <a routerLink="/private/admin/edit-theme/edit-banners" routerLinkActive="active" class="list-group-item"
         (click)="toggleSidebar()">
         <span>Banners</span>

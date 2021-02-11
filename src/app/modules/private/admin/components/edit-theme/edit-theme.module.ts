@@ -13,6 +13,7 @@ import { EditBannerHomeComponent } from './edit-banner-home/edit-banner-home.com
 import { EditHomeComponent } from './edit-home/edit-home.component';
 import { EditThemeComponent } from './edit-theme.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
+import { EditAreasComponent } from './edit-areas/edit-areas.component';
 
 
 
@@ -22,7 +23,7 @@ import { EditAboutComponent } from './edit-about/edit-about.component';
     EditFooterComponent, 
     EditBannerHomeComponent, 
     EditHomeComponent, 
-    EditThemeComponent, EditAboutComponent,
+    EditThemeComponent, EditAboutComponent, EditAreasComponent,
   ],
   imports: [
     CommonModule,
