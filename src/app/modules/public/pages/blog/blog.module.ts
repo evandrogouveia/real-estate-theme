@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BlogRoutingModule } from './blog-routing.module';
@@ -14,6 +14,7 @@ import { AsideLateralComponent } from './components/aside-lateral/aside-lateral.
     CommonModule,
     BlogRoutingModule,
     SharedModule
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BlogModule { }

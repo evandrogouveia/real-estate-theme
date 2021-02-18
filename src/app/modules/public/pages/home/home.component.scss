@@ -7,7 +7,7 @@
         background-color: #f7f7f7;
         padding: 35px;
         i{
-            font-size: 45px;
+            font-size: 50px;
             margin-bottom: 18px;
             color: #201B18;
         }
@@ -245,8 +245,11 @@
         .date{
             margin-bottom: 18px;
             i{
-                margin-right: 10px;
+                margin-right: 5px;
+                font-size: 20px;
                 color: #a38851;
+                position: relative;
+                top: -2px;
             }
             span{
                 font-family: "Rubik", sans-serif; 

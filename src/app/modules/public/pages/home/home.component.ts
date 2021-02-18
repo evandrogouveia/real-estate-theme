@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     dots: false,
     autoHeight: false,
     autoWidth: true,
-    navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'],
+    navText: ['<i class="bx bxs-chevron-left"></i>', '<i class="bx bxs-chevron-right"></i>'],
     responsive: {
       0: {
         items: 1

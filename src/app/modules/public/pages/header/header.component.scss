@@ -2,6 +2,9 @@ header{
     .topbar{
         padding: 10px 0px;
         border-bottom: 1px solid #ededed;
+        i{
+
+        }
         p{
             margin: 0;
             color: #201B18;
@@ -11,18 +14,25 @@ header{
             margin-left: 50px;
         }
         .section-left{
-            .fas{
+            i{
+                font-size: 18px;
                 color: #a38851;
+                line-height: 0;
+                position: relative;
+                top: 3px;
             }
         }
         .socials{
             .nav-link{
                 padding: 0;
-                
             }
-            .fab{
+            i{
                 color: #5e524c;
                 margin-left: 20px;
+                line-height: 0;
+                font-size: 22px;
+                position: relative;
+                top: 3px;
                 &:hover{
                     color: #a38851;
                 }
@@ -52,13 +62,17 @@ header{
                 }
             }
         }
-        
+        .form-inline{
+            i{
+                font-size: 25px;
+            }
+        }
         .whats-contact{
             padding:0px 0px 0px 25px;
             margin-left: 25px;
             border-left: 1px solid #ededed;
-            .fab{
-                font-size: 30px;
+            i{
+                font-size: 38px;
                 color: #201B18;
             }
             .number{
