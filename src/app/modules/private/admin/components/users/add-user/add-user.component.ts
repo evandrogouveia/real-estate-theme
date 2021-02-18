@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-add-user',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-
-  constructor() { }
+  show = false;
+  type = 'password';
+  
+  constructor(public bsModalRef: BsModalRef,) { }
 
   ngOnInit(): void {
+  }
+
+  showHidPassword() {
+    this.show = !this.show;
+    if (this.show) {
+      this.type = 'text';
+    } else {
+      this.type = 'password';
+    }
   }
 
 }

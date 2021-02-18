@@ -1,0 +1,49 @@
+.content-add-user{
+    .modal-header{
+        align-items: center;
+        h3{
+            font-size: 20px;
+            margin: 0;
+            color: #212121;
+        }
+        i{
+            font-size: 35px;
+            color: #888888;
+            cursor: pointer;
+        }
+    }
+    .modal-body{
+        padding-bottom: 30px;
+        .form-add-user{
+            .form-group{
+                position: relative;
+                .icon-password{
+                    right: 12px;
+                }
+            }
+            .form-control{
+                height: 45px;
+                &:focus{
+                    box-shadow: none;
+                    border: 1px solid #a38851;
+                }
+            }
+            .btn{
+                background: #a38851;
+                color: #ffffff;
+                font-size: 15px;
+                font-weight: 600;
+                text-decoration: none;
+                padding: 10px 50px;
+                border-radius: 5px;
+                text-align: center;
+                transition: all .2s;
+                margin-top: 10px;
+                box-shadow: none;
+                &:hover{
+                    background: #c5a462;
+                }
+            }
+        }
+    }
+}
