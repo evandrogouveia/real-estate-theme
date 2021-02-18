@@ -16,6 +16,8 @@ import { EditProfileComponent } from './components/users/edit-profile/edit-profi
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
+import { AddUserComponent } from './components/users/add-user/add-user.component';
+import { BsModalRef } from 'ngx-bootstrap';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { ListPostsComponent } from './components/blog/list-posts/list-posts.comp
     CategoryComponent, 
     CommentsComponent, 
     UsersComponent, 
-    EditProfileComponent, ListPostsComponent, 
+    EditProfileComponent, 
+    ListPostsComponent, 
+    AddUserComponent, 
     
   ],
   imports: [
@@ -39,6 +43,7 @@ import { ListPostsComponent } from './components/blog/list-posts/list-posts.comp
     NgxBootstrapModule,
     AngularEditorModule,
     HttpClientModule
-  ]
+  ],
+  providers: [BsModalRef],
 })
 export class AdminModule { }
