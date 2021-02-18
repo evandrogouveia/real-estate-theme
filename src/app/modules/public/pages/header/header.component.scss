@@ -59,7 +59,17 @@ header{
                 color: #5e524c;
                 &:hover, &.active{
                     color: #201B18;
+                    &:after{
+                        content: "";
+                        width: 100%;
+                        height: 3px;
+                        background: #201B18;
+                        position: relative;
+                        display: block;
+                        top: 5px;
+                    }
                 }
+                
             }
         }
         .form-inline{
