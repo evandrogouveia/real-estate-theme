@@ -15,6 +15,7 @@ import { UsersComponent } from './components/users/users.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     CategoryComponent, 
     CommentsComponent, 
     UsersComponent, 
-    EditProfileComponent, 
+    EditProfileComponent, ListPostsComponent, 
     
   ],
   imports: [

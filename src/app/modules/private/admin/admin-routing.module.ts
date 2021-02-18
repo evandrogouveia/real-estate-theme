@@ -8,6 +8,7 @@ import { CommentsComponent } from './components/blog/comments/comments.component
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { HomeComponent } from './components/painel/home/home.component';
 import { UsersComponent } from './components/users/users.component';
+import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       {path: 'home', component: HomeComponent },
       {path: 'add-posts', component: AddPostsComponent},
+      {path: 'list-posts', component: ListPostsComponent},
       {path: 'add-category', component: CategoryComponent},
       {path: 'comments', component: CommentsComponent},
       {path: 'users', component: UsersComponent},

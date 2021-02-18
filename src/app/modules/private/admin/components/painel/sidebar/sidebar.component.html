@@ -17,6 +17,10 @@
       </a>
     </div>
     <div *ngIf="!retract" id="collapsePosts" class="collapse-menu" [collapse]="!isCollapsedA" [isAnimated]="true">
+      <a routerLink="/private/admin/list-posts" routerLinkActive="active" class="list-group-item"
+        (click)="toggleSidebar()">
+        <span> Posts</span>
+      </a>
       <a routerLink="/private/admin/add-posts" routerLinkActive="active" class="list-group-item"
         (click)="toggleSidebar()">
         <span>Adicionar post</span>
