@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './service/login.service';
 
+import { firebase } from '@firebase/app';
+import '@firebase/auth';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,6 +19,8 @@ export class LoginComponent implements OnInit {
  
   loading = false;
   msgErro = '';
+
+  remember = false;
 
   loginForm: FormGroup = this.fb.group({
     'email': ['', [Validators.required, Validators.email]],
@@ -30,6 +35,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
   }
 
   showHidPassword() {
@@ -39,6 +45,10 @@ export class LoginComponent implements OnInit {
     } else {
       this.type = 'password';
     }
+  }
+
+  isChecked(event){
+    this.remember =  event.target.checked;
   }
 
   submitLogin() {
@@ -66,7 +76,11 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
-    
+      
+      //FICAR CONECTADO
+      this.afAuth.setPersistence(
+        this.remember === true ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION
+      );
   }
 
   private loginErrorNotification(err) {
