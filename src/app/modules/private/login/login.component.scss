@@ -117,8 +117,8 @@
                     -o-transition: all 0.4s;
                     -moz-transition: all 0.4s;
                     transition: all 0.4s;
-                    &:hover{
-                        background: #c5a462;
+                    &:hover, &.waiting{
+                        background: #806636;
                     }
                     .loading{
                         position:absolute;

@@ -19,7 +19,7 @@
             </div>
 
             <div class="container-login100-form-btn">
-                <button type="submit" class="login100-form-btn">
+                <button type="submit" class="login100-form-btn" [ngClass]="{'waiting': loading}">
                     <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
                     {{ loading ? 'Entrando...' : 'Entrar' }}
                 </button>
