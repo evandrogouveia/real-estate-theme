@@ -15,7 +15,7 @@
         <div class="profile-img">
           <img src="{{imageSrc}}" alt="avatar">
         </div>
-        <span class="username">Admin</span>
+        <span class="username">{{(currentUser$ | async)?.username}}</span>
         <span class="down-arrow-header"></span>
       </div>
 
@@ -24,7 +24,7 @@
           <p>Ações</p>
         </li>
         <li class="menuitem">
-          <a routerLink="#">
+          <a routerLink="/private/admin/edit-profile">
             <i class="icon-person-profile"></i>
             <span>Editar perfil</span>
           </a>

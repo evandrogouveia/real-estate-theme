@@ -6,6 +6,9 @@ import { LoginService } from './service/login.service';
 
 import { firebase } from '@firebase/app';
 import '@firebase/auth';
+import { User } from './model/user.model';
+
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -54,19 +57,17 @@ export class LoginComponent implements OnInit {
   submitLogin() {
     this.loading = true;
     const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
+    const password = CryptoJS.SHA256(this.loginForm.value.password).toString();
 
     this.loginService.login(email, password)
       .subscribe(
         (u) => {
           this.afAuth.user.subscribe(data => {
             if (data) {
-              if (data.email === 'vando_gouveia@hotmail.com') {
-                this.router.navigateByUrl('/private/admin');
-              } else {
-                this.router.navigateByUrl('/private/login');
-              }
+              this.router.navigateByUrl('/private/admin');
               this.loading = false;
+            }else {
+              this.router.navigateByUrl('/private/login');
             }
           });
           
@@ -76,7 +77,7 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
-      
+
       //FICAR CONECTADO
       this.afAuth.setPersistence(
         this.remember === true ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION
@@ -85,6 +86,27 @@ export class LoginComponent implements OnInit {
 
   private loginErrorNotification(err) {
     this.msgErro = err;
+  }
+
+  cadastroUsuario() {
+    const newUser: User = {
+      username: 'Admin',
+      name: 'Administrador',
+      lastname: '',
+      email: 'vando_gouveia@hotmail.com',
+      password: CryptoJS.SHA256('123456').toString(),
+      function: 'admin'
+    };
+
+    this.loginService.cadastro(newUser)
+      .subscribe(
+        (u) => {
+          console.log('cadastrou');
+        },
+        (err) => {
+         console.log(err);
+        }
+      );
   }
 
 }
