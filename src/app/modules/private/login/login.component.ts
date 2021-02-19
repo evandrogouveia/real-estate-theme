@@ -90,6 +90,7 @@ export class LoginComponent implements OnInit {
 
   cadastroUsuario() {
     const newUser: User = {
+      avatar: '',
       username: 'Admin',
       name: 'Administrador',
       lastname: '',

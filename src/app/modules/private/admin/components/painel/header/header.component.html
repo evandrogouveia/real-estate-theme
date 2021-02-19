@@ -13,7 +13,7 @@
     <div class="profile-menu" dropdown>
       <div class="button-drop" dropdownToggle aria-controls="dropdown-animated">
         <div class="profile-img">
-          <img src="{{imageSrc}}" alt="avatar">
+          <img src="{{(currentUser$ | async)?.avatar ? (currentUser$ | async)?.avatar : imageSrc}}" alt="avatar">
         </div>
         <span class="username">{{(currentUser$ | async)?.username}}</span>
         <span class="down-arrow-header"></span>
