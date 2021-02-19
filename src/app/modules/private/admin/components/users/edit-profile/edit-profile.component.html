@@ -6,7 +6,7 @@
             </div>
         </div>
 
-        <form class="form-profile">
+        <form class="form-profile" [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
             <div class="avatar" (click)="fileUploader.click()">
                 <img class="img-upload" [src]="imagemSrc" width="200px" height="200px" alt="imagem-upload">
                 <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
@@ -18,30 +18,30 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="usernamename">Nome de usuário</label>
-                <input type="text" class="form-control" id="usernamename" value="admin" disabled>
+                <label for="username">Nome de usuário</label>
+                <input type="text" formControlName="username" class="form-control" id="username" disabled>
             </div>
             <div class="row">
                 <div class="col form-group">
-                    <label for="usernamename">Nome</label>
-                    <input type="text" class="form-control" id="usernamename">
+                    <label for="name">Nome</label>
+                    <input type="text" formControlName="name" class="form-control" id="name">
                 </div>
                 <div class="col form-group">
-                    <label for="usernamename">Sobrenome</label>
-                    <input type="text" class="form-control" id="usernamename">
+                    <label for="lastname">Sobrenome</label>
+                    <input type="text" formControlName="lastname"  class="form-control" id="lastname">
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" formControlName="email" class="form-control" id="email">
             </div>
             <div class="row">
                 <div class="col-6 form-group">
                     <label for="exampleFormControlSelect1">Função</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option value=""></option>
-                        <option>Administrador</option>
-                        <option>Usuário</option>
+                    <select class="form-control" formControlName="function" id="exampleFormControlSelect1">
+                        <option value="" disabled>Selecionar função</option>
+                        <option *ngFor="let f of functions" [ngValue]="f" >{{f}}</option>
+                        
                     </select>
                 </div>
             </div>

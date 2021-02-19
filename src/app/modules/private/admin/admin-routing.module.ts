@@ -22,7 +22,7 @@ const routes: Routes = [
       {path: 'add-category', component: CategoryComponent},
       {path: 'comments', component: CommentsComponent},
       {path: 'users', component: UsersComponent},
-      {path: 'edit-profile', component: EditProfileComponent},
+      {path: 'edit-profile/:id', component: EditProfileComponent},
       {path: 'edit-theme', loadChildren: () => import('./components/edit-theme/edit-theme.module').then(m => m.EditThemeModule) },
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ],

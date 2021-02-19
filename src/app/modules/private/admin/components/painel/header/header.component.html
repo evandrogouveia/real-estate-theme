@@ -24,7 +24,7 @@
           <p>Ações</p>
         </li>
         <li class="menuitem">
-          <a routerLink="/private/admin/edit-profile">
+          <a routerLink="/private/admin/edit-profile/{{(currentUser$ | async)?.id}}">
             <i class="icon-person-profile"></i>
             <span>Editar perfil</span>
           </a>
