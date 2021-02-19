@@ -129,25 +129,14 @@
                 [type="checkbox"]:not(:checked) {
                     opacity: 0;
                 }
-                
-                [type="checkbox"]:not(:checked) + label{
-                    position: relative;
-                    padding-left: 25px;
-                    cursor: pointer;
-                    line-height: 20px;
-                    display: inline-block;
-                    color: #777777;
-                    margin-right: 10px;
-                    font-size: 15px;
-                    font-family: "Rubik", sans-serif;
-                }
+                [type="checkbox"]:not(:checked) + label,
                 [type="checkbox"]:checked + label{
                     position: relative;
                     padding-left: 25px;
                     cursor: pointer;
                     line-height: 20px;
                     display: inline-block;
-                    color: #a38851;
+                    color: #777777;
                     margin-right: 10px;
                     font-size: 15px;
                     font-family: "Rubik", sans-serif;
