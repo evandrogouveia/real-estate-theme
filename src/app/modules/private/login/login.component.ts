@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    
+    private loginService: LoginService,
+    private afAuth: AngularFireAuth,
     private router: Router
   ) { }
 
@@ -38,11 +41,36 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  submitLogin() {
     this.loading = true;
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
+
+    this.loginService.login(email, password)
+      .subscribe(
+        (u) => {
+          this.afAuth.user.subscribe(data => {
+            if (data) {
+              if (data.email === 'vando_gouveia@hotmail.com') {
+                this.router.navigateByUrl('/private/admin');
+              } else {
+                this.router.navigateByUrl('/private/login');
+              }
+              this.loading = false;
+            }
+          });
+          
+        },
+        (err) => {
+          this.loginErrorNotification(err);
+          this.loading = false;
+        }
+      );
     
+  }
+
+  private loginErrorNotification(err) {
+    this.msgErro = err;
   }
 
 }

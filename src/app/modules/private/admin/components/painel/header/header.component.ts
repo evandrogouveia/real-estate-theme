@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/modules/private/login/service/login.service';
 import { SidebarService } from '../../../services/sidebar.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -18,6 +20,10 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarService.toggleNavbar();
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 
 }

@@ -13,7 +13,7 @@ import { RecoverPasswordComponent } from './recover-password/recover-password.co
     CommonModule,
     LoginRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
   ]
 })
 export class LoginModule { }

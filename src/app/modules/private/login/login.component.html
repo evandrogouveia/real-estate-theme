@@ -1,7 +1,7 @@
 <div class="container-login100">
     <div class="wrap-login100">
 
-        <form [formGroup]="loginForm" class="login100-form validate-form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" class="login100-form validate-form" (ngSubmit)="submitLogin()">
             <div class="logo-top">
                 <img src="assets/img/logo.png" alt="logo">
             </div>
@@ -20,7 +20,8 @@
 
             <div class="container-login100-form-btn">
                 <button type="submit" class="login100-form-btn">
-                    Entrar
+                    <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                    {{ loading ? 'Entrando...' : 'Entrar' }}
                 </button>
 
                 <span *ngIf="msgErro" class="msg-erro">{{msgErro}}</span>

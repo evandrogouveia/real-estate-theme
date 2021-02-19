@@ -9,6 +9,7 @@ import { EditProfileComponent } from './components/users/edit-profile/edit-profi
 import { HomeComponent } from './components/painel/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
+import { AuthGuardService } from '../login/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path: 'edit-theme', loadChildren: () => import('./components/edit-theme/edit-theme.module').then(m => m.EditThemeModule) },
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ],
+    canActivate: [AuthGuardService]
   },
 ];
 
