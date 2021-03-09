@@ -6,17 +6,17 @@
             </div>
         </div>
 
-        <form class="form-add-post" [formGroup]="addPostForm">
+        <form class="form-add-post" [formGroup]="addPostForm" (ngSubmit)="addPost()">
             <div class="row">
                 <div class="col-lg-9">
 
                     <div class="form-group">
                         <label for="name">Adicionar título</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="name" formControlName="titlePost">
                     </div>
                     <div class="form-group">
                         <label for="description">Descrição</label>
-                        <angular-editor formControlName="htmlContentDescription1" [config]="config"></angular-editor>
+                        <angular-editor formControlName="descriptionPost" [config]="config"></angular-editor>
                     </div>
 
                     <p class="published-info">Publicado em: <strong>23 de novembro de 2020 às 12:03 </strong></p>
@@ -31,8 +31,8 @@
                         </div>
                         <div class="card-body card-image">
                             <div class="avatar">
-                                <img class="img-upload" [src]="imagemSrc" width="100%" height="200px"
-                                    alt="imagem-upload" (click)="fileUploader.click()">
+                                <img class="img-upload" [src]="highlightedImage" width="100%" height="200px"
+                                    alt="imagem-destacada" (click)="fileUploader.click()">
                                 <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
                                     aria-describedby="nome" placeholder="imagem" (change)="showPreviewImage($event)"
                                     hidden>
@@ -51,27 +51,27 @@
                         </div>
                         <div class="card-body card-category-check">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default" (click)="checkCategory($event)">
                                 <label class="form-check-label" for="exampleCheck1">Default</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck2">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck2" value="Licitação" (click)="checkCategory($event)">
                                 <label class="form-check-label" for="exampleCheck2">Licitação</label>
                                 <div class="subcategory">
-                                    <input type="checkbox" class="form-check-input" id="exampleChecksub1">
+                                    <input type="checkbox" class="form-check-input" id="exampleChecksub1" value="Subcategoria" (click)="checkCategory($event)">
                                     <label class="form-check-label" for="exampleChecksub1">Subcategoria</label>
                                 </div>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck3">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck3" value="Empresaso" (click)="checkCategory($event)">
                                 <label class="form-check-label" for="exampleCheck3">Empresas</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck4">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck4" value="Justiça" (click)="checkCategory($event)">
                                 <label class="form-check-label" for="exampleCheck4">Justiça</label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck5">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck5" value="Direito previdenciário" (click)="checkCategory($event)">
                                 <label class="form-check-label" for="exampleCheck5">Direito previdenciário</label>
                             </div>
                             <hr>

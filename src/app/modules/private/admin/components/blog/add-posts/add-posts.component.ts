@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Post } from '../models/post.model';
+import { PostService } from '../services/post.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-posts',
@@ -8,14 +12,23 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
   styleUrls: ['./add-posts.component.scss']
 })
 export class AddPostsComponent implements OnInit {
-  imagemSrc = 'assets/img/placeholder.jpg';
+  highlightedImage = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
+  selectedCategoryes:any = [];
 
   addPostForm: FormGroup = this.fb.group({
-    htmlContentDescription1: [''],
+    id: [undefined],
+    titlePost: [''],
+    descriptionPost: [''],
+    highlightedImage: [''],
+    categoryes: ['']
   });
 
-  constructor(private fb: FormBuilder,) { }
+  constructor(
+    private fb: FormBuilder,
+    private postservice: PostService,
+    private storage: AngularFireStorage
+    ) { }
 
   ngOnInit(): void {
   }
@@ -23,13 +36,42 @@ export class AddPostsComponent implements OnInit {
   showPreviewImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.imagemSrc = e.target.result;
+      reader.onload = (e: any) => this.highlightedImage = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      this.imagemSrc = 'assets/img/icons/user-empty.svg';
+      this.highlightedImage = 'assets/img/icons/user-empty.svg';
       this.selectedImage = null;
     }
+  }
+
+  checkCategory(event){
+    this.selectedCategoryes.push(event.target.value);
+  }
+
+  addPost(){
+    let post: Post = this.addPostForm.value;
+    if (!post.id) {
+        const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+
+        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.addPostForm.value.highlightedImage = url;
+              this.addPostForm.value.categoryes = this.selectedCategoryes;
+              this.submit(post)
+            });
+          })
+        ).subscribe();
+      
+    } else {
+      //this.updateServico(a);
+    }
+  }
+
+  submit(p: Post){
+    this.postservice.addPost(p)
   }
 
   config: AngularEditorConfig = {
