@@ -7,15 +7,26 @@ import { Post } from '../models/post.model';
 })
 export class PostService {
 
-  private addpostCollection: AngularFirestoreCollection<Post> = this.afs.collection('posts', ref => {
+  private postsCollection: AngularFirestoreCollection<Post> = this.afs.collection('posts', ref => {
     return ref.orderBy('titlePost', 'asc');
   })
 
   constructor(private afs:AngularFirestore) { }
 
+  //LISTAR POSTS
+  getPosts(){
+    return this.postsCollection.valueChanges();
+  }
+
+  //ADICIONAR POSTS
   addPost(p: Post){
     p.id = this.afs.createId();
-    return this.addpostCollection.doc(p.id).set(p);
+    return this.postsCollection.doc(p.id).set(p);
+  }
+
+  //DELETAR POST
+  deletePost(p: Post){
+    this.postsCollection.doc(p.id).delete();
   }
 
 

@@ -74,6 +74,9 @@
         th{
             font-weight: 500;
             background: #f9f9f9;
+            &:nth-child(7){
+                text-align: center;
+            }
         }
         td{
             font-size: 14px;
@@ -96,6 +99,9 @@
             }
             &:nth-child(5){
                 width: 125px;
+            }
+            &:nth-child(7){
+                text-align: center;
             }
             
         }

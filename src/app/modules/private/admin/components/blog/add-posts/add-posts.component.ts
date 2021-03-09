@@ -5,6 +5,8 @@ import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/modules/private/login/service/login.service';
 
 @Component({
   selector: 'app-add-posts',
@@ -15,22 +17,32 @@ export class AddPostsComponent implements OnInit {
   highlightedImage = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
   selectedCategoryes:any = [];
+  currentDate = new Date();
+  username: string;
 
   addPostForm: FormGroup = this.fb.group({
     id: [undefined],
     titlePost: [''],
     descriptionPost: [''],
     highlightedImage: [''],
-    categoryes: ['']
+    categoryes: [''],
+    publicationDate: [''],
+    author: [''],
+    comments: ['']
   });
 
   constructor(
     private fb: FormBuilder,
     private postservice: PostService,
-    private storage: AngularFireStorage
+    private loginService: LoginService,
+    private storage: AngularFireStorage,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
+    this.loginService.getUser().subscribe(u => {
+      this.username = u.username;
+    })
   }
 
   showPreviewImage(event: any) {
@@ -60,7 +72,10 @@ export class AddPostsComponent implements OnInit {
             fileRef.getDownloadURL().subscribe((url) => {
               this.addPostForm.value.highlightedImage = url;
               this.addPostForm.value.categoryes = this.selectedCategoryes;
+              this.addPostForm.value.publicationDate = this.currentDate;
+              this.addPostForm.value.author= this.username;
               this.submit(post)
+              this.router.navigateByUrl('/private/admin/list-posts');
             });
           })
         ).subscribe();

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -19,6 +19,10 @@ import { ListPostsComponent } from './components/blog/list-posts/list-posts.comp
 import { AddUserComponent } from './components/users/add-user/add-user.component';
 import { BsModalRef } from 'ngx-bootstrap';
 
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -44,6 +48,12 @@ import { BsModalRef } from 'ngx-bootstrap';
     AngularEditorModule,
     HttpClientModule
   ],
-  providers: [BsModalRef],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt',
+    },
+    BsModalRef
+  ],
 })
 export class AdminModule { }
