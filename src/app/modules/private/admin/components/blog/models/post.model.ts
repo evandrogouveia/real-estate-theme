@@ -3,7 +3,7 @@ export interface Post {
     titlePost: string;
     descriptionPost: string;
     highlightedImage: string;
-    categoryes: string;
+    categories: string;
     publicationDate: string;
     author: string;
     comments: string;

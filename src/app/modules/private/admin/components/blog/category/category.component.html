@@ -11,14 +11,14 @@
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <form>
+                <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
                     <div class="form-group">
                       <label for="name">Nome</label>
-                      <input type="text" class="form-control" id="name">
+                      <input type="text" class="form-control" id="name" formControlName="name">
                     </div>
                     <div class="form-group">
                       <label for="description">Descrição</label>
-                      <textarea class="form-control" rows="4" id="description"></textarea>
+                      <textarea class="form-control" rows="4" id="description" formControlName="description"></textarea>
                     </div>
                     <div class="form-group category">
                         <label for="select-category">Categoria ascendente</label>
@@ -30,7 +30,7 @@
                           <option>5</option>
                         </select>
                       </div>
-                      <button class="btn btn-add-category">Adicionar nova categoria</button>
+                      <button type="submit" class="btn btn-add-category">Adicionar nova categoria</button>
                   </form>
             </div>
             <div class="col-lg-7">
@@ -49,69 +49,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr *ngFor="let c of categories$ | async">
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox">
                                     </div>
                                 </td>
-                                <td><a href="#">Default</a></td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
+                                <td><a href="#">{{c.name}}</a></td>
+                                <td>{{c.description}}</td>
                                 <td>
                                     <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                    <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox">
-                                    </div>
-                                </td>
-                                <td><a href="#">Licitação</a></td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
-                                <td>
-                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                    <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox">
-                                    </div>
-                                </td>
-                                <td><a href="#">Empresas</a></td>
-                                <td>-</td>
-                                <td>
-                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                    <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox">
-                                    </div>
-                                </td>
-                                <td><a href="#">Justiça</a></td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
-                                <td>
-                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                    <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check">
-                                        <input type="checkbox">
-                                    </div>
-                                </td>
-                                <td><a href="#">Direito previdenciário</a></td>
-                                <td>-</td>
-                                <td>
-                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                    <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                                    <a href="javascript:void(0)" (click)="delete(c)">
+                                        <i class="icon-delete" tooltip="Excluir"></i>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>

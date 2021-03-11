@@ -50,29 +50,9 @@
                             <p>Categorias</p>
                         </div>
                         <div class="card-body card-category-check">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" value="Default" (click)="checkCategory($event)">
-                                <label class="form-check-label" for="exampleCheck1">Default</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck2" value="Licitação" (click)="checkCategory($event)">
-                                <label class="form-check-label" for="exampleCheck2">Licitação</label>
-                                <div class="subcategory">
-                                    <input type="checkbox" class="form-check-input" id="exampleChecksub1" value="Subcategoria" (click)="checkCategory($event)">
-                                    <label class="form-check-label" for="exampleChecksub1">Subcategoria</label>
-                                </div>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck3" value="Empresaso" (click)="checkCategory($event)">
-                                <label class="form-check-label" for="exampleCheck3">Empresas</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck4" value="Justiça" (click)="checkCategory($event)">
-                                <label class="form-check-label" for="exampleCheck4">Justiça</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck5" value="Direito previdenciário" (click)="checkCategory($event)">
-                                <label class="form-check-label" for="exampleCheck5">Direito previdenciário</label>
+                            <div class="form-check" *ngFor="let c of categoriesAll$ | async; let i = index">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck{{i}}" value="{{c.name}}" (click)="checkCategory($event)">
+                                <label class="form-check-label" for="exampleCheck{{i}}">{{c.name}}</label>
                             </div>
                             <hr>
                             <a class="nav-link" routerLink="/private/admin/add-category">+ Adicionar nova categoria</a>

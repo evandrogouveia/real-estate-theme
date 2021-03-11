@@ -7,6 +7,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/private/login/service/login.service';
+import { CategoryService } from '../services/category.service';
+import { Observable } from 'rxjs';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-add-posts',
@@ -16,16 +19,18 @@ import { LoginService } from 'src/app/modules/private/login/service/login.servic
 export class AddPostsComponent implements OnInit {
   highlightedImage = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  selectedCategoryes:any = [];
+  selectedCategoryes:any = ['Defaut'];
   currentDate = new Date();
   username: string;
+
+  categoriesAll$: Observable<Category[]>;
 
   addPostForm: FormGroup = this.fb.group({
     id: [undefined],
     titlePost: [''],
     descriptionPost: [''],
     highlightedImage: [''],
-    categoryes: [''],
+    categories: [''],
     publicationDate: [''],
     author: [''],
     comments: ['']
@@ -35,6 +40,7 @@ export class AddPostsComponent implements OnInit {
     private fb: FormBuilder,
     private postservice: PostService,
     private loginService: LoginService,
+    private categoryService: CategoryService,
     private storage: AngularFireStorage,
     private router: Router
     ) { }
@@ -42,7 +48,8 @@ export class AddPostsComponent implements OnInit {
   ngOnInit(): void {
     this.loginService.getUser().subscribe(u => {
       this.username = u.username;
-    })
+    });
+    this.categoriesAll$ = this.categoryService.getCategory();
   }
 
   showPreviewImage(event: any) {
@@ -58,7 +65,8 @@ export class AddPostsComponent implements OnInit {
   }
 
   checkCategory(event){
-    this.selectedCategoryes.push(event.target.value);
+    if(event)
+    this.selectedCategoryes.splice(0, 1).push(event.target.value)
   }
 
   addPost(){
@@ -71,7 +79,7 @@ export class AddPostsComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.addPostForm.value.highlightedImage = url;
-              this.addPostForm.value.categoryes = this.selectedCategoryes;
+              this.addPostForm.value.categories = this.selectedCategoryes;
               this.addPostForm.value.publicationDate = this.currentDate;
               this.addPostForm.value.author= this.username;
               this.submit(post)
