@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Post } from '../models/post.model';
+import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class BlogService {
 
   private postsCollection: AngularFirestoreCollection<Post> = this.afs.collection('posts', ref => {
     return ref.orderBy('titlePost', 'asc');
@@ -17,17 +17,4 @@ export class PostService {
   getPosts(){
     return this.postsCollection.valueChanges();
   }
-
-  //ADICIONAR POSTS
-  addPost(p: Post){
-    p.id = this.afs.createId();
-    return this.postsCollection.doc(p.id).set(p);
-  }
-
-  //DELETAR POST
-  deletePost(p: Post){
-    this.postsCollection.doc(p.id).delete();
-  }
-
-
 }
