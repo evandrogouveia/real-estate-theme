@@ -67,7 +67,7 @@ export class AddPostsComponent implements OnInit {
     }
   }
 
-  checkCategory(event, isChecked){
+  checkCategory(event, isChecked){ //remove e adiciona a categoria selecionada no array selectedCategoryes
     isChecked = event.target.checked;
   
     if(isChecked){
@@ -78,7 +78,6 @@ export class AddPostsComponent implements OnInit {
       let index = this.selectedCategoryes.indexOf(event.target.value)
       this.selectedCategoryes.splice(index, 1);
     }
-    console.log(this.selectedCategoryes.filter((este, i) => this.selectedCategoryes.indexOf(este) === i))
   }
 
   addPost(){

@@ -16,6 +16,7 @@ export class CategoryComponent implements OnInit {
     id: [undefined],
     name: [''],
     description: [''],
+    parentCategory: ['']
   });
 
   constructor(
@@ -31,7 +32,8 @@ export class CategoryComponent implements OnInit {
   addCategory(){
     let category: Category = this.addCategoryForm.value;
     if (!category.id) {
-      this.submit(category)
+      this.submit(category);
+      this.addCategoryForm.reset();
     } else {
       //this.updateServico(a);
     }
