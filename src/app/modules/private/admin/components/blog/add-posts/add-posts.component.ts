@@ -19,9 +19,12 @@ import { Category } from '../models/category.model';
 export class AddPostsComponent implements OnInit {
   highlightedImage = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  selectedCategoryes:any = ['Defaut'];
+  
   currentDate = new Date();
   username: string;
+
+  selectedCategoryes:any = ['Default'];
+  isfrmChecked:boolean = false;
 
   categoriesAll$: Observable<Category[]>;
 
@@ -64,9 +67,18 @@ export class AddPostsComponent implements OnInit {
     }
   }
 
-  checkCategory(event){
-    if(event)
-    this.selectedCategoryes.splice(0, 1).push(event.target.value)
+  checkCategory(event, isChecked){
+    isChecked = event.target.checked;
+  
+    if(isChecked){
+      this.isfrmChecked = true;
+      this.selectedCategoryes.push(event.target.value);
+    }else{
+      this.isfrmChecked = false;
+      let index = this.selectedCategoryes.indexOf(event.target.value)
+      this.selectedCategoryes.splice(index, 1);
+    }
+    console.log(this.selectedCategoryes.filter((este, i) => this.selectedCategoryes.indexOf(este) === i))
   }
 
   addPost(){
@@ -79,7 +91,7 @@ export class AddPostsComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.addPostForm.value.highlightedImage = url;
-              this.addPostForm.value.categories = this.selectedCategoryes;
+              this.addPostForm.value.categories = this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
               this.addPostForm.value.publicationDate = this.currentDate;
               this.addPostForm.value.author= this.username;
               this.submit(post)
