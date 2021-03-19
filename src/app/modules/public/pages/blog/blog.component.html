@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
                                 <div class="entry-header">
                                     <a routerLink="/blog/single-blog">
-                                        <h3>{{p.titlePost}}</h3>
+                                        <h3>{{(p.titlePost.length > 50) ? (p.titlePost | slice:0:50) + ' ...' : (p.titlePost)}}</h3>
                                     </a>
                                     <div class="entry-date">
                                         <i class='bx bx-calendar'></i>
@@ -24,7 +24,7 @@
                                     </div>
                                 </div>
                                 <div class="entry-footer">
-                                    <p>{{p.descriptionPost}}</p>
+                                    <p>{{(p.descriptionPost.length > 225) ? (p.descriptionPost | slice:0:225) + ' ...' : (p.descriptionPost)}}</p>
                                 </div>
                             </div>
                         </div>

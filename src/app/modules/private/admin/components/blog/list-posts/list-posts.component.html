@@ -35,9 +35,9 @@
                             <input type="checkbox">
                         </div>
                     </td>
-                    <td><a href="#">{{p.titlePost}}</a></td>
+                    <td><a href="#">{{(p.titlePost.length > 40) ? (p.titlePost | slice:0:40) + ' ...' : (p.titlePost)}}</a></td>
                     <td>{{p.author}}</td>
-                    <td>{{p.categories}}</td>
+                    <td>{{p.categories.join(', ')}}</td>
                     <td><i class="icon-message"><span>12</span></i></td>
                     <td>Publicado {{p.publicationDate.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDate.toDate() | date: 'HH:mm'}}</td>
                     <td>

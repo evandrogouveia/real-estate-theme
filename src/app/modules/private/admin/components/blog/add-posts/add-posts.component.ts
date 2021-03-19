@@ -88,14 +88,19 @@ export class AddPostsComponent implements OnInit {
         const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
         const fileRef = this.storage.ref(filePath);
 
+        //insere a categoria Default se não for selecionado nenhuma categoria
         const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = 'Default' :
         this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
+        
+        //remove as tags html da descrição
+        const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
 
         this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.addPostForm.value.highlightedImage = url;
               this.addPostForm.value.categories = categories;
+              this.addPostForm.value.descriptionPost =  description;
               this.addPostForm.value.publicationDate = this.currentDate;
               this.addPostForm.value.author= this.username;
               this.submit(post)
