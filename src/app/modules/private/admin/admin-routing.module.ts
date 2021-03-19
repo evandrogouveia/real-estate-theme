@@ -18,6 +18,7 @@ const routes: Routes = [
     children: [
       {path: 'home', component: HomeComponent },
       {path: 'add-posts', component: AddPostsComponent},
+      {path: 'edit-posts/:id', component: AddPostsComponent},
       {path: 'list-posts', component: ListPostsComponent},
       {path: 'add-category', component: CategoryComponent},
       {path: 'comments', component: CommentsComponent},

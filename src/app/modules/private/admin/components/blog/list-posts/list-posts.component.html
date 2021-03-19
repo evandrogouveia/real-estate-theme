@@ -41,7 +41,7 @@
                     <td><i class="icon-message"><span>12</span></i></td>
                     <td>Publicado {{p.publicationDate.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDate.toDate() | date: 'HH:mm'}}</td>
                     <td>
-                        <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                        <a routerLink="/private/admin/edit-posts/{{p.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
                         <a href="javascript:void(0)" (click)="delete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
                     </td>
                   </tr>

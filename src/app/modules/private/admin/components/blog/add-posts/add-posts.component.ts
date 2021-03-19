@@ -91,7 +91,7 @@ export class AddPostsComponent implements OnInit {
         //insere a categoria Default se não for selecionado nenhuma categoria
         const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = 'Default' :
         this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
-        
+
         //remove as tags html da descrição
         const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
 
@@ -110,6 +110,7 @@ export class AddPostsComponent implements OnInit {
         ).subscribe();
       
     } else {
+      
       //this.updateServico(a);
     }
   }
