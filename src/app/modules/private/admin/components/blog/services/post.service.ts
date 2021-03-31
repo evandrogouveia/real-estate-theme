@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Post } from '../models/post.model';
 
 @Injectable({
@@ -16,6 +16,11 @@ export class PostService {
   //LISTAR POSTS
   getPosts(){
     return this.postsCollection.valueChanges();
+  }
+
+  //LISTAR POST POR ID
+  getPostDetail(postId: string): AngularFirestoreDocument<Post>{
+    return this.postsCollection.doc(postId)
   }
 
   //ADICIONAR POSTS

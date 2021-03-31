@@ -5,7 +5,7 @@ import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/private/login/service/login.service';
 import { CategoryService } from '../services/category.service';
 import { Observable } from 'rxjs';
@@ -28,6 +28,10 @@ export class AddPostsComponent implements OnInit {
 
   categoriesAll$: Observable<Category[]>;
 
+  postId: string;
+  isAddMode: boolean;
+  myModel: any;
+
   addPostForm: FormGroup = this.fb.group({
     id: [undefined],
     titlePost: [''],
@@ -45,7 +49,8 @@ export class AddPostsComponent implements OnInit {
     private loginService: LoginService,
     private categoryService: CategoryService,
     private storage: AngularFireStorage,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
     ) { }
 
   ngOnInit(): void {
@@ -53,8 +58,18 @@ export class AddPostsComponent implements OnInit {
       this.username = u.username;
     });
     this.categoriesAll$ = this.categoryService.getCategory();
+
+    this.postId = this.route.snapshot.paramMap.get('id');
+    this.isAddMode = !this.postId;
+
+    if(!this.isAddMode){
+      const post  = this.postservice.getPostDetail(this.postId).valueChanges();
+      post.subscribe(data => {
+        this.addPostForm.patchValue(data)
+        data.highlightedImage ? this.highlightedImage = data.highlightedImage : this.highlightedImage = this.highlightedImage
+      })
+    }
     
-    console.log(this.selectedCategoryes)
   }
 
   showPreviewImage(event: any) {
@@ -71,7 +86,7 @@ export class AddPostsComponent implements OnInit {
 
   checkCategory(event, isChecked){ //remove e adiciona a categoria selecionada no array selectedCategoryes
     isChecked = event.target.checked;
-  
+    
     if(isChecked){
       this.isfrmChecked = true;
       this.selectedCategoryes.push(event.target.value);
@@ -110,7 +125,7 @@ export class AddPostsComponent implements OnInit {
         ).subscribe();
       
     } else {
-      
+     
       //this.updateServico(a);
     }
   }
