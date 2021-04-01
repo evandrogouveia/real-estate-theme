@@ -9,7 +9,7 @@ import { Post } from 'src/app/modules/private/admin/components/blog/models/post.
 export class BlogService {
 
   private postsCollection: AngularFirestoreCollection<Post> = this.afs.collection('posts', ref => {
-    return ref.orderBy('titlePost', 'asc');
+    return ref.orderBy('titlePost', 'desc');
   });
   private categoriesCollection: AngularFirestoreCollection<Category> = this.afs.collection('categories', ref => {
     return ref.orderBy('name', 'asc');
