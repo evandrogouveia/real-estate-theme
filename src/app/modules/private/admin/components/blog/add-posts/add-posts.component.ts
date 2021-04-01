@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/modules/private/login/service/login.servic
 import { CategoryService } from '../services/category.service';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-posts',
@@ -55,6 +56,7 @@ export class AddPostsComponent implements OnInit {
     private storage: AngularFireStorage,
     private router: Router,
     private route: ActivatedRoute,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -146,7 +148,10 @@ export class AddPostsComponent implements OnInit {
               this.addPostForm.value.descriptionPost = description;
               this.addPostForm.value.publicationDate = this.currentDate;
               this.addPostForm.value.author = this.username;
-              this.postservice.addPost(post).then(() => this.loading = false);
+              this.postservice.addPost(post).then(() => {
+                this.loading = false;
+                this.toastr.success('Post adicionado com sucesso');
+              });
               this.router.navigateByUrl('/private/admin/list-posts');
             });
           })
@@ -157,7 +162,10 @@ export class AddPostsComponent implements OnInit {
         this.addPostForm.value.descriptionPost = description;
         this.addPostForm.value.publicationDate = this.currentDate;
         this.addPostForm.value.author = this.username;
-        this.postservice.addPost(post).then(() => this.loading = false);
+        this.postservice.addPost(post).then(() => {
+          this.loading = false;
+          this.toastr.success('Post adicionado com sucesso');
+        });
         this.router.navigateByUrl('/private/admin/list-posts');
       }
 
@@ -187,7 +195,10 @@ export class AddPostsComponent implements OnInit {
             this.addPostForm.value.descriptionPost = description;
             //this.addPostForm.value.publicationDate = this.currentDate;
             this.addPostForm.value.author = this.username;
-            this.postservice.updatePost(post).then(() => this.loading = false);
+            this.postservice.updatePost(post).then(() => {
+              this.loading = false;
+              this.toastr.success('Post atualizado com sucesso');
+            });
             this.router.navigateByUrl('/private/admin/list-posts');
           });
         })
@@ -198,7 +209,10 @@ export class AddPostsComponent implements OnInit {
       this.addPostForm.value.descriptionPost = description;
       //this.addPostForm.value.publicationDate = this.currentDate;
       this.addPostForm.value.author = this.username;
-      this.postservice.updatePost(post).then(() => this.loading = false);
+      this.postservice.updatePost(post).then(() => {
+        this.loading = false;
+        this.toastr.success('Post atualizado com sucesso');
+      });
       this.router.navigateByUrl('/private/admin/list-posts');
     }
   }
