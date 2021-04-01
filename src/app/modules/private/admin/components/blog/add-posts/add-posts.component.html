@@ -19,7 +19,14 @@
                         <angular-editor formControlName="descriptionPost" [config]="config"></angular-editor>
                     </div>
 
-                    <p class="published-info">Publicado em: <strong>23 de novembro de 2020 às 12:03 </strong></p>
+                    <p *ngIf="!this.isAddMode" class="published-info">Publicado em: 
+                        <strong>
+                            {{publicationDate?.toDate() | date: 'dd'}} de 
+                            {{publicationDate?.toDate() | date: 'MMMM'}} de 
+                            {{publicationDate?.toDate() | date: 'YYYY'}} às 
+                            {{publicationDate?.toDate() | date: 'HH:mm'}} 
+                        </strong>
+                    </p>
                 </div>
                 <div class="col-lg-3">
 
@@ -37,10 +44,10 @@
                                     aria-describedby="nome" placeholder="imagem" (change)="showPreviewImage($event)"
                                     hidden>
                             </div>
-                            <ng-container *ngIf="selectedImage">
-                                <p>Clique sobre a imagem para editar ou atualizar.</p>
-                                <a class="nav-link" href="#"><i class="icon-delete"></i> Remover
-                                    imagem principal</a>
+                            <ng-container>
+                                <p>Clique sobre a imagem para substituí-la.</p>
+                                <!--a class="nav-link" href="#"><i class="icon-delete"></i> Remover
+                                    imagem principal</a-->
                             </ng-container>
                         </div>
                     </div>

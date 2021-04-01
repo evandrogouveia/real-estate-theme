@@ -23,6 +23,7 @@ export class AddPostsComponent implements OnInit {
   selectedImage: any = null;
 
   currentDate = new Date();
+  publicationDate;
   username: string;
 
   selectedCategoryes: any = [];
@@ -68,8 +69,13 @@ export class AddPostsComponent implements OnInit {
     if (!this.isAddMode) {
       const post: Observable<Post> = this.postservice.getPostDetail(this.postId).valueChanges();
       post.subscribe(data => {
+
         this.addPostForm.patchValue(data);
-        data.highlightedImage ? this.highlightedImage = data.highlightedImage : this.highlightedImage = this.highlightedImage
+        this.publicationDate = data.publicationDate;
+
+        if(data.highlightedImage)
+          this.highlightedImage = data.highlightedImage;
+          
         setTimeout(() => {
           this.inputCategories.toArray().forEach(d => {
             let b: any = [];
@@ -97,7 +103,7 @@ export class AddPostsComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      this.highlightedImage = 'assets/img/icons/user-empty.svg';
+      this.highlightedImage = 'assets/img/placeholder.jpg';
       this.selectedImage = null;
     }
   }
@@ -118,8 +124,6 @@ export class AddPostsComponent implements OnInit {
   addPost() {
     let post: Post = this.addPostForm.value;
     if (!post.id) {
-      const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
-      const fileRef = this.storage.ref(filePath);
 
       //insere a categoria Default se não for selecionado nenhuma categoria
       const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = ['Default'] :
@@ -128,19 +132,33 @@ export class AddPostsComponent implements OnInit {
       //remove as tags html da descrição
       const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
 
-      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.addPostForm.value.highlightedImage = url;
-            this.addPostForm.value.categories = categories;
-            this.addPostForm.value.descriptionPost = description;
-            this.addPostForm.value.publicationDate = this.currentDate;
-            this.addPostForm.value.author = this.username;
-            this.postservice.addPost(post)
-            this.router.navigateByUrl('/private/admin/list-posts');
-          });
-        })
-      ).subscribe();
+      if (this.selectedImage) {
+        const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+
+        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.addPostForm.value.highlightedImage = url;
+              this.addPostForm.value.categories = categories;
+              this.addPostForm.value.descriptionPost = description;
+              this.addPostForm.value.publicationDate = this.currentDate;
+              this.addPostForm.value.author = this.username;
+              this.postservice.addPost(post)
+              this.router.navigateByUrl('/private/admin/list-posts');
+            });
+          })
+        ).subscribe();
+      } else {
+        this.addPostForm.value.highlightedImage = this.highlightedImage;
+        this.addPostForm.value.categories = categories;
+        this.addPostForm.value.descriptionPost = description;
+        this.addPostForm.value.publicationDate = this.currentDate;
+        this.addPostForm.value.author = this.username;
+        this.postservice.addPost(post)
+        this.router.navigateByUrl('/private/admin/list-posts');
+      }
+
     }
   }
 
@@ -164,15 +182,19 @@ export class AddPostsComponent implements OnInit {
             this.addPostForm.value.highlightedImage = url;
             this.addPostForm.value.categories = categories;
             this.addPostForm.value.descriptionPost = description;
-            this.addPostForm.value.publicationDate = this.currentDate;
+            //this.addPostForm.value.publicationDate = this.currentDate;
             this.addPostForm.value.author = this.username;
             this.postservice.updatePost(post)
             this.router.navigateByUrl('/private/admin/list-posts');
           });
         })
       ).subscribe();
-    }else{
+    } else {
+      this.addPostForm.value.highlightedImage = this.highlightedImage;
       this.addPostForm.value.categories = categories;
+      this.addPostForm.value.descriptionPost = description;
+      //this.addPostForm.value.publicationDate = this.currentDate;
+      this.addPostForm.value.author = this.username;
       this.postservice.updatePost(post)
       this.router.navigateByUrl('/private/admin/list-posts');
     }

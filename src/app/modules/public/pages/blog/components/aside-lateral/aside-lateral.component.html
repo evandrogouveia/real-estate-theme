@@ -1,11 +1,12 @@
 <div class="aside-lateral">
     <div class="search-blog">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Buscar" aria-label="Recipient's username"
+                aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn" type="button"><i class="bx bx-search-alt-2"></i></button>
+                <button class="btn" type="button"><i class="bx bx-search-alt-2"></i></button>
             </div>
-          </div>
+        </div>
     </div>
 
     <div class="entry-categoryes mt-5">
@@ -22,41 +23,15 @@
         <h3>Posts recentes</h3>
 
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <a href="#" class="d-flex align-items-center">
-                    <img src="assets/img/image-areas-7.jpg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit 
-                    sed do eiusmod tempor incididunt...
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="#" class="d-flex align-items-center">
-                    <img src="assets/img/image-areas-2.jpg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    sed do eiusmod tempor incididunt...
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="#" class="d-flex align-items-center">
-                    <img src="assets/img/image-areas-5.jpg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    sed do eiusmod tempor incididunt...
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="#" class="d-flex align-items-center">
-                    <img src="assets/img/image-areas-3.jpg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    sed do eiusmod tempor incididunt...
-                </a>
-            </li>
-            <li class="list-group-item">
-                <a href="#" class="d-flex align-items-center">
-                    <img src="assets/img/image-areas-4.jpg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    sed do eiusmod tempor incididunt...
-                </a>
-            </li>
+            <ng-container *ngFor="let p of posts$ | async; let i = index">
+                <li class="list-group-item" *ngIf="i < 5">
+                    <a href="#" class="d-flex align-items-center">
+                        <img src="{{p.highlightedImage}}">
+                        {{(p.descriptionPost.length > 95) ? (p.descriptionPost | slice:0:95) + ' ...' :
+                        (p.descriptionPost)}}
+                    </a>
+                </li>
+            </ng-container>
         </ul>
     </div>
 </div>
