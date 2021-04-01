@@ -30,7 +30,10 @@
                 </div>
                 <div class="col-lg-3">
 
-                    <button type="submit" class="btn btn-save-form">{{!this.isAddMode ? 'Atualizar' : 'Publicar' }}</button>
+                    <button type="submit" class="btn btn-save-form">
+                        <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                        {{!this.isAddMode && !loading ? 'Atualizar' : loading ? 'Aguarde...' : 'Publicar' }}
+                    </button>
 
                     <div class="card">
                         <div class="title-card">

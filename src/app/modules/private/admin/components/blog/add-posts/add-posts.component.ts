@@ -28,6 +28,7 @@ export class AddPostsComponent implements OnInit {
 
   selectedCategoryes: any = [];
   isfrmChecked: boolean = false;
+  loading:boolean = false;
 
   categoriesAll$: Observable<Category[]>;
 
@@ -122,6 +123,7 @@ export class AddPostsComponent implements OnInit {
   }
 
   addPost() {
+    this.loading = true;
     let post: Post = this.addPostForm.value;
     if (!post.id) {
 
@@ -144,7 +146,7 @@ export class AddPostsComponent implements OnInit {
               this.addPostForm.value.descriptionPost = description;
               this.addPostForm.value.publicationDate = this.currentDate;
               this.addPostForm.value.author = this.username;
-              this.postservice.addPost(post)
+              this.postservice.addPost(post).then(() => this.loading = false);
               this.router.navigateByUrl('/private/admin/list-posts');
             });
           })
@@ -155,7 +157,7 @@ export class AddPostsComponent implements OnInit {
         this.addPostForm.value.descriptionPost = description;
         this.addPostForm.value.publicationDate = this.currentDate;
         this.addPostForm.value.author = this.username;
-        this.postservice.addPost(post)
+        this.postservice.addPost(post).then(() => this.loading = false);
         this.router.navigateByUrl('/private/admin/list-posts');
       }
 
@@ -163,6 +165,7 @@ export class AddPostsComponent implements OnInit {
   }
 
   updatePost() {
+    this.loading = true;
     let post: Post = this.addPostForm.value;
 
     //insere a categoria Default se não for selecionado nenhuma categoria
@@ -184,7 +187,7 @@ export class AddPostsComponent implements OnInit {
             this.addPostForm.value.descriptionPost = description;
             //this.addPostForm.value.publicationDate = this.currentDate;
             this.addPostForm.value.author = this.username;
-            this.postservice.updatePost(post)
+            this.postservice.updatePost(post).then(() => this.loading = false);
             this.router.navigateByUrl('/private/admin/list-posts');
           });
         })
@@ -195,7 +198,7 @@ export class AddPostsComponent implements OnInit {
       this.addPostForm.value.descriptionPost = description;
       //this.addPostForm.value.publicationDate = this.currentDate;
       this.addPostForm.value.author = this.username;
-      this.postservice.updatePost(post)
+      this.postservice.updatePost(post).then(() => this.loading = false);
       this.router.navigateByUrl('/private/admin/list-posts');
     }
   }
