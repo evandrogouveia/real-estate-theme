@@ -29,6 +29,11 @@ export class PostService {
     return this.postsCollection.doc(p.id).set(p);
   }
 
+  //ATUALIZAR POSTS
+  updatePost(p: Post){
+    return this.postsCollection.doc(p.id).set(p);
+  }
+
   //DELETAR POST
   deletePost(p: Post){
     this.postsCollection.doc(p.id).delete();

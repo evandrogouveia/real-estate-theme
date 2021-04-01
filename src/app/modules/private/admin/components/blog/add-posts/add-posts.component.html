@@ -2,11 +2,11 @@
     <div class="content-add-posts">
         <div class="header-post">
             <div class="wrap">
-                <h4>Adicionar Post</h4>
+                <h4>{{!this.isAddMode ? 'Editar Post' : 'Adicionar Post'}}</h4>
             </div>
         </div>
 
-        <form class="form-add-post" [formGroup]="addPostForm" (ngSubmit)="addPost()">
+        <form class="form-add-post" [formGroup]="addPostForm" (ngSubmit)="submit()">
             <div class="row">
                 <div class="col-lg-9">
 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-lg-3">
 
-                    <button type="submit" class="btn btn-save-form">Publicar</button>
+                    <button type="submit" class="btn btn-save-form">{{!this.isAddMode ? 'Atualizar' : 'Publicar' }}</button>
 
                     <div class="card">
                         <div class="title-card">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="card-body card-category-check">
                             <div class="form-check" *ngFor="let c of categoriesAll$ | async; let i = index">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck{{i}}" value="{{c.name}}" (click)="checkCategory($event)">
+                                <input #inputCategories type="checkbox" class="form-check-input" id="exampleCheck{{i}}" value="{{c.name}}" (click)="checkCategory($event)">
                                 <label class="form-check-label" for="exampleCheck{{i}}">{{c.name}}</label>
                             </div>
                             <hr>

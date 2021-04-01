@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Post } from '../models/post.model';
@@ -17,14 +17,16 @@ import { Category } from '../models/category.model';
   styleUrls: ['./add-posts.component.scss']
 })
 export class AddPostsComponent implements OnInit {
+  @ViewChildren('inputCategories') inputCategories: QueryList<ElementRef>
+
   highlightedImage = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  
+
   currentDate = new Date();
   username: string;
 
-  selectedCategoryes:any = [];
-  isfrmChecked:boolean = false;
+  selectedCategoryes: any = [];
+  isfrmChecked: boolean = false;
 
   categoriesAll$: Observable<Category[]>;
 
@@ -51,7 +53,7 @@ export class AddPostsComponent implements OnInit {
     private storage: AngularFireStorage,
     private router: Router,
     private route: ActivatedRoute,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.loginService.getUser().subscribe(u => {
@@ -62,14 +64,30 @@ export class AddPostsComponent implements OnInit {
     this.postId = this.route.snapshot.paramMap.get('id');
     this.isAddMode = !this.postId;
 
-    if(!this.isAddMode){
-      const post  = this.postservice.getPostDetail(this.postId).valueChanges();
+
+    if (!this.isAddMode) {
+      const post: Observable<Post> = this.postservice.getPostDetail(this.postId).valueChanges();
       post.subscribe(data => {
-        this.addPostForm.patchValue(data)
+        this.addPostForm.patchValue(data);
         data.highlightedImage ? this.highlightedImage = data.highlightedImage : this.highlightedImage = this.highlightedImage
-      })
+        setTimeout(() => {
+          this.inputCategories.toArray().forEach(d => {
+            let b: any = [];
+            b.push(d.nativeElement.value);//adiciona os valores dos inputs na variável b
+
+            for (let i of data.categories) {
+              let f: any = b.filter(c => c == i);//filtra o valor do input que seja igual ao valor que vem do banco
+
+              if (d.nativeElement.value == f) {//clica nos inputs que estajam com valores iguais.
+                d.nativeElement.click();
+              }
+            }
+          });
+
+        }, 600);
+
+      });
     }
-    
   }
 
   showPreviewImage(event: any) {
@@ -84,54 +102,88 @@ export class AddPostsComponent implements OnInit {
     }
   }
 
-  checkCategory(event, isChecked){ //remove e adiciona a categoria selecionada no array selectedCategoryes
+  checkCategory(event, isChecked) { //remove e adiciona a categoria selecionada no array selectedCategoryes
     isChecked = event.target.checked;
-    
-    if(isChecked){
+
+    if (isChecked) {
       this.isfrmChecked = true;
       this.selectedCategoryes.push(event.target.value);
-    }else{
+    } else {
       this.isfrmChecked = false;
       let index = this.selectedCategoryes.indexOf(event.target.value)
       this.selectedCategoryes.splice(index, 1);
     }
   }
 
-  addPost(){
+  addPost() {
     let post: Post = this.addPostForm.value;
     if (!post.id) {
-        const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(filePath);
+      const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(filePath);
 
-        //insere a categoria Default se não for selecionado nenhuma categoria
-        const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = 'Default' :
+      //insere a categoria Default se não for selecionado nenhuma categoria
+      const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = ['Default'] :
         this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
 
-        //remove as tags html da descrição
-        const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
+      //remove as tags html da descrição
+      const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
 
-        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe((url) => {
-              this.addPostForm.value.highlightedImage = url;
-              this.addPostForm.value.categories = categories;
-              this.addPostForm.value.descriptionPost =  description;
-              this.addPostForm.value.publicationDate = this.currentDate;
-              this.addPostForm.value.author= this.username;
-              this.submit(post)
-              this.router.navigateByUrl('/private/admin/list-posts');
-            });
-          })
-        ).subscribe();
-      
-    } else {
-     
-      //this.updateServico(a);
+      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.addPostForm.value.highlightedImage = url;
+            this.addPostForm.value.categories = categories;
+            this.addPostForm.value.descriptionPost = description;
+            this.addPostForm.value.publicationDate = this.currentDate;
+            this.addPostForm.value.author = this.username;
+            this.postservice.addPost(post)
+            this.router.navigateByUrl('/private/admin/list-posts');
+          });
+        })
+      ).subscribe();
     }
   }
 
-  submit(p: Post){
-    this.postservice.addPost(p)
+  updatePost() {
+    let post: Post = this.addPostForm.value;
+
+    //insere a categoria Default se não for selecionado nenhuma categoria
+    const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = ['Default'] :
+      this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
+
+    //remove as tags html da descrição
+    const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
+
+    if (this.selectedImage) {
+      const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(filePath);
+
+      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.addPostForm.value.highlightedImage = url;
+            this.addPostForm.value.categories = categories;
+            this.addPostForm.value.descriptionPost = description;
+            this.addPostForm.value.publicationDate = this.currentDate;
+            this.addPostForm.value.author = this.username;
+            this.postservice.updatePost(post)
+            this.router.navigateByUrl('/private/admin/list-posts');
+          });
+        })
+      ).subscribe();
+    }else{
+      this.addPostForm.value.categories = categories;
+      this.postservice.updatePost(post)
+      this.router.navigateByUrl('/private/admin/list-posts');
+    }
+  }
+
+  submit() {
+    if (this.isAddMode) {
+      this.addPost();
+    } else {
+      this.updatePost();
+    }
   }
 
   config: AngularEditorConfig = {
@@ -149,7 +201,7 @@ export class AddPostsComponent implements OnInit {
         'insertUnorderedList',
         'insertOrderedList',
       ]
-      ],
+    ],
     customClasses: [
       {
         name: "quote",
@@ -165,7 +217,7 @@ export class AddPostsComponent implements OnInit {
         tag: "h1",
       },
     ],
-    
+
   };
 
 }
