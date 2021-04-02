@@ -12,3 +12,11 @@
 @import '~ngx-toastr/toastr';
 
 
+.modal-all{
+    &.modal-dialog{
+        .content-modal{
+            font-family: "Rubik", sans-serif;
+            padding: 15px 0 15px;
+        }
+    }
+}

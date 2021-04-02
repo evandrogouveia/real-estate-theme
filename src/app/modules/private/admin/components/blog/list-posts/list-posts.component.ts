@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Observable } from 'rxjs';
+import { ModalComponent } from '../../shared/modal/modal.component';
 import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
 
@@ -10,11 +12,36 @@ import { PostService } from '../services/post.service';
 })
 export class ListPostsComponent implements OnInit {
   posts$: Observable<Post[]>
+  
 
-  constructor(private postService: PostService) { }
+  constructor(
+    private postService: PostService,
+    private modalService: BsModalService,
+    public bsModalRef: BsModalRef,
+    ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postService.getPosts();
+  }
+  
+
+  openModalConfirmDelete(p){
+    
+    const initialState = {
+      titleModal: 'Deseja realmente excluir o Post?',
+      titlePost: p.titlePost,
+      callback: (result) => {
+        if (result == true){
+          this.delete(p);
+        }
+      }
+    };
+
+    this.bsModalRef = this.modalService.show(
+      ModalComponent,
+      Object.assign({initialState}, {class: 'modal-all'}),
+    );
+
   }
 
   delete(p: Post){

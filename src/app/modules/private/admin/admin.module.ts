@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -22,7 +22,6 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
-
 registerLocaleData(localePt);
 
 @NgModule({
@@ -37,7 +36,7 @@ registerLocaleData(localePt);
     UsersComponent, 
     EditProfileComponent, 
     ListPostsComponent, 
-    AddUserComponent, 
+    AddUserComponent,
     
   ],
   imports: [
@@ -56,5 +55,6 @@ registerLocaleData(localePt);
     },
     BsModalRef
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AdminModule { }

@@ -42,11 +42,11 @@
                     <td>Publicado {{p.publicationDate.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDate.toDate() | date: 'HH:mm'}}</td>
                     <td>
                         <a routerLink="/private/admin/edit-posts/{{p.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
-                        <a href="javascript:void(0)" (click)="delete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
+                        <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
                     </td>
                   </tr>
                 </tbody>
-                
+               
               </table>
         </div>
         
