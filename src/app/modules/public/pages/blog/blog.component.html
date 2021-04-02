@@ -9,13 +9,13 @@
                     <div class="block-post" *ngFor="let p of posts$ | async">
                         <div class="row">
                             <div class="col-lg-6">
-                                <a routerLink="/blog/single-blog">
+                                <a routerLink="single-blog/{{p.id}}">
                                     <img src="{{p.highlightedImage}}">
                                 </a>
                             </div>
                             <div class="col-lg-6">
                                 <div class="entry-header">
-                                    <a routerLink="/blog/single-blog">
+                                    <a routerLink="single-blog/{{p.id}}">
                                         <h3>{{(p.titlePost.length > 50) ? (p.titlePost | slice:0:50) + ' ...' : (p.titlePost)}}</h3>
                                     </a>
                                     <div class="entry-date">

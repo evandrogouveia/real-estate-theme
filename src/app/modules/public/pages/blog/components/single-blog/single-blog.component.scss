@@ -30,21 +30,15 @@
                     font-size: 15px;
                 }
             }
-            a{
-                text-decoration: none;
-                h3{
-                    color: #201B18;
-                    font-family: "Poppins", sans-serif;
-                    font-weight: 600;
-                    font-size: 24px;
-                    margin-bottom: 10px;
-                    margin-top: 30px;
-                    &:hover{
-                        color: #5e524c;
-                    }
-                }
-            }
             
+            h3{
+                color: #201B18;
+                font-family: "Poppins", sans-serif;
+                font-weight: 600;
+                font-size: 24px;
+                margin-bottom: 10px;
+                margin-top: 30px;
+            }
             
         }
         .entry-footer{

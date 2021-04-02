@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
+import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
 
 @Component({
   selector: 'app-single-blog',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleBlogComponent implements OnInit {
 
-  constructor() { }
+  post$: Observable<Post>
+
+  constructor(
+    private route: ActivatedRoute,
+    private postService: PostService
+  ) { }
 
   ngOnInit(): void {
+    const postId = this.route.snapshot.paramMap.get('id');
+    this.post$ = this.postService.getPostDetail(postId).valueChanges();
   }
 
 }
