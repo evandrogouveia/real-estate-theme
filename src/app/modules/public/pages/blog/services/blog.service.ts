@@ -22,6 +22,11 @@ export class BlogService {
     return this.postsCollection.valueChanges();
   }
 
+  //ADICIONAR COMENTÁRIOS
+  addComments(p: Post){
+    return this.postsCollection.doc(p.id).set(p);
+  }
+
   //LISTAR CATEGORIAS
   getCategory(){
     return this.categoriesCollection.valueChanges();

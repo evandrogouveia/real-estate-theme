@@ -9,6 +9,7 @@ import { AsideLateralComponent } from './components/aside-lateral/aside-lateral.
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 registerLocaleData(localePt);
 
@@ -17,7 +18,9 @@ registerLocaleData(localePt);
   imports: [
     CommonModule,
     BlogRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {
