@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Category } from '../models/category.model';
 
 @Injectable({
@@ -18,9 +18,19 @@ export class CategoryService {
     return this.categoriesCollection.valueChanges();
   }
 
+  //LISTAR CATEGORIA POR ID
+  getCategoryDetail(cId: string): AngularFirestoreDocument<Category>{
+    return this.categoriesCollection.doc(cId)
+  }
+
   //ADICIONAR CATEGORIA
   addCategory(c: Category){
     c.id = this.afs.createId();
+    return this.categoriesCollection.doc(c.id).set(c);
+  }
+
+  //ATUALIZAR CATEGORIA
+  updateCategory(c: Category){
     return this.categoriesCollection.doc(c.id).set(c);
   }
 

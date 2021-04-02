@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()">
+                <form [formGroup]="addCategoryForm" (ngSubmit)="submit()">
                     <div class="form-group">
                       <label for="name">Nome</label>
                       <input type="text" class="form-control" id="name" formControlName="name">
@@ -27,7 +27,9 @@
                           <option *ngFor="let c of categories$ | async">{{c.name}}</option>
                         </select>
                       </div>
-                      <button type="submit" class="btn btn-add-category">Adicionar nova categoria</button>
+                      <button type="submit" class="btn btn-add-category">
+                          {{ !this.isAddMode ? 'Atualizar' : 'Adicionar nova categoria'}}
+                        </button>
                   </form>
             </div>
             <div class="col-lg-7">
@@ -55,7 +57,9 @@
                                 <td><a href="#">{{c.name}}</a></td>
                                 <td>{{c.description}}</td>
                                 <td>
-                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                    <a routerLink="/private/admin/edit-category/{{c.id}}">
+                                        <i class="icon-edit" tooltip="Editar"></i>
+                                    </a>
                                     <a href="javascript:void(0)" (click)="delete(c)">
                                         <i class="icon-delete" tooltip="Excluir"></i>
                                     </a>

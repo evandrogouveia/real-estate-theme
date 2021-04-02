@@ -23,14 +23,13 @@ export class ListPostsComponent implements OnInit {
   ngOnInit(): void {
     this.posts$ = this.postService.getPosts();
   }
-  
 
   openModalConfirmDelete(p){
     
     const initialState = {
       titleModal: 'Deseja realmente excluir o Post?',
       titlePost: p.titlePost,
-      callback: (result) => {
+      callback: (result) => {//recebe o evento callback true do modal
         if (result == true){
           this.delete(p);
         }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 import { CategoryService } from '../services/category.service';
@@ -12,35 +14,60 @@ import { CategoryService } from '../services/category.service';
 export class CategoryComponent implements OnInit {
   categories$: Observable<Category[]>;
 
+  categoryId: string;
+  isAddMode: boolean;
+
   addCategoryForm: FormGroup = this.fb.group({
     id: [undefined],
-    name: [''],
+    name: ['', Validators.required],
     description: [''],
     parentCategory: ['']
   });
 
   constructor(
     private fb: FormBuilder,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.categories$ = this.categoryService.getCategory();
-    this.categories$.subscribe(c => console.log(c))
+
+    this.categoryId = this.route.snapshot.paramMap.get('id');
+    this.isAddMode = !this.categoryId;
+
+    if (!this.isAddMode) {
+      const post: Observable<Category> = this.categoryService.getCategoryDetail(this.categoryId).valueChanges();
+      post.subscribe(data => {
+        this.addCategoryForm.patchValue(data);
+      });
+    }
   }
 
   addCategory(){
     let category: Category = this.addCategoryForm.value;
-    if (!category.id) {
-      this.submit(category);
+    if (!category.id && this.addCategoryForm.valid) {
+      this.categoryService.addCategory(category);
       this.addCategoryForm.reset();
-    } else {
-      //this.updateServico(a);
+      this.toastr.success('Categoria adicionada com sucesso');
     }
   }
+  updateCategory(){
+    let category: Category = this.addCategoryForm.value;
+    this.categoryService.updateCategory(category);
+    this.addCategoryForm.reset();
+    this.router.navigateByUrl('/private/admin/add-category');
+    this.toastr.success('Categoria atualizada com sucesso');
+  }
 
-  submit(c: Category){
-    this.categoryService.addCategory(c)
+  submit(){
+    if (this.isAddMode) {
+      this.addCategory();
+    } else {
+      this.updateCategory();
+    }
   }
 
   delete(c: Category){

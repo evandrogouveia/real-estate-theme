@@ -17,13 +17,19 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {path: 'home', component: HomeComponent },
+
       {path: 'add-posts', component: AddPostsComponent},
       {path: 'edit-posts/:id', component: AddPostsComponent},
       {path: 'list-posts', component: ListPostsComponent},
+
       {path: 'add-category', component: CategoryComponent},
+      {path: 'edit-category/:id', component: CategoryComponent},
+
       {path: 'comments', component: CommentsComponent},
+
       {path: 'users', component: UsersComponent},
       {path: 'edit-profile/:id', component: EditProfileComponent},
+
       {path: 'edit-theme', loadChildren: () => import('./components/edit-theme/edit-theme.module').then(m => m.EditThemeModule) },
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ],
