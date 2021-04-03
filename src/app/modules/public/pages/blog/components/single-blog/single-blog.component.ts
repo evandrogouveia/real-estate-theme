@@ -17,12 +17,14 @@ export class SingleBlogComponent implements OnInit {
   post$: Observable<Post>
   url: any;
   comment: any = [];
+  currentDate = new Date();
 
   addCommentsForm: FormGroup = this.fb.group({
     id: [undefined],
     comment: [''],
     name: ['', Validators.required],
     email: ['', Validators.required],
+    commentDate: ['']
   });
 
   updatePostForm: FormGroup = this.fb.group({
@@ -62,6 +64,7 @@ export class SingleBlogComponent implements OnInit {
         this.addCommentsForm.value.comment,
         this.addCommentsForm.value.name,
         this.addCommentsForm.value.email,
+        this.addCommentsForm.value.commentDate = this.currentDate
       );
       this.updatePostForm.value.comments.push(this.addCommentsForm.value);
 
