@@ -2,87 +2,68 @@
     <div class="content-comments">
         <div class="header-comments">
             <div class="wrap">
-              <h4>Comentários</h4>
+                <h4>Comentários</h4>
             </div>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Pesquisar posts">
-              <i class="icon-search"></i>
+                <input type="text" class="form-control" placeholder="Pesquisar posts">
+                <i class="icon-search"></i>
             </div>
         </div>
 
         <div class="table-responsive">
             <table class="table">
                 <thead>
-                  <tr>
-                    <th scope="col">
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </th>
-                    <th scope="col">Autor</th>
-                    <th scope="col">Comentário</th>
-                    <th scope="col">Post</th>
-                    <th scope="col">Enviado em</th>
-                    <th scope="col">Ações</th>
-                  </tr>
+                    <tr>
+                        <th scope="col">
+                            <div class="form-check">
+                                <input type="checkbox">
+                            </div>
+                        </th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Comentário</th>
+                        <th scope="col">Post</th>
+                        <th scope="col">Enviado em</th>
+                        <th scope="col">Ações</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="wrap-user">
-                            <i class="icon-person"></i>
-                            <div>
-                                <p>Admin</p>
-                                <a href="#">email@email.com</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Lorem ipsum dolor sit amet, consectetu</td>
-                    <td><a href="#">Lorem ipsum</a></td>
-                    <td>16/08/2020 às 22:38</td>
-                    <td>
-                        <a href="#"><i class="icon-reject" tooltip="Aprovar"></i></a>
-                        <a href="#"><i class="icon-response" tooltip="Responder"></i></a>
-                        <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                        <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="wrap-user">
-                            <i class="icon-person"></i>
-                            <div>
-                                <p>Admin</p>
-                                <a href="#">vando_gouveia@email.com.br</a>
-                            </div>
-                        </div>
-                    </td>
-                    <td>Lorem ipsum dolor sit amet, consectetu</td>
-                    <td><a href="#">Lorem ipsum</a></td>
-                    <td>16/08/2020 às 22:38</td>
-                    <td>
-                        <a href="#"><i class="icon-approve" tooltip="Rejeitar"></i></a>
-                        <a href="#"><i class="icon-response" tooltip="Responder"></i></a>
-                        <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                        <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                    </td>
-                  </tr>
-                  
+                    <ng-container *ngFor="let p of posts$ | async">
+                        <ng-container *ngFor="let c of p.comments">
+                            <tr *ngIf="p.comments.length > 0">
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wrap-user">
+                                        <i class="icon-person"></i>
+                                        <div>
+                                            <p>{{c.name}}</p>
+                                            <a href="#">{{c.email}}</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{c.comment}}</td>
+                                <td><a href="#">{{p.titlePost}}</a></td>
+                                <td>
+                                    {{c.commentDate.toDate() | date: 'dd/MM/yyyy'}} às 
+                                    {{c.commentDate.toDate() | date: 'HH:mm'}}
+                                </td>
+                                <td>
+                                    <a href="#"><i class="icon-reject" tooltip="Aprovar"></i></a>
+                                    <a href="#"><i class="icon-response" tooltip="Responder"></i></a>
+                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                    <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                                </td>
+
+                            </tr>
+                        </ng-container>
+                    </ng-container>
                 </tbody>
-                
-              </table>
+
+            </table>
         </div>
-        
+
     </div>
 </section>
-

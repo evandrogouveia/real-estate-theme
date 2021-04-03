@@ -148,6 +148,7 @@ export class AddPostsComponent implements OnInit {
               this.addPostForm.value.descriptionPost = description;
               this.addPostForm.value.publicationDate = this.currentDate;
               this.addPostForm.value.author = this.username;
+              this.addPostForm.value.comments = [];
               this.postservice.addPost(post).then(() => {
                 this.loading = false;
                 this.toastr.success('Post adicionado com sucesso');
@@ -162,6 +163,7 @@ export class AddPostsComponent implements OnInit {
         this.addPostForm.value.descriptionPost = description;
         this.addPostForm.value.publicationDate = this.currentDate;
         this.addPostForm.value.author = this.username;
+        this.addPostForm.value.comments = [];
         this.postservice.addPost(post).then(() => {
           this.loading = false;
           this.toastr.success('Post adicionado com sucesso');
@@ -195,6 +197,7 @@ export class AddPostsComponent implements OnInit {
             this.addPostForm.value.descriptionPost = description;
             //this.addPostForm.value.publicationDate = this.currentDate;
             this.addPostForm.value.author = this.username;
+            this.addPostForm.value.comments = [];
             this.postservice.updatePost(post).then(() => {
               this.loading = false;
               this.toastr.success('Post atualizado com sucesso');
@@ -209,6 +212,7 @@ export class AddPostsComponent implements OnInit {
       this.addPostForm.value.descriptionPost = description;
       //this.addPostForm.value.publicationDate = this.currentDate;
       this.addPostForm.value.author = this.username;
+      this.addPostForm.value.comments = [];
       this.postservice.updatePost(post).then(() => {
         this.loading = false;
         this.toastr.success('Post atualizado com sucesso');
