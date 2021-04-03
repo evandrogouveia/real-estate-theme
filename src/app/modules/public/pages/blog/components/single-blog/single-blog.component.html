@@ -52,8 +52,12 @@
                             <a href="https://web.whatsapp.com/send?text={{url}}" target="_blank">
                                 <i class='bx bxl-whatsapp'></i>
                             </a>
-                            <!--a href="#"><i class='bx bxl-facebook'></i></a-->
-                            <!--a href="#"><i class='bx bxl-telegram'></i></a-->
+                            <a href="https://www.facebook.com/sharer.php?href={{url}}" target="_blank">
+                                <i class='bx bxl-facebook'></i>
+                            </a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{url}}" target="_blank">
+                                <i class='bx bxl-linkedin'></i>
+                            </a>
                             <!--a href="#"><i class='bx bxl-instagram'></i></a-->
                         </div>
                     </div>
@@ -63,7 +67,7 @@
                             <h3>Deixe um comentário</h3>
                             <p>Seu endereço de e-mail não será publicado. Os campos obrigatórios estão marcados com *
                             </p>
-                            <form [formGroup]="addCommentsForm" (ngSubmit)="submit()">
+                            <form [formGroup]="addCommentsForm">
                                 <div class="form-group">
                                     <label for="message">Adicionar comentário</label>
                                     <textarea formControlName="comment" class="form-control" id="message" rows="5"></textarea>
@@ -77,7 +81,7 @@
                                     <input formControlName="email" type="text" class="form-control" id="email">
                                 </div>
 
-                                <button type="submit" class="btn">Publicar comentário</button>
+                                <button (click)="submit()" type="button" class="btn">Publicar comentário</button>
                             </form>
                         </div>
                     </div>

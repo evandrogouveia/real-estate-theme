@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
@@ -20,11 +21,18 @@ export class SingleBlogComponent implements OnInit {
   addCommentsForm: FormGroup = this.fb.group({
     id: [undefined],
     comment: [''],
-    name: [''],
-    email: [''],
+    name: ['', Validators.required],
+    email: ['', Validators.required],
   });
 
-  addPostForm: FormGroup = this.fb.group({
+  updatePostForm: FormGroup = this.fb.group({
+    id: [undefined],
+    titlePost: [''],
+    descriptionPost: [''],
+    highlightedImage: [''],
+    categories: [''],
+    publicationDate: [''],
+    author: [''],
     comments: ['']
   });
 
@@ -33,6 +41,7 @@ export class SingleBlogComponent implements OnInit {
     private postService: PostService,
     private blogService: BlogService,
     private fb: FormBuilder,
+    private afs:AngularFirestore
   ) { }
 
   ngOnInit(): void {
@@ -40,23 +49,26 @@ export class SingleBlogComponent implements OnInit {
     this.post$ = this.postService.getPostDetail(postId).valueChanges();
 
     this.post$.subscribe(data => {
-      this.addPostForm.patchValue(data)
+      this.updatePostForm.patchValue(data)
     })
     this.url = window.location.href;
   }
 
-  submit(){
-    let post: Post = this.addPostForm.value;
+  submit() {
+    let post: Post = this.updatePostForm.value;
+    if (this.addCommentsForm.valid) {
+      this.comment.push(
+        this.addCommentsForm.value.id = this.afs.createId(),
+        this.addCommentsForm.value.comment,
+        this.addCommentsForm.value.name,
+        this.addCommentsForm.value.email,
+      );
+      this.updatePostForm.value.comments.push(this.addCommentsForm.value);
 
-    this.comment.push(
-      this.addCommentsForm.value.id,
-      this.addCommentsForm.value.comment,
-      this.addCommentsForm.value.name,
-      this.addCommentsForm.value.email,
-    );
-    this.addPostForm.value.comments = this.comment;
-    console.log(this.comment)
-    this.blogService.addComments(post)
+      this.blogService.addComments(post);
+      this.addCommentsForm.reset();
+    }
+
   }
 
 }
