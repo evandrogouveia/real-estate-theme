@@ -51,7 +51,9 @@
                                     {{c.commentDate.toDate() | date: 'HH:mm'}}
                                 </td>
                                 <td>
-                                    <a href="#"><i class="icon-reject" tooltip="Aprovar"></i></a>
+                                    <a href="javascript:void(0);" (click)="this.toggleComment = !this.toggleComment">
+                                        <i [ngClass]="!toggleComment ? 'icon-reject' : 'icon-approve'" tooltip="Aprovar"></i>
+                                    </a>
                                     <a href="#"><i class="icon-response" tooltip="Responder"></i></a>
                                     <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
                                     <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>

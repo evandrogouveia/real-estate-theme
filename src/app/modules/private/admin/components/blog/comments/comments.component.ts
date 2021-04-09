@@ -10,13 +10,24 @@ import { PostService } from '../services/post.service';
 })
 export class CommentsComponent implements OnInit {
   posts$: Observable<Post[]>
-
+  toggleComment: boolean = false;
+  statusComment;
   constructor(
     private postService: PostService,
   ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postService.getPosts();
+  }
+  toggleStatus(event, id){
+    
+    this.toggleComment = !this.toggleComment
+    if(this.toggleComment){
+      this.statusComment = 'Approved'
+    }else{
+      this.statusComment = 'Pending'
+    }
+    console.log(this.statusComment)
   }
 
 }
