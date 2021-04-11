@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { BlogService } from 'src/app/modules/public/pages/blog/services/blog.service';
 import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
 
@@ -10,24 +12,67 @@ import { PostService } from '../services/post.service';
 })
 export class CommentsComponent implements OnInit {
   posts$: Observable<Post[]>
-  toggleComment: boolean = false;
   statusComment;
+  comment: any = [];
+
+  updateCommentsForm: FormGroup = this.fb.group({
+    id: [undefined],
+    comment: [''],
+    name: [''],
+    email: [''],
+    commentDate: [''],
+    status: ['']
+  });
+
+  updatePostForm: FormGroup = this.fb.group({
+    id: [undefined],
+    titlePost: [''],
+    descriptionPost: [''],
+    highlightedImage: [''],
+    categories: [''],
+    publicationDate: [''],
+    author: [''],
+    comments: ['']
+  });
+
   constructor(
     private postService: PostService,
+    private blogService: BlogService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.posts$ = this.postService.getPosts();
   }
-  toggleStatus(event, id){
+
+  toggleStatus(i, p: Post){
+    let c: any = p.comments[i];
+    this.updateCommentsForm.patchValue(c);
     
-    this.toggleComment = !this.toggleComment
-    if(this.toggleComment){
-      this.statusComment = 'Approved'
+    this.updatePostForm.patchValue(p);
+
+    let post: Post = this.updatePostForm.value;
+   
+    if (this.updateCommentsForm.value.status === 'Reject') {
+        this.updateCommentsForm.value.status = 'Approved';
+        this.updatePostForm.value.comments[i] = this.updateCommentsForm.value;
+        this.blogService.updateComments(post);
     }else{
-      this.statusComment = 'Pending'
+        this.updateCommentsForm.value.status = 'Reject';
+        this.updatePostForm.value.comments[i] = this.updateCommentsForm.value;
+        this.blogService.updateComments(post);
     }
-    console.log(this.statusComment)
+  }
+
+  deleteComment(i, p: any){
+       p.comments.splice(i, 1);
+    
+      this.updatePostForm.patchValue(p);
+
+      this.updatePostForm.value.comments = p.comments;
+
+      let post: Post = this.updatePostForm.value;
+      this.blogService.updateComments(post);
   }
 
 }

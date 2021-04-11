@@ -27,6 +27,11 @@ export class BlogService {
     return this.postsCollection.doc(p.id).set(p);
   }
 
+  //ATUALIZAR COMENTÁRIOS
+  updateComments(p: Post){
+    return this.postsCollection.doc(p.id).update(p);
+  }
+
   //LISTAR CATEGORIAS
   getCategory(){
     return this.categoriesCollection.valueChanges();

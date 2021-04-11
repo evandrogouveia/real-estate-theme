@@ -32,7 +32,7 @@
 
                                         <div class="wrapper-info">
                                             <i class='bx bx-comment-detail'></i>
-                                            <span>{{(post$ | async)?.comments.length}}</span>
+                                            <span>{{approvedComments?.length}}</span>
                                         </div>
                                     </div>
 
@@ -62,10 +62,11 @@
                         </div>
                     </div>
 
-                    <div *ngIf="(post$ | async)?.comments.length > 0" class="approved-comments">
-                        <h5>Este post tem {{(post$ | async)?.comments.length}} comentários</h5>
+                    <!-- Comentários Aprovados -->
+                    <div *ngIf="approvedComments?.length > 0" class="approved-comments">
+                        <h5>Este post tem {{approvedComments?.length}} comentários</h5>
                         <ng-container *ngFor="let c of (post$ | async)?.comments">
-                            <div class="wrap-comment">
+                            <div class="wrap-comment" *ngIf="c.status == 'Approved'">
                                 <img src="assets/img/icons/user-empty.svg">
                                 <div class="w-100">
                                     <div class="comment-author">
@@ -83,7 +84,9 @@
                             </div>
                         </ng-container>
                     </div>
-
+                    <div class="pending-message">
+                        <span>Seu comentário foi enviado e aguarda moderação  :)</span>
+                    </div>
                     <div class="block-comments">
                         <div class="wrapper-form-contact">
                             <h3>Deixe um comentário</h3>

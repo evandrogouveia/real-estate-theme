@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
 import { BlogService } from '../../services/blog.service';
@@ -18,13 +19,15 @@ export class SingleBlogComponent implements OnInit {
   url: any;
   comment: any = [];
   currentDate = new Date();
+  approvedComments: any;
 
   addCommentsForm: FormGroup = this.fb.group({
     id: [undefined],
     comment: [''],
     name: ['', Validators.required],
     email: ['', Validators.required],
-    commentDate: ['']
+    commentDate: [''],
+    status: ['']
   });
 
   updatePostForm: FormGroup = this.fb.group({
@@ -49,10 +52,13 @@ export class SingleBlogComponent implements OnInit {
   ngOnInit(): void {
     const postId = this.route.snapshot.paramMap.get('id');
     this.post$ = this.postService.getPostDetail(postId).valueChanges();
-
+    
     this.post$.subscribe(data => {
       this.updatePostForm.patchValue(data)
-    })
+      let c:any = data.comments;
+      this.approvedComments = c.filter(d => d.status == 'Approved')
+    });
+
     this.url = window.location.href;
   }
 
@@ -64,7 +70,8 @@ export class SingleBlogComponent implements OnInit {
         this.addCommentsForm.value.comment,
         this.addCommentsForm.value.name,
         this.addCommentsForm.value.email,
-        this.addCommentsForm.value.commentDate = this.currentDate
+        this.addCommentsForm.value.commentDate = this.currentDate,
+        this.addCommentsForm.value.status = 'Reject'
       );
       this.updatePostForm.value.comments.push(this.addCommentsForm.value);
 
