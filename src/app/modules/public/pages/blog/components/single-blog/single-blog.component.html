@@ -84,7 +84,7 @@
                             </div>
                         </ng-container>
                     </div>
-                    <div class="pending-message">
+                    <div *ngIf="sendMessage" class="pending-message" id="destino">
                         <span>Seu comentário foi enviado e aguarda moderação  :)</span>
                     </div>
                     <div class="block-comments">

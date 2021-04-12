@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,12 +14,16 @@ import { BlogService } from '../../services/blog.service';
   styleUrls: ['./single-blog.component.scss']
 })
 export class SingleBlogComponent implements OnInit {
+  
 
   post$: Observable<Post>
   url: any;
   comment: any = [];
   currentDate = new Date();
   approvedComments: any;
+  sendMessage: boolean = false;
+
+  scrollPosition;
 
   addCommentsForm: FormGroup = this.fb.group({
     id: [undefined],
@@ -46,7 +50,8 @@ export class SingleBlogComponent implements OnInit {
     private postService: PostService,
     private blogService: BlogService,
     private fb: FormBuilder,
-    private afs:AngularFirestore
+    private afs:AngularFirestore,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -75,7 +80,14 @@ export class SingleBlogComponent implements OnInit {
       );
       this.updatePostForm.value.comments.push(this.addCommentsForm.value);
 
-      this.blogService.addComments(post);
+      this.blogService.addComments(post).then(() =>{
+        setTimeout(() =>{
+          const b = document.querySelector("#destino");
+          b.scrollIntoView({behavior: 'smooth', block: 'center'})
+        }, 1000)
+        
+        this.sendMessage = true;
+      })
       this.addCommentsForm.reset();
     }
 
