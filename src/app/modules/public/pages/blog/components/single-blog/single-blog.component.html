@@ -84,7 +84,7 @@
                             </div>
                         </ng-container>
                     </div>
-                    <div *ngIf="sendMessage" class="pending-message" id="destino">
+                    <div *ngIf="sendMessage" class="pending-message" id="message">
                         <span>Seu comentário foi enviado e aguarda moderação  :)</span>
                     </div>
                     <div class="block-comments">
@@ -107,7 +107,10 @@
                                     <input formControlName="email" type="text" class="form-control" id="email">
                                 </div>
 
-                                <button (click)="submit()" type="button" class="btn">Publicar comentário</button>
+                                <button (click)="submit()" type="button" class="btn">
+                                    <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                                    {{ !loading ? 'Publicar comentário' : 'Publicando...' }}                    
+                                </button>
                             </form>
                         </div>
                     </div>

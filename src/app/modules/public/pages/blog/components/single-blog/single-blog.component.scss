@@ -190,6 +190,7 @@
             button{
                 background-color: #a38851;
                 font-family: 'Rubik', sans-serif;
+                position: relative;
                 box-shadow: none;
                 outline: none;
                 margin-top: 10px;
@@ -199,6 +200,11 @@
                 color: #ffffff;
                 &:hover{
                     background-color: #806636;
+                }
+                .loading{
+                    position:absolute;
+                    left: 12px;
+                    top: 7px;
                 }
             }
         }

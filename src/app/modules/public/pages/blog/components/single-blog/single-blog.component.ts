@@ -22,7 +22,7 @@ export class SingleBlogComponent implements OnInit {
   currentDate = new Date();
   approvedComments: any;
   sendMessage: boolean = false;
-
+  loading:boolean = false;
   scrollPosition;
 
   addCommentsForm: FormGroup = this.fb.group({
@@ -68,6 +68,7 @@ export class SingleBlogComponent implements OnInit {
   }
 
   submit() {
+    this.loading = true;
     let post: Post = this.updatePostForm.value;
     if (this.addCommentsForm.valid) {
       this.comment.push(
@@ -82,12 +83,12 @@ export class SingleBlogComponent implements OnInit {
 
       this.blogService.addComments(post).then(() =>{
         setTimeout(() =>{
-          const b = document.querySelector("#destino");
+          const b = document.querySelector("#message");
           b.scrollIntoView({behavior: 'smooth', block: 'center'})
-        }, 1000)
-        
+        }, 100);
         this.sendMessage = true;
-      })
+        this.loading = false;
+      });
       this.addCommentsForm.reset();
     }
 
