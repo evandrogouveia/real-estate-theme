@@ -29,6 +29,21 @@
                 z-index: 5;
                 left: 15px;
             }
+            small{
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                right: 20px;
+                background: rgb(252, 63, 63);
+                color: #ffffff;
+                width: 20px;
+                height: 20px;
+                border-radius: 30px;
+                font-family: "Poppins", sans-serif;
+                font-size: 10px;
+                z-index: 5;
+            }
             .list-group-item{
                 border:none;
                 display: flex;
@@ -102,6 +117,10 @@
                     margin-right: 0px;
                     left: inherit;
                     right: 22px;
+                }
+                small{
+                    top: 7px;
+                    right: 10px;
                 }
                 .list-group-item {
                     width: 50px;

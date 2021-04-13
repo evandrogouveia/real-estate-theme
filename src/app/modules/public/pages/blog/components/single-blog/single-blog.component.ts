@@ -61,7 +61,7 @@ export class SingleBlogComponent implements OnInit {
     this.post$.subscribe(data => {
       this.updatePostForm.patchValue(data)
       let c:any = data.comments;
-      this.approvedComments = c.filter(d => d.status == 'Approved')
+      this.approvedComments = c.filter(d => d.status == 'Approved');
     });
 
     this.url = window.location.href;

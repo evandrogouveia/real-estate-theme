@@ -33,6 +33,7 @@
 
     <div class="wrap-menu">
       <i (click)="comments.click()" class="icon-message-inline"></i>
+      <!--small *ngIf="qtdCommentsPending > 0">{{qtdCommentsPending}}</small-->
       <a #comments routerLink="/private/admin/comments" routerLinkActive="active" class="list-group-item">
         <span>Comentários</span>
       </a>

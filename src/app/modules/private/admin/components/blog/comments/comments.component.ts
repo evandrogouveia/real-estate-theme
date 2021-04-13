@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BlogService } from 'src/app/modules/public/pages/blog/services/blog.service';
@@ -11,6 +11,8 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
+  @ViewChildren('inputStatus') inputStatus: QueryList<ElementRef>
+
   posts$: Observable<Post[]>
   statusComment;
   comment: any = [];
