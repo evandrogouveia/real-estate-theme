@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Observable } from 'rxjs';
@@ -50,7 +50,6 @@ export class CommentsComponent implements OnInit {
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
     private toastr: ToastrService,
-    private afs:AngularFirestore,
   ) { }
 
   ngOnInit(): void {
@@ -91,7 +90,6 @@ export class CommentsComponent implements OnInit {
       valueForm: c,
       callback: (formData) => {//recebe o evento callback com dados do form do modal
         if (formData){
-          console.log(formData)
           this.updatePostForm.value.comments[i] = formData;
           this.blogService.updateComments(post).then(() => {
             this.toastr.success('Comentário atualizado com sucesso');
@@ -106,7 +104,7 @@ export class CommentsComponent implements OnInit {
     );
   }
 
-  openModalResponse(i, p){
+  openModalResponse(p){
     this.updatePostForm.patchValue(p);
 
     let post: Post = this.updatePostForm.value;
@@ -115,15 +113,10 @@ export class CommentsComponent implements OnInit {
       titleModal: 'Editar comentário',
       callback: (formData) => {//recebe o evento callback com dados do form do modal
         if (formData){
-         
-          
-          setTimeout(() => {
             this.updatePostForm.value.comments.push(formData);
             this.blogService.addComments(post).then(() => {
-              this.toastr.success('Resposta enviada com sucesso');
+                this.toastr.success('Resposta enviada com sucesso');
             });
-          }, 1500)
-          
         }
       }
     };

@@ -47,8 +47,10 @@
                                 <td>{{c.comment}}</td>
                                 <td><a href="#">{{p.titlePost}}</a></td>
                                 <td>
-                                    {{c.commentDate.toDate() | date: 'dd/MM/yyyy'}} às 
-                                    {{c.commentDate.toDate() | date: 'HH:mm'}}
+                                    <span *ngIf="c.commentDate.toDate()">
+                                        {{c.commentDate?.toDate() | date: 'dd/MM/yyyy'}} às 
+                                        {{c.commentDate?.toDate() | date: 'HH:mm'}}
+                                    </span>
                                 </td>
                                 <td>
                                     <a href="javascript:void(0);" (click)="toggleStatus(i, p)">
@@ -56,7 +58,7 @@
                                         tooltip="{{c.status == 'Reject' ? 'Aprovar' : 'Rejeitar'}}">
                                         </i>
                                     </a>
-                                    <a href="javascript:void(0);" (click)="openModalResponse(i, p)">
+                                    <a href="javascript:void(0);" (click)="openModalResponse(p)">
                                         <i class="icon-response" tooltip="Responder"></i>
                                     </a>
                                     <a href="javascript:void(0);" (click)="openModalEdit(i, p)">
