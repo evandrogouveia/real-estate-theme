@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -80,7 +80,7 @@ export class SingleBlogComponent implements OnInit {
         this.addCommentsForm.value.status = 'Reject'
       );
       this.updatePostForm.value.comments.push(this.addCommentsForm.value);
-
+        console.log(this.updatePostForm.value.comments)
       this.blogService.addComments(post).then(() =>{
         setTimeout(() =>{
           const b = document.querySelector("#message");

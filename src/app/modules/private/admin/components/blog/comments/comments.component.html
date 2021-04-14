@@ -56,10 +56,12 @@
                                         tooltip="{{c.status == 'Reject' ? 'Aprovar' : 'Rejeitar'}}">
                                         </i>
                                     </a>
-                                    <a href="javascript:void(0);">
+                                    <a href="javascript:void(0);" (click)="openModalResponse(i, p)">
                                         <i class="icon-response" tooltip="Responder"></i>
                                     </a>
-                                    <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                                    <a href="javascript:void(0);" (click)="openModalEdit(i, p)">
+                                        <i class="icon-edit" tooltip="Editar"></i>
+                                    </a>
                                     <a href="javascript:void(0);" (click)="deleteComment(i, p)">
                                         <i class="icon-delete" tooltip="Excluir"></i>
                                     </a>
@@ -71,6 +73,7 @@
                 </tbody>
 
             </table>
+
         </div>
 
     </div>

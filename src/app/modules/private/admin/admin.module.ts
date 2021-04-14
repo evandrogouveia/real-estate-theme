@@ -21,6 +21,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { ModalCommentsComponent } from './components/blog/comments/modal-comments/modal-comments.component';
 
 registerLocaleData(localePt);
 
@@ -36,7 +37,7 @@ registerLocaleData(localePt);
     UsersComponent, 
     EditProfileComponent, 
     ListPostsComponent, 
-    AddUserComponent,
+    AddUserComponent, ModalCommentsComponent,
     
   ],
   imports: [
