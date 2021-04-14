@@ -110,7 +110,8 @@ export class CommentsComponent implements OnInit {
     let post: Post = this.updatePostForm.value;
 
     const initialState = {
-      titleModal: 'Editar comentário',
+      titleModal: 'Adicionar resposta',
+      inputHidden: true,
       callback: (formData) => {//recebe o evento callback com dados do form do modal
         if (formData){
             this.updatePostForm.value.comments.push(formData);
