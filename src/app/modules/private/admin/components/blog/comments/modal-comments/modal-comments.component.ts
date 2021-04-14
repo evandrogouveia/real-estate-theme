@@ -15,8 +15,9 @@ export class ModalCommentsComponent implements OnInit {
   @Input() valueForm: any;
   currentDate = new Date();
   user$: Observable<User>
-  name;
-  email;
+
+  name: string;
+  email: string;
 
   updateCommentsForm: FormGroup = this.fb.group({
     id: [undefined],
@@ -41,7 +42,7 @@ export class ModalCommentsComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.valueForm){
-    this.updateCommentsForm.patchValue(this.valueForm)
+      this.updateCommentsForm.patchValue(this.valueForm)
     }
   }
 
