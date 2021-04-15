@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Category } from 'src/app/modules/private/admin/components/blog/models/category.model';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 
@@ -35,5 +36,10 @@ export class BlogService {
   //LISTAR CATEGORIAS
   getCategory(){
     return this.categoriesCollection.valueChanges();
+  }
+
+  searchByName(name: string): Observable<Post[]>{
+    return this.afs.collection<Post>('posts',
+    ref => ref.orderBy('titlePost').startAt(name).endAt(name + '\uf8ff')).valueChanges();
   }
 }

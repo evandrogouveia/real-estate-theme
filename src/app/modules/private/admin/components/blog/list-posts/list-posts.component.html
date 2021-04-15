@@ -6,7 +6,8 @@
               <a class="nav-link" routerLink="/private/admin/add-posts">Adicionar novo</a>
             </div>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Pesquisar posts">
+              <input type="text" class="form-control" placeholder="Pesquisar posts"
+              (keyup)="searchPost($event)">
               <i class="icon-search"></i>
             </div>
         </div>
