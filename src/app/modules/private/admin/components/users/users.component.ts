@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
       );
   }
 
-  searchCategory(event){
+  searchUser(event){
     let e = event.target.value;
     if(e){
       this.users$ = this.userService.searchByName(
