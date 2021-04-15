@@ -25,11 +25,21 @@ export class UserService {
     return this.afAuth.authState.pipe(
       switchMap(u => (u) ? this.userCollection.doc<User>(u.uid).valueChanges() : of(null))
     );
-  }  
+  } 
+  
+  // GET USERS
+  getUsers() {
+    return this.userCollection.valueChanges();
+  } 
 
   // GET USER DETAIL
   getUserDetail(userId: string): AngularFirestoreDocument<User> {
     return this.afs.collection('users').doc(userId);
+  }
+
+  searchByName(name: string): Observable<User[]>{
+    return this.afs.collection<User>('users',
+    ref => ref.orderBy('username').startAt(name).endAt(name + '\uf8ff')).valueChanges();
   }
 
   
