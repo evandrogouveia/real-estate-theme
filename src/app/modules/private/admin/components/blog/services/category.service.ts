@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
 
 @Injectable({
@@ -37,5 +38,10 @@ export class CategoryService {
   //DELETAR CATEGORIA
   deleteCategory(c: Category){
     this.categoriesCollection.doc(c.id).delete();
+  }
+
+  searchByName(name: string): Observable<Category[]>{
+    return this.afs.collection<Category>('categories',
+    ref => ref.orderBy('name').startAt(name).endAt(name + '\uf8ff')).valueChanges();
   }
 }

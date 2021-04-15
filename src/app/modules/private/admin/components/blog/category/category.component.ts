@@ -74,4 +74,15 @@ export class CategoryComponent implements OnInit {
     this.categoryService.deleteCategory(c);
   }
 
+  searchCategory(event){
+    let e = event.target.value;
+    if(e){
+      this.categories$ = this.categoryService.searchByName(
+        e.charAt(0).toUpperCase() + e.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
+      );
+    }else{
+      this.categories$ = this.categoryService.getCategory();
+    }
+  }
+
 }

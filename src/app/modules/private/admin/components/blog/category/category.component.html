@@ -5,7 +5,8 @@
                 <h4>Categorias</h4>
             </div>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Pesquisar categoria">
+                <input type="text" class="form-control" placeholder="Pesquisar categoria"
+                (keyup)="searchCategory($event)">
                 <i class="icon-search"></i>
             </div>
         </div>
