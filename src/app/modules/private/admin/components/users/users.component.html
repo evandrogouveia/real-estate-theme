@@ -50,7 +50,11 @@
                         <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
                     </td>
                   </tr>
-                  
+                  <tr *ngIf="(users$ | async)?.length === 0">
+                    <td class="empty-user" colspan="6">
+                      <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                    </td>
+                  </tr>
                 </tbody>
                 
               </table>

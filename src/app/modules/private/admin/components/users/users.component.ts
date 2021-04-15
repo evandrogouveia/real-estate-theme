@@ -12,6 +12,7 @@ import { UserService } from './service/user.service';
 })
 export class UsersComponent implements OnInit {
   users$: Observable<User[]>;
+  dataInput: string;
 
   constructor(
     private modalService: BsModalService,
@@ -31,10 +32,10 @@ export class UsersComponent implements OnInit {
   }
 
   searchUser(event){
-    let e = event.target.value;
-    if(e){
+    this.dataInput = event.target.value;
+    if(this.dataInput){
       this.users$ = this.userService.searchByName(
-        e.charAt(0).toUpperCase() + e.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
+        this.dataInput.charAt(0).toUpperCase() + this.dataInput.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
       );
     }else{
       this.users$ = this.userService.getUsers();

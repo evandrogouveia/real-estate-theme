@@ -66,6 +66,11 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr *ngIf="(categories$ | async)?.length === 0">
+                                <td class="empty-user" colspan="6">
+                                  <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                                </td>
+                              </tr>
                         </tbody>
 
                     </table>

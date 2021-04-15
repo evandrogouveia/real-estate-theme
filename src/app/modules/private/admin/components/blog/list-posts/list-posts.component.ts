@@ -13,7 +13,7 @@ import { PostService } from '../services/post.service';
 })
 export class ListPostsComponent implements OnInit {
   posts$: Observable<Post[]>
-  
+  dataInput: string;
 
   constructor(
     private postService: PostService,
@@ -50,10 +50,10 @@ export class ListPostsComponent implements OnInit {
   }
 
   searchPost(event){
-    let e = event.target.value;
-    if(e){
+    this.dataInput = event.target.value;
+    if(this.dataInput){
       this.posts$ = this.blogService.searchByName(
-        e.charAt(0).toUpperCase() + e.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
+        this.dataInput.charAt(0).toUpperCase() + this.dataInput.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
       );
     }else{
       this.posts$ = this.postService.getPosts();

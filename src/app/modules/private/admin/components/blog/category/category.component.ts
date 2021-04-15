@@ -13,6 +13,7 @@ import { CategoryService } from '../services/category.service';
 })
 export class CategoryComponent implements OnInit {
   categories$: Observable<Category[]>;
+  dataInput: string;
 
   categoryId: string;
   isAddMode: boolean;
@@ -75,10 +76,10 @@ export class CategoryComponent implements OnInit {
   }
 
   searchCategory(event){
-    let e = event.target.value;
-    if(e){
+    this.dataInput = event.target.value;
+    if(this.dataInput){
       this.categories$ = this.categoryService.searchByName(
-        e.charAt(0).toUpperCase() + e.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
+        this.dataInput.charAt(0).toUpperCase() + this.dataInput.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
       );
     }else{
       this.categories$ = this.categoryService.getCategory();

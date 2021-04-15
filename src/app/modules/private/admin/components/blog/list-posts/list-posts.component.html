@@ -46,6 +46,11 @@
                         <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
                     </td>
                   </tr>
+                  <tr *ngIf="(posts$ | async)?.length === 0">
+                    <td class="empty-user" colspan="6">
+                      <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                    </td>
+                  </tr>
                 </tbody>
                
               </table>
