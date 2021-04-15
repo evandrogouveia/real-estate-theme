@@ -48,6 +48,9 @@
                     <td>{{u.function}}</td>
                     <td>
                         <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
+                        <a *ngIf="u.function !== 'Administrador'" href="#">
+                          <i class="icon-delete" tooltip="Remover"></i>
+                        </a>
                     </td>
                   </tr>
                   <tr *ngIf="(users$ | async)?.length === 0">

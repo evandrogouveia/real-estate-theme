@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { User } from 'src/app/modules/private/login/model/user.model';
 import firebase from 'firebase/app';
-import { switchMap } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,18 @@ export class UserService {
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private router: Router,
     ) { }
+
+  addUser(user: User): Observable<boolean>{
+    return from(this.afAuth.createUserWithEmailAndPassword(user.email, user.password))
+        .pipe(
+          switchMap((u: firebase.auth.UserCredential) => this.userCollection.doc(u.user.uid)
+            .set({...user, id: u.user.uid})
+            .then(() => true)
+        ),
+        catchError((err) => throwError(err))
+        );
+  }  
 
   // GET USER
   getUser(): Observable<User> {
