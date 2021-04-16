@@ -60,12 +60,22 @@
             </div>
         </div>
         
-        <form class="form-password">
+        <form class="form-password" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword()">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-4">
                     <div class="form-group">
-                        <label for="usernamename">Nova senha</label>
-                        <input type="{{type}}" class="form-control" id="password">
+                        <label for="currentpassword">Senha atual</label>
+                        <input type="{{type}}" class="form-control" id="currentpassword" 
+                            formControlName="currentpassword">
+                        <i (click)="showHidPassword()" class="icon-password"
+                        [ngClass]="{'show-pass': (show == true)}"></i>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label for="newpassword">Nova senha</label>
+                        <input type="{{type}}" class="form-control" id="newpassword"
+                            formControlName="newpassword">
                         <i (click)="showHidPassword()" class="icon-password"
                         [ngClass]="{'show-pass': (show == true)}"></i>
                     </div>

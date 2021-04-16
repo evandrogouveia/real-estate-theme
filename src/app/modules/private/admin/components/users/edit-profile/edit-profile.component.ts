@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { User } from 'src/app/modules/private/login/model/user.model';
 import { UserService } from '../service/user.service';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-edit-profile',
@@ -32,6 +33,11 @@ export class EditProfileComponent implements OnInit {
     'email': ['', [Validators.required, Validators.email]],
     'function': [''],
     'password': [''],
+  });
+
+  updatePasswordForm: FormGroup = this.fb.group({
+    'currentpassword': [''],
+    'newpassword': [''],
   });
 
   constructor(
@@ -109,6 +115,27 @@ export class EditProfileComponent implements OnInit {
             this.toastr.success('Perfil atualizado com sucesso');
           });
     }
+  }
+
+  updatePassword(){
+    let secretCurrentPassword = CryptoJS.SHA256(this.updatePasswordForm.value.currentpassword).toString();
+    let secretNewPassword = CryptoJS.SHA256(this.updatePasswordForm.value.newpassword).toString();
+
+    this.updatePasswordForm.value.currentpassword = secretCurrentPassword;
+    this.updatePasswordForm.value.newpassword = secretNewPassword;
+
+    this.updateProfileForm.value.password = secretNewPassword;
+
+    const pass = this.updatePasswordForm.value;
+    const user = this.updateProfileForm.value;
+
+    this.userService.changePassword(pass);
+
+    this.userService.updateUser(user).subscribe(() => {
+      this.toastr.success('Sua senha foi atualizado com sucesso');
+    });
+
+    this.updatePasswordForm.reset();
   }
 
 }

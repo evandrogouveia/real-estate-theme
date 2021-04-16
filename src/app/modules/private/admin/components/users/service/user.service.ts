@@ -12,12 +12,12 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
   private userCollection: AngularFirestoreCollection<User> = this.afs.collection('users');
+  alertCtrl:any = Object;
 
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    ) {
-     }
+    ) {}
 
   private secondaryApp = firebase.initializeApp(environment.firebaseConfig, "SecondaryApp"); 
 
@@ -73,6 +73,17 @@ export class UserService {
   searchByName(name: string): Observable<User[]>{
     return this.afs.collection<User>('users',
     ref => ref.orderBy('username').startAt(name).endAt(name + '\uf8ff')).valueChanges();
+  }
+
+  changePassword(pass){
+    const user = firebase.auth().currentUser;
+    
+    const credentials = firebase.auth.EmailAuthProvider.credential(user.email, pass.currentpassword);
+
+    user.reauthenticateWithCredential(credentials).then(success => {
+      user.updatePassword(pass.newpassword).then(() => console.log('sucesso'))
+    })
+  
   }
 
   
