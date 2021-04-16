@@ -27,7 +27,6 @@ export class ListPostsComponent implements OnInit {
   }
 
   openModalConfirmDelete(p){
-    
     const initialState = {
       titleModal: 'Deseja realmente excluir o Post?',
       titlePost: p.titlePost,

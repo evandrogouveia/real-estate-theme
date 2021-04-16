@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { User } from '../../../login/model/user.model';
+import { ModalComponent } from '../shared/modal/modal.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserService } from './service/user.service';
 
@@ -31,6 +32,24 @@ export class UsersComponent implements OnInit {
       AddUserComponent,
       Object.assign({}, {class: 'modal-add-user'})
       );
+  }
+
+  openModalConfirmDelete(u){
+    const initialState = {
+      titleModal: 'Deseja realmente excluir o usuário?',
+      titlePost: u.username,
+      callback: (result) => {//recebe o evento callback true do modal
+        if (result == true){
+          this.deleteUser(u);
+        }
+      }
+    };
+
+    this.bsModalRef = this.modalService.show(
+      ModalComponent,
+      Object.assign({initialState}, {class: 'modal-all'}),
+    );
+
   }
 
   deleteUser(u: User){
