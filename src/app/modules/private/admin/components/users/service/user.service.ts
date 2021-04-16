@@ -82,9 +82,8 @@ export class UserService {
 
     user.reauthenticateWithCredential(credentials).then(success => {
       user.updatePassword(pass.newpassword).then(() => console.log('sucesso'))
-    })
+    });
   
   }
-
   
 }
