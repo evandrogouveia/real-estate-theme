@@ -40,8 +40,14 @@
                 transition: all .2s;
                 margin-top: 10px;
                 box-shadow: none;
+                position: relative;
                 &:hover{
                     background: #806636;
+                }
+                .loading{
+                    position:absolute;
+                    left: 12px;
+                    top: 7px;
                 }
             }
         }

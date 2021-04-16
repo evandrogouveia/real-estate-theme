@@ -54,7 +54,7 @@
             <div class="d-flex align-items-center justify-content-end">
                 <button type="submit" class="btn btn-save-form">
                     <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
-                    Adicionar
+                    {{ loading ? 'Aguarde...' : 'Adicionar'}}
                 </button>
             </div>
         </form>

@@ -56,7 +56,16 @@ export class UserService {
 
   //DELETE USER
   deleteUser(u: User){
-    return this.userCollection.doc(u.id).delete();
+    return this.userCollection.doc(u.id).delete().then(() => this.deleteEmailUser(u, null));
+  }
+
+  deleteEmailUser(user: any, path: string){
+    return this.userCollection.doc('users' + path).delete().then(() => {
+      this.secondaryApp.auth().signInWithEmailAndPassword(user.email, user.password).then(() => {
+        let user:any = this.secondaryApp.auth().currentUser;
+        user.delete();
+      })
+    })
   }
 
   isLoggedIn(){
