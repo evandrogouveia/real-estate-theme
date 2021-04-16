@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/modules/private/login/model/user.model';
+import { LoginService } from 'src/app/modules/private/login/service/login.service';
 import { SidebarService } from '../../../services/sidebar.service';
 
 
@@ -14,8 +17,11 @@ export class SidebarComponent implements OnInit {
   isCollapsedB = false;
   isCollapsedC = false;
 
+  currentUser$: Observable<User>;
+
   constructor(
     private sidebarService: SidebarService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +29,7 @@ export class SidebarComponent implements OnInit {
       .subscribe(valor => { // setar o valor vindo do service na variável.
         this.retract = valor;
     });
+    this.currentUser$ = this.loginService.getUser();
   }
 
   toggleSidebar() {

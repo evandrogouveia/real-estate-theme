@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { User } from 'src/app/modules/private/login/model/user.model';
 import { UserService } from '../service/user.service';
 
@@ -18,7 +21,7 @@ export class EditProfileComponent implements OnInit {
   show = false;
   type = 'password';
 
-  functions: any = ['administrador', 'usuário'];
+  functions: any = ['Administrador', 'Usuário'];
 
   updateProfileForm: FormGroup = this.fb.group({
     'id': [''],
@@ -34,7 +37,9 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private storage: AngularFireStorage,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -65,6 +70,44 @@ export class EditProfileComponent implements OnInit {
       this.type = 'text';
     } else {
       this.type = 'password';
+    }
+  }
+
+  updateUser(){
+    let user = this.updateProfileForm.value;
+
+    if(this.selectedImage){
+      const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(filePath);
+
+      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.updateProfileForm.value.avatar = url;
+            this.updateProfileForm.value.username;
+            this.updateProfileForm.value.name;
+            this.updateProfileForm.value.lastname;
+            this.updateProfileForm.value.email;
+            this.updateProfileForm.value.function;
+            this.updateProfileForm.value.password;
+            this.userService.updateUser(user).subscribe(() => {
+              this.toastr.success('Perfil atualizado com sucesso');
+            });
+           
+          });
+        })
+      ).subscribe();
+    }else{
+          this.updateProfileForm.value.avatar
+          this.updateProfileForm.value.username;
+          this.updateProfileForm.value.name;
+          this.updateProfileForm.value.lastname;
+          this.updateProfileForm.value.email;
+          this.updateProfileForm.value.function;
+          this.updateProfileForm.value.password;
+          this.userService.updateUser(user).subscribe(() => {
+            this.toastr.success('Perfil atualizado com sucesso');
+          });
     }
   }
 

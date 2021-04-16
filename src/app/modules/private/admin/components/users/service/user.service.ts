@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import { from, Observable, of, throwError } from 'rxjs';
 import { User } from 'src/app/modules/private/login/model/user.model';
 import firebase from 'firebase/app';
-import { catchError, switchMap, first, tap } from 'rxjs/operators';
-import { LoginService } from 'src/app/modules/private/login/service/login.service';
+import { catchError, switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,15 +16,12 @@ export class UserService {
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
-    private loginService: LoginService,
-    private router: Router
     ) {
      }
 
   private secondaryApp = firebase.initializeApp(environment.firebaseConfig, "SecondaryApp"); 
 
   addUser(user: User): Observable<boolean>{
-    
     return from(this.secondaryApp.auth().createUserWithEmailAndPassword(user.email, user.password))
         .pipe(
           switchMap((u: firebase.auth.UserCredential) => this.userCollection.doc(u.user.uid)
@@ -44,7 +39,7 @@ export class UserService {
     );
   } 
   
-  // GET USERS
+  // GET USERS ALL
   getUsers() {
     return this.userCollection.valueChanges();
   } 
@@ -54,11 +49,18 @@ export class UserService {
     return this.afs.collection('users').doc(userId);
   }
 
+  //UPDATE USER
+  updateUser(u: User){
+    return from(this.userCollection.doc(u.id)
+    .set({...u}).then(() => true));
+  }
+
   //DELETE USER
   deleteUser(u: User){
     return this.userCollection.doc(u.id).delete().then(() => this.deleteEmailUser(u, null));
   }
 
+  //DELETE E-MAIL USER
   deleteEmailUser(user: any, path: string){
     return this.userCollection.doc('users' + path).delete().then(() => {
       this.secondaryApp.auth().signInWithEmailAndPassword(user.email, user.password).then(() => {
@@ -66,10 +68,6 @@ export class UserService {
         user.delete();
       })
     })
-  }
-
-  isLoggedIn(){
-    return this.afAuth.authState.pipe(first())
   }
 
   searchByName(name: string): Observable<User[]>{

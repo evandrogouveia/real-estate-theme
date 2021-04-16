@@ -6,7 +6,7 @@
             </div>
         </div>
 
-        <form class="form-profile" [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
+        <form class="form-profile" [formGroup]="updateProfileForm" (ngSubmit)="updateUser()">
             <div class="avatar" (click)="fileUploader.click()">
                 <img class="img-upload" [src]="imagemSrc" width="200px" height="200px" alt="imagem-upload">
                 <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
@@ -19,8 +19,10 @@
             </div>
             <div class="form-group">
                 <label for="username">Nome de usuário</label>
-                <input type="text" formControlName="username" class="form-control" id="username" disabled>
+                <input type="text" formControlName="username" class="form-control" id="username" 
+                [readonly]="(currentUser$ | async)?.function == 'Administrador' ? true : false">
             </div>
+            {{(currentUser$ | async)?.function}}
             <div class="row">
                 <div class="col form-group">
                     <label for="name">Nome</label>
@@ -40,12 +42,16 @@
                     <label for="exampleFormControlSelect1">Função</label>
                     <select class="form-control" formControlName="function" id="exampleFormControlSelect1">
                         <option value="" disabled>Selecionar função</option>
-                        <option *ngFor="let f of functions" [ngValue]="f" >{{f}}</option>
-                        
+                        <option selected value="{{(currentUser$ | async)?.function}}" >
+                            {{(currentUser$ | async)?.function}}
+                        </option>
+                        <ng-container *ngFor="let f of functions">
+                            <option *ngIf="f !== (currentUser$ | async)?.function"  [ngValue]="f" >{{f}}</option>
+                        </ng-container>
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn mb-5">Salvar</button>
+            <button type="submit" class="btn mb-5">Atualizar</button>
         </form>
         <hr>
         <div class="header-profile mt-5">
