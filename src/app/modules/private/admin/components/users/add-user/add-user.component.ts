@@ -5,6 +5,7 @@ import * as CryptoJS from 'crypto-js';
 import { User } from 'src/app/modules/private/login/model/user.model';
 import { UserService } from '../service/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from 'src/app/modules/private/login/service/login.service';
 
 @Component({
   selector: 'app-add-user',
@@ -29,7 +30,8 @@ export class AddUserComponent implements OnInit {
     public bsModalRef: BsModalRef, 
     private fb: FormBuilder,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private loginService: LoginService
     ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class AddUserComponent implements OnInit {
     this.addUserForm.value.password = secretPassword;
 
     const user: User = this.addUserForm.value;
+    
     this.userService.addUser(user).subscribe(
       (u) => {
         this.bsModalRef.hide();

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { User } from '../../../login/model/user.model';
 import { AddUserComponent } from './add-user/add-user.component';
@@ -17,7 +18,8 @@ export class UsersComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,12 @@ export class UsersComponent implements OnInit {
       AddUserComponent,
       Object.assign({}, {class: 'modal-add-user'})
       );
+  }
+
+  deleteUser(u: User){
+    this.userService.deleteUser(u).then(() => {
+      this.toastr.success('Usuário removido com sucesso')
+    });
   }
 
   searchUser(event){

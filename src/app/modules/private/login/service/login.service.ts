@@ -12,13 +12,17 @@ import firebase from 'firebase/app';
 })
 export class LoginService {
   user: Observable<User>
+  userData: any;
   private userCollection: AngularFirestoreCollection<User> = this.afs.collection('users');
 
   constructor(
     private afs: AngularFirestore,
     private router: Router,
     private afAuth: AngularFireAuth
-    ) { }
+    ) { 
+    }
+
+
 
   // CADASTRAR USUÁRIO ADMIN
   cadastro(user: User): Observable<boolean> {
