@@ -19,8 +19,8 @@ export class EditProfileComponent implements OnInit {
   selectedImage: any = null;
   currentUser$: Observable<User>;
 
-  show = false;
-  type = 'password';
+  show1 = false;
+  show2 = false;
 
   functions: any = ['Administrador', 'Usuário'];
 
@@ -67,15 +67,6 @@ export class EditProfileComponent implements OnInit {
     } else {
       this.imagemSrc = 'assets/img/icons/user-empty.svg';
       this.selectedImage = null;
-    }
-  }
-
-  showHidPassword() {
-    this.show = !this.show;
-    if (this.show) {
-      this.type = 'text';
-    } else {
-      this.type = 'password';
     }
   }
 

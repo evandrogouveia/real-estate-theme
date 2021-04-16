@@ -65,19 +65,19 @@
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="currentpassword">Senha atual</label>
-                        <input type="{{type}}" class="form-control" id="currentpassword" 
+                        <input type="{{show1 ? 'text' : 'password'}}" class="form-control" id="currentpassword" 
                             formControlName="currentpassword">
-                        <i (click)="showHidPassword()" class="icon-password"
-                        [ngClass]="{'show-pass': (show == true)}"></i>
+                        <i (click)="this.show1 = !this.show1" class="icon-password"
+                        [ngClass]="{'show-pass': show1}"></i>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="form-group">
                         <label for="newpassword">Nova senha</label>
-                        <input type="{{type}}" class="form-control" id="newpassword"
+                        <input type="{{show2 ? 'text' : 'password'}}" class="form-control" id="newpassword"
                             formControlName="newpassword">
-                        <i (click)="showHidPassword()" class="icon-password"
-                        [ngClass]="{'show-pass': (show == true)}"></i>
+                        <i (click)="this.show2 = !this.show2" class="icon-password"
+                        [ngClass]="{'show-pass': show2}"></i>
                     </div>
                 </div>
                 <div class="col-lg-3">          
