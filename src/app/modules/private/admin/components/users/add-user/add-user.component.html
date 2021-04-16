@@ -12,10 +12,26 @@
                         <label for="username">Nome de usuário</label>
                         <input type="text" class="form-control text-capitalize" id="username" formControlName="username">
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                    </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="name">Nome</label>
                         <input type="text" class="form-control text-capitalize" id="name" formControlName="name">
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="lastname">Sobrenome</label>
+                        <input type="text" class="form-control" id="lastname" formControlName="lastname">
+                    </div>
+                </div>
+                <div class="col-lg-6">
                     <div class="form-group">
                         <label for="function">Função</label>
                         <select class="form-control" id="function" formControlName="function">
@@ -25,16 +41,7 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" formControlName="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Sobrenome</label>
-                        <input type="text" class="form-control" id="lastname" formControlName="lastname">
-                    </div>
                     <div class="form-group">
                         <label for="password">Senha</label>
                         <input type="{{type}}" class="form-control" id="password" formControlName="password">
@@ -45,7 +52,10 @@
             </div>
 
             <div class="d-flex align-items-center justify-content-end">
-                <button type="submit" class="btn btn-save-form">Adicionar</button>
+                <button type="submit" class="btn btn-save-form">
+                    <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
+                    Adicionar
+                </button>
             </div>
         </form>
     </div>

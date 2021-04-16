@@ -5,7 +5,6 @@ import * as CryptoJS from 'crypto-js';
 import { User } from 'src/app/modules/private/login/model/user.model';
 import { UserService } from '../service/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { LoginService } from 'src/app/modules/private/login/service/login.service';
 
 @Component({
   selector: 'app-add-user',
@@ -15,6 +14,7 @@ import { LoginService } from 'src/app/modules/private/login/service/login.servic
 export class AddUserComponent implements OnInit {
   show = false;
   type = 'password';
+  loading:boolean = false;
 
   addUserForm: FormGroup = this.fb.group({
     avatar: [''],
@@ -31,7 +31,6 @@ export class AddUserComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private toastr: ToastrService,
-    private loginService: LoginService
     ) { }
 
   ngOnInit(): void {
@@ -47,17 +46,26 @@ export class AddUserComponent implements OnInit {
   }
 
   addUser(){
+    this.loading = true;
+
     let secretPassword = CryptoJS.SHA256(this.addUserForm.value.password).toString();
+    let username = this.addUserForm.value.username.charAt(0).toUpperCase() + this.addUserForm.value.username.slice(1)
+    let name = this.addUserForm.value.name.charAt(0).toUpperCase() + this.addUserForm.value.name.slice(1)
+    
     this.addUserForm.value.password = secretPassword;
+    this.addUserForm.value.username = username;
+    this.addUserForm.value.name = name;
 
     const user: User = this.addUserForm.value;
     
     this.userService.addUser(user).subscribe(
       (u) => {
         this.bsModalRef.hide();
+        this.loading = false;
         this.toastr.success('Usuário adicionado com sucesso!')
       },
       (err) => {
+        this.loading = false;
         if(err.code === 'auth/email-already-in-use'){
           this.toastr.error('Usuário já cadastrado!')
         }
