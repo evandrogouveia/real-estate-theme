@@ -104,6 +104,12 @@ header{
     
 }
 
+#sidebar-wrapper {
+    .socials{
+        display: none !important;
+    }
+}
+
 /*======================= RESPONSIVE =======================*/
 @media(max-width: 991px){
     #wrapper {
@@ -161,6 +167,7 @@ header{
           margin: 30px auto 0;
           width: 50%;
           justify-content: center !important;
+          display: flex !important;
           i{
               color: #5e524c;
               line-height: 0;
