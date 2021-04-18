@@ -25,7 +25,7 @@
         <ul class="list-group list-group-flush">
             <ng-container *ngFor="let p of posts$ | async; let i = index">
                 <li class="list-group-item" *ngIf="i < 5">
-                    <a href="#" class="d-flex align-items-center">
+                    <a href="javascript:void(0);" (click)="reload(p.id)" class="d-flex align-items-center">
                         <img src="{{p.highlightedImage}}">
                         {{(p.descriptionPost.length > 95) ? (p.descriptionPost | slice:0:95) + ' ...' :
                         (p.descriptionPost)}}
