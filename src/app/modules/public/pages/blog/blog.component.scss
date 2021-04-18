@@ -48,3 +48,20 @@
         }
     }
 }
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .section-blog{
+        .block-post{
+            img{
+                margin-bottom: 10px;
+            }
+            .entry-footer{
+                p{
+                    text-align: justify;
+                    font-size: 20px;
+                }
+            } 
+        }
+    }  
+}

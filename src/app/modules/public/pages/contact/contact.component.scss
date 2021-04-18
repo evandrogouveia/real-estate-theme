@@ -83,3 +83,25 @@
     height: 30px;
     display: inline-block;
 }
+
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .section-contact{
+        .wrapper-form-contact{
+            width: 100%;
+            p{
+                text-align: justify;
+            }
+            button{
+                width: 100%;
+            }
+        }
+        .wrapper-contacts{
+            padding-bottom: 30px;
+            .contact{
+                margin-bottom: 40px;
+            }
+        }
+    } 
+}

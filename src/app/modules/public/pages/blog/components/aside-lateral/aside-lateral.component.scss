@@ -89,3 +89,24 @@
         }
     }
 }
+
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .aside-lateral{
+        padding-left: 0;
+        .entry-categoryes{
+            .list-group-item{
+                font-size: 20px;
+            }
+        }
+        .entry-recent-posts{
+            .list-group-item{
+                a{
+                    text-align: justify;
+                    font-size: 17px;
+                }
+            }
+        }
+    }  
+}
