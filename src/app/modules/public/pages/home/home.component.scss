@@ -267,7 +267,8 @@
             box-shadow: none;
             transition: all .2s;
             i{
-                margin-left: 6px;
+               position: relative;
+               top: 6px;
             }
             &:hover{
                 color: #201B18;

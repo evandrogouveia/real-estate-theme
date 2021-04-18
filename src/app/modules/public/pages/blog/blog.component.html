@@ -16,11 +16,15 @@
                             <div class="col-lg-6">
                                 <div class="entry-header">
                                     <a routerLink="single-blog/{{p.id}}">
-                                        <h3>{{(p.titlePost.length > 50) ? (p.titlePost | slice:0:50) + ' ...' : (p.titlePost)}}</h3>
+                                        <h3>{{(p.titlePost.length > 45) ? (p.titlePost | slice:0:45) + ' ...' : (p.titlePost)}}</h3>
                                     </a>
                                     <div class="entry-date">
                                         <i class='bx bx-calendar'></i>
-                                        <span>{{p.publicationDate.toDate() | date: 'dd'}} de {{p.publicationDate.toDate() | date: 'MMMM'}} de {{p.publicationDate.toDate() | date: 'YYYY'}}</span>
+                                        <span>
+                                            {{p.publicationDate.toDate() | date: 'dd'}} de 
+                                            {{p.publicationDate.toDate() | date: 'MMMM'}} de 
+                                            {{p.publicationDate.toDate() | date: 'YYYY'}}
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="entry-footer">

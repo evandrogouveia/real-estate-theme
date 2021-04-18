@@ -199,57 +199,31 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngFor="let p of posts$ | async">
           <div class="card">
-            <a href="#" class="box-image">
-              <img class="card-img-top" src="assets/img/about.jpg" alt="Card image cap">
+            <a routerLink="/blog/single-blog/{{p.id}}" class="box-image">
+              <img class="card-img-top" src="{{p.highlightedImage}}" alt="Card image cap">
             </a>
             <div class="card-body">
-              <h5 class="card-title">A diferença clara entre café gelado e café gelado</h5>
+              <h5 class="card-title">{{(p.titlePost.length > 55) ? (p.titlePost | slice:0:55) + ' ...' : (p.titlePost)}}</h5>
               <div class="date d-flex align-items-center">
                 <i class='bx bx-calendar'></i>
-                <span>3 de fevereiro de 2016</span>
+                <span>
+                  {{p.publicationDate.toDate() | date: 'dd'}} de 
+                  {{p.publicationDate.toDate() | date: 'MMMM'}} de 
+                  {{p.publicationDate.toDate() | date: 'YYYY'}}
+                </span>
               </div>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-readmore">Ver mais <i class="fas fa-angle-right"></i></a>
+              <p class="card-text">
+                {{(p.descriptionPost.length > 200) ? (p.descriptionPost | slice:0:200) + ' ...' : (p.descriptionPost)}}
+              </p>
+              <a routerLink="/blog/single-blog/{{p.id}}" class="btn btn-readmore">
+                Ver mais 
+                <i class='bx bx-chevron-right bx-sm'></i>
+              </a>
             </div>
           </div>
         </div>
-
-        <div class="col-lg-4">
-          <div class="card">
-            <a href="#" class="box-image">
-              <img class="card-img-top" src="assets/img/blog1.jpg" alt="Card image cap">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title">Empoleirado no topo da falésia com vista para o Pacífico</h5>
-              <div class="date d-flex align-items-center">
-                <i class='bx bx-calendar'></i>
-                <span>7 de julho de 2020</span>
-              </div>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-readmore">Ver mais <i class="fas fa-angle-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4">
-          <div class="card">
-            <a href="#" class="box-image">
-              <img class="card-img-top" src="assets/img/blog3.jpg" alt="Card image cap">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title">No entanto, seu além parecia que qualquer um dos dias...</h5>
-              <div class="date d-flex align-items-center">
-                <i class='bx bx-calendar'></i>
-                <span>12 de outubro de 2018</span>
-              </div>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-readmore">Ver mais <i class="fas fa-angle-right"></i></a>
-            </div>
-          </div>
-        </div>
-        
       </div>
     </div>
   </div>
