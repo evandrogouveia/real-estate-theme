@@ -103,3 +103,25 @@ header{
     }
     
 }
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .topbar{
+        display: none;
+    }
+}
+@media(max-width: 575.98px){
+    header{
+        .navbar{
+            .navbar-brand{
+                width: 75px;
+                height: 55px;
+            }
+        }
+    }
+    .section-row-services{
+        .box-service{
+            text-align: center;
+        }
+    } 
+}

@@ -277,3 +277,89 @@
     }
    
 }
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 575.98px){
+    .section-row-services{
+        .f-service{
+            h3{
+                padding: 0 15px;
+                margin-top: 90px;
+            }
+            p{
+                margin-bottom: 60px;
+            }
+        }
+        .box-service{
+            text-align: center;
+        }
+    } 
+    .section-row-professionals{
+        padding: 50px 0;
+        .t-professionals{
+            h3{
+                font-size: 26px;
+            }
+            p{
+                font-size: 18px;
+                width: 100%;
+            }
+        }
+        .box-member{
+            .texts{
+                p{
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .section-row-about{
+        padding: 50px 0 0;
+        .t-title{
+            h3{
+                font-size: 26px;
+            }
+        }
+        .t-about{
+            text-align: center;
+            margin-top: 230px;
+            h3{
+                font-size: 26px;
+            }
+            p{
+                width: 100%;
+            }
+        }
+        .about-img{
+            img{
+                margin-top: -53rem;
+            }
+        }
+    }
+    .section-row-numbers{
+        height: 520px;
+        margin-bottom: 40px;
+        h4{
+            margin-bottom: 40px;
+        }
+        div{
+            &:nth-child(4){
+                h4{
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+    .section-row-blog{
+        margin-bottom: 40px;
+        .t-title{
+            h3{
+                font-size: 26px;
+                margin-bottom: 40px;
+            }
+        }
+        .card{
+            margin-bottom: 30px;
+        }
+    } 
+}

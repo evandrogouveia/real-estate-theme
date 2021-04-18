@@ -66,3 +66,25 @@
         }
     }
 } 
+
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 575.98px){
+    .owl-item{
+        height: 580px;
+        .caption-carousel{
+            top: 40px;
+            h2{
+                font-size: 34px;
+            }
+            p, .nav-link{
+                width: 70%;
+            }
+        }
+    } 
+    .owl-theme{
+        .owl-nav{
+            display: none;
+        }
+    }
+}
