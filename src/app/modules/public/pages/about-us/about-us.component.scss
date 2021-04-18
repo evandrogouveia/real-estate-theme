@@ -62,7 +62,38 @@
             color: #201B18;
             font-size: 15px;
         }
-    }
-   
-    
+    }   
+}
+
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .section-about{
+        .wrapper-image{
+            .text-bottom-image{
+                bottom: -80px;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 95%;
+            }
+        }
+        .wrapper-texts{
+            padding: 135px 0 50px 0;
+            text-align: center;
+        }
+        .about-mvv{
+            padding-bottom: 50px;
+            text-align: center;
+           .wrapper-missing{
+               margin-top: 50px;
+           }
+           .wrapper-missing p, 
+           .wrapper-vision p,
+           .wrapper-value p{
+               text-align: justify;
+           }
+       }
+    }  
+     
 }

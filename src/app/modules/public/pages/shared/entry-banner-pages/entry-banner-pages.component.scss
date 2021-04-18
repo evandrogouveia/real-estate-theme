@@ -21,3 +21,12 @@
         }
     }
 }
+
+@media(max-width: 767px){
+    .entry-banner{
+        height: 125px;
+        .texts{
+            height: 130px;
+        }
+    }
+}
