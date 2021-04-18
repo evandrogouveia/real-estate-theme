@@ -33,32 +33,32 @@
             <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
                 <img src="assets/img/logo.jpg">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex" id="wrapper" [ngClass]="retract">
+            <div class="navbar-collapse" id="sidebar-wrapper">
+                <i class='bx bx-x bx-md d-lg-none' (click)="toggleSidebar()"></i>
                 <ul class="navbar-nav ml-auto mr-3">
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="toggleSidebar()">
                         <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="toggleSidebar()">
                         <a class="nav-link" routerLink="/about" routerLinkActive="active">Quem somos</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="toggleSidebar()">
                         <a class="nav-link" routerLink="/practice-areas" routerLinkActive="active">Áreas de atuação</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="toggleSidebar()">
                         <a class="nav-link" routerLink="/blog" routerLinkActive="active">Blog</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" (click)="toggleSidebar()">
                         <a class="nav-link" routerLink="/contact" routerLinkActive="active">Contato</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <!--form class="form-inline my-2 my-lg-0">
                     <i class='bx bx-search-alt-2' ></i>
-                </form>
+                </form-->
                 <a href="#" class="nav-link whats-contact d-flex align-items-center">
                     <i class='bx bxl-whatsapp'></i>
                     <div class="number">
@@ -66,7 +66,23 @@
                         <h5>(99) 98999-0000</h5>
                     </div>
                 </a>
+
+                <div class="socials d-flex align-items-center justify-content-between">
+                    <a class="nav-link" href="#">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
+                    <a class="nav-link" href="#">
+                        <i class='bx bxl-twitter'></i>
+                    </a>
+                    <a class="nav-link" href="#">
+                        <i class='bx bxl-telegram'></i>
+                    </a>
+                    <a class="nav-link" href="#">
+                        <i class='bx bxl-instagram'></i>
+                    </a>
+                </div>
                
+            </div>
             </div>
         </div>
     </nav>

@@ -7,6 +7,8 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   scrollPosition;
+  toggled = true;
+  retract = 'toggled';
 
   constructor(private renderer: Renderer2,) { }
 
@@ -15,6 +17,15 @@ export class HeaderComponent implements OnInit {
     this.renderer.listen(window, 'scroll', ($event) => {
       this.scrollPosition = window.scrollY;
     });
+  }
+
+  toggleSidebar(){
+    this.toggled = !this.toggled;
+    if (this.toggled === false) {
+      this.retract = '';
+    } else {
+      this.retract = 'toggled';
+    }
   }
 
 }
