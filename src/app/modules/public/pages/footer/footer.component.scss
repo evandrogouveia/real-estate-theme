@@ -104,3 +104,33 @@ footer{
         }
     }
 }
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 575.98px){
+    footer{
+        padding: 50px 0 0;
+        text-align: center;
+        .footer-wrapper{
+            h3{
+                margin: 0 auto 35px;
+            }
+        }
+        h5{
+            margin-top: 50px;
+        }
+        ul{
+            margin-right: 0 !important;
+            justify-content: center;
+        }
+        .footer-copyright{
+            .texts{
+                flex-direction: column;
+                p{
+                    &:first-child{
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
