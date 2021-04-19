@@ -15,7 +15,6 @@ import { BlogService } from '../../services/blog.service';
 })
 export class SingleBlogComponent implements OnInit {
   
-
   post$: Observable<Post>
   url: any;
   comment: any = [];
@@ -24,6 +23,7 @@ export class SingleBlogComponent implements OnInit {
   sendMessage: boolean = false;
   loading:boolean = false;
   scrollPosition;
+ 
 
   addCommentsForm: FormGroup = this.fb.group({
     id: [undefined],
@@ -92,6 +92,11 @@ export class SingleBlogComponent implements OnInit {
       this.addCommentsForm.reset();
     }
 
+  }
+
+  reloadPost(): Observable<Post>{//recebe evento pelo aside lateral para atualização do post
+    const postId = this.route.snapshot.paramMap.get('id');
+    return this.post$ = this.postService.getPostDetail(postId).valueChanges();
   }
 
 }

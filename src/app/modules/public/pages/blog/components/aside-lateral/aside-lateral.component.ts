@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/modules/private/admin/components/blog/models/category.model';
@@ -14,6 +14,8 @@ export class AsideLateralComponent implements OnInit {
   categories$: Observable<Category[]>;
   posts$: Observable<Post[]>
 
+  @Output() eventEmmit = new EventEmitter<Observable<any>>(true);
+
   constructor(
     private blogService: BlogService,
     private router: Router
@@ -24,10 +26,9 @@ export class AsideLateralComponent implements OnInit {
     this.posts$ = this.blogService.getPosts();
   }
 
-  reload(link){
-    this.router.navigateByUrl(`/blog/single-blog/${link}`).then(()=> {
-      location.reload()
-    });
+  reload(event, link){// atualiza o post emitindo evento para single-blog
+    this.router.navigateByUrl(`/blog/single-blog/${link}`);
+    this.eventEmmit.emit(event);
   }
 
 }
