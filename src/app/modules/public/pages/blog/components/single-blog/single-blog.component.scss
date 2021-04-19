@@ -177,6 +177,9 @@
                     border: 1px solid #a38851;
                     color: #a38851;
                 }
+                &.invalid{
+                    border: 1px solid #fb6868;
+                }
             }
             textarea{
                 border-radius: 0;

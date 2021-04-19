@@ -100,11 +100,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Seu Nome*</label>
-                                    <input formControlName="name" type="email" class="form-control" id="name">
+                                    <input formControlName="name" type="email" class="form-control" id="name"
+                                    [ngClass]="{'invalid' : submitted && addCommentsForm.controls.name.invalid}">
+                                    <app-error-input 
+                                        [invalid]="submitted && addCommentsForm.controls.name.invalid" 
+                                        [msg]="'Por favor, digite seu nome'">
+                                    </app-error-input>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-mail*</label>
-                                    <input formControlName="email" type="text" class="form-control" id="email">
+                                    <input formControlName="email" type="text" class="form-control" id="email"
+                                    [ngClass]="{'invalid' : submitted && addCommentsForm.controls.name.invalid}">
+                                    <app-error-input 
+                                        [invalid]="submitted && addCommentsForm.controls.email.invalid" 
+                                        [msg]="'Por favor, digite seu e-mail'">
+                                    </app-error-input>
                                 </div>
 
                                 <button (click)="submit()" type="button" class="btn">

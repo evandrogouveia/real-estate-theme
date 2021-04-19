@@ -22,6 +22,7 @@ export class SingleBlogComponent implements OnInit {
   approvedComments: any;
   sendMessage: boolean = false;
   loading:boolean = false;
+  submitted: boolean = false;
   scrollPosition;
  
 
@@ -29,7 +30,7 @@ export class SingleBlogComponent implements OnInit {
     id: [undefined],
     comment: [''],
     name: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     commentDate: [''],
     status: ['']
   });
@@ -69,8 +70,10 @@ export class SingleBlogComponent implements OnInit {
 
   submit() {
     this.loading = true;
+    this.submitted = true;
     let post: Post = this.updatePostForm.value;
     if (this.addCommentsForm.valid) {
+      this.submitted = false;
       this.comment.push(
         this.addCommentsForm.value.id = this.afs.createId(),
         this.addCommentsForm.value.comment,
@@ -80,7 +83,6 @@ export class SingleBlogComponent implements OnInit {
         this.addCommentsForm.value.status = 'Reject'
       );
       this.updatePostForm.value.comments.push(this.addCommentsForm.value);
-        console.log(this.updatePostForm.value.comments)
       this.blogService.addComments(post).then(() =>{
         setTimeout(() =>{
           const b = document.querySelector("#message");
@@ -90,6 +92,8 @@ export class SingleBlogComponent implements OnInit {
         this.loading = false;
       });
       this.addCommentsForm.reset();
+    }else{
+      this.loading = false;
     }
 
   }

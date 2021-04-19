@@ -26,8 +26,8 @@ export class AsideLateralComponent implements OnInit {
     this.posts$ = this.blogService.getPosts();
   }
 
-  reload(event, link){// atualiza o post emitindo evento para single-blog
-    this.router.navigateByUrl(`/blog/single-blog/${link}`);
+  reload(event, id){// atualiza o post emitindo evento para single-blog
+    this.router.navigateByUrl(`/blog/single-blog/${id}`);
     this.eventEmmit.emit(event);
   }
 
