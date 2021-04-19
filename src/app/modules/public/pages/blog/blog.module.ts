@@ -10,11 +10,12 @@ import { AsideLateralComponent } from './components/aside-lateral/aside-lateral.
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchResultComponent } from './components/search-result/search-result.component';
 
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [BlogComponent, SingleBlogComponent, AsideLateralComponent],
+  declarations: [BlogComponent, SingleBlogComponent, AsideLateralComponent, SearchResultComponent],
   imports: [
     CommonModule,
     BlogRoutingModule,
