@@ -11,11 +11,12 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchResultComponent } from './components/search-result/search-result.component';
+import { CategoryPageComponent } from './components/category-page/category-page.component';
 
 registerLocaleData(localePt);
 
 @NgModule({
-  declarations: [BlogComponent, SingleBlogComponent, AsideLateralComponent, SearchResultComponent],
+  declarations: [BlogComponent, SingleBlogComponent, AsideLateralComponent, SearchResultComponent, CategoryPageComponent],
   imports: [
     CommonModule,
     BlogRoutingModule,
