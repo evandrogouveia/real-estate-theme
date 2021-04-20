@@ -1,10 +1,12 @@
 <div class="aside-lateral">
     <div class="search-blog">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Buscar"
-                >
+            <input #search type="text" class="form-control" placeholder="Buscar"
+                (keyup.enter)="searchBlog($event)">
             <div class="input-group-append">
-                <button class="btn" type="button"><i class="bx bx-search-alt-2"></i></button>
+                <button class="btn" type="button">
+                    <i class="bx bx-search-alt-2"></i>
+                </button>
             </div>
         </div>
     </div>

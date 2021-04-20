@@ -1,1 +1,48 @@
-<p>search-result works!</p>
+<app-entry-banner-pages [title]="'Blog'"></app-entry-banner-pages>
+
+<section>
+    <div class="section-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div *ngIf="(posts$ | async)?.length === 0" class="no-result-search">
+                        <p>Não encontramos resultados para <span>{{valueSearch[0]}}</span></p>
+                    </div>
+                    <div class="block-post" *ngFor="let p of posts$ | async">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a routerLink="single-blog/{{p.id}}">
+                                    <img src="{{p.highlightedImage}}">
+                                </a>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="entry-header">
+                                    <a routerLink="single-blog/{{p.id}}">
+                                        <h3>{{(p.titlePost.length > 45) ? (p.titlePost | slice:0:45) + ' ...' : (p.titlePost)}}</h3>
+                                    </a>
+                                    <div class="entry-date">
+                                        <i class='bx bx-calendar'></i>
+                                        <span>
+                                            {{p.publicationDate.toDate() | date: 'dd'}} de 
+                                            {{p.publicationDate.toDate() | date: 'MMMM'}} de 
+                                            {{p.publicationDate.toDate() | date: 'YYYY'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="entry-footer">
+                                    <p>{{(p.descriptionPost.length > 225) ? (p.descriptionPost | slice:0:225) + ' ...' : (p.descriptionPost)}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <app-aside-lateral (valueToEmit)="getValueMessage($event)"></app-aside-lateral>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>

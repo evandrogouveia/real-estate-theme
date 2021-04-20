@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from './blog.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
 import { SingleBlogComponent } from './components/single-blog/single-blog.component';
 
 const routes: Routes = [
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path : 'single-blog/:id',
     component: SingleBlogComponent
+  },
+  {
+    path : 'search-result',
+    component: SearchResultComponent
   },
 ];
 
