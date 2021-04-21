@@ -6,8 +6,7 @@
               <a class="nav-link" href="javascript:void(0);" (click)="openModalAddUser()">Adicionar novo</a>
             </div>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Pesquisar usuários"
-              (keyup)="searchUser($event)">
+              <input type="text" class="form-control" placeholder="Pesquisar usuários" [(ngModel)]="term">
               <i class="icon-search"></i>
             </div>
         </div>
@@ -29,7 +28,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let u of users$ | async">
+                  <tr *ngFor="let u of (users$ | async) | filter:term">
                     <td>
                         <div class="form-check">
                             <input type="checkbox">

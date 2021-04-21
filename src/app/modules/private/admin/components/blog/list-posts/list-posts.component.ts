@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Observable } from 'rxjs';
-import { BlogService } from 'src/app/modules/public/pages/blog/services/blog.service';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
@@ -19,7 +18,6 @@ export class ListPostsComponent implements OnInit {
     private postService: PostService,
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
-    private blogService: BlogService
     ) { }
 
   ngOnInit(): void {
@@ -46,17 +44,6 @@ export class ListPostsComponent implements OnInit {
 
   delete(p: Post){
     this.postService.deletePost(p);
-  }
-
-  searchPost(event){
-    this.dataInput = event.target.value;
-    if(this.dataInput){
-      this.posts$ = this.blogService.searchByName(
-        this.dataInput.charAt(0).toUpperCase() + this.dataInput.substr(1).toLowerCase() //permitir pesquisa com letras maiúsculas ou minúsculas
-      );
-    }else{
-      this.posts$ = this.postService.getPosts();
-    }
   }
 
 }

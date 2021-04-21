@@ -5,7 +5,7 @@
                 <h4>Comentários</h4>
             </div>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Pesquisar comentário">
+                <input type="text" class="form-control" placeholder="Pesquisar comentário" [(ngModel)]="term">
                 <i class="icon-search"></i>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngFor="let p of posts$ | async">
+                    <ng-container *ngFor="let p of (posts$ | async) | filter:term">
                         <ng-container *ngFor="let c of p.comments; let i = index">
                             <tr *ngIf="p.comments.length > 0" [ngClass]="{'bg-red': c.status == 'Reject'}">
                                 <td>

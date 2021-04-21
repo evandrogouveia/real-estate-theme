@@ -6,8 +6,7 @@
               <a class="nav-link" routerLink="/private/admin/add-posts">Adicionar novo</a>
             </div>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Pesquisar posts"
-              (keyup)="searchPost($event)">
+              <input type="text" class="form-control" placeholder="Pesquisar posts" [(ngModel)]="term">
               <i class="icon-search"></i>
             </div>
         </div>
@@ -30,7 +29,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let p of posts$ | async">
+                  <tr *ngFor="let p of (posts$ | async) | filter:term">
                     <td>
                         <div class="form-check">
                             <input type="checkbox">

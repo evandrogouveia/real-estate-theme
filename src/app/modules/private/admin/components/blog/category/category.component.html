@@ -5,8 +5,7 @@
                 <h4>Categorias</h4>
             </div>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Pesquisar categoria"
-                (keyup)="searchCategory($event)">
+                <input type="text" class="form-control" placeholder="Pesquisar categoria" [(ngModel)]="term">
                 <i class="icon-search"></i>
             </div>
         </div>
@@ -49,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let c of categories$ | async">
+                            <tr *ngFor="let c of (categories$ | async) | filter:term">
                                 <td>
                                     <div class="form-check">
                                         <input type="checkbox">

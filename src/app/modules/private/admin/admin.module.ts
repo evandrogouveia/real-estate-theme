@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
 import { AddUserComponent } from './components/users/add-user/add-user.component';
 import { BsModalRef } from 'ngx-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -47,7 +48,8 @@ registerLocaleData(localePt);
     ReactiveFormsModule,
     NgxBootstrapModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     {
