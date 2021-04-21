@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Category } from 'src/app/modules/private/admin/components/blog/models/category.model';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 import { BlogService } from '../../services/blog.service';
@@ -11,7 +12,7 @@ import { BlogService } from '../../services/blog.service';
   styleUrls: ['./aside-lateral.component.scss']
 })
 export class AsideLateralComponent implements OnInit {
-  categories$: Observable<Category[]>;
+  categories$: Observable<Category[]>
   posts$: Observable<Post[]>
 
   @Output() eventEmmit = new EventEmitter<Observable<any>>(true);
@@ -40,6 +41,13 @@ export class AsideLateralComponent implements OnInit {
       this.router.navigate(['blog/search-result'], {queryParams: [event.target.value]});
     }
     this.search.nativeElement.value = '';
+  }
+
+  filterCategory(c){
+    if(c){
+      this.valueToEmit.emit(c);
+      this.router.navigate(['blog/category-page'], {queryParams: [c]})
+    }
   }
 
 }

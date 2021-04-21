@@ -5,10 +5,9 @@ import { Observable } from 'rxjs';
 import { BlogService } from 'src/app/modules/public/pages/blog/services/blog.service';
 import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
-import { ModalComponent } from '../../shared/modal/modal.component';
 import { ModalCommentsComponent } from './modal-comments/modal-comments.component';
 import { ToastrService } from 'ngx-toastr';
-import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @Component({
   selector: 'app-comments',

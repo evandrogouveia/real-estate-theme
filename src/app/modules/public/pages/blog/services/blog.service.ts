@@ -42,4 +42,9 @@ export class BlogService {
     return this.afs.collection<Post>('posts',
     ref => ref.orderBy('titlePost').startAt(name).endAt(name + '\uf8ff')).valueChanges();
   }
+
+  searchByCategory(name: string): Observable<Post[]>{
+    return this.afs.collection<Post>('posts',
+    ref => ref.where('categories', 'array-contains-any', [name])).valueChanges();
+  }
 }
