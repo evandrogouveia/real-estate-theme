@@ -1,6 +1,7 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 import { BlogService } from '../../services/blog.service';
 
@@ -10,8 +11,9 @@ import { BlogService } from '../../services/blog.service';
   styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
-  posts$: Observable<Post[]>
+  posts$: Observable<Post[]>;
   valueSearch: any;
+  term: Observable<any>;
 
   constructor(
     private blogService: BlogService,
@@ -21,19 +23,14 @@ export class SearchResultComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(value => {
       this.valueSearch = value;
+      this.term = this.valueSearch[0];
     });
-
-    this.posts$ = this.blogService.searchByName(
-      this.valueSearch[0].charAt(0).toUpperCase() + this.valueSearch[0].substr(1).toLowerCase()
-    )
-
+    this.posts$ = this.blogService.getPosts();
   }
 
   getValueMessage(value){//recebe valor da busca do aside lateral através do EventEmitter
     if(value){
-      this.posts$ = this.blogService.searchByName(
-        value.charAt(0).toUpperCase() + value.substr(1).toLowerCase()
-      )
+      this.term = value;
     }
   }
 

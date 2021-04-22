@@ -5,10 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div *ngIf="(posts$ | async)?.length === 0" class="no-result-search">
-                        <p>Não encontramos resultados para <span>{{valueSearch[0]}}</span></p>
-                    </div>
-                    <div class="block-post" *ngFor="let p of posts$ | async">
+                    <div class="block-post" *ngFor="let p of (posts$ | async) | filter:term">
                         <div class="row">
                             <div class="col-lg-6">
                                 <a routerLink="single-blog/{{p.id}}">
@@ -18,7 +15,7 @@
                             <div class="col-lg-6">
                                 <div class="entry-header">
                                     <a routerLink="single-blog/{{p.id}}">
-                                        <h3>{{(p.titlePost.length > 45) ? (p.titlePost | slice:0:45) + ' ...' : (p.titlePost)}}</h3>
+                                        <h3 id="title-post">{{(p.titlePost.length > 45) ? (p.titlePost | slice:0:45) + ' ...' : (p.titlePost)}}</h3>
                                     </a>
                                     <div class="entry-date">
                                         <i class='bx bx-calendar'></i>

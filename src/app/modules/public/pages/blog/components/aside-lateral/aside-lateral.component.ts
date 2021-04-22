@@ -34,10 +34,10 @@ export class AsideLateralComponent implements OnInit {
     this.eventEmmit.emit(event);
   }
 
-  searchBlog(event){
-    if(event && (this.search.nativeElement.value.length > 0)){
-      this.valueToEmit.emit(this.search.nativeElement.value);
-      this.router.navigate(['blog/search-result'], {queryParams: [event.target.value]});
+  searchBlog(term){
+    if(term && (this.search.nativeElement.value.length > 0)){
+      this.valueToEmit.emit(term);
+      this.router.navigate(['blog/search-result'], {queryParams: [term]});
     }
     this.search.nativeElement.value = '';
   }

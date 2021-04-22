@@ -2,7 +2,7 @@
     <div class="search-blog">
         <div class="input-group mb-3">
             <input #search type="text" class="form-control" placeholder="Buscar"
-                (keyup.enter)="searchBlog($event)">
+                (keyup.enter)="searchBlog(term)" [(ngModel)]="term">
             <div class="input-group-append">
                 <button class="btn" type="button">
                     <i class="bx bx-search-alt-2"></i>
