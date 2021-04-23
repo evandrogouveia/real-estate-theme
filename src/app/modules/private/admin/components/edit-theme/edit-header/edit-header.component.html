@@ -69,7 +69,7 @@
         </div>
 
         <div class="card card-edit">
-            <form class="form-navbar">
+            <form [formGroup]="addEditNavbarForm" (ngSubmit)="submitNavbar()" class="form-navbar">
                 <h5>Navbar</h5>
 
                 <div class="row">
@@ -80,10 +80,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="avatar">
-                                    <img class="img-upload" [src]="imagemSrc" width="100%" height="150px"
+                                    <img class="img-upload" [src]="logoSrc" width="100%" height="150px"
                                         alt="imagem-upload">
-                                    <input type="file" #fileUploader accept="image/*" class="form-control" id="avatar"
-                                        aria-describedby="nome" placeholder="imagem" (change)="showPreviewImage($event)"
+                                    <input type="file" #fileUploader accept="image/*" class="form-control" id="logo"
+                                         placeholder="imagem" (change)="showPreviewLogo($event)"
                                         hidden>
                                 </div>
                                 <button type="button" class="btn btn-alter-logo" (click)="fileUploader.click()">
@@ -103,23 +103,28 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="facebook">Posição 1</label>
-                                    <input type="text" class="form-control" id="facebook" placeholder="Insira o nome">
+                                    <input type="text" class="form-control" id="facebook" 
+                                    placeholder="Insira o nome" formControlName="menu1">
                                 </div>
                                 <div class="form-group">
                                     <label for="twitter">Posição 2</label>
-                                    <input type="text" class="form-control" id="twitter" placeholder="Insira o nome">
+                                    <input type="text" class="form-control" id="twitter" 
+                                    placeholder="Insira o nome" formControlName="menu2">
                                 </div>
                                 <div class="form-group">
                                     <label for="telegram">Posição 3</label>
-                                    <input type="text" class="form-control" id="telegram" placeholder="Insira o nome">
+                                    <input type="text" class="form-control" id="telegram" 
+                                    placeholder="Insira o nome" formControlName="menu3">
                                 </div>
                                 <div class="form-group">
                                     <label for="instagram">Posição 4</label>
-                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o nome">
+                                    <input type="text" class="form-control" id="instagram" 
+                                    placeholder="Insira o nome" formControlName="menu4">
                                 </div>
                                 <div class="form-group">
                                     <label for="instagram">Posição 5</label>
-                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o nome">
+                                    <input type="text" class="form-control" id="instagram" 
+                                    placeholder="Insira o nome" formControlName="menu5">
                                 </div>
                             </div>
                         </div>
@@ -127,16 +132,19 @@
                     <div class="col-lg-4">
                         <div class="card card-navbar">
                             <div class="title-card">
-                                <p>Redes sociais</p>
+                                <p>Contato</p>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="number">Número</label>
-                                    <input type="text" class="form-control" id="number" placeholder="Insira o numero">
+                                    <input type="text" class="form-control" id="number" 
+                                    placeholder="Insira o numero" formControlName="phone" 
+                                    mask="(00) 00000-0000">
                                 </div>
                                 <div class="form-group">
                                     <label for="link">Link</label>
-                                    <input type="text" class="form-control" id="link" placeholder="Insira o link">
+                                    <input type="text" class="form-control" id="link" 
+                                    placeholder="Insira o link" formControlName="linkwhatsapp">
                                 </div>
                             </div>
                         </div>

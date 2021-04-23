@@ -30,6 +30,7 @@
     "firebase": "^8.2.10",
     "ng2-search-filter": "^0.5.1",
     "ngx-bootstrap": "5.3.2",
+    "ngx-mask": "^11.1.5",
     "ngx-owl-carousel-o": "^5.0.0",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.3",

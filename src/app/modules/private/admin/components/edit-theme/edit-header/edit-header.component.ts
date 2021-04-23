@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { Navbar } from './models/navbar.model';
 import { Topbar } from './models/topbar.model';
 import { HeaderService } from './services/header.service';
 
@@ -11,11 +12,14 @@ import { HeaderService } from './services/header.service';
   styleUrls: ['./edit-header.component.scss']
 })
 export class EditHeaderComponent implements OnInit {
-  imagemSrc = 'assets/img/placeholder.jpg';
+  logoSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
 
   topbarData$: Observable<Topbar[]>;
   topbarId:any = [];
+
+  navbarData$: Observable<Navbar[]>;
+  navbarId:any = [];
 
   addEditTopbarForm: FormGroup = this.fb.group({
     id: [undefined],
@@ -25,6 +29,18 @@ export class EditHeaderComponent implements OnInit {
     twitter: [''],
     telegram: [''],
     instagram: ['']
+  });
+
+  addEditNavbarForm: FormGroup = this.fb.group({
+    id: [undefined],
+    logo: [''],
+    menu1: [''],
+    menu2: [''],
+    menu3: [''],
+    menu4: [''],
+    menu5: [''],
+    phone: [''],
+    linkwhatsapp: ['']
   });
 
 
@@ -45,27 +61,31 @@ export class EditHeaderComponent implements OnInit {
       })
     });
 
-    
+    this.navbarData$ = this.headerService.getNavbar();
+    this.navbarData$.subscribe(navbar => {
+      navbar.forEach(n => {
+        const navbar = this.headerService.getNavbarDetail(n.id).valueChanges();
+        navbar.subscribe(data => {
+          this.addEditNavbarForm.patchValue(data);
+        })
+      })
+    });
   }
 
-  showPreviewImage(event: any) {
+  showPreviewLogo(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.imagemSrc = e.target.result;
+      reader.onload = (e: any) => this.logoSrc = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      this.imagemSrc = 'assets/img/icons/user-empty.svg';
+      this.logoSrc = 'assets/img/icons/user-empty.svg';
       this.selectedImage = null;
     }
   }
 
-  addCategory(){
-    
-  }
-
   submitTopbar(){
-    let topbar: Topbar = this.addEditTopbarForm.value;
+    let topbar:Topbar = this.addEditTopbarForm.value;
     
     if (!topbar.id && this.addEditTopbarForm.valid) {
       this.headerService.addTopbar(topbar);
@@ -76,5 +96,20 @@ export class EditHeaderComponent implements OnInit {
     }
   
   }
+
+  submitNavbar(){
+    let navbar:Navbar = this.addEditNavbarForm.value;
+     
+    if (!navbar.id && this.addEditNavbarForm.valid) {
+      this.headerService.addNavbar(navbar);
+      this.toastr.success('Dados inseridos com sucesso');
+    }else{
+      this.headerService.updateNavbar(navbar);
+      this.toastr.success('Dados atualizados com sucesso');
+    }
+  
+  }
+
+
 
 }

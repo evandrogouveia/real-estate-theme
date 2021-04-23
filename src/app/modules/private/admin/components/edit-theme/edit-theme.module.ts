@@ -15,6 +15,7 @@ import { EditThemeComponent } from './edit-theme.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
 import { EditAreasComponent } from './edit-areas/edit-areas.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
+import { NgxMaskModule } from 'ngx-mask'
 
 
 
@@ -33,7 +34,8 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
     ReactiveFormsModule,
     NgxBootstrapModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
