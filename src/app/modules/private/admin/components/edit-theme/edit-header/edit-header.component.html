@@ -7,7 +7,7 @@
         </div>
 
         <div class="card card-edit">
-            <form class="form-topbar">
+            <form [formGroup]="addEditTopbarForm" (ngSubmit)="submitTopbar()" class="form-topbar">
                 <h5>Topbar</h5>
                 <div class="row">
                     <div class="col-lg-6">
@@ -19,12 +19,12 @@
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
                                     <input type="email" class="form-control" id="email"
-                                        placeholder="ex.: email@email.com">
+                                        placeholder="ex.: email@email.com" formControlName="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Endereço</label>
                                     <input type="text" class="form-control" id="address"
-                                        placeholder="ex.: Avenida das amérias, 1500">
+                                        placeholder="ex.: Avenida das amérias, 1500" formControlName="address">
                                 </div>
                             </div>
                         </div>
@@ -38,19 +38,23 @@
 
                                 <div class="form-group">
                                     <label for="facebook">Facebook</label>
-                                    <input type="text" class="form-control" id="facebook" placeholder="Insira o link">
+                                    <input type="text" class="form-control" id="facebook" 
+                                    placeholder="Insira o link" formControlName="facebook">
                                 </div>
                                 <div class="form-group">
                                     <label for="twitter">Twitter</label>
-                                    <input type="text" class="form-control" id="twitter" placeholder="Insira o link">
+                                    <input type="text" class="form-control" id="twitter" 
+                                    placeholder="Insira o link" formControlName="twitter">
                                 </div>
                                 <div class="form-group">
                                     <label for="telegram">Telegram</label>
-                                    <input type="text" class="form-control" id="telegram" placeholder="Insira o link">
+                                    <input type="text" class="form-control" id="telegram" 
+                                    placeholder="Insira o link" formControlName="telegram">
                                 </div>
                                 <div class="form-group">
                                     <label for="instagram">Instagram</label>
-                                    <input type="text" class="form-control" id="instagram" placeholder="Insira o link">
+                                    <input type="text" class="form-control" id="instagram" 
+                                    placeholder="Insira o link" formControlName="instagram">
                                 </div>
 
                             </div>

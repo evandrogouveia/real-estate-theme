@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-header',
@@ -8,7 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class EditHeaderComponent implements OnInit {
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  constructor() { }
+
+  addEditTopbarForm: FormGroup = this.fb.group({
+    id: [undefined],
+    email: [''],
+    address: [''],
+    facebook: [''],
+    twitter: [''],
+    telegram: [''],
+    instagram: ['']
+  });
+
+
+  constructor(private fb: FormBuilder,) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +36,10 @@ export class EditHeaderComponent implements OnInit {
       this.imagemSrc = 'assets/img/icons/user-empty.svg';
       this.selectedImage = null;
     }
+  }
+
+  submitTopbar(){
+    console.log(this.addEditTopbarForm.value)
   }
 
 }
