@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { Topbar } from './models/topbar.model';
+import { HeaderService } from './services/header.service';
 
 @Component({
   selector: 'app-edit-header',
@@ -9,6 +13,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class EditHeaderComponent implements OnInit {
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
+
+  topbarData$: Observable<Topbar[]>;
+  topbarId:any = [];
 
   addEditTopbarForm: FormGroup = this.fb.group({
     id: [undefined],
@@ -21,9 +28,24 @@ export class EditHeaderComponent implements OnInit {
   });
 
 
-  constructor(private fb: FormBuilder,) { }
+  constructor(
+    private fb: FormBuilder, 
+    private headerService: HeaderService,
+    private toastr: ToastrService
+    ) { }
 
   ngOnInit(): void {
+    this.topbarData$ = this.headerService.getTopbar();
+    this.topbarData$.subscribe(topbar => {
+      topbar.forEach(d => {
+        const topbar = this.headerService.getTopbarDetail(d.id).valueChanges();
+        topbar.subscribe(data => {
+          this.addEditTopbarForm.patchValue(data);
+        })
+      })
+    });
+
+    
   }
 
   showPreviewImage(event: any) {
@@ -38,8 +60,21 @@ export class EditHeaderComponent implements OnInit {
     }
   }
 
+  addCategory(){
+    
+  }
+
   submitTopbar(){
-    console.log(this.addEditTopbarForm.value)
+    let topbar: Topbar = this.addEditTopbarForm.value;
+    
+    if (!topbar.id && this.addEditTopbarForm.valid) {
+      this.headerService.addTopbar(topbar);
+      this.toastr.success('Dados inseridos com sucesso');
+    }else{
+      this.headerService.updateTopbar(topbar);
+      this.toastr.success('Dados atualizados com sucesso');
+    }
+  
   }
 
 }

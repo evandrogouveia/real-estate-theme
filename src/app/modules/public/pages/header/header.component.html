@@ -5,20 +5,20 @@
                 <div class="col-lg-12">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="section-left d-flex">
-                            <p><i class='bx bxs-envelope'></i> adv@advocacy.com.br</p>
-                            <p><i class='bx bxs-map'></i> Durham Street Hialeah, FL 33010</p>
+                            <p><i class='bx bxs-envelope'></i> {{topbarData[0]?.email}}</p>
+                            <p><i class='bx bxs-map'></i> {{topbarData[0]?.address}}</p>
                         </div>
                         <div class="socials d-flex align-items-center justify-content-between">
-                            <a class="nav-link" href="#">
+                            <a *ngIf="(topbarData[0]?.facebook).length > 0" class="nav-link" href="{{topbarData[0]?.facebook}}" target="_blank">
                                 <i class='bx bxl-facebook'></i>
                             </a>
-                            <a class="nav-link" href="#">
+                            <a *ngIf="(topbarData[0]?.twitter).length > 0" class="nav-link" href="{{topbarData[0]?.twitter}}">
                                 <i class='bx bxl-twitter'></i>
                             </a>
-                            <a class="nav-link" href="#">
+                            <a *ngIf="(topbarData[0]?.telegram).length > 0" class="nav-link" href="{{topbarData[0]?.telegram}}">
                                 <i class='bx bxl-telegram'></i>
                             </a>
-                            <a class="nav-link" href="#">
+                            <a *ngIf="(topbarData[0]?.instagram).length > 0" class="nav-link" href="{{topbarData[0]?.instagram}}">
                                 <i class='bx bxl-instagram'></i>
                             </a>
                         </div>

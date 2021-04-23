@@ -1,4 +1,4 @@
-export interface Header {
+export interface Topbar {
     id?: string;
     email: string;
     address: string;
