@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { Navbar } from './models/navbar.model';
 import { Topbar } from './models/topbar.model';
 import { HeaderService } from './services/header.service';
@@ -47,7 +49,8 @@ export class EditHeaderComponent implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private headerService: HeaderService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private storage: AngularFireStorage,
     ) { }
 
   ngOnInit(): void {
@@ -57,8 +60,8 @@ export class EditHeaderComponent implements OnInit {
         const topbar = this.headerService.getTopbarDetail(d.id).valueChanges();
         topbar.subscribe(data => {
           this.addEditTopbarForm.patchValue(data);
-        })
-      })
+        });
+      });
     });
 
     this.navbarData$ = this.headerService.getNavbar();
@@ -67,8 +70,10 @@ export class EditHeaderComponent implements OnInit {
         const navbar = this.headerService.getNavbarDetail(n.id).valueChanges();
         navbar.subscribe(data => {
           this.addEditNavbarForm.patchValue(data);
-        })
-      })
+          if(data.logo)
+          this.logoSrc = data.logo
+        });
+      });
     });
   }
 
@@ -104,10 +109,27 @@ export class EditHeaderComponent implements OnInit {
       this.headerService.addNavbar(navbar);
       this.toastr.success('Dados inseridos com sucesso');
     }else{
-      this.headerService.updateNavbar(navbar);
-      this.toastr.success('Dados atualizados com sucesso');
+      if (this.selectedImage) {
+        const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+
+        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.addEditNavbarForm.value.logo = url;
+              this.headerService.updateNavbar(navbar).then(() => {
+                this.toastr.success('Dados atualizados com sucesso');
+              });
+            });
+          })
+        ).subscribe();
+      } else {
+        this.addEditNavbarForm.value.logo = this.logoSrc;
+        this.headerService.updateNavbar(navbar).then(() => {
+          this.toastr.success('Dados atualizados com sucesso');
+        });
+      }
     }
-  
   }
 
 }
