@@ -13,6 +13,7 @@ import { HeaderService } from './services/header.service';
   templateUrl: './edit-header.component.html',
   styleUrls: ['./edit-header.component.scss']
 })
+
 export class EditHeaderComponent implements OnInit {
   logoSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
