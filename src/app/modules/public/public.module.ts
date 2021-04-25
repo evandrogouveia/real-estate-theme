@@ -6,7 +6,7 @@ import { PublicComponent } from './public.component';
 import { SharedModule } from './pages/shared/shared.module';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
-
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { FooterComponent } from './pages/footer/footer.component';
   imports: [
     CommonModule,
     PublicRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxMaskModule.forRoot(),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   toggled = true;
   retract = 'toggled';
   topbarData:any = [];
+  navbarData:any = [];
 
   constructor(
     private renderer: Renderer2, 
@@ -27,7 +28,11 @@ export class HeaderComponent implements OnInit {
 
      this.headerService.getTopbar().subscribe(data => {
        this.topbarData = data;
-     })
+     });
+
+     this.headerService.getNavbar().subscribe(data => {
+       this.navbarData = data;
+     });
   }
 
   toggleSidebar(){
