@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'advocacy-theme'`, () => {
+  it(`should have as title 'real-estate-theme'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('advocacy-theme');
+    expect(app.title).toEqual('real-estate-theme');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to advocacy-theme!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to real-estate-theme!');
   });
 });
