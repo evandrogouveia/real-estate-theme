@@ -28,10 +28,10 @@
         </div><!-- /container -->
     </div><!-- /topbar -->
 
-    <nav class="navbar navbar-expand-lg navbar-light" [ngClass]="(scrollPosition > 40) ? 'fixed-top' : ''">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
-                <img src="{{navbarData[0]?.logo}}">
+                <!--img src="{{navbarData[0]?.logo}}"-->
             </a>
             <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
             <div class="d-flex" id="wrapper" [ngClass]="retract">
             <div class="navbar-collapse" id="sidebar-wrapper">
                 <i class='bx bx-x bx-md d-lg-none' (click)="toggleSidebar()"></i>
-                <ul class="navbar-nav ml-auto mr-3">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item" (click)="toggleSidebar()">
                         <a class="nav-link" routerLink="/home" routerLinkActive="active">{{navbarData[0]?.menu1}}</a>
                     </li>
@@ -56,16 +56,6 @@
                         <a class="nav-link" routerLink="/contact" routerLinkActive="active">{{navbarData[0]?.menu5}}</a>
                     </li>
                 </ul>
-                <!--form class="form-inline my-2 my-lg-0">
-                    <i class='bx bx-search-alt-2' ></i>
-                </form-->
-                <a href="{{navbarData[0]?.whatsapp}}" class="nav-link whats-contact d-flex align-items-center">
-                    <i class='bx bxl-whatsapp'></i>
-                    <div class="number">
-                        <p>Entre em contato</p>
-                        <h5>{{navbarData[0]?.phone | mask: '(00) 00000-0000'}}</h5>
-                    </div>
-                </a>
 
                 <div class="socials d-flex align-items-center justify-content-between">
                     <a class="nav-link" href="#">
