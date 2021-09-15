@@ -81,6 +81,60 @@
     
 }
 
+.section-row-testimony{
+    .owl-item{
+        height: 300px;
+        .caption-carousel{
+            position: absolute;
+            top: 180px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 10;
+            p{
+                font-size: 17px;
+                color: #f1f1f1;
+                width: 50%;
+                margin-top: 20px;
+                text-align: center;
+                margin: auto;
+            }
+        }
+    }
+    .wrap-user-testimony{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 60px auto 0;
+        width: 300px;
+        h5, p{
+            color: #ffffff;
+        }
+        p{
+            margin: 0;
+        }
+        .overlay{
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+            &:before{
+                display: none;
+            }
+        }
+    }
+    .owl-theme{
+        .owl-nav.disabled{
+            + .owl-dots{
+                margin-top: 0;
+                padding-bottom: 30px;
+            }
+        } 
+    } 
+    
+}
+
 /*======================= RESPONSIVE =======================*/
 @media(max-width: 575.98px){
     .owl-item{

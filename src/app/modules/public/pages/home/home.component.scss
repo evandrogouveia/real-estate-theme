@@ -250,79 +250,82 @@
         }
         
     }
-}
-
-.section-row-about{
-    padding: 80px 0;
-    .t-title{
-        p{
-            font-size: 16px;
+    .nav-link{
+        &.view-all{
+            background: #31af36;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
             text-transform: uppercase;
-            font-weight: 500;
-            color: #a38851;
-            font-family: "Rubik", sans-serif;
-        }
-        h3{
-            font-size: 35px;
-            font-family: "Rubik", sans-serif;
-            font-weight: 600;
-            color: #201B18;
-            margin-bottom: 70px;
-        }
-    }
-    .t-about{
-       margin-top: 80px;
-        h3{
-            font-size: 28px;
-            font-family: "Rubik", sans-serif;
-            font-weight: 600;
-            color: #201B18;
-            margin-bottom: 30px;
-        }
-        p{
-            font-size: 16px;
-            color: #565872;
-            margin-bottom: 40px;
-            width: 80%;
-            line-height: 25px;
-        }
-    }
-    .about-img{
-        img{
-            width: 100%;
+            border-radius: 30px;
+            margin: 40px auto 0;
+            width: 28%;
+            height: 45px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover{
+                background: #228625;
+            }
         }
     }
 }
 
-.section-row-numbers{
-    display: flex;
-    align-items: center;
-    background: url('/assets/img/numbers-background.jpg') no-repeat;
+.section-row-testimony{
+    display: block;
+    background: url('/assets/img/testimony.jpg') no-repeat;
     background-size: cover;
-    background-position: bottom;
-    height: 250px;
     margin-bottom: 75px;
     position: relative;
     &:before{
         content: "";
-        background: rgba(97, 81, 48, 0.6);
+        display: block;
         width: 100%;
         height: 100%;
-        display: block;
         position: absolute;
+        background: rgba(1,38,12,0.7);
+    }
+    h2{
+        margin-top: 55px;
+        font-family: "Poppins", sans-serif;
+        font-size: 35px;
+        color: #ffffff;
+        position: relative;
+        &:before{
+            content: "";
+            width: 360px;
+            height: 1px;
+            background-color: rgba(255,255,255,0.3);
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: block;
+        }
+        &:after{
+            content: "";
+            height: 3px;
+            width: 85px;
+            bottom: -22px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: block;
+            background-color: #31af36;
+        }
     }
     h3{
-        font-size: 35px;
+        font-size: 25px;
         font-family: "Rubik", sans-serif;
-        font-weight: 600;
+        font-weight: 300;
         color: #ffffff;
+        position: relative;
+        top: 40px;
     }
-    h4{
-        font-size: 18px;
-        font-family: "Rubik", sans-serif;
-        color: #ffffff;
-        font-weight: 400;
-    }
+    
 }
 
 .section-row-blog{
@@ -332,14 +335,14 @@
             font-size: 16px;
             text-transform: uppercase;
             font-weight: 500;
-            color: #a38851;
+            color: #228625;
             font-family: "Rubik", sans-serif;
         }
         h3{
             font-size: 35px;
             font-family: "Rubik", sans-serif;
             font-weight: 600;
-            color: #201B18;
+            color: #0f3232;
             margin-bottom: 70px;
         }
     }
@@ -367,7 +370,7 @@
             i{
                 margin-right: 5px;
                 font-size: 20px;
-                color: #a38851;
+                color: #31af36;
                 position: relative;
                 top: -2px;
             }
@@ -377,7 +380,7 @@
             }
         }
         .btn-readmore{
-            color: #a38851;
+            color: #31af36;
             background-color: #ffffff;
             text-transform: uppercase;
             font-family: "Rubik", sans-serif;
@@ -391,7 +394,7 @@
                top: 6px;
             }
             &:hover{
-                color: #201B18;
+                color: #0f3232;
                 transform: scale(1.03);
             }
         }

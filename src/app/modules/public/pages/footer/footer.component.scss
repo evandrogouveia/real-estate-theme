@@ -1,5 +1,5 @@
 footer{
-    background-color: #3d342f;
+    background-color: #0f3232;
     padding: 70px 0 0;
     color: #ffffff;
     .footer-wrapper{
@@ -30,7 +30,7 @@ footer{
             font-family: 'Rubik', sans-serif;
             font-weight: 100;
             i{
-                color: #a38851;
+                color: #31af36;
                 margin-right: 5px;
                 font-size: 18px;
                 position: relative;
@@ -48,7 +48,7 @@ footer{
             font-family: 'Rubik', sans-serif;
             font-weight: 100;
             &:hover{
-                color: #a38851;
+                color: #31af36;
             }
         }
     }
@@ -67,13 +67,13 @@ footer{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color:#a38851;
+                background-color:#31af36;
                 color: #ffffff;
                 border-radius: 50%;
                 margin-right: 10px;
                 transition: all .2s;
                 &:hover{
-                    background-color: #806636;
+                    background-color: #228625;
                 }
                 i{
                     font-size: 20px;
@@ -83,7 +83,7 @@ footer{
     }
     .footer-copyright{
         width: 100%;
-        background-color:#201B18;
+        background-color:#071d1d;
         padding: 20px 0;
         margin-top: 60px;
         .texts{

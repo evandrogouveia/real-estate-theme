@@ -43,4 +43,30 @@ export class HomeComponent implements OnInit {
     nav: true
   }
 
+
+  customOptionsTestimony: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: true,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: false
+  }
+
 }
