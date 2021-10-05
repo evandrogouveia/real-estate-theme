@@ -17,33 +17,33 @@
             font-size: 14px;
         }
         input{
-            border-radius: 0;
+            border-radius: 6px;
             height: 45px;
             &:focus{
                 box-shadow: none;
-                border: 1px solid #a38851;
-                color: #a38851;
+                border: 1px solid #31af36;
+                color: #31af36;
             }
         }
         textarea{
-            border-radius: 0;
+            border-radius: 6px;
             resize: none;
             &:focus{
                 box-shadow: none;
-                border: 1px solid #a38851;
-                color: #a38851;
+                border: 1px solid #31af36;
+                color: #31af36;
             }
         }
         button{
-            background-color: #a38851;
+            background-color: #31af36;
             font-family: 'Rubik', sans-serif;
             margin-top: 10px;
-            border-radius: 0;
+            border-radius: 30px;
             width: 200px;
             height: 45px;
             color: #ffffff;
             &:hover{
-                background-color: #806636;
+                background-color: #228625;
             }
         }
     }
@@ -56,7 +56,7 @@
         .contact{
             text-align: center;
             i{
-                color: #a38851;
+                color: #31af36;
                 font-size: 35px;
                 margin-bottom: 10px;
             }

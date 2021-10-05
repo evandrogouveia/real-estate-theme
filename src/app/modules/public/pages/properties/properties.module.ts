@@ -1,18 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PracticeAreasRoutingModule } from './practice-areas-routing.module';
-import { PracticeAreasComponent } from './practice-areas.component';
+import { PropertiesRoutingModule } from './properties-routing.module';
+import { PropertiesComponent } from './properties.component';
 import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [PracticeAreasComponent],
+  declarations: [PropertiesComponent],
   imports: [
     CommonModule,
-    PracticeAreasRoutingModule,
+    PropertiesRoutingModule,
     SharedModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class PracticeAreasModule { }
+export class PropertiesModule { }

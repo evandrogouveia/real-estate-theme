@@ -9,6 +9,7 @@
         margin-bottom: 60px;
         img{
             width: 100%;
+            border-radius: 10px;
         }
         .entry-header{
             margin-top: 20px;
@@ -17,10 +18,15 @@
                 display: flex;
                 .wrapper-info{
                     margin-right: 45px;
+                    a {
+                        &:hover{
+                            text-decoration: none;
+                        }
+                    }
                 }
                 i{
                     margin-right: 5px;
-                    color: #a38851;
+                    color: #31af36;
                     font-size: 20px;
                     position: relative;
                     top: 2px;
@@ -82,8 +88,8 @@
                 align-items: center;
                 justify-content: center;
                 &:hover{
-                    color: #a38851;
-                    border: 1px solid #a38851;
+                    color: #31af36;
+                    border: 1px solid #31af36;
                 }
                 i{
                     font-size: 20px;
@@ -170,39 +176,39 @@
                 font-size: 14px;
             }
             input{
-                border-radius: 0;
+                border-radius: 6px;
                 height: 45px;
                 &:focus{
                     box-shadow: none;
-                    border: 1px solid #a38851;
-                    color: #a38851;
+                    border: 1px solid #31af36;
+                    color: #31af36;
                 }
                 &.invalid{
                     border: 1px solid #fb6868;
                 }
             }
             textarea{
-                border-radius: 0;
+                border-radius: 6px;
                 resize: none;
                 &:focus{
                     box-shadow: none;
-                    border: 1px solid #a38851;
-                    color: #a38851;
+                    border: 1px solid #31af36;
+                    color: #31af36;
                 }
             }
             button{
-                background-color: #a38851;
+                background-color: #31af36;
                 font-family: 'Rubik', sans-serif;
                 position: relative;
                 box-shadow: none;
                 outline: none;
                 margin-top: 10px;
-                border-radius: 0;
+                border-radius: 30px;
                 width: 200px;
                 height: 45px;
                 color: #ffffff;
                 &:hover{
-                    background-color: #806636;
+                    background-color: #228625;
                 }
                 .loading{
                     position:absolute;

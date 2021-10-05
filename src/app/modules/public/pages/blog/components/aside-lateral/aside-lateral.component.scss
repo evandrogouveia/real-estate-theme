@@ -2,11 +2,12 @@
     padding-left: 20px;
     .search-blog{
         input{
-            border-radius: 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
             height: 50px;
             &:focus{
                 box-shadow: none;
-                border: 1px solid #a38851;
+                border: 1px solid #31af36;
             }
             &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                 font-family: "Poppins", sans-serif;
@@ -26,17 +27,18 @@
             }
         }
         .btn{
-            background-color: #a38851;
+            background-color: #31af36;
             color: #ffffff;
-            border-radius: 0;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
             width: 50px;
             &:hover{
-                background-color: #201B18;
+                background-color: #228625;
             }
             i{
                 font-size: 25px;
                 position: relative;
-                top: 2px;
+                top: 3px;
             }
         }
     }
@@ -53,7 +55,7 @@
                 content: "";
                 width: 60px;
                 height: 3px;
-                background: #a38851;
+                background: #228625;
                 display: block;
                 margin-top: 10px;
             }
@@ -68,7 +70,7 @@
                 text-decoration: none;
                 
                 &:hover{
-                    color: #201B18;
+                    color: #0f3232;
                 }
             }
         }
@@ -84,6 +86,7 @@
                     height: 55px;
                     margin-right: 15px;
                     object-fit: cover;
+                    border-radius: 5px;
                 }
             }
         }
