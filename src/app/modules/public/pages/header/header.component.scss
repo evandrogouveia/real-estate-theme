@@ -44,6 +44,12 @@ header{
     }
     .navbar{
         background-color: transparent;
+        height: 90px;
+        transition: 0.3s height ease-in-out;
+        &.fixed-top{
+            background-color: #0f3232;
+            height: 65px;
+        }
         .navbar-brand{
             width: 140px;
             height: 90px;
