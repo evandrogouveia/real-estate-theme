@@ -5,13 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyDsP4X3pnI816pHbmhVCYp7e6MAQzxeFH0",
-    authDomain: "advocacy-project.firebaseapp.com",
-    projectId: "advocacy-project",
-    storageBucket: "advocacy-project.appspot.com",
-    messagingSenderId: "348583772414",
-    appId: "1:348583772414:web:7bfcb69ff967bca109e5af",
-    measurementId: "G-C7ZT2PTF6E"
+    apiKey: 'AIzaSyA5Lnmz6vqmobWj-ge5S969mw6W-oNRB-4',
+    authDomain: 'real-estate-5304e.firebaseapp.com',
+    projectId: 'real-estate-5304e',
+    storageBucket: 'real-estate-5304e.appspot.com',
+    messagingSenderId: '935324930314',
+    appId: '1:935324930314:web:ed94ffd139663c6445eaf3'
   }
 };
 

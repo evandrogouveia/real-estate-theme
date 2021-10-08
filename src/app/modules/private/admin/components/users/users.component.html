@@ -47,7 +47,7 @@
                     <td>{{u.function}}</td>
                     <td>
                         <a routerLink="/private/admin/edit-profile/{{u.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
-                        <a *ngIf="u.function !== 'Administrador'" href="javascript:void(0);" (click)="openModalConfirmDelete(u)">
+                        <a *ngIf="u.function !== 'admin'" href="javascript:void(0);" (click)="openModalConfirmDelete(u)">
                           <i class="icon-delete" tooltip="Remover"></i>
                         </a>
                     </td>

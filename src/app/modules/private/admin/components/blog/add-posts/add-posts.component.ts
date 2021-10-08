@@ -61,7 +61,9 @@ export class AddPostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.getUser().subscribe(u => {
-      this.username = u.username;
+      if(u) {
+        this.username = u.username;
+      }
     });
     this.categoriesAll$ = this.categoryService.getCategory();
 

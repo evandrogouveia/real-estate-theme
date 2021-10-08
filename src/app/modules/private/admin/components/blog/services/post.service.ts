@@ -26,7 +26,7 @@ export class PostService {
   //ADICIONAR POSTS
   addPost(p: Post){
     p.id = this.afs.createId();
-    return this.postsCollection.doc(p.id).set(p);
+    return this.postsCollection.doc(p.id).set(Object.assign({}, p));
   }
 
   //ATUALIZAR POSTS
