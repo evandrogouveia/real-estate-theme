@@ -22,7 +22,7 @@
                 border-radius: 5px;
                 &:focus{
                     box-shadow: none;
-                    border:1px solid #a38851;
+                    border:1px solid var(--bg-primary-color);
                 }
                 &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                     color: #aaaaaa;
@@ -48,7 +48,7 @@
         }
 
         .btn-save-form{
-            background: #a38851;
+            background: var(--bg-primary-color);
             position: relative;
             color: #ffffff;
             width: 100%;
@@ -59,7 +59,7 @@
             box-shadow: none;
             padding: 10px 0;
             &:hover{
-                    background:#806636;
+                    background:var(--bg-primary-color-hover);
             }
             .loading{
                 position:absolute;
@@ -83,7 +83,7 @@
                     border-radius: 5px;
                     &:focus{
                         box-shadow: none;
-                        border:1px solid #a38851;
+                        border:1px solid var(--bg-primary-color);
                     }
                     &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                         color: #aaaaaa;
@@ -160,7 +160,7 @@
                         cursor: pointer;
                         line-height: 20px;
                         display: inline-block;
-                        color: #a38851;
+                        color: var(--bg-primary-color);
                         margin-right: 10px;
                         font-size: 15px;
                         font-family: "Rubik", sans-serif;
@@ -179,8 +179,8 @@
                         border-radius: 2px;
                     }
                     [type="checkbox"]:checked + label:before {
-                        border: 2px solid #a38851;
-                        background: #a38851;
+                        border: 2px solid var(--bg-primary-color);
+                        background: var(--bg-primary-color);
                     }
                     [type="checkbox"]:checked + label:after,
                     [type="checkbox"]:not(:checked) + label:after {
@@ -213,7 +213,7 @@
                         margin-left: 20px;
                     }
                     .nav-link{
-                        color: #a38851;
+                        color: var(--bg-primary-color);
                         font-weight: 500;
                         font-size: 15px;
                         padding: 0;

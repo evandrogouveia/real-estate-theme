@@ -24,8 +24,8 @@ form{
         height: 45px;
         &:focus{
             box-shadow: none;
-            border: 1px solid #a38851;
-            color: #a38851;
+            border: 1px solid var(--bg-primary-color);
+            color: var(--bg-primary-color);
         }
     }
     textarea{
@@ -33,14 +33,14 @@ form{
         resize: none;
         &:focus{
             box-shadow: none;
-            border: 1px solid #a38851;
-            color: #a38851;
+            border: 1px solid var(--bg-primary-color);
+            color: var(--bg-primary-color);
         }
     }
 }
 .btn-not-confirm{
     border: 1px solid #dddddd;
-    background-color: #ffffff;
+    background-color: var(--bg-white-color);
     box-shadow: none;
     outline: none;
     margin-right: 20px;
@@ -51,12 +51,12 @@ form{
     }
 }
 .btn-confirm{
-    background-color: #a38851;
+    background-color: var(--bg-primary-color);
     box-shadow: none;
     outline: none;
     width: 125px;
-    color: #ffffff;
+    color: var(--bg-white-color);
     &:hover{
-        background-color: #806636;
+        background-color: var(--bg-primary-color-hover);
     }
 }

@@ -14,7 +14,7 @@ p{
 }
 .btn-not-confirm{
     border: 1px solid #dddddd;
-    background-color: #ffffff;
+    background-color: var(--bg-white-color);
     box-shadow: none;
     outline: none;
     margin-right: 20px;
@@ -25,12 +25,12 @@ p{
     }
 }
 .btn-confirm{
-    background-color: rgb(71, 182, 71);
+    background-color: var(--bg-primary-color);
     box-shadow: none;
     outline: none;
     width: 65px;
-    color: #ffffff;
+    color: var(--bg-white-color);
     &:hover{
-        background-color: rgb(64, 163, 64);
+        background-color: var(--bg-primary-color-hover);
     }
 }

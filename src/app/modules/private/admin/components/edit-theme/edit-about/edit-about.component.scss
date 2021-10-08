@@ -23,8 +23,8 @@
                 margin-bottom: 20px;
             }
             .btn-save-form{
-                background: #a38851;
-                color: #ffffff;
+                background: var(--bg-primary-color);
+                color: var(--bg-white-color);
                 width: 15%;
                 border-radius: 5px;
                 transition: all 0.2s;
@@ -33,7 +33,7 @@
                 box-shadow: none;
                 padding: 10px 0;
                 &:hover{
-                        background:#806636;
+                        background:var(--bg-primary-color-hover);
                 }
             }
             .card{
@@ -51,7 +51,7 @@
                         resize: none;
                         &:focus{
                             box-shadow: none;
-                            border:1px solid #a38851;
+                            border:1px solid var(--bg-primary-color);
                         }
                     }
                 }

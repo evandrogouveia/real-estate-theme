@@ -60,7 +60,7 @@
                     border-radius: 5px;
                     transition: border 0.5s;
                     &:focus{
-                        border: 1px solid #31af36;
+                        border: 1px solid var(--bg-primary-color);
                         box-shadow: none;
                         outline: none;
                         transition: border 0.5s;
@@ -103,7 +103,7 @@
                     width: 100%;
                     height: 45px;
                     border-radius: 5px;
-                    background: #31af36;
+                    background: var(--bg-primary-color);
                     border: none;
                     outline: none;
                     margin-bottom: 15px;
@@ -118,7 +118,7 @@
                     -moz-transition: all 0.4s;
                     transition: all 0.4s;
                     &:hover, &.waiting{
-                        background: #228625;
+                        background: var(--bg-primary-color-hover);
                     }
                     .loading{
                         position:absolute;
@@ -155,12 +155,12 @@
                     height: 17px;
                     border: 1px solid #979797;
                     -webkit-appearance: none;
-                    background: #fff;
+                    background: var(--bg-white-color);
                     border-radius: 2px;
                 }
                 [type="checkbox"]:checked + label:before {
-                    border: 2px solid #31af36;
-                    background: #31af36;
+                    border: 2px solid var(--bg-primary-color);
+                    background: var(--bg-primary-color);
                 }
                 [type="checkbox"]:checked + label:after,
                 [type="checkbox"]:not(:checked) + label:after {
@@ -171,7 +171,7 @@
                     left: 6px;
                     width: 5px;
                     height: 11px;
-                    border: solid #ffffff;
+                    border: solid var(--bg-white-color);
                     border-width: 0 2px 2px 0;
                     transform: rotate(45deg) !important;
                    

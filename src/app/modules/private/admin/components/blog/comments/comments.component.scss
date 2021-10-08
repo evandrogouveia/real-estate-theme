@@ -22,7 +22,7 @@
                 border-radius: 5px;
                 &:focus{
                     box-shadow: none;
-                    border:1px solid #a38851;
+                    border:1px solid var(--bg-primary-color);
                 }
                 &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                     color: #aaaaaa;
@@ -48,7 +48,7 @@
         }
     }
     .table{
-        background-color: #ffffff;
+        background-color: var(--bg-white-color);
         border: 1px solid #ccd0d4;
         box-shadow: 0 1px 1px rgba(0,0,0,.04);
         .form-check{
@@ -78,11 +78,11 @@
             vertical-align: middle;
             
             a{
-                color: #a38851;
+                color: var(--bg-primary-color);
                 font-weight: 500;
                 font-size: 15px;
                 &:hover{
-                    color:#806636;
+                    color:var(--bg-primary-color-hover);
                 }
             }
             &:nth-child(1){
