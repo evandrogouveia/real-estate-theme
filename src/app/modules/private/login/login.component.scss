@@ -35,7 +35,7 @@
                 text-align: center;
                 width: 200px;
                 height: 125px;
-                margin:0 auto 40px;
+                margin:0 auto 30px;
                 overflow: hidden;
                 img{
                    width: 100%;
@@ -60,7 +60,7 @@
                     border-radius: 5px;
                     transition: border 0.5s;
                     &:focus{
-                        border: 1px solid #a38851;
+                        border: 1px solid #31af36;
                         box-shadow: none;
                         outline: none;
                         transition: border 0.5s;
@@ -103,7 +103,7 @@
                     width: 100%;
                     height: 45px;
                     border-radius: 5px;
-                    background: #a38851;
+                    background: #31af36;
                     border: none;
                     outline: none;
                     margin-bottom: 15px;
@@ -118,7 +118,7 @@
                     -moz-transition: all 0.4s;
                     transition: all 0.4s;
                     &:hover, &.waiting{
-                        background: #806636;
+                        background: #228625;
                     }
                     .loading{
                         position:absolute;
@@ -159,8 +159,8 @@
                     border-radius: 2px;
                 }
                 [type="checkbox"]:checked + label:before {
-                    border: 2px solid #a38851;
-                    background: #a38851;
+                    border: 2px solid #31af36;
+                    background: #31af36;
                 }
                 [type="checkbox"]:checked + label:after,
                 [type="checkbox"]:not(:checked) + label:after {
