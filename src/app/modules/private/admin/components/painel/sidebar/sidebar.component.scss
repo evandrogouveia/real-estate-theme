@@ -74,15 +74,15 @@
                 color: #2b2b2b;
                 padding-left: 50px;
                 &:hover, &.active{
-                    background-color: #fff8eb;
-                    color: #a38851;
+                    background-color: #e7fce8;
+                    color: #31af36;
                     &:before{
                         content: "";
                         display: block;
                         width: 5px;
                         height: 45px;
                         color: #000;
-                        background: #a38851;
+                        background: #31af36;
                         position: absolute;
                         left: 0px;
                     }
@@ -90,23 +90,23 @@
             }
             &:hover{
                 .list-group-item{
-                    background-color: #fff8eb;
-                    color: #a38851;
+                    background-color: #e7fce8;
+                    color: #31af36;
                     &:before{
                         content: "";
                         display: block;
                         width: 5px;
                         height: 45px;
                         color: #000;
-                        background: #a38851;
+                        background: #31af36;
                         position: absolute;
-                        left: -15px;
+                        left: 0px;
                     }
                 }
             }
         }
         .collapse-menu {
-            background-color: #fff8eb;
+            background-color: #e7fce8;
             .list-group-item{
                 padding-left: 55px;
                 background-color: transparent;
@@ -117,8 +117,8 @@
                 font-family: "Rubik", sans-serif;
                 text-decoration: none;
                 &:hover, &.active{
-                    background-color: #fff8eb;
-                    color: #a38851;
+                    background-color: #e7fce8;
+                    color: #31af36;
                     &:before{
                         opacity: 0;
                     }
@@ -146,15 +146,23 @@
                     padding: 10px 4px;
                     margin-left: 215px;
                     justify-content: center;
-                    
+                    &.active{
+                        &:before{
+                            left: -15px;
+                        }
+                    }
                     span{
                         display: none;
                     }
                 }
-                .list-group-item.active:before,
-                .list-group-item:hover:before{
-                    left: -15px;
+                &:hover{
+                    .list-group-item{
+                        &:before{
+                            left: -15px;
+                        }
+                    }
                 }
+                
             }   
         }
     }
