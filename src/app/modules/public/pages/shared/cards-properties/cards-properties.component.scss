@@ -1,12 +1,12 @@
 .section-row-properties{
-    background: #ffffff;
+    background: var(--bg-white-color);
     padding: 80px 0;
     .t-professionals{
         h3{
             font-size: 35px;
             font-family: "Rubik", sans-serif;
             font-weight: 600;
-            color: #0f3232;
+            color: var(--bg-secondary-color);
             margin-bottom: 5px;
         }
         p{
@@ -19,7 +19,7 @@
         }
     }
     .box-property{
-        background: #ffffff;
+        background: var(--bg-white-color);
         margin-top: 35px;
         width: 100%;
         position: relative;
@@ -49,10 +49,10 @@
             object-fit: cover;
         }
         .property-ribon{
-            background: #31af36;
+            background: var(--bg-primary-color);
             position: absolute;
             right: -5px;
-            color: #ffffff;
+            color: var(--bg-white-color);
             text-transform: uppercase;
             padding: 5px 15px 3px;
             font-weight: 600;
@@ -64,10 +64,10 @@
                 position: absolute;
                 right: 0;
                 bottom: -5px;
-                border-top: 5px solid #228625;
+                border-top: 5px solid var(--bg-primary-color-hover);
                 width: 5px;
                 display: block;
-                border-right: 5px solid #ffffff;
+                border-right: 5px solid var(--bg-white-color);
             }
         }
         .texts{
@@ -77,7 +77,7 @@
                 font-family: "Rubik", sans-serif;
                 font-weight: 600;
                 text-transform: uppercase;
-                color: #0f3232;
+                color: var(--bg-secondary-color);
                 height: 35px;
             }  
             span{
@@ -110,7 +110,7 @@
                     align-items: center;
                     justify-content: space-between;
                     i{
-                        color: #0f3232;
+                        color: var(--bg-secondary-color);
                         font-size: 20px;
                     }
                     span{

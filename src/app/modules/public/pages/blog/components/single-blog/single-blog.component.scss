@@ -26,7 +26,7 @@
                 }
                 i{
                     margin-right: 5px;
-                    color: #31af36;
+                    color: var(--bg-primary-color);
                     font-size: 20px;
                     position: relative;
                     top: 2px;
@@ -39,7 +39,7 @@
             }
             
             h3{
-                color: #201B18;
+                color: var(--bg-black-color);
                 font-family: "Poppins", sans-serif;
                 font-weight: 600;
                 font-size: 24px;
@@ -88,8 +88,8 @@
                 align-items: center;
                 justify-content: center;
                 &:hover{
-                    color: #31af36;
-                    border: 1px solid #31af36;
+                    color: var(--bg-primary-color);
+                    border: 1px solid var(--bg-primary-color);
                 }
                 i{
                     font-size: 20px;
@@ -180,8 +180,8 @@
                 height: 45px;
                 &:focus{
                     box-shadow: none;
-                    border: 1px solid #31af36;
-                    color: #31af36;
+                    border: 1px solid var(--bg-primary-color);
+                    color: var(--bg-primary-color);
                 }
                 &.invalid{
                     border: 1px solid #fb6868;
@@ -192,12 +192,12 @@
                 resize: none;
                 &:focus{
                     box-shadow: none;
-                    border: 1px solid #31af36;
-                    color: #31af36;
+                    border: 1px solid var(--bg-primary-color);
+                    color: var(--bg-primary-color);
                 }
             }
             button{
-                background-color: #31af36;
+                background-color: var(--bg-primary-color);
                 font-family: 'Rubik', sans-serif;
                 position: relative;
                 box-shadow: none;
@@ -206,9 +206,9 @@
                 border-radius: 30px;
                 width: 200px;
                 height: 45px;
-                color: #ffffff;
+                color: var(--bg-white-color);
                 &:hover{
-                    background-color: #228625;
+                    background-color: var(--bg-primary-color-hover);
                 }
                 .loading{
                     position:absolute;

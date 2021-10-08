@@ -6,7 +6,7 @@
             width: 100%;
         }
         .text-bottom-image{
-            background-color: #ffffff;
+            background-color: var(--bg-white-color);
             box-shadow: 0px 10px 20px 0px rgba(61, 52, 47, 0.09);
             padding: 25px 50px 25px 40px;
             position: absolute;
@@ -17,12 +17,12 @@
                 font-family: "Poppins", sans-serif;
                 font-size: 20px;
                 font-weight: 600;
-                color: #0f3232;
+                color: var(--bg-secondary-color);
                 &:before{
                     content: "";
                     width: 70px;
                     height: 3px;
-                    background: #0f3232;
+                    background: var(--bg-secondary-color);
                     display: block;
                     margin-bottom: 15px;
                 }
@@ -37,29 +37,29 @@
             font-family: "Poppins", sans-serif;
             font-size: 36px;
             font-weight: 600;
-            color: #0f3232;
+            color: var(--bg-secondary-color);
             margin-bottom: 20px;
         }
         p{
             font-family: 'Rubik', sans-serif;
-            color: #0f3232
+            color: var(--bg-secondary-color);
         }
     }
 
     .about-mvv{
-        background-color: #f7f7f7;
+        background-color: var(--bg-grey-white-color-7);
         padding-bottom: 130px;
         .wrapper-missing{
             margin-top: 150px;
         }
         h4{
-            color: #0f3232;
+            color: var(--bg-secondary-color);
             font-family: "Poppins", sans-serif;
             font-size: 20px;
         }
         p{
             font-family: 'Rubik', sans-serif;
-            color: #0f3232;
+            color: var(--bg-secondary-color);
             font-size: 15px;
         }
     }   

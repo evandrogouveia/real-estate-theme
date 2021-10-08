@@ -13,13 +13,13 @@
             a{
                 text-decoration: none;
                 h3{
-                    color: #201B18;
+                    color: var(--bg-black-color);
                     font-family: "Poppins", sans-serif;
                     font-weight: 600;
                     font-size: 24px;
                     margin-bottom: 10px;
                     &:hover{
-                        color: #173a3a;
+                        color: var(--bg-secondary-color);
                     }
                 }
             }
@@ -28,7 +28,7 @@
                 margin-bottom: 25px;
                 i{
                     margin-right: 5px;
-                    color: #228625;
+                    color: var(--bg-primary-color-hover);
                     font-size: 20px;
                     position: relative;
                     top: 2px;

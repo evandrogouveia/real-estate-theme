@@ -7,7 +7,7 @@
             height: 50px;
             &:focus{
                 box-shadow: none;
-                border: 1px solid #31af36;
+                border: 1px solid var(--bg-primary-color);
             }
             &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
                 font-family: "Poppins", sans-serif;
@@ -27,13 +27,13 @@
             }
         }
         .btn{
-            background-color: #31af36;
-            color: #ffffff;
+            background-color: var(--bg-primary-color);
+            color: var(--bg-white-color);
             border-top-right-radius: 6px;
             border-bottom-right-radius: 6px;
             width: 50px;
             &:hover{
-                background-color: #228625;
+                background-color: var(--bg-primary-color-hover);
             }
             i{
                 font-size: 25px;
@@ -49,13 +49,13 @@
             font-family: "Poppins", sans-serif;
             font-weight: 600;
             font-size: 23px;
-            color:#201B18;
+            color: var(--bg-black-color);
             margin-bottom: 20px;
             &:after{
                 content: "";
                 width: 60px;
                 height: 3px;
-                background: #228625;
+                background: var(--bg-primary-color-hover);
                 display: block;
                 margin-top: 10px;
             }
@@ -70,7 +70,7 @@
                 text-decoration: none;
                 
                 &:hover{
-                    color: #0f3232;
+                    color: var(--bg-secondary-color);
                 }
             }
         }

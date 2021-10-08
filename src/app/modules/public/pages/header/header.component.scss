@@ -37,7 +37,7 @@ header{
                 position: relative;
                 top: 4px;
                 &:hover{
-                    color: #ffffff;
+                    color: var(--bg-white-color);
                 }
             }
         }
@@ -47,7 +47,7 @@ header{
         height: 90px;
         transition: 0.3s height ease-in-out;
         &.fixed-top{
-            background-color: #0f3232;
+            background-color: var(--bg-secondary-color);
             height: 65px;
         }
         .navbar-brand{
@@ -64,19 +64,10 @@ header{
                 font-family: 'Rubik', sans-serif;
                 font-size: 18px;
                 font-weight: 400;
-                color: #ffffff;
+                color: var(--bg-white-color);
                 transition: all .2s;
                 &:hover, &.active{
-                    color: #31af36;
-                   /* &:after{
-                        content: "";
-                        width: 100%;
-                        height: 3px;
-                        background: #31af36;
-                        position: relative;
-                        display: block;
-                        top: 2px;
-                    }*/
+                    color: var(--bg-primary-color);
                 }
                 
             }
@@ -84,29 +75,6 @@ header{
         .form-inline{
             i{
                 font-size: 25px;
-            }
-        }
-        .whats-contact{
-            padding:0px 0px 0px 25px;
-            margin-left: 25px;
-            border-left: 1px solid #ededed;
-            i{
-                font-size: 38px;
-                color: #201B18;
-            }
-            .number{
-                margin-left: 10px;
-                p{
-                    margin: 0;
-                    color: #5e524c;
-                    font-size: 16px;
-                    font-weight: 400;
-                }
-                h5{
-                    font-weight: 600;
-                    color: #201B18;
-                    font-size: 20px;
-                }
             }
         }
     }
@@ -133,7 +101,7 @@ header{
       position: fixed;
       top: 0;
       z-index: 100;
-      background-color: #ffffff;
+      background-color: var(--bg-white-color);
       width: 290px;
       box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.16);
       -webkit-transition: margin .25s ease-out;

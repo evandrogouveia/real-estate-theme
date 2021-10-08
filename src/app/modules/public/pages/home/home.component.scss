@@ -5,7 +5,7 @@
     padding-bottom: 60px;
     z-index: 5;
     position: relative;
-    background: #f7f7f7;
+    background: var(--bg-grey-white-color-7);
     .wrap-filter{
         position: relative;
         top: -51px;
@@ -14,19 +14,19 @@
             border-radius: 30px;
         }
         .box-filter{
-            background-color: #0f3232;
+            background-color: var(--bg-secondary-color);
             padding: 30px 10px 13px;
             i{
                 font-size: 50px;
                 margin-bottom: 18px;
-                color: #201B18;
+                color: var(--bg-black-color);
             }
             h4{
                 font-size: 18px;
                 font-weight: 600;
                 font-family: "Rubik", sans-serif;
                 margin-bottom: 20px;
-                color: #201B18;
+                color: var(--bg-black-color);
             }
             p{
                 font-size: 14px;
@@ -39,10 +39,10 @@
                 font-family: "Rubik", sans-serif;
                 font-size: 14px;
                 font-weight: 700;
-                color: #201B18;
+                color: var(--bg-black-color);
                 transition: all .2s;
                 &:hover{
-                    color: #a38851;
+                    color: var(--bg-primary-color);
                 }
             }
             &:nth-child(1){
@@ -59,12 +59,12 @@
                 height: 45px;
                 &:focus{
                     box-shadow: none;
-                    border: 2px solid #31af36;
+                    border: 2px solid var(--bg-primary-color);
                 }
             }
             .btn-filter{
-                background: #31af36;
-                color: #ffffff;
+                background: var(--bg-primary-color);
+                color: var(--bg-white-color);
                 font-size: 15px;
                 font-weight: 600;
                 text-transform: uppercase;
@@ -74,7 +74,7 @@
                 height: 45px;
                 transition: all 0.2s;
                 &:hover{
-                    background: #228625;
+                    background: var(--bg-primary-color-hover);
                 }
             }
         }
@@ -86,7 +86,7 @@
             font-size: 30px;
             font-family: "Rubik", sans-serif;
             font-weight: 600;
-            color: #0f3232;
+            color: var(--bg-secondary-color);
             margin-bottom: 5px;
         }
         p{
@@ -94,29 +94,13 @@
             color: #737477;
             margin-bottom: 40px;
         }
-        a{
-            background: #a38851;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            text-decoration: none;
-            padding: 15px 35px;
-            border-radius: 30px;
-            text-align: center;
-            transition: all .2s;
-            
-            &:hover{
-                background: #806636;
-            }
-        }
     }
     .wrap-icons{
         text-align: center;
         .icon-circle{
             width: 115px;
             height: 115px;
-            border: 10px solid #31af36;
+            border: 10px solid var(--bg-primary-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -124,12 +108,12 @@
             margin: 0 auto 20px;
             i{
                 font-size: 60px;
-                color: #0f3232;
+                color: var(--bg-secondary-color);
             }
         }
         h4{
             font-size: 20px;
-            color: #31af36;
+            color: var(--bg-primary-color);
             font-weight: 600;
         }
         p{
@@ -140,8 +124,8 @@
 }
 .nav-link{
     &.view-all{
-        background: #31af36;
-        color: #ffffff;
+        background: var(--bg-primary-color);
+        color: var(--bg-white-color);
         font-size: 15px;
         font-weight: 600;
         text-transform: uppercase;
@@ -154,7 +138,7 @@
         align-items: center;
         justify-content: center;
         &:hover{
-            background: #228625;
+            background: var(--bg-primary-color-hover);
         }
     }
 }
@@ -177,7 +161,7 @@
         margin-top: 55px;
         font-family: "Poppins", sans-serif;
         font-size: 35px;
-        color: #ffffff;
+        color: var(--bg-white-color);
         position: relative;
         &:before{
             content: "";
@@ -201,14 +185,14 @@
             right: 0;
             margin: auto;
             display: block;
-            background-color: #31af36;
+            background-color: var(--bg-primary-color);
         }
     }
     h3{
         font-size: 25px;
         font-family: "Rubik", sans-serif;
         font-weight: 300;
-        color: #ffffff;
+        color: var(--bg-white-color);
         position: relative;
         top: 40px;
     }
@@ -222,14 +206,14 @@
             font-size: 16px;
             text-transform: uppercase;
             font-weight: 500;
-            color: #228625;
+            color: var(--bg-primary-color-hover);
             font-family: "Rubik", sans-serif;
         }
         h3{
             font-size: 35px;
             font-family: "Rubik", sans-serif;
             font-weight: 600;
-            color: #0f3232;
+            color: var(--bg-secondary-color);
             margin-bottom: 70px;
         }
     }
@@ -250,7 +234,7 @@
         
         h5{
             font-family: "Rubik", sans-serif; 
-            color: #201B18;
+            color: var(--bg-black-color);
         }
         p{
             font-size: 16px;
@@ -261,7 +245,7 @@
             i{
                 margin-right: 5px;
                 font-size: 20px;
-                color: #31af36;
+                color: var(--bg-primary-color);
                 position: relative;
                 top: -2px;
             }
@@ -271,8 +255,8 @@
             }
         }
         .btn-readmore{
-            color: #31af36;
-            background-color: #ffffff;
+            color: var(--bg-primary-color);
+            background-color: var(--bg-white-color);
             text-transform: uppercase;
             font-family: "Rubik", sans-serif;
             font-weight: 600;
@@ -285,7 +269,7 @@
                top: 6px;
             }
             &:hover{
-                color: #228625;
+                color: var(--bg-primary-color-hover);
                 transform: scale(1.03);
             }
         }
