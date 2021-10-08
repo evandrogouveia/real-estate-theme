@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 
@@ -27,7 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     AngularFireAuthModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
-    })
+    }),
   ],
   providers: [
     {

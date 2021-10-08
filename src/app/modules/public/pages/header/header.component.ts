@@ -12,30 +12,36 @@ export class HeaderComponent implements OnInit {
   scrollPosition;
   toggled = true;
   retract = 'toggled';
-  topbarData:any = [];
-  navbarData:any = [];
+  topbarData: any = [];
+  navbarData: any = [];
+  inputLoading = false;
 
   constructor(
-    private renderer: Renderer2, 
+    private renderer: Renderer2,
     private headerService: HeaderService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     //FIXAR HEADER
     this.renderer.listen(window, 'scroll', ($event) => {
       this.scrollPosition = window.scrollY;
     });
+    this.inputLoading = true;
+    this.headerService.getTopbar().subscribe(data => {
+      if (data) {
+        setTimeout(() => {
+          this.inputLoading = false;
+        }, 1500)
+      } 
+      this.topbarData = data
+    });
 
-     this.headerService.getTopbar().subscribe(data => {
-       this.topbarData = data;
-     });
-
-     this.headerService.getNavbar().subscribe(data => {
-       this.navbarData = data;
-     });
+    this.headerService.getNavbar().subscribe(data => {
+      this.navbarData = data;
+    });
   }
 
-  toggleSidebar(){
+  toggleSidebar() {
     this.toggled = !this.toggled;
     if (this.toggled === false) {
       this.retract = '';

@@ -138,6 +138,26 @@
         }
     }
 }
+.nav-link{
+    &.view-all{
+        background: #31af36;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-radius: 30px;
+        margin: 0px auto 70px;
+        width: 28%;
+        height: 45px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover{
+            background: #228625;
+        }
+    }
+}
 
 .section-row-testimony{
     display: block;

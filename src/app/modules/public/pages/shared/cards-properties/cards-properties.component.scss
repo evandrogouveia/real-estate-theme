@@ -110,7 +110,7 @@
                     align-items: center;
                     justify-content: space-between;
                     i{
-                        color: #228625;
+                        color: #0f3232;
                         font-size: 20px;
                     }
                     span{
@@ -122,25 +122,5 @@
             }
         }
         
-    }
-    .nav-link{
-        &.view-all{
-            background: #31af36;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            border-radius: 30px;
-            margin: 40px auto 0;
-            width: 28%;
-            height: 45px;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            &:hover{
-                background: #228625;
-            }
-        }
     }
 }
