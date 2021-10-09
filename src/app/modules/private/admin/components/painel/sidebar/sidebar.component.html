@@ -2,14 +2,14 @@
 <div id="sidebar-wrapper" [ngClass]="retract">
   <div class="list-group list-group-flush">
     <div class="wrap-menu">
-      <i (click)="home.click()" class="icon-internal-home"></i>
+      <i (click)="home.click()" class="bx bx-home"></i>
       <a #home routerLink="/private/admin/home" routerLinkActive="active" class="list-group-item">
         <span>Home</span>
       </a>
     </div>
 
     <div class="wrap-menu">
-      <i class="icon-posts" (click)="toggleSidebar()"></i>
+      <i class="bx bx-pin" (click)="toggleSidebar()"></i>
       <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedA = !isCollapsedA"
         [attr.aria-expanded]="!isCollapsedA" aria-controls="collapsePosts" [ngClass]="{'active' : isCollapsedA}">
         <span>Posts</span>
@@ -30,9 +30,14 @@
         <span>Categorias</span>
       </a>
     </div>
-
     <div class="wrap-menu">
-      <i (click)="comments.click()" class="icon-message-inline"></i>
+      <i (click)="properties.click()" class="bx bx-building-house"></i>
+      <a #properties routerLink="/private/admin/properties" routerLinkActive="active" class="list-group-item">
+        <span>Imóveis</span>
+      </a>
+    </div>
+    <div class="wrap-menu">
+      <i (click)="comments.click()" class="bx bx-message-rounded"></i>
       <!--small *ngIf="qtdCommentsPending > 0">{{qtdCommentsPending}}</small-->
       <a #comments routerLink="/private/admin/comments" routerLinkActive="active" class="list-group-item">
         <span>Comentários</span>
@@ -40,7 +45,7 @@
     </div>
 
     <div class="wrap-menu">
-      <i class="icon-user" (click)="toggleSidebar()"></i>
+      <i class="bx bx-user" (click)="toggleSidebar()"></i>
       <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedB = !isCollapsedB"
         [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseUsers" [ngClass]="{'active' : isCollapsedB}">
         <span>Usuários</span>
@@ -58,7 +63,7 @@
     </div>
 
     <div class="wrap-menu">
-      <i class="icon-theme" (click)="toggleSidebar()"></i>
+      <i class="bx bx-paint" (click)="toggleSidebar()"></i>
       <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedC = !isCollapsedC"
         [attr.aria-expanded]="!isCollapsedC" aria-controls="collapsePersonalize" [ngClass]="{'active' : isCollapsedC}">
         <span>Personalizar</span>

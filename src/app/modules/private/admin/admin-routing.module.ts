@@ -10,6 +10,7 @@ import { HomeComponent } from './components/painel/home/home.component';
 import { UsersComponent } from './components/users/users.component';
 import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
 import { AuthGuardService } from '../login/auth/auth-guard.service';
+import { PropertiesComponent } from './components/properties/properties.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path: 'add-category', component: CategoryComponent},
       {path: 'edit-category/:id', component: CategoryComponent},
 
+      {path: 'properties', component: PropertiesComponent},
       {path: 'comments', component: CommentsComponent},
 
       {path: 'users', component: UsersComponent},

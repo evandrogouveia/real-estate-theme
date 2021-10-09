@@ -39,7 +39,9 @@ registerLocaleData(localePt);
     UsersComponent, 
     EditProfileComponent, 
     ListPostsComponent, 
-    AddUserComponent, ModalCommentsComponent, PropertiesComponent,
+    AddUserComponent, 
+    ModalCommentsComponent, 
+    PropertiesComponent,
     
   ],
   imports: [
