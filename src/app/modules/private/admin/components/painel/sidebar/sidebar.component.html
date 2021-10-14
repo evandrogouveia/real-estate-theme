@@ -56,8 +56,8 @@
       <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
         <span>Usuários</span>
       </a>
-      <a routerLink="/private/admin/edit-profile/{{(currentUser$ | async)?.id}}" routerLinkActive="active" class="list-group-item"
-        (click)="toggleSidebar()">
+      <a routerLink="/private/admin/edit-profile/{{(currentUser$ | async)?.id}}" routerLinkActive="active"
+        class="list-group-item" (click)="toggleSidebar()">
         <span>Meu perfil</span>
       </a>
     </div>
@@ -104,3 +104,4 @@
   </div>
 
 </div><!-- /#sidebar-wrapper -->
+

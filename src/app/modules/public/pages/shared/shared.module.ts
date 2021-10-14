@@ -5,6 +5,7 @@ import { ErrorInputComponent } from './error-input/error-input.component';
 import { CardsPropertiesComponent } from './cards-properties/cards-properties.component';
 import { LoadingComponent } from './loading/loading.component';
 import { NgxLoadingModule,  ngxLoadingAnimationTypes } from 'ngx-loading';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
 
@@ -18,6 +19,7 @@ import { NgxLoadingModule,  ngxLoadingAnimationTypes } from 'ngx-loading';
   ],
   imports: [
     CommonModule,
+    NgxSkeletonLoaderModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes
     })
@@ -27,6 +29,7 @@ import { NgxLoadingModule,  ngxLoadingAnimationTypes } from 'ngx-loading';
     ErrorInputComponent,
     CardsPropertiesComponent,
     LoadingComponent,
+    NgxSkeletonLoaderModule,
     NgxLoadingModule
   ]
 })
