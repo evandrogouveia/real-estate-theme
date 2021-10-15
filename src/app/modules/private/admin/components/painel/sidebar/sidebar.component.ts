@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
   isCollapsedA = false;
   isCollapsedB = false;
   isCollapsedC = false;
+  isCollapsedD = false;
 
   currentUser$: Observable<User>;
 
@@ -35,5 +36,4 @@ export class SidebarComponent implements OnInit {
   toggleSidebar() {
     this.sidebarService.toggleNavbar();
   }
-  
 }

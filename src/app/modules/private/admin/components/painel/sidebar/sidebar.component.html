@@ -31,11 +31,23 @@
       </a>
     </div>
     <div class="wrap-menu">
-      <i (click)="properties.click()" class="bx bx-building-house"></i>
-      <a #properties routerLink="/private/admin/properties" routerLinkActive="active" class="list-group-item">
+      <i class="bx bx-building-house" (click)="toggleSidebar()"></i>
+      <a #properties href="javascript:void(0);" class="list-group-item" (click)="isCollapsedB = !isCollapsedB"
+      [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseProperties" [ngClass]="{'active' : isCollapsedB}">
         <span>Imóveis</span>
+        <span class="down-arrow"></span>
       </a>
     </div>
+    <div *ngIf="!retract" id="collapseProperties" class="collapse-menu" [collapse]="!isCollapsedB" [isAnimated]="true">
+      <a routerLink="/private/admin/list-property" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
+        <span>Imóveis</span>
+      </a>
+      <a routerLink="/private/admin/add-property" routerLinkActive="active"
+        class="list-group-item" (click)="toggleSidebar()">
+        <span>Adicionar Imóvel</span>
+      </a>
+    </div>
+
     <div class="wrap-menu">
       <i (click)="comments.click()" class="bx bx-message-rounded"></i>
       <!--small *ngIf="qtdCommentsPending > 0">{{qtdCommentsPending}}</small-->
@@ -46,13 +58,13 @@
 
     <div class="wrap-menu">
       <i class="bx bx-user" (click)="toggleSidebar()"></i>
-      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedB = !isCollapsedB"
-        [attr.aria-expanded]="!isCollapsedB" aria-controls="collapseUsers" [ngClass]="{'active' : isCollapsedB}">
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedC = !isCollapsedC"
+        [attr.aria-expanded]="!isCollapsedC" aria-controls="collapseUsers" [ngClass]="{'active' : isCollapsedC}">
         <span>Usuários</span>
         <span class="down-arrow"></span>
       </a>
     </div>
-    <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedB" [isAnimated]="true">
+    <div *ngIf="!retract" id="collapseUsers" class="collapse-menu" [collapse]="!isCollapsedC" [isAnimated]="true">
       <a routerLink="/private/admin/users" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
         <span>Usuários</span>
       </a>
@@ -64,13 +76,13 @@
 
     <div class="wrap-menu">
       <i class="bx bx-paint" (click)="toggleSidebar()"></i>
-      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedC = !isCollapsedC"
-        [attr.aria-expanded]="!isCollapsedC" aria-controls="collapsePersonalize" [ngClass]="{'active' : isCollapsedC}">
+      <a href="javascript:void(0);" class="list-group-item" (click)="isCollapsedD = !isCollapsedD"
+        [attr.aria-expanded]="!isCollapsedD" aria-controls="collapsePersonalize" [ngClass]="{'active' : isCollapsedD}">
         <span>Personalizar</span>
         <span class="down-arrow"></span>
       </a>
     </div>
-    <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedC" [isAnimated]="true">
+    <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedD" [isAnimated]="true">
       <a routerLink="/private/admin/edit-theme/edit-areas" routerLinkActive="active" class="list-group-item"
         (click)="toggleSidebar()">
         <span>Áreas de atuação</span>

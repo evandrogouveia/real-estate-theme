@@ -23,7 +23,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { ModalCommentsComponent } from './components/blog/comments/modal-comments/modal-comments.component';
-import { PropertiesComponent } from './components/properties/properties.component';
+import { AddPropertyComponent } from './components/properties/add-property/add-property.component';
+import { ListPropertyComponent } from './components/properties/list-property/list-property.component';
+import { CategoryPropertyComponent } from './components/properties/category-property/category-property.component';
 
 registerLocaleData(localePt);
 
@@ -41,8 +43,9 @@ registerLocaleData(localePt);
     ListPostsComponent, 
     AddUserComponent, 
     ModalCommentsComponent, 
-    PropertiesComponent,
-    
+    AddPropertyComponent, 
+    ListPropertyComponent, 
+    CategoryPropertyComponent,
   ],
   imports: [
     CommonModule,
