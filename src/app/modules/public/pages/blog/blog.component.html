@@ -9,7 +9,7 @@
                     <div class="block-post" *ngFor="let p of posts$ | async">
                         <div class="row">
                             <div class="col-lg-6">
-                                <ngx-skeleton-loader appearance="line" [theme]="{width: '100%', height: '85%'}"></ngx-skeleton-loader>
+                                <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonImage" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
                                 <a routerLink="single-blog/{{p.id}}">
                                     <img src="{{p.highlightedImage}}">
                                 </a>
@@ -17,9 +17,11 @@
                             <div class="col-lg-6">
                                 <div class="entry-header">
                                     <a routerLink="single-blog/{{p.id}}">
+                                        <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonTitle" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
                                         <h3>{{(p.titlePost.length > 45) ? (p.titlePost | slice:0:45) + ' ...' : (p.titlePost)}}</h3>
                                     </a>
                                     <div class="entry-date">
+                                        <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonDate" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
                                         <i class='bx bx-calendar'></i>
                                         <span>
                                             {{p.publicationDate.toDate() | date: 'dd'}} de 
@@ -29,6 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="entry-footer">
+                                    <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonDesc"  *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
                                     <p>{{(p.descriptionPost.length > 225) ? (p.descriptionPost | slice:0:225) + ' ...' : (p.descriptionPost)}}</p>
                                 </div>
                             </div>

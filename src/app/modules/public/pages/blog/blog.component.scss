@@ -12,6 +12,8 @@
         .entry-header{
             a{
                 text-decoration: none;
+                position: relative;
+                display: block;
                 h3{
                     color: var(--bg-black-color);
                     font-family: "Poppins", sans-serif;
@@ -26,6 +28,7 @@
             
             .entry-date{
                 margin-bottom: 25px;
+                position: relative;
                 i{
                     margin-right: 5px;
                     color: var(--bg-primary-color-hover);
@@ -41,6 +44,7 @@
             }
         }
         .entry-footer{
+            position: relative;
             p{
                 font-family: 'Rubik', sans-serif;
                 color: #6c6c74;

@@ -2,7 +2,7 @@
     background: url('/assets/img/entry-image.jpg') no-repeat;
     background-size: cover;
     background-position: center;
-    height: 200px;
+    height: 160px;
     position: relative;
     &:after{
         content: "";
@@ -13,7 +13,7 @@
         top: 0;
     }
     .texts{
-        height: 200px;
+        height: 160px;
         h2{
             font-family: "Rubik", sans-serif;
             color: var(--bg-white-color);
