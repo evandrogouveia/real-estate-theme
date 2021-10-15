@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { PropertiesRoutingModule } from './properties-routing.module';
 import { PropertiesComponent } from './properties.component';
 import { SharedModule } from '../shared/shared.module';
+import { SinglePropertyComponent } from './components/single-property/single-property.component';
 
 
 @NgModule({
-  declarations: [PropertiesComponent],
+  declarations: [PropertiesComponent, SinglePropertyComponent],
   imports: [
     CommonModule,
     PropertiesRoutingModule,

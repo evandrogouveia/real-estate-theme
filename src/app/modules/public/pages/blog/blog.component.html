@@ -18,7 +18,7 @@
                                 <div class="entry-header">
                                     <a routerLink="single-blog/{{p.id}}">
                                         <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonTitle" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
-                                        <h3>{{(p.titlePost.length > 45) ? (p.titlePost | slice:0:45) + ' ...' : (p.titlePost)}}</h3>
+                                        <h3>{{(p.titlePost.length > 40) ? (p.titlePost | slice:0:40) + ' ...' : (p.titlePost)}}</h3>
                                     </a>
                                     <div class="entry-date">
                                         <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonDate" *ngIf="!(posts$ | async)"></ngx-skeleton-loader>
