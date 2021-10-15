@@ -28,7 +28,7 @@ const routes: Routes = [
       {path: 'edit-category/:id', component: CategoryComponent},
 
       {path: 'add-property', component: AddPropertyComponent},
-      {path: 'list-property', component: ListPropertyComponent},
+      {path: 'list-properties', component: ListPropertyComponent},
 
       {path: 'comments', component: CommentsComponent},
 
