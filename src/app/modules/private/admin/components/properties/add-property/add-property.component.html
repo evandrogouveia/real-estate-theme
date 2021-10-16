@@ -50,12 +50,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="name">Localização</label>
+                        <input type="text" class="form-control" id="locationProperty" formControlName="locationProperty">
+                    </div>
                     <p *ngIf="!this.isAddMode" class="published-info">Publicado em:
                         <strong>
-                            {{publicationDate?.toDate() | date: 'dd'}} de
-                            {{publicationDate?.toDate() | date: 'MMMM'}} de
-                            {{publicationDate?.toDate() | date: 'YYYY'}} às
-                            {{publicationDate?.toDate() | date: 'HH:mm'}}
+                            {{publicationDateProperty?.toDate() | date: 'dd'}} de
+                            {{publicationDateProperty?.toDate() | date: 'MMMM'}} de
+                            {{publicationDateProperty?.toDate() | date: 'YYYY'}} às
+                            {{publicationDateProperty?.toDate() | date: 'HH:mm'}}
                         </strong>
                     </p>
                 </div>
