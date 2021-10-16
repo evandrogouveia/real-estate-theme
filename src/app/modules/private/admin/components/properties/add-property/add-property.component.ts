@@ -17,11 +17,11 @@ import { PropertyService } from '../services/property.service';
 })
 export class AddPropertyComponent implements OnInit {
 
-  highlightedImage = 'assets/img/placeholder.jpg';
+  highlightedImageProperty = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
   loading: boolean = false;
   currentDate = new Date();
-  publicationDate;
+  publicationDateProperty;
 
   propertyId: string;
   isAddMode: boolean;
@@ -60,10 +60,10 @@ export class AddPropertyComponent implements OnInit {
       post.subscribe(data => {
 
         this.addPropertyForm.patchValue(data);
-        this.publicationDate = data.publicationDateProperty;
+        this.publicationDateProperty = data.publicationDateProperty;
 
         if(data.highlightedImageProperty)
-          this.highlightedImage = data.highlightedImageProperty;
+          this.highlightedImageProperty = data.highlightedImageProperty;
       });
     }
   }
@@ -71,11 +71,11 @@ export class AddPropertyComponent implements OnInit {
   showPreviewImage(event: any) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.highlightedImage = e.target.result;
+      reader.onload = (e: any) => this.highlightedImageProperty = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      this.highlightedImage = 'assets/img/placeholder.jpg';
+      this.highlightedImageProperty = 'assets/img/placeholder.jpg';
       this.selectedImage = null;
     }
   }
@@ -99,9 +99,9 @@ export class AddPropertyComponent implements OnInit {
         this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
-              this.addPropertyForm.value.highlightedImage = url;
+              this.addPropertyForm.value.highlightedImageProperty = url;
               this.addPropertyForm.value.descriptionProperty = description;
-              this.addPropertyForm.value.publicationDate = this.currentDate;
+              this.addPropertyForm.value.publicationDateProperty = this.currentDate;
               this.propertyservice.addProperty(property).then(() => {
                 this.loading = false;
                 this.toastr.success('Propriedade adicionada com sucesso');
@@ -111,13 +111,13 @@ export class AddPropertyComponent implements OnInit {
           })
         ).subscribe();
       } else {
-        this.addPropertyForm.value.highlightedImage = this.highlightedImage;
+        this.addPropertyForm.value.highlightedImageProperty = this.highlightedImageProperty;
         this.addPropertyForm.value.descriptionProperty = description;
-        this.addPropertyForm.value.publicationDate = this.currentDate;
+        this.addPropertyForm.value.publicationDateProperty = this.currentDate;
         this.addPropertyForm.value.comments = [];
         this.propertyservice.addProperty(property).then(() => {
           this.loading = false;
-          this.toastr.success('Propriedade adicionada com sucesso');
+          this.toastr.success('Imóvel adicionado com sucesso');
         });
         this.router.navigateByUrl('/private/admin/list-posts');
       }
@@ -137,7 +137,7 @@ export class AddPropertyComponent implements OnInit {
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '35rem',
+    height: '15rem',
     minHeight: '1rem',
     placeholder: 'Digite o texto aqui...',
     translate: 'no',
