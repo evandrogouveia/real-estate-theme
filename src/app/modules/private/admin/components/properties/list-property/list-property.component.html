@@ -1,1 +1,57 @@
-<p>list-property works!</p>
+<section>
+    <div class="content-list-posts">
+        <div class="header-post">
+            <div class="wrap">
+              <h4>Imóveis</h4>
+              <a class="nav-link" routerLink="/private/admin/add-property">Adicionar novo</a>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Pesquisar imóveis" [(ngModel)]="term">
+              <i class="icon-search"></i>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                        <div class="form-check">
+                            <input type="checkbox">
+                        </div>
+                    </th>
+                    <th scope="col">Título</th>
+                    <!--th scope="col">Categorias</th-->
+                    <th scope="col">Data</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let p of (properties$ | async) | filter:term">
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox">
+                        </div>
+                    </td>
+                    <td><a routerLink="/private/admin/edit-posts/{{p.id}}">{{(p.titleProperty.length > 40) ? (p.titleProperty | slice:0:40) + ' ...' : (p.titleProperty)}}</a></td>
+                    <!--td>{{p.categories.join(', ')}}</td-->
+                    <td>Publicado {{p.publicationDate.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDate.toDate() | date: 'HH:mm'}}</td>
+                    <td>
+                        <a routerLink="/private/admin/edit-posts/{{p.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
+                        <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
+                    </td>
+                  </tr>
+                  <tr *ngIf="(properties$ | async)?.length === 0">
+                    <td class="empty-user" colspan="6">
+                      <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                    </td>
+                  </tr>
+                </tbody>
+               
+              </table>
+        </div>
+        
+    </div>
+</section>
+
+

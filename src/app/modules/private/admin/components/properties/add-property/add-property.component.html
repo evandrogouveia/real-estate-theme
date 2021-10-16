@@ -1,17 +1,17 @@
 <section>
-    <div class="content-add-posts">
-        <div class="header-post">
+    <div class="content-add-property">
+        <div class="header-property">
             <div class="wrap">
                 <h4>{{!this.isAddMode ? 'Editar Imóvel' : 'Adicionar Imóvel'}}</h4>
             </div>
         </div>
 
-        <form class="form-add-post" [formGroup]="addPropertyForm" (ngSubmit)="submit()">
+        <form class="form-add-property" [formGroup]="addPropertyForm" (ngSubmit)="submit()">
             <div class="row">
                 <div class="col-lg-9">
 
                     <div class="form-group">
-                        <label for="name">Adicionar título</label>
+                        <label for="name">Título</label>
                         <input type="text" class="form-control" id="name" formControlName="titleProperty">
                     </div>
                     <div class="form-group">
