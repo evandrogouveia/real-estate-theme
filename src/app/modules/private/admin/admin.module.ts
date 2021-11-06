@@ -26,6 +26,7 @@ import { ModalCommentsComponent } from './components/blog/comments/modal-comment
 import { AddPropertyComponent } from './components/properties/add-property/add-property.component';
 import { ListPropertyComponent } from './components/properties/list-property/list-property.component';
 import { CategoryPropertyComponent } from './components/properties/category-property/category-property.component';
+import { AgmCoreModule } from '@agm/core';
 
 registerLocaleData(localePt);
 
@@ -55,7 +56,11 @@ registerLocaleData(localePt);
     NgxBootstrapModule,
     AngularEditorModule,
     HttpClientModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCzC66os6ra-4rKS59FfISfCfxkK3YM6oo',
+      libraries: ['places']
+    })
   ],
   providers: [
     {

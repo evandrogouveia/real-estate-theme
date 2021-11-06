@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 
@@ -9,10 +9,9 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+
   show = false;
   type = 'password';
-
-
 
   clientForm = this.fb.group({
     id: [undefined],
@@ -26,8 +25,6 @@ export class AdminComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
 }

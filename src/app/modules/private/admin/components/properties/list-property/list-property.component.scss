@@ -90,6 +90,10 @@
                 &:hover{
                     color:var(--bg-primary-color-hover);
                 }
+                img {
+                    width: 90px;
+                    border-radius: 5px;
+                }
             }
             &:nth-child(1){
                 width: 25px;

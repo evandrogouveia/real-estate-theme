@@ -14,7 +14,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxLoadingModule } from 'ngx-loading';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

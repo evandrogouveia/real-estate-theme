@@ -20,8 +20,10 @@
                             <input type="checkbox">
                         </div>
                     </th>
+                    <th scope="col">Miniatura</th>
                     <th scope="col">Título</th>
                     <!--th scope="col">Categorias</th-->
+                    <th scope="col">Preço</th>
                     <th scope="col">Data</th>
                     <th scope="col">Ações</th>
                   </tr>
@@ -33,8 +35,14 @@
                             <input type="checkbox">
                         </div>
                     </td>
+                    <td>
+                      <a routerLink="/private/admin/edit-posts/{{p.id}}">
+                        <img src="{{p.highlightedImageProperty}}">
+                      </a>
+                    </td>
                     <td><a routerLink="/private/admin/edit-posts/{{p.id}}">{{(p.titleProperty.length > 40) ? (p.titleProperty | slice:0:40) + ' ...' : (p.titleProperty)}}</a></td>
                     <!--td>{{p.categories.join(', ')}}</td-->
+                    <td>{{p.priceProperty}}</td>
                     <td>Publicado {{p.publicationDateProperty.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDateProperty.toDate() | date: 'HH:mm'}}</td>
                     <td>
                         <a routerLink="/private/admin/edit-property/{{p.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
