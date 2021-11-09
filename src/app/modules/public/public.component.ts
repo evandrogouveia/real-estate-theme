@@ -11,6 +11,7 @@ export class PublicComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  /* Adiciona ou remove a classe "no-home" caso esteja em página diferente da Home */
   ngOnInit(): void {
     let currentRoute = this.router.routerState.snapshot.url;
     this.router.events.pipe(

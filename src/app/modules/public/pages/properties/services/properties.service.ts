@@ -1,9 +1,20 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Property } from 'src/app/modules/private/admin/components/properties/models/property.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertiesService {
 
-  constructor() { }
+  private propertiesCollection: AngularFirestoreCollection<Property> = this.afs.collection('properties', ref => {
+    return ref.orderBy('titleProperty', 'desc');
+  });
+
+  constructor(private afs:AngularFirestore) { }
+
+  //LISTAR PROPRIEDADES
+  getProperties(){
+    return this.propertiesCollection.valueChanges();
+  }
 }
