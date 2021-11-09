@@ -7,9 +7,7 @@ import { Property } from 'src/app/modules/private/admin/components/properties/mo
 })
 export class PropertiesService {
 
-  private propertiesCollection: AngularFirestoreCollection<Property> = this.afs.collection('properties', ref => {
-    return ref.orderBy('titleProperty', 'desc');
-  });
+  private propertiesCollection: AngularFirestoreCollection<Property> = this.afs.collection('properties');
 
   constructor(private afs:AngularFirestore) { }
 
