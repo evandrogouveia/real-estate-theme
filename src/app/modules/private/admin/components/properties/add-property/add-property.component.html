@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <div class="form-group">
                             <label>Localização</label>
-                            <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+                            <input type="text" class="form-control" (change)="$event.preventDefault()"
                                 autocorrect="off" autocapitalize="off"
                                 spellcheck="off" type="text" #search>
                         </div>
@@ -66,9 +66,10 @@
                                 (dragEnd)="markerDragEnd($event)"></agm-marker>
                         </agm-map>
 
-                        <h5>Address: {{address}}</h5>
-                        <div>Latitude: {{latitude}}</div>
-                        <div>Longitude: {{longitude}}</div>
+                        <div class="text-address">
+                            <label>Endereço</label>
+                            <input type="text" class="form-control" disabled value="{{address}}">
+                        </div>
                     </div>
 
                     <p *ngIf="!this.isAddMode" class="published-info">Publicado em:

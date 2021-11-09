@@ -28,6 +28,9 @@ export class AddPropertyComponent implements OnInit {
   longitude: number;
   zoom:number;
   address: string;
+  city: string;
+  uf: string;
+
   private geoCoder;
 
   @ViewChild('search')
@@ -43,6 +46,8 @@ export class AddPropertyComponent implements OnInit {
     descriptionProperty: [''],
     highlightedImageProperty: [''],
     locationProperty: [''],
+    cityProperty: [''],
+    ufProperty: [''],
     categoriesProperty: [''],
     publicationDateProperty: [''],
     qtdBedrooms: [''],
@@ -79,6 +84,7 @@ export class AddPropertyComponent implements OnInit {
       });
     }
     
+    /* INICIALIZAR DADOS DO MAPA */
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
@@ -98,6 +104,7 @@ export class AddPropertyComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.zoom = 12;
+          this.getAddress(this.latitude, this.longitude);
         });
       });
     });
@@ -137,6 +144,9 @@ export class AddPropertyComponent implements OnInit {
               this.addPropertyForm.value.highlightedImageProperty = url;
               this.addPropertyForm.value.descriptionProperty = description;
               this.addPropertyForm.value.publicationDateProperty = this.currentDate;
+              this.addPropertyForm.value.locationProperty = this.address;
+              this.addPropertyForm.value.cityProperty = this.city;
+              this.addPropertyForm.value.ufProperty = this.uf;
               this.propertyservice.addProperty(property).then(() => {
                 this.loading = false;
                 this.toastr.success('Propriedade adicionada com sucesso');
@@ -149,6 +159,9 @@ export class AddPropertyComponent implements OnInit {
         this.addPropertyForm.value.highlightedImageProperty = this.highlightedImageProperty;
         this.addPropertyForm.value.descriptionProperty = description;
         this.addPropertyForm.value.publicationDateProperty = this.currentDate;
+        this.addPropertyForm.value.locationProperty = this.address;
+        this.addPropertyForm.value.cityProperty = this.city;
+        this.addPropertyForm.value.ufProperty = this.uf;
         this.addPropertyForm.value.comments = [];
         this.propertyservice.addProperty(property).then(() => {
           this.loading = false;
@@ -168,7 +181,7 @@ export class AddPropertyComponent implements OnInit {
     }
   }
 
-  // Get Current Location Coordinates
+  // OBTER CORDENADAS DE LOCALIZAÇÃO
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -180,6 +193,7 @@ export class AddPropertyComponent implements OnInit {
     }
   }
 
+   // OBTER EVENTO DO MARCADOR
   markerDragEnd($event: MouseEvent) {
     console.log($event);
     this.latitude = $event.coords.lat;
@@ -187,16 +201,18 @@ export class AddPropertyComponent implements OnInit {
     this.getAddress(this.latitude, this.longitude);
   }
 
+  // OBTER ENDEREÇO
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
+        console.log(results[0].address_components[4])
         if (results[0]) {
           this.zoom = 12;
           this.address = results[0].formatted_address;
+          this.city = results[0].address_components[4].long_name;
+          this.uf = results[0].address_components[4].short_name;
         } else {
-          window.alert('No results found');
+          window.alert('Não encontramos nenhum resultado');
         }
       } else {
         window.alert('Geocoder failed due to: ' + status);

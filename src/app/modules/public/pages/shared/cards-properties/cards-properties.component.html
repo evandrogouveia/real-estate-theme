@@ -11,14 +11,14 @@
       <div class="col-lg-3" *ngFor="let property of (properties$ | async)">
         <a href="#" class="box-property">
           <div class="wrap-image">
-            <img src="assets/img/properties/single-property-01.jpg">
+            <img src="{{property.highlightedImageProperty}}">
           </div>
           <div class="property-ribon">
             <span>R$ {{property.priceProperty}}</span>
           </div>
           <div class="texts">
             <h5>{{property.titleProperty}}</h5>
-            <span><i class='bx bx-map'></i> Barra Funda - SP</span>
+            <span><i class='bx bx-map'></i> {{property.cityProperty}} - {{property.ufProperty}}</span>
             <div class="property-listing">
               <div class="wrap-icon">
                 <i class='bx bx-hotel'></i>
