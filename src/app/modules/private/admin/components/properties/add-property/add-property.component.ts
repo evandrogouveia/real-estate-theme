@@ -78,36 +78,14 @@ export class AddPropertyComponent implements OnInit {
 
         this.addPropertyForm.patchValue(data);
         this.publicationDateProperty = data.publicationDateProperty;
+        this.address = data.locationProperty;
 
         if(data.highlightedImageProperty)
           this.highlightedImageProperty = data.highlightedImageProperty;
       });
     }
+    this.initializeMap();
     
-    /* INICIALIZAR DADOS DO MAPA */
-    this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
-
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-          this.getAddress(this.latitude, this.longitude);
-        });
-      });
-    });
   }
 
   showPreviewImage(event: any) {
@@ -181,6 +159,37 @@ export class AddPropertyComponent implements OnInit {
     }
   }
 
+
+  /* INICIALIZAR DADOS DO MAPA */
+  initializeMap() {
+    
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
+
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+          this.getAddress(this.latitude, this.longitude);
+          
+          
+        });
+      });
+    });
+  }
+
   // OBTER CORDENADAS DE LOCALIZAÇÃO
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
@@ -192,6 +201,8 @@ export class AddPropertyComponent implements OnInit {
       });
     }
   }
+
+  
 
    // OBTER EVENTO DO MARCADOR
   markerDragEnd($event: MouseEvent) {
@@ -205,7 +216,6 @@ export class AddPropertyComponent implements OnInit {
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
       if (status === 'OK') {
-        console.log(results[0].address_components[4])
         if (results[0]) {
           this.zoom = 12;
           this.address = results[0].formatted_address;

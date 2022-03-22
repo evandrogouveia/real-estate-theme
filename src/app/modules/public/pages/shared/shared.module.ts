@@ -6,6 +6,8 @@ import { CardsPropertiesComponent } from './cards-properties/cards-properties.co
 import { LoadingComponent } from './loading/loading.component';
 import { NgxLoadingModule,  ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,6 +22,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
   imports: [
     CommonModule,
     NgxSkeletonLoaderModule,
+    NgxBootstrapModule,
+    FormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes
     })

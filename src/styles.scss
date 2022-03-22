@@ -31,3 +31,17 @@
         background: var(--bg-secondary-color) !important;
     }
 }
+.pagination{
+    justify-content: center;
+    margin-top: 30px;
+}
+.page-item .page-link:focus{
+	box-shadow: none;
+}
+.page-item .page-link, .page-link:hover{
+	color: var(--bg-primary-color);
+}
+.page-item.active .page-link{
+	background-color: var(--bg-primary-color);
+	border-color: var(--bg-primary-color);
+}

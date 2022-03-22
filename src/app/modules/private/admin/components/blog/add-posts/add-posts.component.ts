@@ -80,7 +80,6 @@ export class AddPostsComponent implements OnInit {
 
         if(data.highlightedImage)
           this.highlightedImage = data.highlightedImage;
-          
         setTimeout(() => {
           this.inputCategories.toArray().forEach(d => {
             let b: any = [];

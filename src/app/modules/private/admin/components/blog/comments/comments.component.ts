@@ -133,7 +133,7 @@ export class CommentsComponent implements OnInit {
       this.updatePostForm.patchValue(p);
 
       this.updatePostForm.value.comments = p.comments;
-
+      
       let post: Post = this.updatePostForm.value;
       this.blogService.updateComments(post).then(() => {
         this.toastr.success('Comentário removido');

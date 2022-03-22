@@ -49,6 +49,8 @@
                 }
         }
         textarea{
+            height: 200px;
+            resize: none;
             &:focus{
                 box-shadow: none;
                 border:1px solid var(--bg-primary-color);
