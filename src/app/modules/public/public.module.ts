@@ -8,9 +8,10 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { NgxMaskModule } from 'ngx-mask';
 
+
 @NgModule({
   declarations: [
-    PublicComponent,  
+    PublicComponent,
     HeaderComponent,
     FooterComponent,
   ],

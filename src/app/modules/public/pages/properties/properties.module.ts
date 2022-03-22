@@ -12,7 +12,7 @@ import { SinglePropertyComponent } from './components/single-property/single-pro
   imports: [
     CommonModule,
     PropertiesRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
