@@ -11,7 +11,7 @@
 @import './assets/boxicons-2.0.7/css/boxicons.min.css';
 @import './assets/styles/theme-color.scss';
 @import '~ngx-toastr/toastr';
-
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 .modal-all{
     &.modal-dialog{
@@ -44,4 +44,28 @@
 .page-item.active .page-link{
 	background-color: var(--bg-primary-color);
 	border-color: var(--bg-primary-color);
+}
+
+gallery-core[thumbPosition=top] gallery-thumbs .g-slider, gallery-core[thumbPosition=bottom] gallery-thumbs .g-slider{
+    left: 60px !important;
+}
+bs-datepicker-inline-container{
+    width: 100%;
+    .bs-datepicker{
+        box-shadow: none;
+        .bs-datepicker-container{
+            padding: 0;
+            width: 100%;
+        }
+        .bs-media-container, bs-days-calendar-view{
+            width: 100%;
+        }
+    }
+}
+.theme-green .bs-datepicker-head,
+.theme-green .bs-datepicker-body table td span.selected, 
+.theme-green .bs-datepicker-body table td.selected span, 
+.theme-green .bs-datepicker-body table td span[class*=select-]:after, 
+.theme-green .bs-datepicker-body table td[class*=select-] span:after{
+    background: var(--bg-secondary-color);
 }

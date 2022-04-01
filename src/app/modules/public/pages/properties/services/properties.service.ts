@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Property } from 'src/app/modules/private/admin/components/properties/models/property.model';
 
 @Injectable({
@@ -15,4 +15,10 @@ export class PropertiesService {
   getProperties(){
     return this.propertiesCollection.valueChanges();
   }
+
+  //LISTAR PROPRIEDADE POR ID
+  getPropertyDetail(propertyId: string): AngularFirestoreDocument<Property>{
+    return this.propertiesCollection.doc(propertyId);
+  }
+
 }

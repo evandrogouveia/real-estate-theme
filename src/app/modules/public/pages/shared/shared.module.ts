@@ -34,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     CardsPropertiesComponent,
     LoadingComponent,
     NgxSkeletonLoaderModule,
-    NgxLoadingModule
+    NgxLoadingModule,
+    NgxBootstrapModule,
   ]
 })
 export class SharedModule { }
