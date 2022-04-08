@@ -69,3 +69,16 @@ bs-datepicker-inline-container{
 .theme-green .bs-datepicker-body table td[class*=select-] span:after{
     background: var(--bg-secondary-color);
 }
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .g-image-item{
+        background-size: contain !important;
+    }
+    .gallery-plans{
+        height: 320px;
+    }
+    .bs-datepicker{
+        width: 100%;
+    }
+}

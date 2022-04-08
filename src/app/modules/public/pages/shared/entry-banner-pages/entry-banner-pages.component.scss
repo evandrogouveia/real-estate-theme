@@ -24,9 +24,12 @@
 
 @media(max-width: 767px){
     .entry-banner{
-        height: 125px;
+        height: 90px;
         .texts{
-            height: 130px;
+            height: 95px;
+            h2{
+                font-size: 28px;
+            }
         }
     }
 }

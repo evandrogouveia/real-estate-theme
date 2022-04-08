@@ -1,7 +1,7 @@
 .section-row-properties{
     background: var(--bg-white-color);
     padding: 80px 0;
-    .t-professionals{
+    .t-properties{
         h3{
             font-size: 35px;
             font-family: "Rubik", sans-serif;
@@ -123,4 +123,24 @@
         }
         
     }
+}
+
+/*======================= RESPONSIVE =======================*/
+@media(max-width: 767px){
+    .section-row-properties{
+        padding: 30px 0;
+        .t-properties{
+            p{
+                width: 100%;
+            }
+        }
+        .box-property{
+            img{
+                max-height: 200px;
+            }
+            .wrap-image{
+                height: 200px;
+            }
+        }
+    }  
 }

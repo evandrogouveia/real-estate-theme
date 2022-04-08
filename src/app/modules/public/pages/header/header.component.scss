@@ -113,7 +113,7 @@ header{
             position: absolute;
             top: 16px;
             right: 15px;
-            color: rgba(0,0,0,.5);
+            color: rgba(0,0,0,.3);
             cursor: pointer;
         }
       } 
@@ -125,8 +125,10 @@ header{
                   padding-left: 15px;
                   position: relative;
                   text-align: center;
+                  color: var(--bg-secondary-color);
                   &:hover, &.active{
-                      background: #f0dcb4;
+                      background: var(--bg-primary-color);
+                      border-radius: 10px;
                       &:after{
                           display: none;
                       }
@@ -146,7 +148,7 @@ header{
           justify-content: center !important;
           display: flex !important;
           i{
-              color: #5e524c;
+              color: var(--bg-secondary-color);
               line-height: 0;
               font-size: 30px;
               position: relative;
@@ -170,12 +172,19 @@ header{
 @media(max-width: 575.98px){
     header{
         .navbar{
+            &.fixed-top{
+                padding-top: 4px;
+            }
             .navbar-brand{
-                width: 75px;
+                width: 140px;
                 height: 55px;
             }
             .navbar-toggler{
                 border: none;
+                i{
+                    color: var(--bg-white-color);
+                    font-size: 35px;
+                }
             }
         }
     }

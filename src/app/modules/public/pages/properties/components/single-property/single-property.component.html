@@ -33,7 +33,7 @@
                 <div class="content-details">
                     <h2>Detalhes</h2>
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class='bx bx-bookmark'></i>
                                 <p>ID da propriedade</p>
@@ -41,43 +41,41 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-hotel"></i>
                                 <p>Quartos</p>
                                 <span>{{(propertyId$ | async)?.qtdBedrooms}}</span>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-bath"></i>
                                 <p>Banheiro</p>
                                 <span>{{(propertyId$ | async)?.qtdBathrooms}}</span>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-car"></i>
                                 <p>Garagem</p>
                                 <span>{{(propertyId$ | async)?.qtdGarages}}</span>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-ruler"></i>
                                 <p>Área total</p>
                                 <span>{{(propertyId$ | async)?.areaProperty}} m²</span>
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class='bx bx-dollar-circle'></i>
                                 <p>Preço</p>
                                 <span>R$ {{(propertyId$ | async)?.priceProperty}} </span>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="content-description">
@@ -104,7 +102,7 @@
                 </div>
                 <div class="content-description">
                     <h2>Plantas</h2>
-                    <gallery gallerize="gallery-plans" [items]="itemsPlans"></gallery>
+                    <gallery gallerize="gallery-plans" class="gallery-plans" [items]="itemsPlans"></gallery>
                 </div>
                 <div class="content-description">
                     <h2>Vídeo</h2>

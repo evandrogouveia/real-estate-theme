@@ -278,7 +278,10 @@
 }
 
 /*======================= RESPONSIVE =======================*/
-@media(max-width: 575.98px){
+@media(max-width: 767px){
+    .slider-home{
+        margin-top: -90px;
+    }
     .section-row-services{
         .f-service{
             h3{
