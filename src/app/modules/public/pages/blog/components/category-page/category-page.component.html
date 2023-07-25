@@ -12,13 +12,13 @@
                     <div class="block-post" *ngFor="let p of posts$ | async">
                         <div class="row">
                             <div class="col-lg-6">
-                                <a routerLink="single-blog/{{p.id}}">
-                                    <img src="{{p.highlightedImage}}">
+                                <a routerLink="/blog/single-blog/{{p.ID}}">
+                                    <img src="{{p.imagemDestacada}}">
                                 </a>
                             </div>
                             <div class="col-lg-6">
                                 <div class="entry-header">
-                                    <a routerLink="single-blog/{{p.id}}">
+                                    <a routerLink="/blog/single-blog/{{p.ID}}">
                                         <h3>{{(p.titulo.length > 45) ? (p.titulo | slice:0:45) + ' ...' : (p.titulo)}}</h3>
                                     </a>
                                     <div class="entry-date">
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="entry-footer">
-                                    <p>{{(p.descricao.length > 225) ? (p.descricao | slice:0:225) + ' ...' : (p.descricao)}}</p>
+                                    <p [innerHTML]="(p.descricao.length > 225) ? (p.descricao | slice:0:225) + ' ...' : (p.descricao)"></p>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <app-aside-lateral (valueToEmit)="getValueMessage($event)"></app-aside-lateral>
+                    <app-aside-lateral></app-aside-lateral>
                 </div>
                 
             </div>

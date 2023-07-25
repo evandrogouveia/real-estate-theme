@@ -23,7 +23,7 @@ export class SingleBlogComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getPostId();
     this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((event) => {
-      if (event) {  this.getPostId(); }
+      if (event) {  this.getPostId();   this.url = window.location.href; }
     });
   }
 

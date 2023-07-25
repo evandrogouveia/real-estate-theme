@@ -21,8 +21,8 @@ export class PostService {
   getAllPosts(): Observable<Post> {
     return this.http.get<any>(`${environment.API_URL}/all-posts`);
   }
-  getSearchPosts(): Observable<Post> {
-    return this.http.get<any>(`${environment.API_URL}/search-posts`);
+  getSearchPosts(termo): Observable<Post> {
+    return this.http.get<any>(`${environment.API_URL}/search-posts`,  {params: {term: termo} });
   }
   updatePost(postID, post): Observable<Post> {
     return this.http.patch<any>(`${environment.API_URL}/update-post/${postID}`, post);

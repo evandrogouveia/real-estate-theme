@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
-import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'app-category-page',
@@ -16,23 +16,23 @@ export class CategoryPageComponent implements OnInit {
 
   constructor(
     private postsService: PostService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(value => {
-      this.valueFilter = value;
-    });
+    this.getPost();
 
-    this.posts$ = this.postsService.getSearchPosts();
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((event) => {
+      if (event) {  this.getPost(); }
+    });
   }
 
-  getValueMessage(value){//recebe valor da busca do aside lateral através do EventEmitter
-    if(value){
-      /*this.posts$ = this.blogService.searchByCategory(
-        value.charAt(0).toUpperCase() + value.substr(1).toLowerCase()
-      )*/
-    }
+  getPost() {
+    this.route.queryParams.subscribe(value => {
+      this.valueFilter = value;
+      this.posts$ = this.postsService.getSearchPosts(this.valueFilter[0]);
+    });
   }
 
 }
