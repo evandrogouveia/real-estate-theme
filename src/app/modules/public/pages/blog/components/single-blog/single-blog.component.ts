@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
 
 @Component({
@@ -15,10 +16,18 @@ export class SingleBlogComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postsService: PostService
   ) { }
 
   ngOnInit(): void {
+    this.getPostId();
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((event) => {
+      if (event) {  this.getPostId(); }
+    });
+  }
+
+  getPostId() {
     const postId = this.route.snapshot.paramMap.get('id');
     this.postsService.getPostID(postId).subscribe((post: any) => {
       post.map(p => p.categorias = JSON.parse(p.categorias));
