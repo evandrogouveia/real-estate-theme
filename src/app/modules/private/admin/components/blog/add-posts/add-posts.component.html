@@ -6,17 +6,17 @@
             </div>
         </div>
 
-        <form class="form-add-post" [formGroup]="addPostForm" (ngSubmit)="submit()">
+        <form class="form-add-post" [formGroup]="addPostForm" (ngSubmit)="addUpdadePosts()">
             <div class="row">
                 <div class="col-lg-9">
 
                     <div class="form-group">
                         <label for="name">Adicionar título</label>
-                        <input type="text" class="form-control" id="name" formControlName="titlePost">
+                        <input type="text" class="form-control" id="name" formControlName="titulo">
                     </div>
                     <div class="form-group">
                         <label for="description">Descrição</label>
-                        <angular-editor formControlName="descriptionPost" [config]="config"></angular-editor>
+                        <angular-editor formControlName="descricao" [config]="config"></angular-editor>
                     </div>
 
                     <p *ngIf="!this.isAddMode" class="published-info">Publicado em: 
@@ -61,8 +61,8 @@
                         </div>
                         <div class="card-body card-category-check">
                             <div class="form-check" *ngFor="let c of categoriesAll$ | async; let i = index">
-                                <input #inputCategories type="checkbox" class="form-check-input" id="exampleCheck{{i}}" value="{{c.name}}" (click)="checkCategory($event)">
-                                <label class="form-check-label" for="exampleCheck{{i}}">{{c.name}}</label>
+                                <input #inputCategories type="checkbox" class="form-check-input" id="exampleCheck{{i}}" value="{{c.nome}}" (click)="checkCategory($event)">
+                                <label class="form-check-label" for="exampleCheck{{i}}">{{c.nome}}</label>
                             </div>
                             <hr>
                             <a class="nav-link" routerLink="/private/admin/add-category">+ Adicionar nova categoria</a>

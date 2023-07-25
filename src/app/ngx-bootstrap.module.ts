@@ -12,7 +12,8 @@ import {
   BsDropdownModule,
   BsLocaleService,
   TooltipModule,
-  PaginationModule
+  PaginationModule,
+  SortableModule
 } from 'ngx-bootstrap';
 
 
@@ -28,7 +29,8 @@ defineLocale('pt-br', ptBrLocale);
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    SortableModule.forRoot()
   ],
   exports: [
     CollapseModule,
@@ -38,7 +40,8 @@ defineLocale('pt-br', ptBrLocale);
     ModalModule,
     BsDropdownModule,
     TooltipModule,
-    PaginationModule
+    PaginationModule,
+    SortableModule
   ],
 })
 export class NgxBootstrapModule {

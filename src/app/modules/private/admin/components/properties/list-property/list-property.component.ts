@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ModalComponent } from '../../shared/modal/modal.component';
-import { Property } from '../models/property.model';
-import { PropertyService } from '../services/property.service';
+import { Propriedades } from '../models/propriedades.model';
+import { PropriedadesService } from '../services/propriedades.service';
 
 @Component({
   selector: 'app-list-property',
@@ -11,25 +12,30 @@ import { PropertyService } from '../services/property.service';
   styleUrls: ['./list-property.component.scss']
 })
 export class ListPropertyComponent implements OnInit {
-  properties$: Observable<Property[]>
+  properties$: Observable<Propriedades>
   dataInput: string;
 
   constructor(
-    private propertyService: PropertyService,
+    private propriedadesService: PropriedadesService,
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
-    this.properties$ = this.propertyService.getProperties();
+    this.getPropriedades();
+  }
+
+  getPropriedades() {
+    this.properties$ = this.propriedadesService.getAllPropriedades();
   }
 
   openModalConfirmDelete(p){
     const initialState = {
       titleModal: 'Deseja realmente excluir este Imóvel?',
-      titlePost: p.titleProperty,
+      titlePost: p.titulo,
       callback: (result) => {//recebe o evento callback true do modal
-        if (result == true){
+        if (result === true){
           this.delete(p);
         }
       }
@@ -42,8 +48,20 @@ export class ListPropertyComponent implements OnInit {
 
   }
 
-  delete(p: Property){
-    this.propertyService.deleteProperty(p);
+  getJsonFromObj(obj) {
+    obj = JSON.parse(obj);
+    if (obj.length !== 0) {
+      return obj;
+    } else {
+      return 'Sem categoria'
+    }
+  }
+
+  delete(p: Propriedades){
+    this.propriedadesService.deletePropriedade(p.ID).subscribe(() => {
+      this.getPropriedades();
+      this.toastr.success('Propriedade removida com sucesso', '');
+    });
   }
 
 }

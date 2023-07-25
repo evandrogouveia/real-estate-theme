@@ -11,22 +11,11 @@
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <form [formGroup]="addCategoryForm" (ngSubmit)="submit()">
+                <form [formGroup]="addCategoriasForm" (ngSubmit)="addUpdadeCateorias()">
                     <div class="form-group">
-                      <label for="name">Nome</label>
-                      <input type="text" class="form-control" id="name" formControlName="name">
+                      <label for="nome">Nome</label>
+                      <input type="text" class="form-control" id="nome" formControlName="nome">
                     </div>
-                    <div class="form-group">
-                      <label for="description">Descrição</label>
-                      <textarea class="form-control" rows="4" id="description" formControlName="description"></textarea>
-                    </div>
-                    <!--div class="form-group category">
-                        <label for="select-category">Categoria ascendente</label>
-                        <select class="form-control" id="select-category" formControlName="parentCategory">
-                          <option>Nenhuma</option>
-                          <option *ngFor="let c of categories$ | async">{{c.name}}</option>
-                        </select>
-                    </div-->
                       <button type="submit" class="btn btn-add-category">
                           {{ !this.isAddMode ? 'Atualizar' : 'Adicionar nova categoria'}}
                         </button>
@@ -37,37 +26,21 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">
-                                    <div class="form-check">
-                                        <input type="checkbox">
-                                    </div>
-                                </th>
                                 <th scope="col">Nome</th>
-                                <th scope="col">Descrição</th>
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let c of (categories$ | async) | filter:term">
+                            <tr *ngFor="let c of (categorias$ | async) | filter:term">
+                                <td><a href="#">{{c.nome}}</a></td>
                                 <td>
-                                    <div class="form-check">
-                                        <input type="checkbox">
-                                    </div>
-                                </td>
-                                <td><a href="#">{{c.name}}</a></td>
-                                <td>{{c.description}}</td>
-                                <td>
-                                    <a routerLink="/private/admin/edit-category/{{c.id}}">
-                                        <i class="icon-edit" tooltip="Editar"></i>
-                                    </a>
-                                    <a href="javascript:void(0)" (click)="delete(c)">
-                                        <i class="icon-delete" tooltip="Excluir"></i>
-                                    </a>
+                                    <i class="icon-edit" tooltip="Editar" (click)="setDataCategoria(c)"></i>
+                                    <i class="icon-delete" tooltip="Excluir" (click)="openModalConfirmDelete(c)"></i>
                                 </td>
                             </tr>
-                            <tr *ngIf="(categories$ | async)?.length === 0">
+                            <tr *ngIf="(categorias$ | async)?.length === 0">
                                 <td class="empty-user" colspan="6">
-                                  <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                                  <p>Nenhuma categoria cadastrada</p>
                                 </td>
                               </tr>
                         </tbody>

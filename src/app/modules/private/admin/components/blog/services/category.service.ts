@@ -1,47 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private categoriesCollection: AngularFirestoreCollection<Category> = this.afs.collection('categories', ref => {
-    return ref.orderBy('name', 'asc');
-  })
+  constructor(private http: HttpClient) { }
 
-  constructor(private afs:AngularFirestore) { }
-
-  //LISTAR CATEGORIAS
-  getCategory(){
-    return this.categoriesCollection.valueChanges();
+  /*** SERVIÇOS DE CATEGORIAS DE POSTS ***/
+  newCategoria(categoria): Observable<any> {
+    return this.http.post<any>(`${environment.API_URL}/new-categoria`, categoria);
   }
-
-  //LISTAR CATEGORIA POR ID
-  getCategoryDetail(cId: string): AngularFirestoreDocument<Category>{
-    return this.categoriesCollection.doc(cId)
+  getAllCategorias(): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/all-categorias`);
   }
-
-  //ADICIONAR CATEGORIA
-  addCategory(c: Category){
-    c.id = this.afs.createId();
-    return this.categoriesCollection.doc(c.id).set(c);
+  updateCategoria(categoriaID, categoria): Observable<any> {
+    return this.http.patch<any>(`${environment.API_URL}/update-categoria/${categoriaID}`, categoria);
   }
-
-  //ATUALIZAR CATEGORIA
-  updateCategory(c: Category){
-    return this.categoriesCollection.doc(c.id).set(c);
-  }
-
-  //DELETAR CATEGORIA
-  deleteCategory(c: Category){
-    this.categoriesCollection.doc(c.id).delete();
-  }
-
-  searchByName(name: string): Observable<Category[]>{
-    return this.afs.collection<Category>('categories',
-    ref => ref.orderBy('name').startAt(name).endAt(name + '\uf8ff')).valueChanges();
+  deleteCategoria(categoriaID): Observable<any> {
+    return this.http.delete<any>(`${environment.API_URL}/delete-categoria/${categoriaID}`);
   }
 }

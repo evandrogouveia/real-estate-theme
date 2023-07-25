@@ -70,6 +70,10 @@ bs-datepicker-inline-container{
     background: var(--bg-secondary-color);
 }
 
+.map-container {
+    height: 90%;
+  }
+
 /*======================= RESPONSIVE =======================*/
 @media(max-width: 767px){
     .g-image-item{

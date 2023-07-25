@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Post } from '../models/post.model';
@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './add-posts.component.html',
   styleUrls: ['./add-posts.component.scss']
 })
-export class AddPostsComponent implements OnInit {
+export class AddPostsComponent implements OnInit, AfterViewInit {
   @ViewChildren('inputCategories') inputCategories: QueryList<ElementRef>
 
   highlightedImage = 'assets/img/placeholder.jpg';
@@ -27,7 +27,7 @@ export class AddPostsComponent implements OnInit {
   publicationDate;
   username: string;
 
-  selectedCategoryes: any = [];
+  selectedCategorias: any = [];
   isfrmChecked: boolean = false;
   loading:boolean = false;
 
@@ -38,22 +38,19 @@ export class AddPostsComponent implements OnInit {
   myModel: any;
 
   addPostForm: FormGroup = this.fb.group({
-    id: [undefined],
-    titlePost: [''],
-    descriptionPost: [''],
-    highlightedImage: [''],
-    categories: [''],
-    publicationDate: [''],
-    author: [''],
-    comments: ['']
+    ID: [],
+    titulo: [''],
+    descricao: [''],
+    imagemDestacada: [''],
+    categorias: [''],
+    autor: ['']
   });
 
   constructor(
     private fb: FormBuilder,
-    private postservice: PostService,
+    private postsService: PostService,
     private loginService: LoginService,
     private categoryService: CategoryService,
-    private storage: AngularFireStorage,
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService
@@ -65,39 +62,14 @@ export class AddPostsComponent implements OnInit {
         this.username = u.username;
       }
     });
-    this.categoriesAll$ = this.categoryService.getCategory();
+    this.categoriesAll$ = this.categoryService.getAllCategorias();
 
     this.postId = this.route.snapshot.paramMap.get('id');
     this.isAddMode = !this.postId;
+  }
 
-
-    if (!this.isAddMode) {
-      const post: Observable<Post> = this.postservice.getPostDetail(this.postId).valueChanges();
-      post.subscribe(data => {
-
-        this.addPostForm.patchValue(data);
-        this.publicationDate = data.publicationDate;
-
-        if(data.highlightedImage)
-          this.highlightedImage = data.highlightedImage;
-        setTimeout(() => {
-          this.inputCategories.toArray().forEach(d => {
-            let b: any = [];
-            b.push(d.nativeElement.value);//adiciona os valores dos inputs na variável b
-
-            for (let i of data.categories) {
-              let f: any = b.filter(c => c == i);//filtra o valor do input que seja igual ao valor que vem do banco
-
-              if (d.nativeElement.value == f) {//clica nos inputs que estajam com valores iguais.
-                d.nativeElement.click();
-              }
-            }
-          });
-
-        }, 600);
-
-      });
-    }
+  ngAfterViewInit(): void {
+      this.setDataPosts();
   }
 
   showPreviewImage(event: any) {
@@ -117,118 +89,83 @@ export class AddPostsComponent implements OnInit {
 
     if (isChecked) {
       this.isfrmChecked = true;
-      this.selectedCategoryes.push(event.target.value);
+      this.selectedCategorias.push(event.target.value);
     } else {
       this.isfrmChecked = false;
-      let index = this.selectedCategoryes.indexOf(event.target.value)
-      this.selectedCategoryes.splice(index, 1);
+      const index = this.selectedCategorias.indexOf(event.target.value)
+      this.selectedCategorias.splice(index, 1);
     }
   }
 
-  addPost() {
+  addUpdadePosts() {
     this.loading = true;
-    let post: Post = this.addPostForm.value;
-    if (!post.id) {
+    this.addPostForm.controls.categorias.patchValue(this.selectedCategorias);
+    this.addPostForm.controls.autor.patchValue(this.username);
 
-      //insere a categoria Default se não for selecionado nenhuma categoria
-      const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = ['Default'] :
-        this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
+    const formData = new FormData();
+    formData.append('imagemDestacada', this.selectedImage);
+
+    formData.append('formPosts', JSON.stringify(this.addPostForm.value));
+
+    if (this.isAddMode) {
 
       //remove as tags html da descrição
-      const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
+      const descricaoFormatada = this.addPostForm.value.descricao.replace(/<[^>]*>/g, '');
+      this.addPostForm.value.descricao = descricaoFormatada;
 
-      if (this.selectedImage) {
-        const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(filePath);
-
-        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe((url) => {
-              this.addPostForm.value.highlightedImage = url;
-              this.addPostForm.value.categories = categories;
-              this.addPostForm.value.descriptionPost = description;
-              this.addPostForm.value.publicationDate = this.currentDate;
-              this.addPostForm.value.author = this.username;
-              this.addPostForm.value.comments = [];
-              this.postservice.addPost(post).then(() => {
-                this.loading = false;
-                this.toastr.success('Post adicionado com sucesso');
-              });
-              this.router.navigateByUrl('/private/admin/list-posts');
-            });
-          })
-        ).subscribe();
-      } else {
-        this.addPostForm.value.highlightedImage = this.highlightedImage;
-        this.addPostForm.value.categories = categories;
-        this.addPostForm.value.descriptionPost = description;
-        this.addPostForm.value.publicationDate = this.currentDate;
-        this.addPostForm.value.author = this.username;
-        this.addPostForm.value.comments = [];
-        this.postservice.addPost(post).then(() => {
+      if (this.addPostForm.valid) {
+        this.postsService.newPost(formData).subscribe(() => {
+          this.reset();
+          this.toastr.success('Post adicionado com sucesso', '');
+          this.router.navigate(['private/admin/list-posts']);
+        }, (err) => {
+          console.log(err)
           this.loading = false;
-          this.toastr.success('Post adicionado com sucesso');
+          this.toastr.error('Ocorreu um erro ao adicionar o Post, tente novamente mais tarde', '');
         });
-        this.router.navigateByUrl('/private/admin/list-posts');
-      }
-
-    }
-  }
-
-  updatePost() {
-    this.loading = true;
-    let post: Post = this.addPostForm.value;
-
-    //insere a categoria Default se não for selecionado nenhuma categoria
-    const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = ['Default'] :
-      this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);
-
-    //remove as tags html da descrição
-    const description = this.addPostForm.value.descriptionPost.replace(/<[^>]*>/g, '');
-
-    if (this.selectedImage) {
-      const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
-      const fileRef = this.storage.ref(filePath);
-
-      this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.addPostForm.value.highlightedImage = url;
-            this.addPostForm.value.categories = categories;
-            this.addPostForm.value.descriptionPost = description;
-            //this.addPostForm.value.publicationDate = this.currentDate;
-            this.addPostForm.value.author = this.username;
-            this.addPostForm.value.comments = [];
-            this.postservice.updatePost(post).then(() => {
-              this.loading = false;
-              this.toastr.success('Post atualizado com sucesso');
-            });
-            this.router.navigateByUrl('/private/admin/list-posts');
-          });
-        })
-      ).subscribe();
-    } else {
-      this.addPostForm.value.highlightedImage = this.highlightedImage;
-      this.addPostForm.value.categories = categories;
-      this.addPostForm.value.descriptionPost = description;
-      //this.addPostForm.value.publicationDate = this.currentDate;
-      this.addPostForm.value.author = this.username;
-      this.addPostForm.value.comments = [];
-      this.postservice.updatePost(post).then(() => {
+      } else {
         this.loading = false;
-        this.toastr.success('Post atualizado com sucesso');
+        this.toastr.error('Preencha os campos obrigatórios', '');
+      }
+    } else {
+      this.postsService.updatePost(this.postId, formData).subscribe(() => {
+        this.reset();
+        this.toastr.success('Post atualizado com sucesso', '');
+        this.router.navigate(['private/admin/list-posts']);
+      }, (err) => {
+        this.loading = false;
+        this.toastr.error('Ocorreu um erro ao atualizar o Post, tente novamente mais tarde', '');
       });
-      this.router.navigateByUrl('/private/admin/list-posts');
     }
   }
 
-  submit() {
-    if (this.isAddMode) {
-      this.addPost();
-    } else {
-      this.updatePost();
+  reset(): void {
+    this.loading = false;
+    this.highlightedImage = '';
+    this.addPostForm.reset();
+  }
+
+  setDataPosts() {
+    if (!this.isAddMode) {
+      this.postsService.getPostID(this.postId).subscribe(data => {
+
+        data[0].imagemDestacada ? this.highlightedImage= data[0].imagemDestacada : this.highlightedImage = 'assets/img/placeholder.jpg';
+
+        this.addPostForm.patchValue(data[0]);
+        this.addPostForm.controls.categorias.patchValue(JSON.parse(data[0].categorias));
+        this.selectedCategorias = JSON.parse(data[0].categorias);
+
+        setTimeout(() => {
+          this.inputCategories.forEach(input => {
+            if (JSON.parse(data[0].categorias).includes(input.nativeElement.value)) {
+              input.nativeElement.checked = true;
+            }
+          });
+        });
+      });
     }
   }
+
 
   config: AngularEditorConfig = {
     editable: true,

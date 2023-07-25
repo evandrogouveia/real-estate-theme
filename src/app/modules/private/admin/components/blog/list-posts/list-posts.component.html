@@ -15,39 +15,29 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </th>
+                    <th scope="col">Miniatura</th>
                     <th scope="col">Título</th>
                     <th scope="col">Autor</th>
                     <th scope="col">Categorias</th>
-                    <th scope="col">Comentários</th>
-                    <th scope="col">Data</th>
+                    <th scope="col">Data de publicação</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let p of (posts$ | async) | filter:term">
+                  <tr *ngFor="let p of posts | filter:term">
+                    <td><img [src]="p.imagemDestacada"></td>
+                    <td><a routerLink="/private/admin/edit-posts/{{p.id}}">{{(p.titulo.length > 40) ? (p.titulo | slice:0:40) + ' ...' : (p.titulo)}}</a></td>
+                    <td>{{p.autor}}</td>
+                    <td>{{p.categorias}}</td>
+                    <td>{{p.dataPublicacao | date: 'dd/MM/yyyy'}}</td>
                     <td>
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </td>
-                    <td><a routerLink="/private/admin/edit-posts/{{p.id}}">{{(p.titlePost.length > 40) ? (p.titlePost | slice:0:40) + ' ...' : (p.titlePost)}}</a></td>
-                    <td>{{p.author}}</td>
-                    <td>{{p.categories.join(', ')}}</td>
-                    <td><i class="icon-message"><span>{{p.comments.length}}</span></i></td>
-                    <td>Publicado {{p.publicationDate.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDate.toDate() | date: 'HH:mm'}}</td>
-                    <td>
-                        <a routerLink="/private/admin/edit-posts/{{p.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
+                        <a routerLink="/private/admin/edit-posts/{{p.ID}}"><i class="icon-edit" tooltip="Editar"></i></a>
                         <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
                     </td>
                   </tr>
-                  <tr *ngIf="(posts$ | async)?.length === 0">
+                  <tr *ngIf="posts?.length === 0">
                     <td class="empty-user" colspan="6">
-                      <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                      <p>Nenhum Post cadastrado</p>
                     </td>
                   </tr>
                 </tbody>

@@ -3,79 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Gallery, GalleryItem, ImageItem, ImageSize, ThumbnailsPosition } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
 import { Observable } from 'rxjs';
-import { Property } from 'src/app/modules/private/admin/components/properties/models/property.model';
-import { PropertiesService } from '../../services/properties.service';
-
-const data = [
-  {
-    srcUrl: 'assets/img/properties/1.jpg',
-    previewUrl: 'assets/img/properties/1.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/2.jpg',
-    previewUrl: 'assets/img/properties/2.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/3.jpg',
-    previewUrl: 'assets/img/properties/3.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/4.jpg',
-    previewUrl: 'assets/img/properties/4.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/5.jpg',
-    previewUrl: 'assets/img/properties/5.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/6.jpg',
-    previewUrl: 'assets/img/properties/6.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/7.jpg',
-    previewUrl: 'assets/img/properties/7.jpg'
-  },
-  {
-    srcUrl: 'assets/img/properties/8.jpg',
-    previewUrl: 'assets/img/properties/8.jpg'
-  },
-
-];
-
-const dataPlans = [
-  {
-    srcUrl: 'assets/img/planta1.jpg',
-    previewUrl: 'assets/img/planta1.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta2.jpg',
-    previewUrl: 'assets/img/planta2.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta1.jpg',
-    previewUrl: 'assets/img/planta1.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta2.jpg',
-    previewUrl: 'assets/img/planta2.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta1.jpg',
-    previewUrl: 'assets/img/planta1.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta2.jpg',
-    previewUrl: 'assets/img/planta2.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta1.jpg',
-    previewUrl: 'assets/img/planta1.jpg'
-  },
-  {
-    srcUrl: 'assets/img/planta2.jpg',
-    previewUrl: 'assets/img/planta2.jpg'
-  },
-];
+import { Propriedades } from 'src/app/modules/private/admin/components/properties/models/propriedades.model';
+import { PropriedadesService } from 'src/app/modules/private/admin/components/properties/services/propriedades.service';
+import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'app-single-property',
@@ -83,39 +13,92 @@ const dataPlans = [
   styleUrls: ['./single-property.component.scss']
 })
 export class SinglePropertyComponent implements OnInit {
-  properties$: Observable<Property[]>;
-  propertyId$: Observable<Property>;
 
-  items: GalleryItem[];
-  imageData = data;
+  properties$: Observable<Propriedades>;
+  propertyId$: Observable<Propriedades>;
+
+  propriedadeID = [];
+
   url: any;
-
+  items: GalleryItem[];
   itemsPlans: GalleryItem[];
-  plansData = dataPlans;
 
   bsInlineValue = new Date();
 
+  neighborhoodAndCity: string;
+  map!: Leaflet.Map;
+  markers: Leaflet.Marker[] = [];
+  options = {
+    layers: [
+      Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: null
+      })
+    ],
+    zoom: 16,
+  }
+
   constructor(
-    private propertiesService: PropertiesService,
+    private propriedadesService: PropriedadesService,
     public gallery: Gallery,
     public lightbox: Lightbox,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
-    const propertyId = this.route.snapshot.paramMap.get('id');
-    this.properties$ = this.propertiesService.getProperties();
-    this.propertyId$ = this.propertiesService.getPropertyDetail(propertyId).valueChanges();
+    this.properties$ = this.propriedadesService.getAllPropriedades();
     this.url = window.location.href;
-    this.getGalleryTop();
-    this.getGalleryPlans();
-
-    this.propertyId$.subscribe(d => console.log(d))
+    this.getPropriedade();
   }
 
-  getGalleryTop() {
-    this.items = this.imageData.map(item => new ImageItem({
-      src: item.srcUrl, thumb: item.previewUrl
+  getPropriedade() {
+    const propertyId = this.route.snapshot.paramMap.get('id');
+    this.propriedadesService.getPropriedadeID(propertyId).subscribe((p: any) => {
+      p[0].endereco = JSON.parse(p[0].endereco);
+      this.getGalleryTop(p);
+      this.getGalleryPlans(p);
+      this.propriedadeID = p;
+      this.initMarkers(p[0]);
+    });
+  }
+
+  initMarkers(propriedade) {
+    console.log(parseFloat(propriedade.endereco.latitude))
+    const initialMarkers = [
+      {
+        position: { lat: parseFloat(propriedade.endereco.latitude), lng: parseFloat(propriedade.endereco.longitude) },
+        draggable: false,
+      }
+    ];
+    for (let index = 0; index < initialMarkers.length; index++) {
+      const data = initialMarkers[index];
+      const marker = this.generateMarker(data, index);
+      marker.addTo(this.map).bindPopup(`<b>${propriedade.titulo}</b>`);
+      this.map.panTo(data.position);
+      this.markers.push(marker)
+    }
+  }
+
+  onMapReady($event: Leaflet.Map) {
+    this.map = $event;
+  }
+
+  generateMarker(data: any, index: number) {
+    const myIcon = Leaflet.icon({
+      iconUrl: 'assets/img/custom-marker.png',
+      iconSize: [50, 50],
+      iconAnchor: [22, 94],
+      popupAnchor: [4, -90],
+      shadowUrl: null,
+      shadowSize: [68, 95],
+      shadowAnchor: [22, 94]
+  });
+    return Leaflet.marker(data.position, {icon: myIcon, draggable: data.draggable });
+  }
+
+  getGalleryTop(p) {
+    const dataGallery = JSON.parse(p[0].imagens);
+    this.items = dataGallery.map(item => new ImageItem({
+      src: item, thumb: item
     }));
 
     const lightboxRef = this.gallery.ref('lightbox');
@@ -127,9 +110,10 @@ export class SinglePropertyComponent implements OnInit {
     lightboxRef.load(this.items);
   }
 
-  getGalleryPlans() {
-    this.itemsPlans = this.plansData.map(item => new ImageItem({
-      src: item.srcUrl, thumb: item.previewUrl
+  getGalleryPlans(p) {
+    const dataPlantas = JSON.parse(p[0].plantas);
+    this.itemsPlans = dataPlantas.map(item => new ImageItem({
+      src: item, thumb: item
     }));
 
     const galleryBoxRef = this.gallery.ref('gallery-plans');

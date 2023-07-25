@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/modules/private/admin/components/blog/models/category.model';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
+import { CategoryService } from 'src/app/modules/private/admin/components/blog/services/category.service';
+import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
 import { BlogService } from '../../services/blog.service';
 
 @Component({
@@ -11,8 +13,8 @@ import { BlogService } from '../../services/blog.service';
   styleUrls: ['./aside-lateral.component.scss']
 })
 export class AsideLateralComponent implements OnInit {
-  categories$: Observable<Category[]>
-  posts$: Observable<Post[]>
+  categories$: Observable<Category[]>;
+  posts$: Observable<Post>;
 
   @Output() eventEmmit = new EventEmitter<Observable<any>>(true);
   @Output() valueToEmit = new EventEmitter<boolean>();
@@ -20,13 +22,14 @@ export class AsideLateralComponent implements OnInit {
   @ViewChild('search') search: ElementRef;
 
   constructor(
-    private blogService: BlogService,
+    private postsService: PostService,
+    private categoryService: CategoryService,
     private router: Router
     ) { }
 
   ngOnInit(): void {
-    this.categories$ = this.blogService.getCategory();
-    this.posts$ = this.blogService.getPosts();
+    this.categories$ = this.categoryService.getAllCategorias();
+    this.posts$ = this.postsService.getAllPosts();
   }
 
   reload(event, id){// atualiza o post emitindo evento para single-blog

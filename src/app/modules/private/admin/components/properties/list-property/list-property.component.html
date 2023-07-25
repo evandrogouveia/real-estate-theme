@@ -15,43 +15,35 @@
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </th>
                     <th scope="col">Miniatura</th>
                     <th scope="col">Título</th>
-                    <!--th scope="col">Categorias</th-->
+                    <th scope="col">Categorias</th>
                     <th scope="col">Preço</th>
-                    <th scope="col">Data</th>
+                    <th scope="col">Data Publicação</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let p of (properties$ | async) | filter:term">
                     <td>
-                        <div class="form-check">
-                            <input type="checkbox">
-                        </div>
-                    </td>
-                    <td>
-                      <a routerLink="/private/admin/edit-posts/{{p.id}}">
-                        <img src="{{p.highlightedImageProperty}}">
+                      <a routerLink="/private/admin/edit-posts/{{p.ID}}">
+                        <img src="{{p.imagemDestacada}}">
                       </a>
                     </td>
-                    <td><a routerLink="/private/admin/edit-posts/{{p.id}}">{{(p.titleProperty.length > 40) ? (p.titleProperty | slice:0:40) + ' ...' : (p.titleProperty)}}</a></td>
-                    <!--td>{{p.categories.join(', ')}}</td-->
-                    <td>{{p.priceProperty}}</td>
-                    <td>Publicado {{p.publicationDateProperty.toDate() | date: 'dd/MM/yyyy'}} às {{p.publicationDateProperty.toDate() | date: 'HH:mm'}}</td>
+                    <td><a routerLink="/private/admin/edit-posts/{{p.ID}}">{{(p.titulo.length > 40) ? (p.titulo | slice:0:40) + ' ...' : (p.titulo)}}</a></td>
                     <td>
-                        <a routerLink="/private/admin/edit-property/{{p.id}}"><i class="icon-edit" tooltip="Editar"></i></a>
+                     {{ getJsonFromObj(p.categorias) }}
+                    </td>
+                    <td>{{p.preco | currency: 'BRL'}}</td>
+                    <td>{{p.dataPublicacao | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                        <a routerLink="/private/admin/edit-property/{{p.ID}}"><i class="icon-edit" tooltip="Editar"></i></a>
                         <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
                     </td>
                   </tr>
                   <tr *ngIf="(properties$ | async)?.length === 0">
                     <td class="empty-user" colspan="6">
-                      <p>Não encontramos nenhum resultado para: <span>{{dataInput}}</span></p>
+                      <p>Nenhuma propriedade cadastrada</p>
                     </td>
                   </tr>
                 </tbody>

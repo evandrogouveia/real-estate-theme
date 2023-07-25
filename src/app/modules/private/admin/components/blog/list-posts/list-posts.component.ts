@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'leaflet';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { Post } from '../models/post.model';
@@ -11,25 +13,33 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./list-posts.component.scss']
 })
 export class ListPostsComponent implements OnInit {
-  posts$: Observable<Post[]>
+  posts: any = [];
   dataInput: string;
 
   constructor(
     private postService: PostService,
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
+    private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
-    this.posts$ = this.postService.getPosts();
+     this.getPosts();
+  }
+
+  getPosts() {
+    this.postService.getAllPosts().subscribe((posts: any) => {
+      posts.map(p => p.categorias = JSON.parse(p.categorias));
+      this.posts = posts;
+     })
   }
 
   openModalConfirmDelete(p){
     const initialState = {
       titleModal: 'Deseja realmente excluir o Post?',
-      titlePost: p.titlePost,
+      titlePost: p.titulo,
       callback: (result) => {//recebe o evento callback true do modal
-        if (result == true){
+        if (result === true){
           this.delete(p);
         }
       }
@@ -42,8 +52,11 @@ export class ListPostsComponent implements OnInit {
 
   }
 
-  delete(p: Post){
-    this.postService.deletePost(p);
+  delete(p: any){
+    this.postService.deletePost(p.ID).subscribe(() => {
+      this.getPosts();
+      this.toastr.success('Post removido com sucesso', '');
+    });
   }
 
 }

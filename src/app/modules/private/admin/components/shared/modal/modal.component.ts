@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-modal',

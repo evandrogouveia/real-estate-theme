@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Property } from 'src/app/modules/private/admin/components/properties/models/property.model';
+import { Propriedades } from 'src/app/modules/private/admin/components/properties/models/propriedades.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertiesService {
 
-  private propertiesCollection: AngularFirestoreCollection<Property> = this.afs.collection('properties');
+  private propertiesCollection: AngularFirestoreCollection<Propriedades> = this.afs.collection('properties');
 
   constructor(private afs:AngularFirestore) { }
 
@@ -17,7 +17,7 @@ export class PropertiesService {
   }
 
   //LISTAR PROPRIEDADE POR ID
-  getPropertyDetail(propertyId: string): AngularFirestoreDocument<Property>{
+  getPropertyDetail(propertyId: string): AngularFirestoreDocument<Propriedades>{
     return this.propertiesCollection.doc(propertyId);
   }
 

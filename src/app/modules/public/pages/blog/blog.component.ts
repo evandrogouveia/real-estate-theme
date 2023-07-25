@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
+import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
 import { BlogService } from './services/blog.service';
 
 
@@ -10,7 +11,7 @@ import { BlogService } from './services/blog.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  posts$: Observable<Post[]>
+  posts$: Observable<Post>
   themeConfigSkeletonImage = {
     width: '97%',
     height: '100%',
@@ -41,10 +42,10 @@ export class BlogComponent implements OnInit {
     'border-radius': '10px'
   }
 
-  constructor(private blogService: BlogService) { }
+  constructor(private postsService: PostService) { }
 
   ngOnInit(): void {
-    this.posts$ = this.blogService.getPosts()
+    this.posts$ = this.postsService.getAllPosts();
   }
 
 }

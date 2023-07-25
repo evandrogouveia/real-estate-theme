@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { Category } from '../models/category.model';
+import { ModalComponent } from '../../shared/modal/modal.component';
 import { CategoryService } from '../services/category.service';
 
 @Component({
@@ -12,67 +12,84 @@ import { CategoryService } from '../services/category.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  categories$: Observable<Category[]>;
+  categorias$: Observable<any>;
   dataInput: string;
 
-  categoryId: string;
   isAddMode: boolean;
 
-  addCategoryForm: FormGroup = this.fb.group({
-    id: [undefined],
-    name: ['', Validators.required],
-    description: [''],
-    parentCategory: ['']
+  addCategoriasForm: FormGroup = this.fb.group({
+    ID: [],
+    nome: ['', Validators.required],
   });
 
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private modalService: BsModalService,
+    public bsModalRef: BsModalRef,
   ) { }
 
   ngOnInit(): void {
-    this.categories$ = this.categoryService.getCategory();
+    this.isAddMode = true;
+    this.getCategorias();
+  }
 
-    this.categoryId = this.route.snapshot.paramMap.get('id');
-    this.isAddMode = !this.categoryId;
+  getCategorias() {
+    this.categorias$ = this.categoryService.getAllCategorias();
+  }
 
-    if (!this.isAddMode) {
-      const post: Observable<Category> = this.categoryService.getCategoryDetail(this.categoryId).valueChanges();
-      post.subscribe(data => {
-        this.addCategoryForm.patchValue(data);
+  addUpdadeCateorias(){
+    const ID = this.addCategoriasForm.controls.ID.value;
+    if (ID) {
+      this.categoryService.updateCategoria(ID, this.addCategoriasForm.value).subscribe(() => {
+        this.isAddMode = true;
+        this.addCategoriasForm.reset();
+        this.getCategorias();
+        this.toastr.success('Categoria atualizada com sucesso', '');
+      }, (err) => {
+        this.toastr.error('Ocorreu um erro ao atualizar dados, tente novamente mais tarde', '');
+      });
+    } else {
+      this.categoryService.newCategoria(this.addCategoriasForm.value).subscribe(() => {
+        this.addCategoriasForm.reset();
+        this.getCategorias();
+        this.toastr.success('Categoria salva com sucesso', '');
+      }, (err) => {
+        this.toastr.error('Ocorreu um erro ao cadastrar dados, tente novamente mais tarde', '');
       });
     }
   }
 
-  addCategory(){
-    let category: Category = this.addCategoryForm.value;
-    if (!category.id && this.addCategoryForm.valid) {
-      this.categoryService.addCategory(category);
-      this.addCategoryForm.reset();
-      this.toastr.success('Categoria adicionada com sucesso');
-    }
-  }
-  updateCategory(){
-    let category: Category = this.addCategoryForm.value;
-    this.categoryService.updateCategory(category);
-    this.addCategoryForm.reset();
-    this.router.navigateByUrl('/private/admin/add-category');
-    this.toastr.success('Categoria atualizada com sucesso');
+  setDataCategoria(c): void{
+    this.isAddMode = false;
+    window.scroll(0, 0);
+    this.addCategoriasForm.patchValue(c);
   }
 
-  submit(){
-    if (this.isAddMode) {
-      this.addCategory();
-    } else {
-      this.updateCategory();
-    }
+  openModalConfirmDelete(c){
+    const initialState = {
+      titleModal: 'Deseja realmente excluir esta categoria?',
+      titlePost: c.nome,
+      callback: (result) => {//recebe o evento callback true do modal
+        if (result === true){
+          this.delete(c);
+        }
+      }
+    };
+
+    this.bsModalRef = this.modalService.show(
+      ModalComponent,
+      Object.assign({initialState}, {class: 'modal-all'}),
+    );
+
   }
 
-  delete(c: Category){
-    this.categoryService.deleteCategory(c);
+  delete(c: any){
+    this.categoryService.deleteCategoria(c.ID).subscribe(() => {
+      this.getCategorias();
+      this.toastr.success('Categoria removida com sucesso', '');
+    });
   }
 
 }

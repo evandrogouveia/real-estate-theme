@@ -7,6 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { SinglePropertyComponent } from './components/single-property/single-property.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 @NgModule({
@@ -17,6 +19,8 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     SharedModule,
     GalleryModule,
     LightboxModule,
+    LeafletModule,
+    NgxMaskModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

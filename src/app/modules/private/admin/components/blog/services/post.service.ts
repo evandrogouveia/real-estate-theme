@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Post } from '../models/post.model';
 
 @Injectable({
@@ -7,36 +9,26 @@ import { Post } from '../models/post.model';
 })
 export class PostService {
 
-  private postsCollection: AngularFirestoreCollection<Post> = this.afs.collection('posts', ref => {
-    return ref.orderBy('titlePost', 'asc');
-  });
+  constructor(private http: HttpClient) { }
 
-  constructor(private afs:AngularFirestore) { }
-
-  //LISTAR POSTS
-  getPosts(){
-    return this.postsCollection.valueChanges();
+  /*** SERVIÇOS DE POSTS ***/
+  newPost(post): Observable<Post> {
+    return this.http.post<any>(`${environment.API_URL}/new-post`, post);
   }
-
-  //LISTAR POST POR ID
-  getPostDetail(postId: string): AngularFirestoreDocument<Post>{
-    return this.postsCollection.doc(postId)
+  getPostID(postID): Observable<Post> {
+    return this.http.get<any>(`${environment.API_URL}/post/${postID}`);
   }
-
-  //ADICIONAR POSTS
-  addPost(p: Post){
-    p.id = this.afs.createId();
-    return this.postsCollection.doc(p.id).set(Object.assign({}, p));
+  getAllPosts(): Observable<Post> {
+    return this.http.get<any>(`${environment.API_URL}/all-posts`);
   }
-
-  //ATUALIZAR POSTS
-  updatePost(p: Post){
-    return this.postsCollection.doc(p.id).set(p);
+  getSearchPosts(): Observable<Post> {
+    return this.http.get<any>(`${environment.API_URL}/search-posts`);
   }
-
-  //DELETAR POST
-  deletePost(p: Post){
-    this.postsCollection.doc(p.id).delete();
+  updatePost(postID, post): Observable<Post> {
+    return this.http.patch<any>(`${environment.API_URL}/update-post/${postID}`, post);
+  }
+  deletePost(postID): Observable<Post> {
+    return this.http.delete<any>(`${environment.API_URL}/delete-post/${postID}`);
   }
 
 

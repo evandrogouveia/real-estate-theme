@@ -4,8 +4,8 @@
             <div class="gallerize-example">
                 <div class="wrap-gallery" gallerize>
                     <section class="grid grid-row-2">
-                        <div *ngFor="let img of imageData; let i = index" class="item item-{{i+1}} ">
-                            <img class="img-grid" [src]="img.srcUrl">
+                        <div *ngFor="let img of items; let i = index" class="item item-{{i+1}} ">
+                            <img class="img-grid" [src]="img.data.src">
                         </div>
                     </section>
                 </div>
@@ -17,14 +17,14 @@
         <div class="top-infos">
             <div class="row">
                 <div class="col-lg-8">
-                    <h2>{{(propertyId$ | async)?.titleProperty}}</h2>
+                    <h2>{{propriedadeID[0]?.titulo}}</h2>
                     <p>
                         <i class="bx bx-map"></i> 
-                        {{(propertyId$ | async)?.cityProperty}} - {{(propertyId$ | async)?.ufProperty}}
+                        {{propriedadeID[0]?.endereco.cidade}} - {{propriedadeID[0]?.endereco.uf}}
                     </p>
                 </div>
                 <div class="col-lg-4">
-                    <p class="custom-price">R$ {{(propertyId$ | async)?.priceProperty}}</p>
+                    <p class="custom-price">{{propriedadeID[0]?.preco | currency: 'BRL'}}</p>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                             <div class="items">
                                 <i class='bx bx-bookmark'></i>
                                 <p>ID da propriedade</p>
-                                <span>P5845</span>
+                                <span>{{propriedadeID[0]?.IDPropriedade}}</span>
                             </div>
                         </div>
 
@@ -45,60 +45,42 @@
                             <div class="items">
                                 <i class="bx bx-hotel"></i>
                                 <p>Quartos</p>
-                                <span>{{(propertyId$ | async)?.qtdBedrooms}}</span>
+                                <span>{{propriedadeID[0]?.qtdQuartos}}</span>
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-bath"></i>
                                 <p>Banheiro</p>
-                                <span>{{(propertyId$ | async)?.qtdBathrooms}}</span>
+                                <span>{{propriedadeID[0]?.qtdBanheiros}}</span>
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-car"></i>
                                 <p>Garagem</p>
-                                <span>{{(propertyId$ | async)?.qtdGarages}}</span>
+                                <span>{{propriedadeID[0]?.qtdVagas}}</span>
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class="bx bx-ruler"></i>
                                 <p>Área total</p>
-                                <span>{{(propertyId$ | async)?.areaProperty}} m²</span>
+                                <span>{{propriedadeID[0]?.areaImovel}} m²</span>
                             </div>
                         </div>
                         <div class="col-6 col-lg-4">
                             <div class="items">
                                 <i class='bx bx-dollar-circle'></i>
                                 <p>Preço</p>
-                                <span>R$ {{(propertyId$ | async)?.priceProperty}} </span>
+                                <span>{{propriedadeID[0]?.preco | currency: 'BRL'}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="content-description">
                     <h2>Descrição</h2>
-                    <p>Enjoy the cool serenity of Deering Bay all day from this spectacular North or South, three
-                        bedroom, three
-                        and a half bath Milano unit with 10ft ceilings which provide light and airy views of the golf
-                        course and
-                        pool. Oversized open balconies provide luxurious entertainment spaces. Spacious flow-through
-                        floor plan
-                        with lavish master bedroom suite with his and her walk-in closets,
-                        gourmet cook’s kitchen with granite counters and top of the line Thermador and Sub Zero
-                        appliances.</p>
-
-                    <p>Enjoy the cool serenity of Deering Bay all day from this spectacular North or South, three
-                        bedroom, three
-                        and a half bath Milano unit with 10ft ceilings which provide light and airy views of the golf
-                        course and
-                        pool. Oversized open balconies provide luxurious entertainment spaces. Spacious flow-through
-                        floor plan
-                        with lavish master bedroom suite with his and her walk-in closets,
-                        gourmet cook’s kitchen with granite counters and top of the line Thermador and Sub Zero
-                        appliances.</p>
+                    <p [innerHtml]="propriedadeID[0]?.descricao"></p>
                 </div>
                 <div class="content-description">
                     <h2>Plantas</h2>
@@ -106,17 +88,20 @@
                 </div>
                 <div class="content-description">
                     <h2>Vídeo</h2>
-                    <video width="100%" height="100%" controls>
-                        <source src="assets/img/video.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <video [src]="propriedadeID[0]?.video" width="100%" height="100%" controls></video>
                 </div>
-                <div class="content-description">
+                <div class="content-maps">
                     <h2>Localização</h2>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15345.835038053923!2d-50.15164636244047!3d-15.937401523398883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9367790ac413c979%3A0xbeb1308cbb66ab22!2zR29pw6FzLCBHTywgNzY2MDAtMDAw!5e0!3m2!1spt-BR!2sbr!4v1648675745469!5m2!1spt-BR!2sbr"
-                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <p>
+                        {{propriedadeID[0]?.endereco.rua}} 
+                        {{propriedadeID[0]?.endereco.numero}}, 
+                        {{propriedadeID[0]?.endereco.bairro}},
+                        {{propriedadeID[0]?.endereco.complemento ? propriedadeID[0]?.endereco.complemento + ', ' : ''}}
+                        {{propriedadeID[0]?.endereco.cidade}} - 
+                        {{propriedadeID[0]?.endereco.uf}},
+                        {{propriedadeID[0]?.endereco.cep | mask: '00000-000'}}
+                    </p>
+                    <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"></div>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -163,11 +148,11 @@
                             <ng-container *ngFor="let p of properties$ | async; let i = index">
                                 <li class="list-group-item" *ngIf="i < 5">
                                     <a href="javascript:void(0);" class="d-flex align-items-center">
-                                        <img src="{{p.highlightedImageProperty}}">
+                                        <img src="{{p.imagemDestacada}}">
                                         <p>
-                                            {{(p.titleProperty.length > 25) ? (p.titleProperty | slice:0:25) + ' ...' :
-                                            (p.titleProperty)}}<br>
-                                            <span>R$ {{p.priceProperty}}</span>
+                                            {{(p.titulo.length > 25) ? (p.titulo | slice:0:25) + ' ...' :
+                                            (p.titulo)}}<br>
+                                            <span>R$ {{p.preco | currency: 'BRL'}}</span>
                                         </p>
                                     </a>
                                 </li>
@@ -175,7 +160,7 @@
                         </ul>
                     </div>
                 </div>
-
+                
                 <div class="collumn-right">
                     <h2>Compartilhar</h2>
 
@@ -202,3 +187,4 @@
 
     </div>
 </div>
+

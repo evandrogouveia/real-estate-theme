@@ -62,21 +62,17 @@
         background-color: var(--bg-white-color);
         border: 1px solid #ccd0d4;
         box-shadow: 0 1px 1px rgba(0,0,0,.04);
-        .form-check{
-            padding-left: 5px;
-            input{
-                width: 17px;
-                height: 17px;
-                position: relative;
-                top: 3px;
+        tr{
+            th,td{
+                &:last-child{
+                    width: 120px;
+                    text-align: center;
+                }
             }
         }
         th{
             font-weight: 500;
             background: #f9f9f9;
-            &:nth-child(7){
-                text-align: center;
-            }
         }
         td{
             font-size: 14px;
@@ -91,22 +87,13 @@
                     color:var(--bg-primary-color-hover);
                 }
                 img {
-                    width: 90px;
+                    width: 80px;
+                    height: 70px;
+                    object-fit: cover;
                     border-radius: 5px;
                 }
             }
-            &:nth-child(1){
-                width: 25px;
-            }
-            &:nth-child(2){
-                width: 30%;
-            }
-            &:nth-child(5){
-                width: 125px;
-            }
-            &:nth-child(7){
-                text-align: center;
-            }
+            
             &.empty-user{
                 p{
                     margin: 10px;

@@ -10,11 +10,9 @@ import { SidebarComponent } from './components/painel/sidebar/sidebar.component'
 import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
 import { AddPostsComponent } from './components/blog/add-posts/add-posts.component';
 import { CategoryComponent } from './components/blog/category/category.component';
-import { CommentsComponent } from './components/blog/comments/comments.component';
 import { UsersComponent } from './components/users/users.component';
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { HttpClientModule } from '@angular/common/http';
 import { ListPostsComponent } from './components/blog/list-posts/list-posts.component';
 import { AddUserComponent } from './components/users/add-user/add-user.component';
 import { BsModalRef } from 'ngx-bootstrap';
@@ -22,30 +20,27 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { ModalCommentsComponent } from './components/blog/comments/modal-comments/modal-comments.component';
 import { AddPropertyComponent } from './components/properties/add-property/add-property.component';
 import { ListPropertyComponent } from './components/properties/list-property/list-property.component';
 import { CategoryPropertyComponent } from './components/properties/category-property/category-property.component';
-import { AgmCoreModule } from '@agm/core';
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
-    AdminComponent, 
-    HomeComponent, 
-    HeaderComponent, 
-    SidebarComponent, 
-    AddPostsComponent, 
-    CategoryComponent, 
-    CommentsComponent, 
-    UsersComponent, 
-    EditProfileComponent, 
-    ListPostsComponent, 
-    AddUserComponent, 
-    ModalCommentsComponent, 
-    AddPropertyComponent, 
-    ListPropertyComponent, 
+    AdminComponent,
+    HomeComponent,
+    HeaderComponent,
+    SidebarComponent,
+    AddPostsComponent,
+    CategoryComponent,
+    UsersComponent,
+    EditProfileComponent,
+    ListPostsComponent,
+    AddUserComponent,
+    AddPropertyComponent,
+    ListPropertyComponent,
     CategoryPropertyComponent,
   ],
   imports: [
@@ -55,12 +50,8 @@ registerLocaleData(localePt);
     ReactiveFormsModule,
     NgxBootstrapModule,
     AngularEditorModule,
-    HttpClientModule,
     Ng2SearchPipeModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCzC66os6ra-4rKS59FfISfCfxkK3YM6oo',
-      libraries: ['places']
-    })
+    NgxMaskModule.forRoot()
   ],
   providers: [
     {

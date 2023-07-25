@@ -9,32 +9,32 @@
       </div>
 
       <div class="col-lg-3" *ngFor="let property of returnedArray">
-        <span class="box-property" (click)="routerLinkId(property.id)">
+        <span class="box-property" (click)="routerLinkId(property.ID)">
           <div class="wrap-image">
-            <img src="{{property.highlightedImageProperty}}">
+            <img src="{{property.imagemDestacada}}">
           </div>
           <div class="property-ribon">
-            <span>R$ {{property.priceProperty}}</span>
+            <span>{{property.preco | currency: 'BRL'}}</span>
           </div>
           <div class="texts">
-            <h5>{{property.titleProperty}}</h5>
-            <span><i class='bx bx-map'></i> {{property.cityProperty}} - {{property.ufProperty}}</span>
+            <h5>{{property.titulo}}</h5>
+            <span><i class='bx bx-map'></i> {{property.endereco.cidade}} - {{property.endereco.uf}}</span>
             <div class="property-listing">
               <div class="wrap-icon">
                 <i class='bx bx-hotel'></i>
-                <span>{{property.qtdBedrooms}}</span>
+                <span>{{property.qtdQuartos}}</span>
               </div>
               <div class="wrap-icon">
                 <i class='bx bx-bath'></i>
-                <span>{{property.qtdBathrooms}}</span>
+                <span>{{property.qtdBanheiros}}</span>
               </div>
               <div class="wrap-icon">
                 <i class='bx bx-car'></i>
-                <span>{{property.qtdGarages}}</span>
+                <span>{{property.qtdVagas}}</span>
               </div>
               <div class="wrap-icon">
                 <i class='bx bx-ruler'></i>
-                <span>{{property.areaProperty}} m²</span>
+                <span>{{property.areaImovel}} m²</span>
               </div>
             </div>
           </div>

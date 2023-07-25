@@ -1,234 +1,321 @@
-import { MapsAPILoader, MouseEvent } from '@agm/core';
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { LoginService } from 'src/app/modules/private/login/service/login.service';
-import { Property } from '../models/property.model';
-import { PropertyService } from '../services/property.service';
+import { PropriedadesService } from '../services/propriedades.service';
+import { Endereco, NgxViacepService } from '@brunoc/ngx-viacep';
+import { HttpClient } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-add-property',
   templateUrl: './add-property.component.html',
   styleUrls: ['./add-property.component.scss']
 })
-export class AddPropertyComponent implements OnInit {
+export class AddPropertyComponent implements OnInit, AfterViewInit {
 
-  highlightedImageProperty = 'assets/img/placeholder.jpg';
-  selectedImage: any = null;
+  highlightedImageDestacada = 'assets/img/placeholder.jpg';
+  selectedImageDestacada: any = null;
+
+  emptyImageGallery = 'assets/img/placeholder-white.jpg';
+  highlightedImagesGallery = [];
+  selectedMultiplesImages: any = [];
+
+  emptyImagePlantas = 'assets/img/placeholder-white.jpg';
+  highlightedImagesPlantas = [];
+  selectedMultiplesImagesPlantas: any = [];
+
+  selectedCategoriasPropriedades = [];
+
+  emptyVideo = 'assets/img/placeholder-video.jpg';
+  urlVideo;
+  selectedVideo: File;
+
   loading: boolean = false;
   currentDate = new Date();
   publicationDateProperty;
 
-  latitude: number;
-  longitude: number;
-  zoom:number;
-  address: string;
-  city: string;
-  uf: string;
-
-  private geoCoder;
-
-  @ViewChild('search')
-  public searchElementRef: ElementRef;
+  @ViewChild('search') public searchElementRef: ElementRef;
+  @ViewChildren('inputCategories') inputCategories: QueryList<ElementRef>;
 
   propertyId: string;
   isAddMode: boolean;
 
+  categoriasPropriedades$: Observable<any>;
+
+  searchAddress: string;
+  private geoCoder;
+
   addPropertyForm: FormGroup = this.fb.group({
-    id: [undefined],
-    titleProperty: [''],
-    priceProperty: [''],
-    descriptionProperty: [''],
-    highlightedImageProperty: [''],
-    locationProperty: [''],
-    cityProperty: [''],
-    ufProperty: [''],
-    categoriesProperty: [''],
-    publicationDateProperty: [''],
-    qtdBedrooms: [''],
-    qtdBathrooms: [''],
-    qtdGarages: [''],
-    areaProperty: [''],
+    ID: [null],
+    IDPropriedade: [null, Validators.required],
+    titulo: ['', Validators.required],
+    descricao: ['', Validators.required],
+    imagemDestacada: [''],
+    imagens: [''],
+    preco: ['', Validators.required],
+    qtdQuartos: [''],
+    qtdBanheiros: [''],
+    qtdVagas: [''],
+    areaImovel: [''],
+    plantas: [''],
+    video: [''],
+    endereco: this.fb.group({
+      cep: [''],
+      rua: [''],
+      numero: [''],
+      complemento: [''],
+      bairro: [''],
+      cidade: [''],
+      uf: [''],
+      latitude: [''],
+      longitude: ['']
+    }),
+    enderecoCompleto: [''],
+    categorias: ['']
   });
 
   constructor(
     private fb: FormBuilder,
-    private propertyservice: PropertyService,
-    private loginService: LoginService,
-    private storage: AngularFireStorage,
-    private router: Router,
+    private propriedadesService: PropriedadesService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private router: Router,
+    private viacep: NgxViacepService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
     this.propertyId = this.route.snapshot.paramMap.get('id');
     this.isAddMode = !this.propertyId;
-
-    if (!this.isAddMode) {
-      const post: Observable<Property> = this.propertyservice.getPropertyDetail(this.propertyId).valueChanges();
-      post.subscribe(data => {
-
-        this.addPropertyForm.patchValue(data);
-        this.publicationDateProperty = data.publicationDateProperty;
-        this.address = data.locationProperty;
-
-        if(data.highlightedImageProperty)
-          this.highlightedImageProperty = data.highlightedImageProperty;
-      });
-    }
-    this.initializeMap();
-    
+    this.categoriasPropriedades$ = this.propriedadesService.getAllCategoriasPropriedades();
   }
 
-  showPreviewImage(event: any) {
+  ngAfterViewInit(): void {
+    this.setDataPropriedade();
+  }
+
+  showPreviewImageDestacada(event: any): void {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.highlightedImageProperty = e.target.result;
+      reader.onload = (e: any) => this.highlightedImageDestacada = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
+      this.selectedImageDestacada = event.target.files[0];
     } else {
-      this.highlightedImageProperty = 'assets/img/placeholder.jpg';
-      this.selectedImage = null;
+      this.highlightedImageDestacada = 'assets/img/placeholder.jpg';
+      this.selectedImageDestacada = null;
     }
   }
 
-  addPost() {
-    this.loading = true;
-    const property: Property = this.addPropertyForm.value;
-    if (!property.id) {
-
-      //insere a categoria Default se não for selecionado nenhuma categoria
-      /*const categories = this.selectedCategoryes.length === 0 ? this.selectedCategoryes = ['Default'] :
-        this.selectedCategoryes.filter((category, i) => this.selectedCategoryes.indexOf(category) === i);*/
-
-      //remove as tags html da descrição
-      const description = this.addPropertyForm.value.descriptionProperty.replace(/<[^>]*>/g, '');
-
-      if (this.selectedImage) {
-        const filePath = `imagem/${this.selectedImage.name}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(filePath);
-
-        this.storage.upload(filePath, this.selectedImage).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe((url) => {
-              this.addPropertyForm.value.highlightedImageProperty = url;
-              this.addPropertyForm.value.descriptionProperty = description;
-              this.addPropertyForm.value.publicationDateProperty = this.currentDate;
-              this.addPropertyForm.value.locationProperty = this.address;
-              this.addPropertyForm.value.cityProperty = this.city;
-              this.addPropertyForm.value.ufProperty = this.uf;
-              this.propertyservice.addProperty(property).then(() => {
-                this.loading = false;
-                this.toastr.success('Propriedade adicionada com sucesso');
-              });
-              this.router.navigateByUrl('/private/admin/list-properties');
-            });
-          })
-        ).subscribe();
-      } else {
-        this.addPropertyForm.value.highlightedImageProperty = this.highlightedImageProperty;
-        this.addPropertyForm.value.descriptionProperty = description;
-        this.addPropertyForm.value.publicationDateProperty = this.currentDate;
-        this.addPropertyForm.value.locationProperty = this.address;
-        this.addPropertyForm.value.cityProperty = this.city;
-        this.addPropertyForm.value.ufProperty = this.uf;
-        this.addPropertyForm.value.comments = [];
-        this.propertyservice.addProperty(property).then(() => {
-          this.loading = false;
-          this.toastr.success('Imóvel adicionado com sucesso');
-        });
-        this.router.navigateByUrl('/private/admin/list-posts');
-      }
-
-    }
-  }
-
-  submit() {
-    if (this.isAddMode) {
-      this.addPost();
-    } else {
-      console.log('update');
-    }
-  }
-
-
-  /* INICIALIZAR DADOS DO MAPA */
-  initializeMap() {
-    
-    this.mapsAPILoader.load().then(() => {
-      this.setCurrentLocation();
-      this.geoCoder = new google.maps.Geocoder;
-
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-          
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-          this.getAddress(this.latitude, this.longitude);
-          
-          
-        });
-      });
-    });
-  }
-
-  // OBTER CORDENADAS DE LOCALIZAÇÃO
-  private setCurrentLocation() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 8;
-        this.getAddress(this.latitude, this.longitude);
-      });
-    }
-  }
-
-  
-
-   // OBTER EVENTO DO MARCADOR
-  markerDragEnd($event: MouseEvent) {
-    console.log($event);
-    this.latitude = $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    this.getAddress(this.latitude, this.longitude);
-  }
-
-  // OBTER ENDEREÇO
-  getAddress(latitude, longitude) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      if (status === 'OK') {
-        if (results[0]) {
-          this.zoom = 12;
-          this.address = results[0].formatted_address;
-          this.city = results[0].address_components[4].long_name;
-          this.uf = results[0].address_components[4].short_name;
-        } else {
-          window.alert('Não encontramos nenhum resultado');
+  showPreviewImagesGalery(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files.length <= 10 && (this.selectedMultiplesImages.length + event.target.files.length) <= 10) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < event.target.files.length; i++) {
+          const reader = new FileReader();
+          reader.onload = (e: any) => this.highlightedImagesGallery.push(e.target.result);
+          reader.readAsDataURL(event.target.files[i]);
+          this.selectedMultiplesImages.push(event.target.files[i]);
         }
       } else {
-        window.alert('Geocoder failed due to: ' + status);
+        this.toastr.error('Selecione no máximo 10 imagens', '');
+        return;
       }
+    }
+  }
 
+  showPreviewImagesPlantas(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files.length <= 10 && (this.selectedMultiplesImagesPlantas.length + event.target.files.length) <= 10) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < event.target.files.length; i++) {
+          const reader = new FileReader();
+          reader.onload = (e: any) => this.highlightedImagesPlantas.push(e.target.result);
+          reader.readAsDataURL(event.target.files[i]);
+          this.selectedMultiplesImagesPlantas.push(event.target.files[i]);
+        }
+      } else {
+        this.toastr.error('Selecione no máximo 10 imagens', '');
+        return;
+      }
+    }
+  }
+
+  showPreviewVideo(event) {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.urlVideo = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedVideo = event.target.files[0];
+    } else {
+      this.urlVideo = null;
+    }
+  }
+
+  checkCategory(event, isChecked) {
+    isChecked = event.target.checked;
+
+    if (isChecked) {
+      this.selectedCategoriasPropriedades.push(event.target.value);
+    } else {
+      const index = this.selectedCategoriasPropriedades.indexOf(event.target.value);
+      this.selectedCategoriasPropriedades.splice(index, 1);
+    }
+  }
+
+  removeImageGallery(i) {
+    this.highlightedImagesGallery.splice(i, 1);
+    this.selectedMultiplesImages.splice(i, 1);
+    this.addPropertyForm.controls.imagens.patchValue(this.selectedMultiplesImages);
+  }
+
+  removeImagePlantas(i) {
+    this.highlightedImagesPlantas.splice(i, 1);
+    this.selectedMultiplesImagesPlantas.splice(i, 1);
+    this.addPropertyForm.controls.plantas.patchValue(this.selectedMultiplesImagesPlantas);
+  }
+
+  removeVideo() {
+    this.selectedVideo = null;
+    this.urlVideo = null;
+    this.addPropertyForm.controls.video.patchValue(null);
+  }
+
+  cancelPublication() {
+    this.router.navigate(['private/admin/list-properties']);
+  }
+
+  addUpdadePropriedade() {
+    this.loading = true;
+    this.addPropertyForm.controls.categorias.patchValue(this.selectedCategoriasPropriedades);
+
+    console.log(this.searchAddress)
+
+    const formData = new FormData();
+    formData.append('imagemDestacada', this.selectedImageDestacada);
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.selectedMultiplesImages.length; i++) {
+      formData.append('imagens', this.selectedMultiplesImages[i]);
+    }
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.selectedMultiplesImagesPlantas.length; i++) {
+      formData.append('plantas', this.selectedMultiplesImagesPlantas[i]);
+    }
+
+    formData.append('video', this.selectedVideo);
+
+    formData.append('formPropriedades', JSON.stringify(this.addPropertyForm.value));
+
+    if (this.isAddMode) {
+
+      //remove as tags html da descrição
+      const descricaoFormatada = this.addPropertyForm.value.descricao.replace(/<[^>]*>/g, '');
+      this.addPropertyForm.value.descricao = descricaoFormatada;
+
+      if (this.addPropertyForm.valid) {
+        this.propriedadesService.newPropriedade(formData).subscribe(() => {
+          this.reset();
+          this.toastr.success('Propriedade adicionada com sucesso', '');
+          this.router.navigate(['private/admin/list-properties']);
+        }, (err) => {
+          console.log(err)
+          this.loading = false;
+          this.toastr.error('Ocorreu um erro ao adicionar a Propriedade, tente novamente mais tarde', '');
+        });
+      } else {
+        this.loading = false;
+        this.toastr.error('Preencha os campos obrigatórios', '');
+      }
+    } else {
+      this.propriedadesService.updatePropriedade(this.propertyId, formData).subscribe(() => {
+        this.reset();
+        this.toastr.success('Propriedade atualizada com sucesso', '');
+        this.router.navigate(['private/admin/list-properties']);
+      }, (err) => {
+        this.loading = false;
+        this.toastr.error('Ocorreu um erro ao atualizar a Propriedade, tente novamente mais tarde', '');
+      });
+    }
+  }
+
+  reset(): void {
+    this.loading = false;
+    this.highlightedImagesGallery = [];
+    this.highlightedImagesPlantas = [];
+    this.addPropertyForm.reset();
+  }
+
+  setDataPropriedade() {
+    if (!this.isAddMode) {
+      this.propriedadesService.getPropriedadeID(this.propertyId).subscribe(data => {
+        this.highlightedImagesGallery = JSON.parse(data[0].imagens);
+        this.selectedMultiplesImages = JSON.parse(data[0].imagens);
+
+        this.highlightedImagesPlantas = JSON.parse(data[0].plantas);
+        this.selectedMultiplesImagesPlantas = JSON.parse(data[0].plantas);
+
+        data[0].imagemDestacada ? this.highlightedImageDestacada = data[0].imagemDestacada : this.highlightedImageDestacada = 'assets/img/placeholder.jpg';
+        data[0].video ? this.urlVideo = data[0].video : this.urlVideo = null;
+
+        this.addPropertyForm.patchValue(data[0]);
+        this.addPropertyForm.controls.categorias.patchValue(JSON.parse(data[0].categorias));
+        this.addPropertyForm.controls.imagens.patchValue(JSON.parse(data[0].imagens));
+        this.addPropertyForm.controls.plantas.patchValue(JSON.parse(data[0].plantas));
+        this.addPropertyForm.controls.video.patchValue(data[0].video);
+        this.addPropertyForm.controls.endereco.patchValue(JSON.parse(data[0].endereco));
+        this.selectedCategoriasPropriedades = JSON.parse(data[0].categorias);
+
+        setTimeout(() => {
+          this.inputCategories.forEach(input => {
+            if (JSON.parse(data[0].categorias).includes(input.nativeElement.value)) {
+              input.nativeElement.checked = true;
+            }
+          });
+        });
+      });
+    }
+  }
+
+  getAddressViaCep(): void {
+    const CEP = this.addPropertyForm.controls.endereco.get('cep').value;
+
+    this.viacep.buscarPorCep(CEP).subscribe((endereco: Endereco) => {
+      this.addPropertyForm.controls.endereco.get('rua').setValue(endereco.logradouro);
+      this.addPropertyForm.controls.endereco.get('bairro').setValue(endereco.bairro);
+      this.addPropertyForm.controls.endereco.get('cidade').setValue(endereco.localidade);
+      this.addPropertyForm.controls.endereco.get('uf').setValue(endereco.uf);
+      this.registerDataMarker(endereco);
     });
+  }
+
+  registerDataMarker(address) {
+    let completeAddress = [
+      address.logradouro + ', ' +
+      this.addPropertyForm.controls.endereco.get('numero').value + ' - ' +
+      address.bairro + ', ' +
+      address.localidade + ' - ' +
+      address.uf
+     
+    ];
+    console.log(completeAddress)
+    const request = this.http.get(`https://nominatim.openstreetmap.org/search?format=json&q=${completeAddress}`);
+
+    request.subscribe(res => console.log(res[0]))
+  
+      /*this.geoCoder = new google.maps.Geocoder;
+      this.geoCoder.geocode({ 'address': completeAddress[0] }, (results, status) => {
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
+        console.log(lat);
+        console.log(lng)
+        this.addPropertyForm.controls.endereco.get('latitude').setValue(lat);
+        this.addPropertyForm.controls.endereco.get('longitude').setValue(lng);
+      });*/
+
   }
 
   // tslint:disable-next-line: member-ordering
@@ -239,7 +326,7 @@ export class AddPropertyComponent implements OnInit {
     minHeight: '1rem',
     placeholder: 'Digite o texto aqui...',
     translate: 'no',
-    defaultParagraphSeparator: 'p',
+    defaultParagraphSeparator: ' arrayImagens = [];p',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
       [

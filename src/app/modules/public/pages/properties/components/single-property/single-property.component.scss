@@ -37,7 +37,8 @@
 }
 .content-details,
 .content-description,
-.collumn-right{
+.collumn-right,
+.content-maps{
     padding: 20px;
     background: var(--bg-white-color);
     border: 1px solid #ebebeb;
@@ -188,8 +189,12 @@ p{
         }
     }
 }
-
-
+.content-maps{
+    height: 500px;
+    h2{
+        margin-bottom: 5px;
+    }
+}
 
 
 /*======================= RESPONSIVE =======================*/

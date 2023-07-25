@@ -9,7 +9,7 @@
                     <div class="block-single-post">
                         <div class="row">
                             <div class="col-lg-12">
-                                <img src="{{(post$ | async)?.highlightedImage}}">
+                                <img src="{{post[0]?.imagemDestacada}}">
                             </div>
                             <div class="col-lg-12">
                                 <div class="entry-header">
@@ -17,33 +17,33 @@
                                         <div class="wrapper-info">
                                             <i class='bx bx-calendar'></i>
                                             <span>
-                                                {{(post$ | async)?.publicationDate?.toDate() | date: 'dd'}} de
-                                                {{(post$ | async)?.publicationDate?.toDate() | date: 'MMMM'}} de
-                                                {{(post$ | async)?.publicationDate?.toDate() | date: 'YYYY'}}
+                                                {{post[0]?.dataPublicacao | date: 'dd'}} de
+                                                {{post[0]?.dataPublicacao | date: 'MMMM'}} de
+                                                {{post[0]?.dataPublicacao | date: 'YYYY'}}
                                             </span>
                                         </div>
 
                                         <div class="wrapper-info">
                                             <a href="#">
                                                 <i class='bx bx-folder'></i>
-                                                <span>{{(post$ | async)?.categories}}</span>
+                                                <span>{{post[0]?.categorias}}</span>
                                             </a>
                                         </div>
 
-                                        <div class="wrapper-info">
-                                            <i class='bx bx-comment-detail'></i>
-                                            <span>{{approvedComments?.length}}</span>
-                                        </div>
                                     </div>
 
-                                    <h3>{{(post$ | async)?.titlePost}}</h3>
+                                    <h3>{{post[0]?.titulo}}</h3>
 
                                 </div>
                                 <div class="entry-footer">
-                                    <p>{{(post$ | async)?.descriptionPost}}</p>
+                                    <p [innerHTML]="post[0]?.descricao"></p>
                                 </div>
+
+                               
                             </div>
                         </div>
+                        <div class="fb-comments" [attr.data-href]="url" 
+                        data-width="100%" data-numposts="5" style="width: 100%;display: block;"></div>
                     </div>
 
                     <div class="block-share">
@@ -58,70 +58,6 @@
                             <a href="https://www.linkedin.com/sharing/share-offsite/?url={{url}}" target="_blank">
                                 <i class='bx bxl-linkedin'></i>
                             </a>
-                            <!--a href="#"><i class='bx bxl-instagram'></i></a-->
-                        </div>
-                    </div>
-
-                    <!-- Comentários Aprovados -->
-                    <div *ngIf="approvedComments?.length > 0" class="approved-comments">
-                        <h5>Este post tem {{approvedComments?.length}} comentários</h5>
-                        <ng-container *ngFor="let c of (post$ | async)?.comments">
-                            <div class="wrap-comment" *ngIf="c.status == 'Approved'">
-                                <img src="assets/img/icons/user-empty.svg">
-                                <div class="w-100">
-                                    <div class="comment-author">
-                                        <h5>{{c.name}}</h5>
-                                        <p>
-                                            {{c.commentDate?.toDate() | date: 'dd'}} de
-                                            {{c.commentDate?.toDate() | date: 'MMMM'}} de
-                                            {{c.commentDate?.toDate() | date: 'YYYY'}}
-                                        </p>
-                                    </div>
-                                    <div class="comment-content">
-                                        <p>{{c.comment}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </div>
-                    <div *ngIf="sendMessage" class="pending-message" id="message">
-                        <span>Seu comentário foi enviado e aguarda moderação  :)</span>
-                    </div>
-                    <div class="block-comments">
-                        <div class="wrapper-form-contact">
-                            <h3>Deixe um comentário</h3>
-                            <p>Seu endereço de e-mail não será publicado. Os campos obrigatórios estão marcados com *
-                            </p>
-                            <form [formGroup]="addCommentsForm">
-                                <div class="form-group">
-                                    <label for="message">Adicionar comentário</label>
-                                    <textarea formControlName="comment" class="form-control" id="message"
-                                        rows="5"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Seu Nome*</label>
-                                    <input formControlName="name" type="email" class="form-control" id="name"
-                                    [ngClass]="{'invalid' : submitted && addCommentsForm.controls.name.invalid}">
-                                    <app-error-input 
-                                        [invalid]="submitted && addCommentsForm.controls.name.invalid" 
-                                        [msg]="'Por favor, digite seu nome'">
-                                    </app-error-input>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">E-mail*</label>
-                                    <input formControlName="email" type="text" class="form-control" id="email"
-                                    [ngClass]="{'invalid' : submitted && addCommentsForm.controls.name.invalid}">
-                                    <app-error-input 
-                                        [invalid]="submitted && addCommentsForm.controls.email.invalid" 
-                                        [msg]="'Por favor, digite seu e-mail'">
-                                    </app-error-input>
-                                </div>
-
-                                <button (click)="submit()" type="button" class="btn">
-                                    <img *ngIf="loading" class="loading" src="assets/img/icons/loading-button-white.svg">
-                                    {{ !loading ? 'Publicar comentário' : 'Publicando...' }}                    
-                                </button>
-                            </form>
                         </div>
                     </div>
 
