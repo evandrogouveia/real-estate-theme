@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
 
@@ -7,9 +7,9 @@ import { PostService } from 'src/app/modules/private/admin/components/blog/servi
   templateUrl: './single-blog.component.html',
   styleUrls: ['./single-blog.component.scss']
 })
-export class SingleBlogComponent implements OnInit {
+export class SingleBlogComponent implements OnInit, AfterViewInit {
   post = [];
-  url: any;
+  url: any = 'https://real-estate-theme.vercel.app/';
   currentDate = new Date();
   scrollPosition;
 
@@ -23,9 +23,13 @@ export class SingleBlogComponent implements OnInit {
     this.postsService.getPostID(postId).subscribe((post: any) => {
       post.map(p => p.categorias = JSON.parse(p.categorias));
       this.post = post;
-      console.log(post)
-    })
-    this.url = window.location.href;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.url = window.location.href;
+    }, 1000);
   }
 
 }
