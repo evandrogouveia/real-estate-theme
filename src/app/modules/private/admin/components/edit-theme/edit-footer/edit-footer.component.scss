@@ -97,9 +97,13 @@
                     p + p{
                         margin-bottom: 20px;
                     }
-                    .img-upload{
-                        object-fit: cover;
+                    .avatar{
+                        background-color: #eeeeee;
+                        .img-upload{
+                            object-fit: contain;
+                        }
                     }
+                   
                 }
                 &.card-f{
                     min-height: 920px;

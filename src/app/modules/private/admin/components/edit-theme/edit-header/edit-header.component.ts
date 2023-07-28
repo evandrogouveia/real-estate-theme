@@ -98,7 +98,6 @@ export class EditHeaderComponent implements OnInit {
   getHeader() {
     this.headerService.getHeader().subscribe(header => {
       if (header[0]?.ID) {
-        console.log(header)
         this.logoSrc = header[0].navBar.logo;
         this.isAddMode = false;
         this.addEditHeaderForm.patchValue(header[0]);
