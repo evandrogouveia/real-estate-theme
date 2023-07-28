@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EditThemeService } from 'src/app/modules/private/admin/components/edit-theme/services/edit-theme.service';
 
 @Component({
   selector: 'app-contact',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
+  contato = [];
 
-  constructor() { }
+  constructor(private editThemeService: EditThemeService ) { }
 
   ngOnInit(): void {
+    this.editThemeService.getAllDadosContatos().subscribe(contato => {
+      this.contato = contato;
+      console.log(contato)
+    });
   }
 
 }

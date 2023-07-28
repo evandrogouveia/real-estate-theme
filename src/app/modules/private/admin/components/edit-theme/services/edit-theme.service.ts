@@ -46,4 +46,15 @@ export class EditThemeService {
   updateDadosHome(homeID, home): Observable<any> {
     return this.http.patch<any>(`${environment.API_URL}/update-home/${homeID}`, home);
   }
+
+   /*** SERVIÇOS DE CONTATOS ***/
+   newDadosContatos(contato): Observable<any> {
+    return this.http.post<any>(`${environment.API_URL}/new-contato`, contato);
+  }
+  getAllDadosContatos(): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/all-contato`);
+  }
+  updateDadosContatos(contatoID, contato): Observable<any> {
+    return this.http.patch<any>(`${environment.API_URL}/update-contato/${contatoID}`, contato);
+  }
 }

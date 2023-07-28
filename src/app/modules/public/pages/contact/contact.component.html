@@ -6,8 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="wrapper-form-contact">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p [innerHTML]="contato[0]?.titulo"></p>
                         <form>
                             <div class="form-group">
                                 <label for="name">Nome</label>
@@ -38,31 +37,30 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="contact">
-                            <i class='bx bxs-phone'></i>
-                            <h4>Telefone</h4>
-                            <p>(99) 98999-0000</p>
+                            <i class='{{contato[0]?.coluna1.icone1}}'></i>
+                            <h4>{{contato[0]?.coluna1.tituloColuna1}}</h4>
+                            <p>{{contato[0]?.coluna1.descricaoColuna1}}</p>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="contact">
-                            <i class='bx bxs-envelope'></i>
-                            <h4>E-mail</h4>
-                            <p>adv@advocacy.com.br</p>
+                            <i class='{{contato[0]?.coluna2.icone2}}'></i>
+                            <h4>{{contato[0]?.coluna2.tituloColuna2}}</h4>
+                            <p>{{contato[0]?.coluna2.descricaoColuna2}}</p>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="contact">
-                            <i class="bx bxs-map"></i>
-                            <h4>Nosso endereço</h4>
-                            <p>Durham Street Hialeah, FL 33010</p>
+                            <i class="{{contato[0]?.coluna3.icone3}}"></i>
+                            <h4>{{contato[0]?.coluna3.tituloColuna3}}</h4>
+                            <p>{{contato[0]?.coluna3.descricaoColuna3}}</p>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="contact">
-                            <i class='bx bxs-time-five'></i>
-                            <h4>Funcionamento</h4>
-                            <p> Seg - Sex: 08:00 as 18:00</p>
-                            <p> Sáb - Dom: Fechado</p>
+                            <i class='{{contato[0]?.coluna4.icone4}}'></i>
+                            <h4>{{contato[0]?.coluna4.tituloColuna4}}</h4>
+                            <p class="horary">{{contato[0]?.coluna4.descricaoColuna4}}</p>
                         </div>
                     </div>
                 </div>

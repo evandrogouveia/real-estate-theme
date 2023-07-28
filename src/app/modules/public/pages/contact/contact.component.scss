@@ -71,6 +71,10 @@
                 color: var(--bg-secondary-color);
                 margin-bottom: 0;
                 font-size: 15px;
+                &.horary{
+                    width: 200px;
+                    margin: auto;
+                }
             }
 
         }
