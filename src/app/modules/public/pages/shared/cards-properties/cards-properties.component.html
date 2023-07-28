@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="t-properties text-center">
-          <h3>Imóveis Recentes</h3>
-          <p>Encontre as últimas casas à venda, notícias sobre imóveis e dados do mercado imobiliário.</p>
+          <h3>{{home[0]?.secaoTwo.titulo}}</h3>
+          <p [innerHTML]="home[0]?.secaoTwo.subtitulo"></p>
         </div>
       </div>
 
-      <div class="col-lg-3" *ngFor="let property of returnedArray">
+      <div class="col-lg-{{home[0]?.secaoTwo.gridSecao2}}" *ngFor="let property of returnedArray">
         <span class="box-property" (click)="routerLinkId(property.ID)">
           <div class="wrap-image">
             <img src="{{property.imagemDestacada}}">

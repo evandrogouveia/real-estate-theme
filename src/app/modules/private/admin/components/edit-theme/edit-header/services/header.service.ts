@@ -1,67 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Navbar } from '../models/navbar.model';
-import { Topbar } from '../models/topbar.model';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeaderService {
 
-  private topbarCollection: AngularFirestoreCollection<Topbar> = this.afs.collection('topbar', ref => {
-    return ref.orderBy('email', 'asc');
-  })
+  constructor(private http: HttpClient) { }
 
-  private navbarCollection: AngularFirestoreCollection<Navbar> = this.afs.collection('navbar', ref => {
-    return ref.orderBy('id', 'asc');
-  })
-
-  constructor(private afs:AngularFirestore) { }
-
-  //GET TOPBAR
-  getTopbar(){
-    return this.topbarCollection.valueChanges();
+  /*** SERVIÇOS DO HEADER ***/
+  newHeader(header): Observable<any> {
+    return this.http.post<any>(`${environment.API_URL}/new-header`, header);
   }
-
-  //GET TOPBAR ID
-  getTopbarDetail(tId: string): AngularFirestoreDocument<Topbar>{
-    return this.topbarCollection.doc(tId)
+  getHeader(): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/all-header`);
   }
-
-  //ADICIONAR TOPBAR
-  addTopbar(t: Topbar){
-    t.id = this.afs.createId();
-    return this.topbarCollection.doc(t.id).set(t);
+  updateHeader(headerID, header): Observable<any> {
+    return this.http.patch<any>(`${environment.API_URL}/update-header/${headerID}`, header);
   }
-
-  //UPDATE TOPBAR
-  updateTopbar(t: Topbar){
-    return this.topbarCollection.doc(t.id).set(t);
-  }
-
-
-
-  //GET NAVBAR
-  getNavbar(){
-    return this.navbarCollection.valueChanges();
-  }
-
-  //GET NAVBAR ID
-  getNavbarDetail(nId: string): AngularFirestoreDocument<Navbar>{
-    return this.navbarCollection.doc(nId)
-  }
-
-  //ADICIONAR NAVBAR
-  addNavbar(n: Navbar){
-    n.id = this.afs.createId();
-    return this.navbarCollection.doc(n.id).set(n);
-  }
-
-  //UPDATE NAVBAR
-  updateNavbar(n: Navbar){
-    return this.navbarCollection.doc(n.id).set(n);
-  }
-
-
-  
 }

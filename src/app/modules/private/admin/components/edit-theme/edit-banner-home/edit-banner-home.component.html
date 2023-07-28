@@ -7,7 +7,7 @@
         </div>
 
         <div class="card card-edit">
-            <form class="form-banner">
+            <form class="form-banner" [formGroup]="addBannerHomeForm" (ngSubmit)="addUpdadeBannerHome()">
                 <h5>Adicionar banner</h5>
                 <div class="row">
                     <div class="col-lg-12">
@@ -28,15 +28,17 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label for="title">Título</label>
-                                            <input type="email" class="form-control" id="title">
+                                            <input type="email" class="form-control" id="title"
+                                                formControlName="titulo">
                                         </div>
                                         <div class="form-group">
                                             <label for="descricao">Descrição</label>
-                                            <textarea class="form-control" id="descricao" rows="3"></textarea>
+                                            <textarea class="form-control" id="descricao" rows="3"
+                                                formControlName="descricao"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="link">Link do botão</label>
-                                            <input type="text" class="form-control" id="link">
+                                            <input type="text" class="form-control" id="link" formControlName="link">
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +48,9 @@
                 </div>
 
                 <div class="d-flex align-items-center justify-content-end">
-                    <button type="submit" class="btn btn-save-form">Adicionar</button>
+                    <button type="submit" class="btn btn-save-form">
+                        {{ !this.isAddMode ? 'Atualizar' : 'Salvar'}}
+                    </button>
                 </div>
             </form>
         </div>
@@ -57,61 +61,29 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">
-                                <div class="form-check">
-                                    <input type="checkbox">
-                                </div>
-                            </th>
                             <th scope="col">Imagem</th>
                             <th scope="col">Título</th>
                             <th scope="col">Descrição</th>
+                            <th scope="col">Link</th>
                             <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let banner of (banners$ | async)">
+                            <td><img class="img-banner" [src]="banner.imagem" alt="imagem-banner"></td>
+                            <td>{{banner.titulo}}</td>
+                            <td>{{banner.descricao}}</td>
+                            <td>{{banner.link}}</td>
                             <td>
-                                <div class="form-check">
-                                    <input type="checkbox">
-                                </div>
-                            </td>
-                            <td><img class="img-banner" src="assets/img/slide-1.jpg" alt="imagem-banner"></td>
-                            <td><a href="#">Insuring Your Future From Today </a></td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
-                            <td>
-                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
+                                <i class="icon-edit" tooltip="Editar" (click)="setDataBanners(banner)"></i>
+                                <i class="icon-delete" tooltip="Excluir" (click)="openModalConfirmDelete(banner)"></i>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox">
-                                </div>
+                        <tr *ngIf="(banners$ | async)?.length === 0">
+                            <td class="empty-user" colspan="6">
+                              <p>Nenhum banner cadastrado</p>
                             </td>
-                            <td><img class="img-banner" [src]="imagemSrc" alt="imagem-banner"></td>
-                            <td><a href="#">Insuring Your Future From Today </a></td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</td>
-                            <td>
-                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input type="checkbox">
-                                </div>
-                            </td>
-                            <td><img class="img-banner" [src]="imagemSrc" alt="imagem-banner"></td>
-                            <td><a href="#">Insuring Your Future From Today </a></td>
-                            <td>-</td>
-                            <td>
-                                <a href="#"><i class="icon-edit" tooltip="Editar"></i></a>
-                                <a href="#"><i class="icon-delete" tooltip="Excluir"></i></a>
-                            </td>
-                        </tr>
-
+                          </tr>
                     </tbody>
 
                 </table>
@@ -120,7 +92,7 @@
 
         <div class="card card-edit">
             <h5>Banner Páginas</h5>
-            <form class="form-banner-pages">
+            <form class="form-banner-pages" [formGroup]="addBannerPaginasForm" (ngSubmit)="addUpdadeBannerPaginas()">
                 <div class="table-responsive">
                     <table class="table table-banner-pages">
                         <thead>
@@ -140,12 +112,12 @@
                             <tr>
                                 <td colspan="2">
                                     <div class="wrap-banner-pages">
-                                        <img class="img-banner-pages" [src]="imagemSrc" alt="imagem-banner">
-                                        <input type="file" #fileUploader accept="image/*" class="form-control"
+                                        <img class="img-banner-pages" [src]="imagemSrcPaginas" alt="imagem-banner">
+                                        <input type="file" #fileUploaderPaginas accept="image/*" class="form-control"
                                             id="avatar" aria-describedby="nome" placeholder="imagem"
-                                            (change)="showPreviewImage($event)" hidden>
+                                            (change)="showPreviewImagePaginas($event)" hidden>
                                         <div class="box-icon-picture">
-                                            <p (click)="fileUploader.click()">Alterar imagem</p>
+                                            <p (click)="fileUploaderPaginas.click()">Alterar imagem</p>
                                         </div>
                                     </div>
                                     <div class="text-recommended">

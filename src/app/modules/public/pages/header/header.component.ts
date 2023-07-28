@@ -12,8 +12,8 @@ export class HeaderComponent implements OnInit {
   scrollPosition;
   toggled = true;
   retract = 'toggled';
-  topbarData: any = [];
-  navbarData: any = [];
+  headerData: any = [];
+
   inputLoading = false;
 
   constructor(
@@ -27,18 +27,16 @@ export class HeaderComponent implements OnInit {
       this.scrollPosition = window.scrollY;
     });
     this.inputLoading = true;
-    this.headerService.getTopbar().subscribe(data => {
+    this.headerService.getHeader().subscribe(data => {
       if (data) {
         setTimeout(() => {
           this.inputLoading = false;
         }, 1500)
       } 
-      this.topbarData = data
+      this.headerData = data
     });
 
-    this.headerService.getNavbar().subscribe(data => {
-      this.navbarData = data;
-    });
+  
   }
 
   toggleSidebar() {

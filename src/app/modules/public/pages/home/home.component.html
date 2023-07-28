@@ -1,51 +1,20 @@
 <section>
   <div class="slider-home w-100">
     <owl-carousel-o [options]="customOptions">
-      <ng-template carouselSlide>
-        <div class="container">
-          <div class="caption-carousel">
-            <h2>Agora ficou fácil encontrar sua futura casa </h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <a routerLink="/properties" class="nav-link">Ver mais</a>
+      <ng-container *ngFor="let b of (banners$ | async)">
+        <ng-template carouselSlide>
+          <div class="container">
+            <div class="caption-carousel">
+              <h2>{{b.titulo}}</h2>
+              <p>{{b.descricao}}</p>
+              <a [routerLink]="b.link" class="nav-link">Ver mais</a>
+            </div>
           </div>
-        </div>
-        <div class="overlay">
-          <img src="assets/img/banner-1.jpg">
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="container">
-          <div class="caption-carousel">
-            <h2>Agora ficou fácil encontrar sua futura casa </h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <a routerLink="/properties" class="nav-link">Ver mais</a>
+          <div class="overlay">
+            <img [src]="b.imagem">
           </div>
-        </div>
-        <div class="overlay">
-          <img src="assets/img/banner-2.jpg">
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="container">
-          <div class="caption-carousel">
-            <h2>Agora ficou fácil encontrar sua futura casa </h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <a routerLink="/properties" class="nav-link">Ver mais</a>
-          </div>
-        </div>
-        <div class="overlay">
-          <img src="assets/img/banner-3.jpg">
-        </div>
-      </ng-template>
+        </ng-template>
+      </ng-container>
     </owl-carousel-o>
   </div>
 </section>
@@ -63,9 +32,9 @@
           <div class="col-lg-3 box-filter">
             <div class="form-group">
               <select class="form-control" id="exampleFormControlSelect1">
-                <option>Categoria</option>
-                <option>Apartamentos</option>
-                <option>Casas</option>
+                <option value="" selected disabled>Categoria</option>
+                <option *ngFor="let c of (categorias$ | async)" [value]="c.nome">{{c.nome}}</option>
+              
               </select>
             </div>
           </div>
@@ -74,7 +43,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
               </div>
-              <input type="text" class="form-control" placeholder="Preço Min.">
+              <input type="text" class="form-control price" placeholder="Preço Min." mask="separator.2" [decimalMarker]="','"
+              thousandSeparator="." [dropSpecialCharacters]="true" >
             </div>
           </div>
           <div class="col-lg-2 box-filter">
@@ -82,7 +52,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text">$</span>
               </div>
-              <input type="text" class="form-control" placeholder="Preço Max.">
+              <input type="text" class="form-control price" placeholder="Preço Max." mask="separator.2" [decimalMarker]="','"
+              thousandSeparator="." [dropSpecialCharacters]="true">
             </div>
           </div>
           <div class="col-lg-2 box-filter">
@@ -94,51 +65,51 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="f-service text-center">
-            <h3>Melhores Imóveis</h3>
-            <p>Junto com a gestão de propriedades, oferecemos também serviços imobiliários.</p>
+            <h3>{{home[0]?.secaoOne.titulo}}</h3>
+            <p [innerHTML]="home[0]?.secaoOne.subtitulo"></p>
           </div>
         </div>
 
         <div class="col-lg-3">
           <div class="wrap-icons">
             <div class="icon-circle">
-              <i class='bx bx-home-smile'></i>
+              <i class='{{home[0]?.secaoOne.coluna1.icone1}}'></i>
             </div>
-            <h4>Encontre sua casa</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt</p>
+            <h4>{{home[0]?.secaoOne.coluna1.tituloColuna1}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna1.descricaoColuna1"></p>
           </div>
         </div>
+        
         <div class="col-lg-3">
           <div class="wrap-icons">
             <div class="icon-circle">
-              <i class='bx bx-chat'></i>
+              <i class='{{home[0]?.secaoOne.coluna2.icone2}}'></i>
             </div>
-            <h4>Apoio online</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt</p>
+            <h4>{{home[0]?.secaoOne.coluna2.tituloColuna2}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna2.descricaoColuna2"></p>
           </div>
         </div>
+
         <div class="col-lg-3">
           <div class="wrap-icons">
             <div class="icon-circle">
-              <i class='bx bx-book'></i>
+              <i class='{{home[0]?.secaoOne.coluna3.icone3}}'></i>
             </div>
-            <h4>Suporte jurídico</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt</p>
+            <h4>{{home[0]?.secaoOne.coluna3.tituloColuna3}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna3.descricaoColuna3"></p>
           </div>
         </div>
+
         <div class="col-lg-3">
           <div class="wrap-icons">
             <div class="icon-circle">
-              <i class='bx bx-key'></i>
+              <i class='{{home[0]?.secaoOne.coluna4.icone4}}'></i>
             </div>
-            <h4>Pegue a chave</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt</p>
+            <h4>{{home[0]?.secaoOne.coluna4.tituloColuna4}}</h4>
+            <p [innerHTML]="home[0]?.secaoOne.coluna4.descricaoColuna4"></p>
           </div>
         </div>
+      
       </div>
 
     </div>
@@ -146,7 +117,7 @@
 </section>
 
 <section>
-  <app-cards-properties [hasPaginator]="false"></app-cards-properties>
+  <app-cards-properties [hasPaginator]="true"></app-cards-properties>
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
@@ -157,7 +128,8 @@
 </section>
 
 <section>
-  <div class="section-row-testimony">
+  <div *ngIf="backgroundDepoimentos.length > 0" class="section-row-testimony" 
+    [ngStyle]="{background: 'url('+backgroundDepoimentos[0]?.background+')', backgroundSize: 'cover'}">
 
     <div class="col-lg-12 text-center">
       <h3>Depoimentos</h3>
@@ -165,63 +137,25 @@
     </div>
 
     <owl-carousel-o [options]="customOptionsTestimony">
-      <ng-template carouselSlide>
-        <div class="container">
-          <div class="caption-carousel">
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <ng-container *ngFor="let d of (depoimentos$ | async)">
+        <ng-template carouselSlide>
+          <div class="container">
+            <div class="caption-carousel">
+              <p [innerHTML]="d.descricao"></p>
+            </div>
           </div>
-        </div>
-        <div class="wrap-user-testimony">
-          <div class="overlay">
-            <img src="assets/img/man.jpg">
+          <div class="wrap-user-testimony">
+            <div class="overlay">
+              <img [src]="d.imagem">
+            </div>
+            <div>
+              <h5>{{d.nome}}</h5>
+              <p>{{d.funcao}}</p>
+            </div>
           </div>
-          <div>
-            <h5>Jonh Doe</h5>
-            <p>Advogado</p>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="container">
-          <div class="caption-carousel">
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-        </div>
-        <div class="wrap-user-testimony">
-          <div class="overlay">
-            <img src="assets/img/pretty.jpg">
-          </div>
-          <div>
-            <h5>Nancy Freeman</h5>
-            <p>Psicóloga</p>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template carouselSlide>
-        <div class="container">
-          <div class="caption-carousel">
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-        </div>
-        <div class="wrap-user-testimony">
-          <div class="overlay">
-            <img src="assets/img/man.jpg">
-          </div>
-          <div>
-            <h5>Jonh Doe</h5>
-            <p>Advogado</p>
-          </div>
-        </div>
-      </ng-template>
+        </ng-template>
+      </ng-container>
+      
     </owl-carousel-o>
 
   </div>
@@ -233,31 +167,29 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="t-title text-center">
-            <p>Notícias</p>
-            <h3>Blog</h3>
+            <p>{{home[0]?.secaoNoticias.titulo}}</p>
+            <h3 [innerHTML]="home[0]?.secaoNoticias.subtitulo"></h3>
           </div>
         </div>
 
-        <div class="col-lg-4" *ngFor="let p of posts$ | async">
+        <div class="col-lg-{{home[0]?.secaoNoticias.gridNoticias}}" *ngFor="let p of posts$ | async">
           <div class="card">
-            <a routerLink="/blog/single-blog/{{p.id}}" class="box-image">
-              <img class="card-img-top" src="{{p.highlightedImage}}" alt="Card image cap">
+            <a routerLink="/blog/single-blog/{{p.ID}}" class="box-image">
+              <img class="card-img-top" src="{{p.imagemDestacada}}" alt="Card image cap">
             </a>
             <div class="card-body">
-              <h5 class="card-title">{{(p.titlePost.length > 55) ? (p.titlePost | slice:0:55) + ' ...' : (p.titlePost)}}
+              <h5 class="card-title">{{(p.titulo?.length > 55) ? (p.titulo | slice:0:55) + ' ...' : (p.titulo)}}
               </h5>
               <div class="date d-flex align-items-center">
                 <i class='bx bx-calendar'></i>
                 <span>
-                  {{p.publicationDate.toDate() | date: 'dd'}} de
-                  {{p.publicationDate.toDate() | date: 'MMMM'}} de
-                  {{p.publicationDate.toDate() | date: 'YYYY'}}
+                  {{p.dataPublicacao | date: 'dd'}} de
+                  {{p.dataPublicacao | date: 'MMMM'}} de
+                  {{p.dataPublicacao | date: 'YYYY'}}
                 </span>
               </div>
-              <p class="card-text">
-                {{(p.descriptionPost.length > 200) ? (p.descriptionPost | slice:0:200) + ' ...' : (p.descriptionPost)}}
-              </p>
-              <a routerLink="/blog/single-blog/{{p.id}}" class="btn btn-readmore">
+              <p class="card-text" [innerHTML]="(p.descricao?.length > 200) ? (p.descricao | slice:0:200) + ' ...' : (p.descricao)"></p>
+              <a routerLink="/blog/single-blog/{{p.ID}}" class="btn btn-readmore">
                 Ver mais
                 <i class='bx bx-chevron-right bx-sm'></i>
               </a>

@@ -24,6 +24,7 @@ import { AddPropertyComponent } from './components/properties/add-property/add-p
 import { ListPropertyComponent } from './components/properties/list-property/list-property.component';
 import { CategoryPropertyComponent } from './components/properties/category-property/category-property.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { DepoimentosComponent } from './components/depoimentos/depoimentos.component';
 
 registerLocaleData(localePt);
 
@@ -42,6 +43,7 @@ registerLocaleData(localePt);
     AddPropertyComponent,
     ListPropertyComponent,
     CategoryPropertyComponent,
+    DepoimentosComponent,
   ],
   imports: [
     CommonModule,

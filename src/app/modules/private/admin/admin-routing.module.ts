@@ -12,6 +12,7 @@ import { AuthGuardService } from '../login/auth/auth-guard.service';
 import { AddPropertyComponent } from './components/properties/add-property/add-property.component';
 import { ListPropertyComponent } from './components/properties/list-property/list-property.component';
 import { CategoryPropertyComponent } from './components/properties/category-property/category-property.component';
+import { DepoimentosComponent } from './components/depoimentos/depoimentos.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,8 @@ const routes: Routes = [
       {path: 'add-property', component: AddPropertyComponent},
       {path: 'edit-property/:id', component: AddPropertyComponent},
       {path: 'list-properties', component: ListPropertyComponent},
+
+      {path: 'depositions', component: DepoimentosComponent},
 
       {path: 'users', component: UsersComponent},
       {path: 'edit-profile/:id', component: EditProfileComponent},

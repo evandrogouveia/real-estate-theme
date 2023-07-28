@@ -8,6 +8,7 @@ import { NgxLoadingModule,  ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
 import { FormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes
-    })
+    }),
+    NgxMaskModule.forRoot()
   ],
   exports: [
     EntryBannerPagesComponent,
@@ -36,6 +38,7 @@ import { FormsModule } from '@angular/forms';
     NgxSkeletonLoaderModule,
     NgxLoadingModule,
     NgxBootstrapModule,
+    NgxMaskModule
   ]
 })
 export class SharedModule { }

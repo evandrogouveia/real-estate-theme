@@ -6,20 +6,20 @@
                 <div class="col-lg-12">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="section-left d-flex">
-                            <p><i class='bx bxs-envelope'></i> {{topbarData[0]?.email}}</p>
-                            <p><i class='bx bxs-map'></i> {{topbarData[0]?.address}}</p>
+                            <p><i class='bx bxs-envelope'></i> {{headerData[0]?.topBar.email}}</p>
+                            <p><i class='bx bxs-map'></i> {{headerData[0]?.topBar.enderecoCompleto}}</p>
                         </div>
                         <div class="socials d-flex align-items-center justify-content-between">
-                            <a *ngIf="(topbarData[0]?.facebook).length > 0" class="nav-link" href="{{topbarData[0]?.facebook}}" target="_blank">
+                            <a *ngIf="headerData[0]?.topBar.facebook.length > 0" class="nav-link" href="{{headerData[0]?.topBar.facebook}}" target="_blank">
                                 <i class='bx bxl-facebook'></i>
                             </a>
-                            <a *ngIf="(topbarData[0]?.twitter).length > 0" class="nav-link" href="{{topbarData[0]?.twitter}}">
+                            <a *ngIf="headerData[0]?.topBar.twitter.length > 0" class="nav-link" href="{{headerData[0]?.topBar.twitter}}">
                                 <i class='bx bxl-twitter'></i>
                             </a>
-                            <a *ngIf="(topbarData[0]?.telegram).length > 0" class="nav-link" href="{{topbarData[0]?.telegram}}">
+                            <a *ngIf="headerData[0]?.topBar.telegram.length > 0" class="nav-link" href="{{headerData[0]?.topBar.telegram}}">
                                 <i class='bx bxl-telegram'></i>
                             </a>
-                            <a *ngIf="(topbarData[0]?.instagram).length > 0" class="nav-link" href="{{topbarData[0]?.instagram}}">
+                            <a *ngIf="headerData[0]?.topBar.instagram.length > 0" class="nav-link" href="{{headerData[0]?.topBar.instagram}}">
                                 <i class='bx bxl-instagram'></i>
                             </a>
                         </div>
@@ -32,8 +32,7 @@
     <nav class="navbar navbar-expand-lg navbar-light" [ngClass]="{'fixed-top': scrollPosition > 50}">
         <div class="container">
             <a class="navbar-brand" routerLink="/home" routerLinkActive="active">
-                <!--img src="{{navbarData[0]?.logo}}"-->
-                  <img src="assets/img/logoipsum.svg">
+                <img src="{{headerData[0]?.navBar.logo}}">
             </a>
             <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
                 <i class='bx bx-menu'></i>
@@ -43,19 +42,19 @@
                 <i class='bx bx-x bx-md d-lg-none' (click)="toggleSidebar()"></i>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item" (click)="toggleSidebar()">
-                        <a class="nav-link" routerLink="/home" routerLinkActive="active">{{navbarData[0]?.menu1}}</a>
+                        <a class="nav-link" routerLink="/home" routerLinkActive="active">{{headerData[0]?.navBar.menu1}}</a>
                     </li>
                     <li class="nav-item" (click)="toggleSidebar()">
-                        <a class="nav-link" routerLink="/about" routerLinkActive="active">{{navbarData[0]?.menu2}}</a>
+                        <a class="nav-link" routerLink="/about" routerLinkActive="active">{{headerData[0]?.navBar.menu2}}</a>
                     </li>
                     <li class="nav-item" (click)="toggleSidebar()">
-                        <a class="nav-link" routerLink="/properties" routerLinkActive="active">{{navbarData[0]?.menu3}}</a>
+                        <a class="nav-link" routerLink="/properties" routerLinkActive="active">{{headerData[0]?.navBar.menu3}}</a>
                     </li>
                     <li class="nav-item" (click)="toggleSidebar()">
-                        <a class="nav-link" routerLink="/blog" routerLinkActive="active">{{navbarData[0]?.menu4}}</a>
+                        <a class="nav-link" routerLink="/blog" routerLinkActive="active">{{headerData[0]?.navBar.menu4}}</a>
                     </li>
                     <li class="nav-item" (click)="toggleSidebar()">
-                        <a class="nav-link" routerLink="/contact" routerLinkActive="active">{{navbarData[0]?.menu5}}</a>
+                        <a class="nav-link" routerLink="/contact" routerLinkActive="active">{{headerData[0]?.navBar.menu5}}</a>
                     </li>
                 </ul>
 

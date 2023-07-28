@@ -192,8 +192,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
     this.loading = true;
     this.addPropertyForm.controls.categorias.patchValue(this.selectedCategoriasPropriedades);
 
-    console.log(this.searchAddress)
-
     const formData = new FormData();
     formData.append('imagemDestacada', this.selectedImageDestacada);
     // tslint:disable-next-line: prefer-for-of

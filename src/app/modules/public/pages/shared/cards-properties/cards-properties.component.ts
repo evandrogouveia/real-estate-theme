@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { EditThemeService } from 'src/app/modules/private/admin/components/edit-theme/services/edit-theme.service';
 import { Propriedades } from 'src/app/modules/private/admin/components/properties/models/propriedades.model';
 import { PropriedadesService } from 'src/app/modules/private/admin/components/properties/services/propriedades.service';
 import { PropertiesService } from '../../properties/services/properties.service';
@@ -14,19 +15,27 @@ import { PropertiesService } from '../../properties/services/properties.service'
 })
 export class CardsPropertiesComponent implements OnInit {
   @Input() hasPaginator: boolean;
+  @Input() dataHome: any;
   properties$: Observable<Propriedades>;
   contentArray: any = [];
   returnedArray: Propriedades[]
   itemsPerPage= 8;
+  home = [];
 
   constructor(
     private propriedadesService: PropriedadesService,
-    private router: Router
+    private router: Router,
+    private editThemeService: EditThemeService
     ) { }
 
   ngOnInit(): void {
     this.properties$ = this.propriedadesService.getAllPropriedades();
     this.getPropertiesPagination();
+
+    this.editThemeService.getAllDadosHome().subscribe(home => {
+      this.home = home;
+      console.log(home)
+    });
   }
 
   getPropertiesPagination() {

@@ -53,10 +53,9 @@
     </div>
 
     <div class="wrap-menu">
-      <i (click)="comments.click()" class="bx bx-message-rounded"></i>
-      <!--small *ngIf="qtdCommentsPending > 0">{{qtdCommentsPending}}</small-->
-      <a #comments routerLink="/private/admin/comments" routerLinkActive="active" class="list-group-item">
-        <span>Comentários</span>
+      <i (click)="depoimentos.click()" class="bx bx-message-rounded"></i>
+      <a #depoimentos routerLink="/private/admin/depositions" routerLinkActive="active" class="list-group-item" (click)="toggleSidebar()">
+        <span>Depoimentos</span>
       </a>
     </div>
 
@@ -87,10 +86,7 @@
       </a>
     </div>
     <div *ngIf="!retract" id="collapsePersonalize" class="collapse-menu" [collapse]="!isCollapsedD" [isAnimated]="true">
-      <a routerLink="/private/admin/edit-theme/edit-areas" routerLinkActive="active" class="list-group-item"
-        (click)="toggleSidebar()">
-        <span>Áreas de atuação</span>
-      </a>
+     
       <a routerLink="/private/admin/edit-theme/edit-banners" routerLinkActive="active" class="list-group-item"
         (click)="toggleSidebar()">
         <span>Banners</span>

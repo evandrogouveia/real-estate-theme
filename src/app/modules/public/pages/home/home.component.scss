@@ -55,11 +55,20 @@
                 border-bottom-right-radius: 15px;
                 padding-right: 30px;
             }
+            .input-group-prepend, .input-group-text{
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
             input, select{
                 height: 45px;
+                border-radius: 10px;
                 &:focus{
                     box-shadow: none;
                     border: 2px solid var(--bg-primary-color);
+                }
+                &.price{
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
                 }
             }
             .btn-filter{
@@ -145,7 +154,7 @@
 
 .section-row-testimony{
     display: block;
-    background: url('/assets/img/testimony.jpg') no-repeat;
+    //background: url('/assets/img/testimony.jpg') no-repeat;
     background-size: cover;
     margin-bottom: 75px;
     position: relative;

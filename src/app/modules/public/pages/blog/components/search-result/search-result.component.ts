@@ -37,13 +37,4 @@ export class SearchResultComponent implements OnInit {
     });
   }
 
-  getValueMessage(value){//recebe valor da busca do aside lateral através do EventEmitter
-    if(value){
-      console.log(value)
-      /*this.posts$ = this.blogService.searchByCategory(
-        value.charAt(0).toUpperCase() + value.substr(1).toLowerCase()
-      )*/
-    }
-  }
-
 }
