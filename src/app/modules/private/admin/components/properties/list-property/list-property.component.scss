@@ -65,8 +65,15 @@
         tr{
             th,td{
                 &:last-child{
-                    width: 120px;
+                    width: 165px;
                     text-align: center;
+                    i.bx-duplicate{
+                        font-size: 23px;
+                        color: #919194;
+                        &:hover{
+                            color: rgb(72, 102, 236);
+                        }
+                    }
                 }
             }
         }

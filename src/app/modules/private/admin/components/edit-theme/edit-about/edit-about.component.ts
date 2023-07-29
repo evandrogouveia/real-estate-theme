@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { ToastrService } from 'ngx-toastr';
+import { EditThemeService } from '../services/edit-theme.service';
 
 @Component({
   selector: 'app-edit-about',
@@ -10,17 +12,46 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 export class EditAboutComponent implements OnInit {
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-  checked: boolean = true;
+  isAddMode: boolean;
 
-  aboutFooterForm: FormGroup = this.fb.group({
-    htmlContentDescription1: [''],
-    htmlContentDescription2: [''],
-    htmlContentDescription3: [''],
+  quemSomosForm: FormGroup = this.fb.group({
+    ID: [],
+    imagem: [''],
+    titulo: [''],
+    descricao: [''],
+    textoInferior: [''],
+    coluna1: this.fb.group({
+      titulo: [''],
+      descricao: ['']
+    }),
+    coluna2: this.fb.group({
+      titulo: [''],
+      descricao: ['']
+    }),
+    coluna3: this.fb.group({
+      titulo: [''],
+      descricao: ['']
+    })
   });
 
-  constructor(private fb: FormBuilder,) { }
+  constructor(
+    private fb: FormBuilder,
+    private editThemeService: EditThemeService,
+    private toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
+    this.isAddMode = true;
+    this.setDataForms();
+  }
+
+  setDataForms() {
+    this.editThemeService.getAllQuemSomos().subscribe(data => {
+      if (data[0]) {
+        this.imagemSrc = data[0]?.imagem
+        this.quemSomosForm.patchValue(data[0]);
+      }
+    });
   }
 
   showPreviewImage(event: any) {
@@ -30,13 +61,33 @@ export class EditAboutComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      this.imagemSrc = 'assets/img/icons/user-empty.svg';
+      this.imagemSrc = 'assets/img/placeholder.jpg';
       this.selectedImage = null;
     }
   }
 
-  isChecked(event){
-    this.checked = event.target.checked;
+  addUpdateQuemSomos() {
+    const ID = this.quemSomosForm.controls.ID.value;
+
+    const formData = new FormData();
+
+    formData.append('imagem', this.selectedImage);
+    formData.append('formQuemSomos', JSON.stringify(this.quemSomosForm.value));
+    if (ID) {
+      this.editThemeService.updateQuemSomos(ID, formData).subscribe(() => {
+        this.setDataForms();
+        this.toastr.success('Dados atualizado com sucesso', '');
+      }, (err) => {
+        this.toastr.error('Ocorreu um erro ao atualizar dados, tente novamente mais tarde', '');
+      });
+    } else {
+      this.editThemeService.newQuemSomos(formData).subscribe(() => {
+        this.setDataForms();
+        this.toastr.success('Dados salvo com sucesso', '');
+      }, (err) => {
+        this.toastr.error('Ocorreu um erro ao salvar dados, tente novamente mais tarde', '');
+      });
+    }
   }
 
   config: AngularEditorConfig = {
@@ -56,7 +107,7 @@ export class EditAboutComponent implements OnInit {
         'insertUnorderedList',
         'insertOrderedList',
       ]
-      ],
+    ],
     customClasses: [
       {
         name: "quote",
@@ -72,7 +123,7 @@ export class EditAboutComponent implements OnInit {
         tag: "h1",
       },
     ],
-    
+
   };
 
 }

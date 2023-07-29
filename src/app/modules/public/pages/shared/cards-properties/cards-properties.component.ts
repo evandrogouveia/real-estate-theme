@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EditThemeService } from 'src/app/modules/private/admin/components/edit-theme/services/edit-theme.service';
 import { Propriedades } from 'src/app/modules/private/admin/components/properties/models/propriedades.model';
 import { PropriedadesService } from 'src/app/modules/private/admin/components/properties/services/propriedades.service';
-import { PropertiesService } from '../../properties/services/properties.service';
+
 
 @Component({
   selector: 'app-cards-properties',
@@ -34,14 +34,12 @@ export class CardsPropertiesComponent implements OnInit {
 
     this.editThemeService.getAllDadosHome().subscribe(home => {
       this.home = home;
-      console.log(home)
     });
   }
 
   getPropertiesPagination() {
     this.properties$.pipe(
       map((value: any) => {
-        value.map(p => p.endereco = JSON.parse(p.endereco))
         this.contentArray = value;
         this.returnedArray = this.contentArray.slice(0,8);
       })
@@ -49,13 +47,14 @@ export class CardsPropertiesComponent implements OnInit {
   }
 
   pageChanged(event: PageChangedEvent): void {
+    window.scrollTo(0, 200);
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.returnedArray = this.contentArray.slice(startItem, endItem);
   }
 
   routerLinkId(idProperty) {
-    this.router.navigate([`/properties/${idProperty}`]);
+    this.router.navigate([`/propriedades/${idProperty}`]);
   }
 
 }

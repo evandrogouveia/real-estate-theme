@@ -1,6 +1,6 @@
 export interface Propriedades {
     ID: number;
-    IDPropriedade: number;
+    IDPropriedade: string;
     titulo: string;
     descricao: string;
     imagemDestacada: string;

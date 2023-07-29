@@ -16,6 +16,7 @@
                 <thead>
                   <tr>
                     <th scope="col">Miniatura</th>
+                    <th scope="col">IDPropriedade</th>
                     <th scope="col">Título</th>
                     <th scope="col">Categorias</th>
                     <th scope="col">Preço</th>
@@ -24,24 +25,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let p of (properties$ | async) | filter:term">
+                  <tr *ngFor="let p of returnedArray | filter:term">
                     <td>
                       <a routerLink="/private/admin/edit-posts/{{p.ID}}">
                         <img src="{{p.imagemDestacada}}">
                       </a>
                     </td>
+                    <td>P-{{ p.IDPropriedade}}</td>
                     <td><a routerLink="/private/admin/edit-posts/{{p.ID}}">{{(p.titulo.length > 40) ? (p.titulo | slice:0:40) + ' ...' : (p.titulo)}}</a></td>
-                    <td>
-                     {{ getJsonFromObj(p.categorias) }}
-                    </td>
+                    <td>{{ p.categorias ?  p.categorias : 'Sem categoria'}}</td>
                     <td>{{p.preco | currency: 'BRL'}}</td>
                     <td>{{p.dataPublicacao | date: 'dd/MM/yyyy'}}</td>
                     <td>
+                        <a href="javascript:void(0)" (click)="duplicateItem(p)"><i class="bx bx-duplicate" tooltip="Duplicar"></i></a>
                         <a routerLink="/private/admin/edit-property/{{p.ID}}"><i class="icon-edit" tooltip="Editar"></i></a>
                         <a href="javascript:void(0)" (click)="openModalConfirmDelete(p)"><i class="icon-delete" tooltip="Excluir"></i></a>
                     </td>
                   </tr>
-                  <tr *ngIf="(properties$ | async)?.length === 0">
+                  <tr *ngIf="returnedArray[0] && returnedArray[0]?.length === 0">
                     <td class="empty-user" colspan="6">
                       <p>Nenhuma propriedade cadastrada</p>
                     </td>
@@ -49,6 +50,10 @@
                 </tbody>
                
               </table>
+
+              <pagination *ngIf="contentArray.length > 8" previousText="Anterior" nextText="Próximo" [totalItems]="contentArray.length"
+              [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)">
+              </pagination>
         </div>
         
     </div>

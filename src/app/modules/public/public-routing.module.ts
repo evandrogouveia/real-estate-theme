@@ -7,10 +7,10 @@ const routes: Routes = [
   {
     path: '', component: PublicComponent, children: [
       { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
-      { path: 'about', loadChildren: () => import('./pages/about-us/about-us.module').then(m => m.AboutUsModule) },
-      { path: 'properties', loadChildren: () => import('./pages/properties/properties.module').then(m => m.PropertiesModule) },
+      { path: 'quem-somos', loadChildren: () => import('./pages/about-us/about-us.module').then(m => m.AboutUsModule) },
+      { path: 'propriedades', loadChildren: () => import('./pages/properties/properties.module').then(m => m.PropertiesModule) },
       { path: 'blog', loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule) },
-      { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
+      { path: 'contato', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
       {path: '', pathMatch: 'full', redirectTo: 'home'},
     ]
   }

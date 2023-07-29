@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddPropertyComponent implements OnInit, AfterViewInit {
 
-  highlightedImageDestacada = 'assets/img/placeholder.jpg';
+  highlightedImageDestacada = ['assets/img/placeholder.jpg'];
   selectedImageDestacada: any = null;
 
   emptyImageGallery = 'assets/img/placeholder-white.jpg';
@@ -40,6 +40,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
 
   @ViewChild('search') public searchElementRef: ElementRef;
   @ViewChildren('inputCategories') inputCategories: QueryList<ElementRef>;
+  @ViewChildren('inputGalleryImages') inputGalleryImages: QueryList<ElementRef>;
 
   propertyId: string;
   isAddMode: boolean;
@@ -99,14 +100,14 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   }
 
   showPreviewImageDestacada(event: any): void {
+    this.highlightedImageDestacada = [];
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.highlightedImageDestacada = e.target.result;
+      reader.onload = (e: any) => this.highlightedImageDestacada.push(e.target.result);
+      console.log(this.highlightedImageDestacada)
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImageDestacada = event.target.files[0];
-    } else {
-      this.highlightedImageDestacada = 'assets/img/placeholder.jpg';
-      this.selectedImageDestacada = null;
+      this.addPropertyForm.controls.imagemDestacada.patchValue(this.highlightedImageDestacada);
     }
   }
 
@@ -119,6 +120,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
           reader.onload = (e: any) => this.highlightedImagesGallery.push(e.target.result);
           reader.readAsDataURL(event.target.files[i]);
           this.selectedMultiplesImages.push(event.target.files[i]);
+          this.addPropertyForm.controls.imagens.patchValue(this.highlightedImagesGallery);
         }
       } else {
         this.toastr.error('Selecione no máximo 10 imagens', '');
@@ -136,6 +138,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
           reader.onload = (e: any) => this.highlightedImagesPlantas.push(e.target.result);
           reader.readAsDataURL(event.target.files[i]);
           this.selectedMultiplesImagesPlantas.push(event.target.files[i]);
+          this.addPropertyForm.controls.plantas.patchValue(this.highlightedImagesPlantas);
         }
       } else {
         this.toastr.error('Selecione no máximo 10 imagens', '');
@@ -169,13 +172,13 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   removeImageGallery(i) {
     this.highlightedImagesGallery.splice(i, 1);
     this.selectedMultiplesImages.splice(i, 1);
-    this.addPropertyForm.controls.imagens.patchValue(this.selectedMultiplesImages);
+    this.addPropertyForm.controls.imagens.patchValue(this.highlightedImagesGallery);
   }
 
   removeImagePlantas(i) {
     this.highlightedImagesPlantas.splice(i, 1);
     this.selectedMultiplesImagesPlantas.splice(i, 1);
-    this.addPropertyForm.controls.plantas.patchValue(this.selectedMultiplesImagesPlantas);
+    this.addPropertyForm.controls.plantas.patchValue(this.highlightedImagesPlantas);
   }
 
   removeVideo() {
@@ -193,23 +196,11 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
     this.addPropertyForm.controls.categorias.patchValue(this.selectedCategoriasPropriedades);
 
     const formData = new FormData();
-    formData.append('imagemDestacada', this.selectedImageDestacada);
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.selectedMultiplesImages.length; i++) {
-      formData.append('imagens', this.selectedMultiplesImages[i]);
-    }
-
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.selectedMultiplesImagesPlantas.length; i++) {
-      formData.append('plantas', this.selectedMultiplesImagesPlantas[i]);
-    }
 
     formData.append('video', this.selectedVideo);
-
     formData.append('formPropriedades', JSON.stringify(this.addPropertyForm.value));
 
     if (this.isAddMode) {
-
       //remove as tags html da descrição
       const descricaoFormatada = this.addPropertyForm.value.descricao.replace(/<[^>]*>/g, '');
       this.addPropertyForm.value.descricao = descricaoFormatada;
@@ -250,26 +241,36 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   setDataPropriedade() {
     if (!this.isAddMode) {
       this.propriedadesService.getPropriedadeID(this.propertyId).subscribe(data => {
-        this.highlightedImagesGallery = JSON.parse(data[0].imagens);
-        this.selectedMultiplesImages = JSON.parse(data[0].imagens);
 
-        this.highlightedImagesPlantas = JSON.parse(data[0].plantas);
-        this.selectedMultiplesImagesPlantas = JSON.parse(data[0].plantas);
+        if (data[0].imagemDestacada) {
+          this.highlightedImageDestacada = data[0].imagemDestacada;
+        }
+        if (data[0].imagens) {
+          data[0].imagens.map(img => {
+            this.highlightedImagesGallery.push(img);
+            this.selectedMultiplesImages.push(img);
+          });
+        }
+        if (data[0].plantas) {
+          data[0].plantas.map(planta => {
+            this.highlightedImagesPlantas.push(planta);
+            this.selectedMultiplesImagesPlantas.push(planta);
+          });
+        }
 
-        data[0].imagemDestacada ? this.highlightedImageDestacada = data[0].imagemDestacada : this.highlightedImageDestacada = 'assets/img/placeholder.jpg';
         data[0].video ? this.urlVideo = data[0].video : this.urlVideo = null;
 
         this.addPropertyForm.patchValue(data[0]);
-        this.addPropertyForm.controls.categorias.patchValue(JSON.parse(data[0].categorias));
-        this.addPropertyForm.controls.imagens.patchValue(JSON.parse(data[0].imagens));
-        this.addPropertyForm.controls.plantas.patchValue(JSON.parse(data[0].plantas));
+        this.addPropertyForm.controls.categorias.patchValue(data[0].categorias);
+        this.addPropertyForm.controls.imagens.patchValue(data[0].imagens);
+        this.addPropertyForm.controls.plantas.patchValue(data[0].plantas);
         this.addPropertyForm.controls.video.patchValue(data[0].video);
-        this.addPropertyForm.controls.endereco.patchValue(JSON.parse(data[0].endereco));
-        this.selectedCategoriasPropriedades = JSON.parse(data[0].categorias);
+        this.addPropertyForm.controls.endereco.patchValue(data[0].endereco);
+        this.selectedCategoriasPropriedades = data[0].categorias;
 
         setTimeout(() => {
           this.inputCategories.forEach(input => {
-            if (JSON.parse(data[0].categorias).includes(input.nativeElement.value)) {
+            if (data[0].categorias.includes(input.nativeElement.value)) {
               input.nativeElement.checked = true;
             }
           });
@@ -297,22 +298,22 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
       address.bairro + ', ' +
       address.localidade + ' - ' +
       address.uf
-     
+
     ];
     console.log(completeAddress)
     const request = this.http.get(`https://nominatim.openstreetmap.org/search?format=json&q=${completeAddress}`);
 
     request.subscribe(res => console.log(res[0]))
-  
-      /*this.geoCoder = new google.maps.Geocoder;
-      this.geoCoder.geocode({ 'address': completeAddress[0] }, (results, status) => {
-        const lat = results[0].geometry.location.lat();
-        const lng = results[0].geometry.location.lng();
-        console.log(lat);
-        console.log(lng)
-        this.addPropertyForm.controls.endereco.get('latitude').setValue(lat);
-        this.addPropertyForm.controls.endereco.get('longitude').setValue(lng);
-      });*/
+
+    /*this.geoCoder = new google.maps.Geocoder;
+    this.geoCoder.geocode({ 'address': completeAddress[0] }, (results, status) => {
+      const lat = results[0].geometry.location.lat();
+      const lng = results[0].geometry.location.lng();
+      console.log(lat);
+      console.log(lng)
+      this.addPropertyForm.controls.endereco.get('latitude').setValue(lat);
+      this.addPropertyForm.controls.endereco.get('longitude').setValue(lng);
+    });*/
 
   }
 

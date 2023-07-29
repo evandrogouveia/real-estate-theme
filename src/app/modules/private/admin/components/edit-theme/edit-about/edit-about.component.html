@@ -5,9 +5,9 @@
                 <h4>Editar Quem somos</h4>
             </div>
         </div>
+        <form class="form-about-upper" [formGroup]="quemSomosForm" (ngSubmit)="addUpdateQuemSomos()">
+            <div class="card card-edit">
 
-        <div class="card card-edit">
-            <form class="form-about-upper">
                 <h5>Seção: Superior</h5>
                 <div class="row">
                     <div class="col-lg-12">
@@ -27,16 +27,19 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label for="title">Título</label>
-                                            <input type="email" class="form-control" id="title">
+                                            <label for="titulo">Título</label>
+                                            <input type="email" class="form-control" id="titulo"
+                                                formControlName="titulo">
                                         </div>
                                         <div class="form-group">
                                             <label for="descricao">Descrição</label>
-                                            <textarea class="form-control" id="descricao" rows="3"></textarea>
+                                            <textarea class="form-control" id="descricao" rows="3"
+                                                formControlName="descricao"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label for="link">Texto inferior da imagem</label>
-                                            <input type="text" class="form-control" id="link">
+                                            <label for="textoInferior">Texto inferior da imagem</label>
+                                            <input type="text" class="form-control" id="textoInferior"
+                                                formControlName="textoInferior">
                                         </div>
                                     </div>
                                 </div>
@@ -48,83 +51,96 @@
                 <div class="d-flex align-items-center justify-content-end">
                     <button type="submit" class="btn btn-save-form">Salvar</button>
                 </div>
-            </form>
-        </div>
 
-        <div class="card card-edit">
-            <form class="form-about-bottom" [formGroup]="aboutFooterForm">
+            </div>
+
+            <div class="card card-edit">
+
                 <h5>Seção: Inferior</h5>
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card card-topbar">
-                            <div class="title-card">
-                                <p>Textos 1</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="title">Título</label>
-                                            <input type="email" class="form-control" id="title">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="descricao">Descrição</label>
-                                            <angular-editor formControlName="htmlContentDescription1" [config]="config"></angular-editor>
+                    <ng-container formGroupName="coluna1">
+
+                        <div class="col-lg-4">
+                            <div class="card card-topbar">
+                                <div class="title-card">
+                                    <p>Textos 1</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="titulo">Título</label>
+                                                <input type="text" class="form-control" id="titulo"
+                                                    formControlName="titulo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descricao">Descrição</label>
+                                                <angular-editor formControlName="descricao"
+                                                    [config]="config"></angular-editor>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card card-topbar">
-                            <div class="title-card">
-                                <p>Textos 2</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="title">Título</label>
-                                            <input type="email" class="form-control" id="title">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="descricao">Descrição</label>
-                                            <angular-editor formControlName="htmlContentDescription2" [config]="config"></angular-editor>
+                    </ng-container>
+                    <ng-container formGroupName="coluna2">
+                        <div class="col-lg-4">
+                            <div class="card card-topbar">
+                                <div class="title-card">
+                                    <p>Textos 2</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="title">Título</label>
+                                                <input type="email" class="form-control" id="title"
+                                                    formControlName="titulo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descricao">Descrição</label>
+                                                <angular-editor formControlName="descricao"
+                                                    [config]="config"></angular-editor>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card card-topbar">
-                            <div class="title-card">
-                                <p>Textos 3</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="title">Título</label>
-                                            <input type="email" class="form-control" id="title">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="descricao">Descrição</label>
-                                            <angular-editor formControlName="htmlContentDescription3" [config]="config"></angular-editor>
+                    </ng-container>
+                    <ng-container formGroupName="coluna3">
+                        <div class="col-lg-4">
+                            <div class="card card-topbar">
+                                <div class="title-card">
+                                    <p>Textos 3</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="title">Título</label>
+                                                <input type="email" class="form-control" id="title"
+                                                    formControlName="titulo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descricao">Descrição</label>
+                                                <angular-editor formControlName="descricao"
+                                                    [config]="config"></angular-editor>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </ng-container>
                 </div>
 
                 <div class="d-flex align-items-center justify-content-end">
                     <button type="submit" class="btn btn-save-form">Salvar</button>
                 </div>
-            </form>
-        </div>
 
+            </div>
+        </form>
     </div>
 </section>

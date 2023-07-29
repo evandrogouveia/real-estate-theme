@@ -53,7 +53,7 @@ export class SinglePropertyComponent implements OnInit {
   getPropriedade() {
     const propertyId = this.route.snapshot.paramMap.get('id');
     this.propriedadesService.getPropriedadeID(propertyId).subscribe((p: any) => {
-      p[0].endereco = JSON.parse(p[0].endereco);
+      console.log(p)
       this.getGalleryTop(p);
       this.getGalleryPlans(p);
       this.propriedadeID = p;
@@ -96,7 +96,7 @@ export class SinglePropertyComponent implements OnInit {
   }
 
   getGalleryTop(p) {
-    const dataGallery = JSON.parse(p[0].imagens);
+    const dataGallery = p[0].imagens;
     this.items = dataGallery.map(item => new ImageItem({
       src: item, thumb: item
     }));
@@ -111,10 +111,12 @@ export class SinglePropertyComponent implements OnInit {
   }
 
   getGalleryPlans(p) {
-    const dataPlantas = JSON.parse(p[0].plantas);
-    this.itemsPlans = dataPlantas.map(item => new ImageItem({
-      src: item, thumb: item
-    }));
+    const dataPlantas = p[0].plantas;
+    if (dataPlantas) {
+      this.itemsPlans = dataPlantas.map(item => new ImageItem({
+        src: item, thumb: item
+      }));
+    }
 
     const galleryBoxRef = this.gallery.ref('gallery-plans');
 

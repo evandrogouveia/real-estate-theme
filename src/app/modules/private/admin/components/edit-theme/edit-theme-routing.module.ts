@@ -8,7 +8,6 @@ import { EditHeaderComponent } from './edit-header/edit-header.component';
 import { EditHomeComponent } from './edit-home/edit-home.component';
 import { EditThemeComponent } from './edit-theme.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
-import { EditAreasComponent } from './edit-areas/edit-areas.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 
 const routes: Routes = [
@@ -21,7 +20,6 @@ const routes: Routes = [
       {path: 'edit-banners', component: EditBannerHomeComponent},
       {path: 'edit-home', component: EditHomeComponent},
       {path: 'edit-about', component: EditAboutComponent},
-      {path: 'edit-areas', component: EditAreasComponent},
       {path: 'edit-contact', component: EditContactComponent},
     ],
   },

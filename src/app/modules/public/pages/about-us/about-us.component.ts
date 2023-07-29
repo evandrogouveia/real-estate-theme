@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EditThemeService } from 'src/app/modules/private/admin/components/edit-theme/services/edit-theme.service';
 
 @Component({
   selector: 'app-about-us',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutUsComponent implements OnInit {
 
-  constructor() { }
+  quemSomos = [];
+
+  constructor(private editThemeService: EditThemeService) { }
 
   ngOnInit(): void {
+    this.editThemeService.getAllQuemSomos().subscribe(data => {
+      this.quemSomos = data;
+      console.log(data)
+    })
   }
 
 }
