@@ -25,6 +25,7 @@ import { ListPropertyComponent } from './components/properties/list-property/lis
 import { CategoryPropertyComponent } from './components/properties/category-property/category-property.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { DepoimentosComponent } from './components/depoimentos/depoimentos.component';
+import { AgmCoreModule } from '@agm/core';
 
 registerLocaleData(localePt);
 
@@ -53,6 +54,10 @@ registerLocaleData(localePt);
     NgxBootstrapModule,
     AngularEditorModule,
     Ng2SearchPipeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCzC66os6ra-4rKS59FfISfCfxkK3YM6oo',
+      libraries: ['places']
+    }),
     NgxMaskModule.forRoot()
   ],
   providers: [

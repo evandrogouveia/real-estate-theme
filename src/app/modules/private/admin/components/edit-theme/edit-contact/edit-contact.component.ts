@@ -1,5 +1,7 @@
+import { MapsAPILoader } from '@agm/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Endereco, NgxViacepService } from '@brunoc/ngx-viacep';
 import { ToastrService } from 'ngx-toastr';
 import { arrayIcones } from '../../shared/arrayIcones';
 import { EditThemeService } from '../services/edit-theme.service';
@@ -14,6 +16,8 @@ export class EditContactComponent implements OnInit {
   icones = arrayIcones;
 
   isAddMode: boolean;
+
+  private geoCoder;
 
   contatoForm: FormGroup = this.fb.group({
     ID: [],
@@ -38,13 +42,25 @@ export class EditContactComponent implements OnInit {
       tituloColuna4: [''],
       descricaoColuna4: [''],
     }),
-    linkMapa: ['']
+    endereco: this.fb.group({
+      cep: [''],
+      rua: [''],
+      numero: [''],
+      complemento: [''],
+      bairro: [''],
+      cidade: [''],
+      uf: [''],
+      latitude: [''],
+      longitude: ['']
+    }),
   });
 
   constructor(
     private fb: FormBuilder,
     private editThemeService: EditThemeService,
     private toastr: ToastrService,
+    private viacep: NgxViacepService,
+    private mapsAPILoader: MapsAPILoader,
   ) { }
 
   ngOnInit(): void {
@@ -80,5 +96,37 @@ export class EditContactComponent implements OnInit {
         this.toastr.error('Ocorreu um erro ao salvar dados, tente novamente mais tarde', '');
       });
     }
+  }
+
+  getAddressViaCep(): void {
+    const CEP = this.contatoForm.controls.endereco.get('cep').value;
+
+    this.viacep.buscarPorCep(CEP).subscribe((endereco: Endereco) => {
+      this.contatoForm.controls.endereco.get('rua').setValue(endereco.logradouro);
+      this.contatoForm.controls.endereco.get('bairro').setValue(endereco.bairro);
+      this.contatoForm.controls.endereco.get('cidade').setValue(endereco.localidade);
+      this.contatoForm.controls.endereco.get('uf').setValue(endereco.uf);
+      this.registerDataMarker(endereco);
+    });
+  }
+
+  registerDataMarker(address) {
+    let completeAddress = [
+      address.logradouro+', '+
+      this.contatoForm.controls.endereco.get('numero').value +' - '+ 
+      address.bairro +', '+
+      address.localidade +' - '+
+      address.uf +', '+
+      address.cep
+    ];
+    this.mapsAPILoader.load().then(() => {;
+      this.geoCoder = new google.maps.Geocoder;
+      this.geoCoder.geocode({ 'address': completeAddress[0] }, (results, status) => {
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
+        this.contatoForm.controls.endereco.get('latitude').setValue(lat);
+        this.contatoForm.controls.endereco.get('longitude').setValue(lng);
+      });
+     });
   }
 }

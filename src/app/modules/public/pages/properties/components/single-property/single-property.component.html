@@ -90,7 +90,7 @@
                     <h2>Vídeo</h2>
                     <video [src]="propriedadeID[0]?.video" width="100%" height="100%" controls></video>
                 </div>
-                <!--div class="content-maps">
+                <div class="content-maps">
                     <h2>Localização</h2>
                     <p>
                         {{propriedadeID[0]?.endereco.rua}} 
@@ -101,8 +101,23 @@
                         {{propriedadeID[0]?.endereco.uf}},
                         {{propriedadeID[0]?.endereco.cep | mask: '00000-000'}}
                     </p>
-                    <div class="map-container" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"></div>
-                </div-->
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+                        <ng-container *ngIf="propriedadeID.length > 0">
+                            <agm-marker 
+                            [latitude]="lat" 
+                            [longitude]="lng"
+                            [iconUrl]="'assets/img/custom-marker.png'"
+                            >
+                            <agm-info-window>
+                                <strong>
+                                    {{propriedadeID[0]?.titulo}}
+                                </strong>
+                              </agm-info-window>
+                        </agm-marker>
+                        </ng-container>
+                      
+                    </agm-map>
+                </div>
             </div>
             <div class="col-lg-4">
                 <div class="collumn-right">

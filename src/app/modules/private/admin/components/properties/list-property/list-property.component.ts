@@ -17,7 +17,7 @@ export class ListPropertyComponent implements OnInit {
   dataInput: string;
   contentArray: any = [];
   returnedArray: any = [];
-  itemsPerPage= 8;
+  itemsPerPage = 8;
 
   constructor(
     private propriedadesService: PropriedadesService,
@@ -46,6 +46,8 @@ export class ListPropertyComponent implements OnInit {
 
   duplicateItem(p) {
     const formData = new FormData();
+    p.IDPropriedade = p.IDPropriedade+'- cópia';
+    p.titulo = p.titulo+'- cópia';
     formData.append('formPropriedades', JSON.stringify(p));
     this.propriedadesService.newPropriedade(formData).subscribe(() => {
       this.toastr.success('Propriedade duplicada com sucesso', '');

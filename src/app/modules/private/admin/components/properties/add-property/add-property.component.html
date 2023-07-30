@@ -110,11 +110,11 @@
                         <label for="imagens">Vídeo <small>(Formato: MP4)</small></label>
                         <div class="wrap-imagens-propriedade">
                             <div class="video-propriedade">
-                                <img *ngIf="!urlVideo" class="img-upload" [src]="emptyVideo" width="100%" height="100%"
+                                <img *ngIf="urlVideo.length === 0" class="img-upload" [src]="emptyVideo" width="100%" height="100%"
                                     alt="imagens-galeria" (click)="fileUploaderVideo.click()">
-                                <span *ngIf="!urlVideo"><i class='bx bx-plus'></i></span>
-                                <video *ngIf="urlVideo" [src]="urlVideo" width="100%" height="100%" controls></video>
-                                <div *ngIf="urlVideo" class="wrap-remove">
+                                <span *ngIf="urlVideo.length === 0"><i class='bx bx-plus'></i></span>
+                                <video *ngIf="urlVideo.length > 0" [src]="urlVideo" width="100%" height="100%" controls></video>
+                                <div *ngIf="urlVideo.length > 0" class="wrap-remove">
                                     <i class='bx bx-trash' (click)="removeVideo()"></i>
                                 </div>
                                 <input type="file" #fileUploaderVideo accept="video/mp4" class="form-control"
@@ -170,7 +170,7 @@
                         </div>
                     </ng-container>
                     <div class="fixed-buttons-form">
-                        <button type="submit" class="btn btn-cancel" (click)="cancelPublication()">
+                        <button type="button" class="btn btn-cancel" (click)="cancelPublication()">
                             Cancelar
                         </button>
                         <button type="submit" class="btn btn-save-form">

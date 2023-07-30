@@ -14,7 +14,6 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
     this.editFooterService.getFooter().subscribe(footer => {
       this.footer = footer;
-      console.log(footer)
     });
   }
 

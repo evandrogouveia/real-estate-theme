@@ -7,8 +7,8 @@ import { SharedModule } from '../shared/shared.module';
 import { SinglePropertyComponent } from './components/single-property/single-property.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgxMaskModule } from 'ngx-mask';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -19,7 +19,10 @@ import { NgxMaskModule } from 'ngx-mask';
     SharedModule,
     GalleryModule,
     LightboxModule,
-    LeafletModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCzC66os6ra-4rKS59FfISfCfxkK3YM6oo',
+      libraries: ['places']
+    }),
     NgxMaskModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

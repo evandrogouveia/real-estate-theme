@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Propriedades } from 'src/app/modules/private/admin/components/properties/models/propriedades.model';
 import { PropriedadesService } from 'src/app/modules/private/admin/components/properties/services/propriedades.service';
 import * as Leaflet from 'leaflet';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'app-single-property',
@@ -26,18 +27,14 @@ export class SinglePropertyComponent implements OnInit {
   bsInlineValue = new Date();
 
   neighborhoodAndCity: string;
-  map!: Leaflet.Map;
-  markers: Leaflet.Marker[] = [];
-  options = {
-    layers: [
-      Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: null
-      })
-    ],
-    zoom: 16,
-  }
+  lat: number;
+  lng: number;
+  zoom: number;
+
+  private geoCoder;
 
   constructor(
+    private mapsAPILoader: MapsAPILoader,
     private propriedadesService: PropriedadesService,
     public gallery: Gallery,
     public lightbox: Lightbox,
@@ -53,47 +50,51 @@ export class SinglePropertyComponent implements OnInit {
   getPropriedade() {
     const propertyId = this.route.snapshot.paramMap.get('id');
     this.propriedadesService.getPropriedadeID(propertyId).subscribe((p: any) => {
-      console.log(p)
       this.getGalleryTop(p);
       this.getGalleryPlans(p);
       this.propriedadeID = p;
-      this.initMarkers(p[0]);
+      console.log(p)
+      this.initializeMap(p[0].endereco);
     });
   }
 
-  initMarkers(propriedade) {
-    console.log(parseFloat(propriedade.endereco.latitude))
-    const initialMarkers = [
-      {
-        position: { lat: parseFloat(propriedade.endereco.latitude), lng: parseFloat(propriedade.endereco.longitude) },
-        draggable: false,
+   /* INICIALIZAR DADOS DO MAPA */
+   initializeMap(address): void {
+    this.mapsAPILoader.load().then(() => {
+      this.geoCoder = new google.maps.Geocoder;
+
+      if (address) {
+        this.neighborhoodAndCity = address.bairro + ', ' + address.cidade;
+        this.geoCoder.geocode({ 'address': this.neighborhoodAndCity }, (res) => {
+          if (res[0]) {
+            this.lat = res[0].geometry.location.lat();
+            this.lng = res[0].geometry.location.lng();
+            this.zoom = 15;
+          }
+        });
       }
-    ];
-    for (let index = 0; index < initialMarkers.length; index++) {
-      const data = initialMarkers[index];
-      const marker = this.generateMarker(data, index);
-      marker.addTo(this.map).bindPopup(`<b>${propriedade.titulo}</b>`);
-      this.map.panTo(data.position);
-      this.markers.push(marker)
-    }
+    });
   }
 
-  onMapReady($event: Leaflet.Map) {
-    this.map = $event;
+   // OBTER ENDEREÇO
+   getAddress(latitude, longitude): void {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          //this.address = results[0].formatted_address;
+          //this.city = results[0].address_components[4].long_name;
+          //this.uf = results[0].address_components[4].short_name;
+        } else {
+          window.alert('Não encontramos nenhum resultado');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+    });
   }
 
-  generateMarker(data: any, index: number) {
-    const myIcon = Leaflet.icon({
-      iconUrl: 'assets/img/custom-marker.png',
-      iconSize: [50, 50],
-      iconAnchor: [22, 94],
-      popupAnchor: [4, -90],
-      shadowUrl: null,
-      shadowSize: [68, 95],
-      shadowAnchor: [22, 94]
-  });
-    return Leaflet.marker(data.position, {icon: myIcon, draggable: data.draggable });
-  }
+  
 
   getGalleryTop(p) {
     const dataGallery = p[0].imagens;

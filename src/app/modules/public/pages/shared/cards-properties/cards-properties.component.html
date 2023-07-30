@@ -17,7 +17,7 @@
             <span>{{property.preco | currency: 'BRL'}}</span>
           </div>
           <div class="texts">
-            <h5>{{property.titulo}}</h5>
+            <h5>{{property.titulo.length >= 34 ? (property.titulo | slice:0:34) + ' ...' : property.titulo}}</h5>
             <span><i class='bx bx-map'></i> {{property.endereco.cidade}} - {{property.endereco.uf}}</span>
             <div class="property-listing">
               <div class="wrap-icon">

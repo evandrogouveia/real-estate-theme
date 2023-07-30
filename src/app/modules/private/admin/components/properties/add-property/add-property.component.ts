@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { PropriedadesService } from '../services/propriedades.service';
 import { Endereco, NgxViacepService } from '@brunoc/ngx-viacep';
 import { HttpClient } from '@angular/common/http';
+import { MapsAPILoader } from '@agm/core';
 
 
 
@@ -31,7 +32,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   selectedCategoriasPropriedades = [];
 
   emptyVideo = 'assets/img/placeholder-video.jpg';
-  urlVideo;
+  urlVideo = [];
   selectedVideo: File;
 
   loading: boolean = false;
@@ -75,7 +76,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
       latitude: [''],
       longitude: ['']
     }),
-    enderecoCompleto: [''],
     categorias: ['']
   });
 
@@ -86,7 +86,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService,
     private router: Router,
     private viacep: NgxViacepService,
-    private http: HttpClient
+    private mapsAPILoader: MapsAPILoader,
   ) { }
 
   ngOnInit(): void {
@@ -104,7 +104,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => this.highlightedImageDestacada.push(e.target.result);
-      console.log(this.highlightedImageDestacada)
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImageDestacada = event.target.files[0];
       this.addPropertyForm.controls.imagemDestacada.patchValue(this.highlightedImageDestacada);
@@ -150,11 +149,10 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   showPreviewVideo(event) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.urlVideo = e.target.result;
+      reader.onload = (e: any) => this.urlVideo.push(e.target.result);
       reader.readAsDataURL(event.target.files[0]);
       this.selectedVideo = event.target.files[0];
-    } else {
-      this.urlVideo = null;
+      this.addPropertyForm.controls.video.patchValue(this.urlVideo);
     }
   }
 
@@ -183,8 +181,8 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
 
   removeVideo() {
     this.selectedVideo = null;
-    this.urlVideo = null;
-    this.addPropertyForm.controls.video.patchValue(null);
+    this.urlVideo = [];
+    this.addPropertyForm.controls.video.patchValue(this.urlVideo);
   }
 
   cancelPublication() {
@@ -196,8 +194,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
     this.addPropertyForm.controls.categorias.patchValue(this.selectedCategoriasPropriedades);
 
     const formData = new FormData();
-
-    formData.append('video', this.selectedVideo);
     formData.append('formPropriedades', JSON.stringify(this.addPropertyForm.value));
 
     if (this.isAddMode) {
@@ -258,7 +254,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
           });
         }
 
-        data[0].video ? this.urlVideo = data[0].video : this.urlVideo = null;
+        data[0].video ? this.urlVideo = data[0].video : this.urlVideo = [];
 
         this.addPropertyForm.patchValue(data[0]);
         this.addPropertyForm.controls.categorias.patchValue(data[0].categorias);
@@ -293,29 +289,24 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
 
   registerDataMarker(address) {
     let completeAddress = [
-      address.logradouro + ', ' +
-      this.addPropertyForm.controls.endereco.get('numero').value + ' - ' +
-      address.bairro + ', ' +
-      address.localidade + ' - ' +
-      address.uf
-
+      address.logradouro+', '+
+      this.addPropertyForm.controls.endereco.get('numero').value +' - '+ 
+      address.bairro +', '+
+      address.localidade +' - '+
+      address.uf +', '+
+      address.cep
     ];
-    console.log(completeAddress)
-    const request = this.http.get(`https://nominatim.openstreetmap.org/search?format=json&q=${completeAddress}`);
-
-    request.subscribe(res => console.log(res[0]))
-
-    /*this.geoCoder = new google.maps.Geocoder;
-    this.geoCoder.geocode({ 'address': completeAddress[0] }, (results, status) => {
-      const lat = results[0].geometry.location.lat();
-      const lng = results[0].geometry.location.lng();
-      console.log(lat);
-      console.log(lng)
-      this.addPropertyForm.controls.endereco.get('latitude').setValue(lat);
-      this.addPropertyForm.controls.endereco.get('longitude').setValue(lng);
-    });*/
-
+    this.mapsAPILoader.load().then(() => {;
+      this.geoCoder = new google.maps.Geocoder;
+      this.geoCoder.geocode({ 'address': completeAddress[0] }, (results, status) => {
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
+        this.addPropertyForm.controls.endereco.get('latitude').setValue(lat);
+        this.addPropertyForm.controls.endereco.get('longitude').setValue(lng);
+      });
+     });
   }
+
 
   // tslint:disable-next-line: member-ordering
   config: AngularEditorConfig = {

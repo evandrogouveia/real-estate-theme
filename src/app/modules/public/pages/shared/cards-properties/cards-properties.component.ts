@@ -47,7 +47,7 @@ export class CardsPropertiesComponent implements OnInit {
   }
 
   pageChanged(event: PageChangedEvent): void {
-    window.scrollTo(0, 200);
+    window.scrollTo(0, 1150);
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.returnedArray = this.contentArray.slice(startItem, endItem);

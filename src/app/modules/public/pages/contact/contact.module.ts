@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ContactRoutingModule } from './contact-routing.module';
 import { ContactComponent } from './contact.component';
 import { SharedModule } from '../shared/shared.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -11,7 +12,11 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     ContactRoutingModule,
-    SharedModule
+    SharedModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCzC66os6ra-4rKS59FfISfCfxkK3YM6oo',
+      libraries: ['places']
+    }),
   ]
 })
 export class ContactModule { }
