@@ -139,14 +139,27 @@
 @media(max-width: 575.98px){
     .owl-item{
         height: 580px;
+        img{
+            height: 580px;
+        }
         .caption-carousel{
             top: 40px;
             h2{
-                font-size: 34px;
+                font-size: 27px;
+                width: 95%;
+                margin-top: 100px;
             }
-            p, .nav-link{
-                width: 70%;
+            p{
+                font-size: 15px;
+                line-height: 18px;
+                width: 100%;
             }
+            .nav-link{
+                width: 40%;
+                font-size: 13px;
+                padding: 6px 15px;
+            }
+            
         }
     } 
     .owl-theme{
