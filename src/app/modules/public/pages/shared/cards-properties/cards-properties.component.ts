@@ -19,9 +19,49 @@ export class CardsPropertiesComponent implements OnInit {
   @Input() itemsPerPage = 8;
   properties$: Observable<Propriedades>;
   contentArray: any = [];
-  returnedArray: Propriedades[]
+  returnedArray: Propriedades[];
+  loading = false;
   
   home = [];
+
+  themeConfigSkeletonImage = {
+    width: '100%',
+    height: '170px',
+    position: 'absolute',
+    left: '0',
+    'border-radius': '10px 10px 0 0'
+  }
+
+
+  themeConfigSkeletonTitulo = {
+    width: '85%',
+    height: '35px',
+    position: 'absolute',
+    left: '0',
+    right: '0',
+    margin: 'auto',
+    'border-radius': '10px'
+  }
+
+  themeConfigSkeletonEndereco = {
+    width: '85%',
+    height: '20px',
+    position: 'absolute',
+    left: '0',
+    right: '0',
+    margin: 'auto',
+    'border-radius': '10px'
+  }
+
+  themeConfigSkeletonOpcoes = {
+    width: '85%',
+    height: '35px',
+    position: 'absolute',
+    left: '0',
+    right: '0',
+    margin: 'auto',
+    'border-radius': '10px'
+  }
 
   constructor(
     private propriedadesService: PropriedadesService,
@@ -39,12 +79,13 @@ export class CardsPropertiesComponent implements OnInit {
   }
 
   getPropertiesPagination() {
+    this.loading = true;
     this.properties$.pipe(
       map((value: any) => {
         this.contentArray = value;
         this.returnedArray = this.contentArray.slice(0,this.itemsPerPage);
       })
-    ).subscribe();
+    ).subscribe(() => this.loading = false);
   }
 
   pageChanged(event: PageChangedEvent): void {

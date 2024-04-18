@@ -72,6 +72,9 @@
         }
         .texts{
             padding: 20px;
+            &.loading{
+                height: 150px;
+            }
             h5{
                 font-size: 16px;
                 font-family: "Rubik", sans-serif;

@@ -8,6 +8,26 @@
         </div>
       </div>
 
+      <ng-container *ngIf="loading" >
+        <div class="col-lg-{{home[0]?.secaoTwo.gridSecao2}}" *ngFor="let p of [1,2,3,4,5,6,7,8]">
+          <span class="box-property" (click)="routerLinkId(property.ID)">
+            <div class="wrap-image">
+              <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonImage" ></ngx-skeleton-loader>
+            </div>
+           
+            <div class="texts loading">
+              <h5><ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonTitulo"></ngx-skeleton-loader></h5>
+              <span class="mb-4"><ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonEndereco"></ngx-skeleton-loader></span>
+  
+              <div class="property-listing d-block">
+                <ngx-skeleton-loader appearance="line" [theme]="themeConfigSkeletonOpcoes"></ngx-skeleton-loader>
+              </div>
+            </div>
+          </span>
+        </div>
+      </ng-container>
+      
+
       <div class="col-lg-{{home[0]?.secaoTwo.gridSecao2}}" *ngFor="let property of returnedArray">
         <span class="box-property" (click)="routerLinkId(property.ID)">
           <div class="wrap-image">
@@ -19,6 +39,7 @@
           <div class="texts">
             <h5>{{property.titulo.length >= 34 ? (property.titulo | slice:0:34) + ' ...' : property.titulo}}</h5>
             <span><i class='bx bx-map'></i> {{property.endereco.cidade}} - {{property.endereco.uf}}</span>
+
             <div class="property-listing">
               <div class="wrap-icon">
                 <i class='bx bx-hotel'></i>
