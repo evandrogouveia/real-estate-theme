@@ -77,7 +77,6 @@ export class EditBannerHomeComponent implements OnInit {
       if (banner[0]?.ID) {
         this.imagemSrcPaginas = banner[0]?.imagem;
         this.addBannerPaginasForm.patchValue(banner[0]);
-        console.log(this.addBannerPaginasForm.controls.ID.value)
       }
     });
 
@@ -126,8 +125,9 @@ export class EditBannerHomeComponent implements OnInit {
 
   openModalConfirmDelete(b){
     const initialState = {
-      titleModal: 'Deseja realmente excluir esta banner?',
+      titleModal: 'Deseja realmente excluir este banner?',
       titlePost: b.titulo,
+      typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result === true){
           this.delete(b);
@@ -149,10 +149,22 @@ export class EditBannerHomeComponent implements OnInit {
     });
   }
 
+  openModalAddBanner() {
+    const initialState = {
+      titleModal: 'Adicionar Banner',
+      typeModal: 'add',
+    };
+
+    this.bsModalRef = this.modalService.show(
+      ModalComponent,
+      Object.assign({initialState}, {class: 'modal-add-banner'}),
+    );
+  }
+
   addUpdadeBannerPaginas() {
     const ID = this.addBannerPaginasForm.controls.ID.value;
     const formData = new FormData();
-    console.log(ID)
+  
     if(this.selectedImagePaginas){
       formData.append('imagemPaginas', this.selectedImagePaginas);
     }

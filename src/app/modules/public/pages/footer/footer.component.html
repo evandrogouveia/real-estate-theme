@@ -51,7 +51,7 @@
                             <a class="nav-link" href="{{footer[0]?.redesSociais.facebook}}" target="_blank"><i class='bx bxl-facebook'></i></a>
                         </li>
                         <li *ngIf="footer[0]?.redesSociais.twitter.length > 0" class="nav-item">
-                            <a class="nav-link" href="{{footer[0]?.redesSociais.twitter}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+                            <a class="nav-link" href="{{footer[0]?.redesSociais.twitter}}" target="_blank"><i class="custom-icon-twitter"></i></a>
                         </li>
                         <li *ngIf="footer[0]?.redesSociais.telegram.length > 0" class="nav-item">
                             <a class="nav-link" href="{{footer[0]?.redesSociais.telegram}}"target="_blank"><i class='bx bxl-telegram'></i></a>
@@ -68,8 +68,12 @@
     <div class="footer-copyright">
         <div class="container">
             <div class="texts">
-                <p>Copyright © 2021 Advocacy theme Lorem Ipsum - Todos os Direitos Reservados</p>
-                <p>Desenvolvido por: <a href="http://evandrogouveia.epizy.com/" target="_blank">Evandro Gouveia</a></p>
+                <p>{{footer[0]?.copyright}}</p>
+                <p>Desenvolvido por: 
+                    <a href="https://mypagetecnologia.com.br/" target="_blank">
+                        <img src="assets/img/logomypage.png" width="100" height="auto" alt="logo mypage tecnologia">
+                    </a>
+                </p>
             </div>
         </div>
     </div>

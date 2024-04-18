@@ -61,6 +61,7 @@ export class ListPropertyComponent implements OnInit {
     const initialState = {
       titleModal: 'Deseja realmente excluir este Imóvel?',
       titlePost: p.titulo,
+      typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result === true){
           this.delete(p);

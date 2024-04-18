@@ -29,7 +29,8 @@ export class ListPostsComponent implements OnInit {
 
   getPosts() {
     this.postService.getAllPosts().subscribe((posts: any) => {
-      posts.map(p => p.categorias = JSON.parse(p.categorias));
+      console.log(posts)
+      posts.map(p => p.categorias = p.categorias);
       this.posts = posts;
      })
   }
@@ -38,6 +39,7 @@ export class ListPostsComponent implements OnInit {
     const initialState = {
       titleModal: 'Deseja realmente excluir o Post?',
       titlePost: p.titulo,
+      typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result === true){
           this.delete(p);

@@ -21,10 +21,10 @@
 
                     <p *ngIf="!this.isAddMode" class="published-info">Publicado em: 
                         <strong>
-                            {{publicationDate?.toDate() | date: 'dd'}} de 
-                            {{publicationDate?.toDate() | date: 'MMMM'}} de 
-                            {{publicationDate?.toDate() | date: 'YYYY'}} às 
-                            {{publicationDate?.toDate() | date: 'HH:mm'}} 
+                            {{dataPublicacao | date: 'dd'}} de 
+                            {{dataPublicacao | date: 'MMMM'}} de 
+                            {{dataPublicacao | date: 'YYYY'}} às 
+                            {{dataPublicacao | date: 'HH:mm'}} 
                         </strong>
                     </p>
                 </div>

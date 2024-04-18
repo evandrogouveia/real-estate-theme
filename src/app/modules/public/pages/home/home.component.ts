@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Post } from 'src/app/modules/private/admin/components/blog/models/post.model';
 import { CategoryService } from 'src/app/modules/private/admin/components/blog/services/category.service';
 import { PostService } from 'src/app/modules/private/admin/components/blog/services/post.service';
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   depoimentos$: Observable<any>;
   backgroundDepoimentos = [];
   home = [];
+  qtdItens: any;
 
   constructor(
     private postsService: PostService,
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
       if(fundo) { this.backgroundDepoimentos = fundo; }
     })
     this.editThemeService.getAllDadosHome().subscribe(home => {
+      home[0].secaoNoticias.gridNoticias === '3' ? this.qtdItens = 4 : this.qtdItens = 3;
       this.home = home;
     });
   }

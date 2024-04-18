@@ -18,7 +18,7 @@
             font-weight: 600;
             font-size: 55px;
             color: var(--bg-white-color);
-            width: 55%;
+            width: 65%;
         }
         p{
             font-size: 18px;
@@ -127,8 +127,8 @@
     .owl-theme{
         .owl-nav.disabled{
             + .owl-dots{
-                margin-top: 0;
-                padding-bottom: 30px;
+                margin-top: 30;
+                padding-bottom: 40px;
             }
         } 
     } 

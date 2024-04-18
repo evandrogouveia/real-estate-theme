@@ -71,6 +71,7 @@ export class CategoryComponent implements OnInit {
     const initialState = {
       titleModal: 'Deseja realmente excluir esta categoria?',
       titlePost: c.nome,
+      typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result === true){
           this.delete(c);

@@ -81,6 +81,16 @@ footer{
                 }
             }
         }
+        .custom-icon-twitter{
+            background-image: url('/assets/img/icons/twitter-branco.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            line-height: 0;
+            display: block;
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
     }
     .footer-copyright{
         width: 100%;

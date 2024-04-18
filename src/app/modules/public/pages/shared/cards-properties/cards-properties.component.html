@@ -41,7 +41,7 @@
         </span>
       </div>
 
-      <div class="col-lg-12" *ngIf="contentArray.length > 8 && hasPaginator">
+      <div class="col-lg-12" *ngIf="contentArray.length > itemsPerPage && hasPaginator">
         <pagination previousText="Anterior" nextText="Próximo" [totalItems]="contentArray.length"
           [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)">
         </pagination>

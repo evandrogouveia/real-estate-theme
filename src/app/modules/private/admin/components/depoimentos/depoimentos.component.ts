@@ -161,6 +161,7 @@ export class DepoimentosComponent implements OnInit {
     const initialState = {
       titleModal: 'Deseja realmente excluir o depoimento de?',
       titlePost: d.nome,
+      typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result === true){
           this.delete(d);

@@ -171,8 +171,8 @@
             <h3 [innerHTML]="home[0]?.secaoNoticias.subtitulo"></h3>
           </div>
         </div>
-
-        <div class="col-lg-{{home[0]?.secaoNoticias.gridNoticias}}" *ngFor="let p of posts$ | async">
+       
+        <div class="col-lg-{{home[0]?.secaoNoticias.gridNoticias}} mb-5" *ngFor="let p of (posts$ | async) | slice:0:qtdItens">
           <div class="card">
             <a routerLink="/blog/single-blog/{{p.ID}}" class="box-image">
               <img class="card-img-top" src="{{p.imagemDestacada}}" alt="Card image cap">
@@ -195,6 +195,10 @@
               </a>
             </div>
           </div>
+        </div>
+
+        <div class="col-lg-12">
+          <a class="nav-link view-all" routerLink="/blog">Ver todas as notícias</a>
         </div>
       </div>
     </div>

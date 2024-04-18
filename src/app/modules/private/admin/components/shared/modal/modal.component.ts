@@ -9,7 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap';
 export class ModalComponent implements OnInit {
   @Input() titleModal: string;
   @Input() titlePost: string;
-
+  @Input() typeModal: string;
 
   constructor(public bsModalRef: BsModalRef) { }
 

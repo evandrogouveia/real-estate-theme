@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap';
 import * as CryptoJS from 'crypto-js';
-import { User } from 'src/app/modules/private/login/model/user.model';
+import { User } from 'src/app/modules/login/model/user.model';
 import { UserService } from '../service/user.service';
 import { ToastrService } from 'ngx-toastr';
 

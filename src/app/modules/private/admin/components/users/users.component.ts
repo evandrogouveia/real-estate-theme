@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { User } from '../../../login/model/user.model';
+import { User } from '../../../../login/model/user.model';
 import { ModalComponent } from '../shared/modal/modal.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { UserService } from './service/user.service';
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.users$ = this.userService.getUsers();
+  
   }
 
   openModalAddUser(){
@@ -38,6 +38,7 @@ export class UsersComponent implements OnInit {
     const initialState = {
       titleModal: 'Deseja realmente excluir o usuário?',
       titlePost: u.username,
+      typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result == true){
           this.deleteUser(u);
@@ -53,9 +54,7 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(u: User){
-    this.userService.deleteUser(u).then(() => {
-      this.toastr.success('Usuário removido com sucesso')
-    });
+    
   }
 
 }

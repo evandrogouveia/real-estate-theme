@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Post } from '../models/post.model';
 import { PostService } from '../services/post.service';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from 'src/app/modules/private/login/service/login.service';
+import { LoginService } from 'src/app/modules/login/service/login.service';
 import { CategoryService } from '../services/category.service';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
@@ -24,8 +23,8 @@ export class AddPostsComponent implements OnInit, AfterViewInit {
   selectedImage: any = null;
 
   currentDate = new Date();
-  publicationDate;
-  username: string;
+  dataPublicacao;
+  autor: any;
 
   selectedCategorias: any = [];
   isfrmChecked: boolean = false;
@@ -41,6 +40,7 @@ export class AddPostsComponent implements OnInit, AfterViewInit {
     ID: [],
     titulo: [''],
     descricao: [''],
+    dataPublicacao: [''],
     imagemDestacada: [''],
     categorias: [''],
     autor: ['']
@@ -57,15 +57,12 @@ export class AddPostsComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginService.getUser().subscribe(u => {
-      if(u) {
-        this.username = u.username;
-      }
-    });
     this.categoriesAll$ = this.categoryService.getAllCategorias();
-
     this.postId = this.route.snapshot.paramMap.get('id');
     this.isAddMode = !this.postId;
+    this.loginService.getUser().subscribe(u => {
+      this.autor = u[0]?.nomeSocial;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -100,7 +97,7 @@ export class AddPostsComponent implements OnInit, AfterViewInit {
   addUpdadePosts() {
     this.loading = true;
     this.addPostForm.controls.categorias.patchValue(this.selectedCategorias);
-    this.addPostForm.controls.autor.patchValue(this.username);
+    this.addPostForm.controls.autor.patchValue(this.autor);
 
     const formData = new FormData();
     formData.append('imagemDestacada', this.selectedImage);
@@ -152,12 +149,13 @@ export class AddPostsComponent implements OnInit, AfterViewInit {
         data[0].imagemDestacada ? this.highlightedImage= data[0].imagemDestacada : this.highlightedImage = 'assets/img/placeholder.jpg';
 
         this.addPostForm.patchValue(data[0]);
-        this.addPostForm.controls.categorias.patchValue(JSON.parse(data[0].categorias));
-        this.selectedCategorias = JSON.parse(data[0].categorias);
+        this.addPostForm.controls.categorias.patchValue(data[0].categorias);
+        this.selectedCategorias = data[0].categorias;
+        this.dataPublicacao = data[0].dataPublicacao;
 
         setTimeout(() => {
           this.inputCategories.forEach(input => {
-            if (JSON.parse(data[0].categorias).includes(input.nativeElement.value)) {
+            if (data[0].categorias.includes(input.nativeElement.value)) {
               input.nativeElement.checked = true;
             }
           });

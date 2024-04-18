@@ -5,9 +5,6 @@ header{
     .topbar{
         padding: 10px 0px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        i{
-
-        }
         p{
             margin: 0;
             color: rgba(255, 255, 255, 0.603);
@@ -38,6 +35,21 @@ header{
                 top: 4px;
                 &:hover{
                     color: var(--bg-white-color);
+                }
+            }
+            .custom-icon-twitter{
+                background-image: url('/assets/img/icons/twitter.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                margin-left: 20px;
+                line-height: 0;
+                display: block;
+                width: 22px;
+                height: 22px;
+                position: relative;
+                top: -1px;
+                &:hover{
+                    background-image: url('/assets/img/icons/twitter-branco.svg');
                 }
             }
         }

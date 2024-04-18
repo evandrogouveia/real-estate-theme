@@ -17,10 +17,35 @@
     .card-edit{
         padding: 20px 30px;
         margin-bottom: 20px;
-         .form-banner, .form-banner-pages{
+        .card-header-banner{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             h5{
-                margin-bottom: 20px;
+                margin-bottom: 0px;
             }
+            .btn-save-form{
+                background: var(--bg-primary-color);
+                color: var(--bg-white-color);
+                width: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                border-radius: 5px;
+                transition: all 0.2s;
+                box-shadow: none;
+                padding: 10px 20px;
+                i{
+                    font-size: 20px;
+                }
+                &:hover{
+                    background:var(--bg-primary-color-hover);
+                }
+            }
+        }
+         .form-banner, .form-banner-pages{
+          
             .btn-save-form{
                 background: var(--bg-primary-color);
                 color: var(--bg-white-color);

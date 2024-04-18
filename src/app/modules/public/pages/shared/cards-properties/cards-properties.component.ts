@@ -16,10 +16,11 @@ import { PropriedadesService } from 'src/app/modules/private/admin/components/pr
 export class CardsPropertiesComponent implements OnInit {
   @Input() hasPaginator: boolean;
   @Input() dataHome: any;
+  @Input() itemsPerPage = 8;
   properties$: Observable<Propriedades>;
   contentArray: any = [];
   returnedArray: Propriedades[]
-  itemsPerPage= 8;
+  
   home = [];
 
   constructor(
@@ -41,7 +42,7 @@ export class CardsPropertiesComponent implements OnInit {
     this.properties$.pipe(
       map((value: any) => {
         this.contentArray = value;
-        this.returnedArray = this.contentArray.slice(0,8);
+        this.returnedArray = this.contentArray.slice(0,this.itemsPerPage);
       })
     ).subscribe();
   }

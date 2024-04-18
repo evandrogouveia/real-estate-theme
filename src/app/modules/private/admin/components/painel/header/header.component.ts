@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { User } from 'src/app/modules/private/login/model/user.model';
-import { LoginService } from 'src/app/modules/private/login/service/login.service';
+import { User } from 'src/app/modules/login/model/user.model';
+import { LoginService } from 'src/app/modules/login/service/login.service';
 import { SidebarService } from '../../../services/sidebar.service';
 
 @Component({
