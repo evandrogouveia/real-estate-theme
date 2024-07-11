@@ -24,7 +24,6 @@ export class FormBannerComponent implements OnInit {
     link: ['']
   });
   
-
   constructor(
     private fb: FormBuilder,
     private editThemeService: EditThemeService,

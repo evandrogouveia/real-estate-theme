@@ -14,12 +14,13 @@ export class ModalComponent implements OnInit {
 
   constructor(public bsModalRef: BsModalRef) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   delete(){
     this.bsModalRef.content.callback(true);//emite um evento callback true para o modal
     this.bsModalRef.hide();
   }
+
+  
 
 }
