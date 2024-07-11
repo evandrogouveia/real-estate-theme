@@ -14,7 +14,6 @@ export class FormBannerComponent implements OnInit {
 
   imagemSrc = 'assets/img/placeholder.jpg';
   selectedImage: any = null;
-
   isAddMode: boolean;
 
   addBannerHomeForm: FormGroup = this.fb.group({
