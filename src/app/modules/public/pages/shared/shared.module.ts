@@ -7,8 +7,9 @@ import { LoadingComponent } from './loading/loading.component';
 import { NgxLoadingModule,  ngxLoadingAnimationTypes } from 'ngx-loading';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxBootstrapModule } from 'src/app/ngx-bootstrap.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -23,8 +24,10 @@ import { NgxMaskModule } from 'ngx-mask';
   imports: [
     CommonModule,
     NgxSkeletonLoaderModule,
+    RouterModule,
     NgxBootstrapModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.wanderingCubes
     }),
@@ -38,7 +41,9 @@ import { NgxMaskModule } from 'ngx-mask';
     NgxSkeletonLoaderModule,
     NgxLoadingModule,
     NgxBootstrapModule,
-    NgxMaskModule
+    NgxMaskModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }

@@ -3,7 +3,6 @@
     padding-bottom: 40px;
 }
 .wrap-gallery{
-    height: 455px;
     overflow: hidden;
 }
 .img-grid{
@@ -186,6 +185,13 @@ p{
             i{
                 font-size: 20px;
             }
+            &.custom{
+                &:hover{
+                    .custom-icon-twitter{
+                        background-image: url('/assets/img/icons/twitter-verde.svg');
+                    }
+                }
+            }
         }
     }
 }
@@ -197,6 +203,17 @@ p{
 }
 agm-map {
     height: 400px;
+}
+.custom-icon-twitter{
+    background-image: url('/assets/img/icons/twitter-cinza.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+    line-height: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: relative;
 }
 
 

@@ -75,15 +75,16 @@ export class DepoimentosComponent implements OnInit {
 
   addUpdadeDepoimento() {
     const ID = this.addDepoimentosForm.controls.ID.value;
-    const formData = new FormData();
 
     const descricao = this.addDepoimentosForm.value.descricao.replace(/<[^>]*>/g, '');
     this.addDepoimentosForm.value.descricao = descricao;
 
+    const formData = new FormData();
+
     formData.append('background', this.selectedImageBackground);
     formData.append('imagem', this.selectedImage);
     formData.append('formDepoimentos', JSON.stringify(this.addDepoimentosForm.value));
-
+    
     if (ID) {
       this.depoimentosService.updateDepoimento(ID, formData).subscribe(() => {
         this.isAddMode = true;
@@ -108,8 +109,8 @@ export class DepoimentosComponent implements OnInit {
 
     formData.append('background', this.selectedImageBackground);
     formData.append('formBackgroundDepoimentos', JSON.stringify(this.addBackgroundDepoimentosForm.value));
-
-    if (ID) {
+    console.log(ID)
+    if (ID && ID !== null) {
       this.depoimentosService.updateFundoDepoimento(ID, formData).subscribe(() => {
         this.isAddMode = true;
         this.toastr.success('Dados atualizado com sucesso', '');
@@ -132,7 +133,7 @@ export class DepoimentosComponent implements OnInit {
 
     this.depoimentosService.getFundoDepoimentos().subscribe(res => {
       if (res) {
-        console.log(res)
+        this.addBackgroundDepoimentosForm.patchValue(res[0]);
         this.imagemSrcBackground = res[0].background;
       }
     })

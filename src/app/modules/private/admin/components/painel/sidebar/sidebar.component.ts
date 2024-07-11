@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
   isCollapsedC = false;
   isCollapsedD = false;
 
-  currentUser$: Observable<User>;
+  currentUser = [];
 
   constructor(
     private sidebarService: SidebarService,
@@ -30,7 +30,9 @@ export class SidebarComponent implements OnInit {
       .subscribe(valor => { // setar o valor vindo do service na variável.
         this.retract = valor;
     });
-    this.currentUser$ = this.loginService.getUser();
+    this.loginService.getUser().subscribe(user => {
+      this.currentUser = user[0];
+    });
   }
 
   toggleSidebar() {

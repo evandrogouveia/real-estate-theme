@@ -15,7 +15,8 @@ import { BlogService } from '../../services/blog.service';
 export class SearchResultComponent implements OnInit {
   posts$: Observable<Post>
   valueFilter: any;
-
+  term;
+  
   constructor(
     private postsService: PostService,
     private route: ActivatedRoute,

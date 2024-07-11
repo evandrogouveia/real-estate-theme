@@ -79,7 +79,7 @@
                                         <div class="form-group col-lg-3 mb-3">
                                             <label for="cep" class="form-label">CEP</label>
                                             <input type="text" class="form-control" id="cep" formControlName="cep" mask="00000-000" (blur)="getAddressViaCep()"
-                                            [ngClass]="{'is-invalid': submitted && contractorRegistroForm.controls.endereco.get('cep').errors }">
+                                            [ngClass]="{'is-invalid': submitted && contatoForm.controls.endereco.get('cep').errors }">
                                          
                                         </div>
                                         <div class="form-group col-lg-9 mb-3">

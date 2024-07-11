@@ -5,7 +5,7 @@
                 <h4>Categorias de propriedades</h4>
             </div>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Pesquisar categoria" [(ngModel)]="term">
+                <input type="text" class="form-control" placeholder="Pesquisar categoria">
                 <i class="icon-search"></i>
             </div>
         </div>
@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let c of (categoriasPropriedades$ | async) | filter:term">
+                            <tr *ngFor="let c of (categoriasPropriedades$ | async)">
                                 <td><span>{{c.nome}}</span></td>
                                 <td>
                                     <i class="icon-edit" tooltip="Editar" (click)="setDataCategoriaPropriedades(c)"></i>

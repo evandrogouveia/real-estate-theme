@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../../../../login/model/user.model';
 import { ModalComponent } from '../shared/modal/modal.component';
 import { AddUserComponent } from './add-user/add-user.component';
@@ -15,7 +15,9 @@ import { UserService } from './service/user.service';
 export class UsersComponent implements OnInit {
   users$: Observable<User[]>;
   dataInput: string;
-
+  currentUser: any = [];
+  term;
+  
   constructor(
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
@@ -24,7 +26,14 @@ export class UsersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  
+    this.getUsers();
+  } 
+
+  getUsers() {
+    this.users$ = this.userService.getUsers();
+    this.userService.getUser().subscribe(user => {
+      this.currentUser = user[0];
+    });
   }
 
   openModalAddUser(){
@@ -32,12 +41,16 @@ export class UsersComponent implements OnInit {
       AddUserComponent,
       Object.assign({}, {class: 'modal-add-user'})
       );
+
+      this.modalService.onHide.subscribe(() => {
+        this.getUsers();
+      })
   }
 
   openModalConfirmDelete(u){
     const initialState = {
       titleModal: 'Deseja realmente excluir o usuário?',
-      titlePost: u.username,
+      titlePost: u.nomeSocial,
       typeModal: 'aviso',
       callback: (result) => {//recebe o evento callback true do modal
         if (result == true){
@@ -54,7 +67,12 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(u: User){
-    
+    this.userService.deleteUser(u).subscribe(() => {
+      this.getUsers();
+      this.toastr.success('Usuário removido com sucesso!');
+    }, () => {
+      this.toastr.error('Ocorreu um erro na solicitação');
+    });
   }
 
 }

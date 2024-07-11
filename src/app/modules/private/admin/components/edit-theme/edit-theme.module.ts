@@ -15,6 +15,7 @@ import { EditThemeComponent } from './edit-theme.component';
 import { EditAboutComponent } from './edit-about/edit-about.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -24,7 +25,9 @@ import { NgxMaskModule } from 'ngx-mask';
     EditFooterComponent, 
     EditBannerHomeComponent, 
     EditHomeComponent, 
-    EditThemeComponent, EditAboutComponent, EditContactComponent,
+    EditThemeComponent, 
+    EditAboutComponent, 
+    EditContactComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { NgxMaskModule } from 'ngx-mask';
     AngularEditorModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
+    SharedModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

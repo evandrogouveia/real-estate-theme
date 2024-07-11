@@ -16,7 +16,7 @@ export class CategoryComponent implements OnInit {
   dataInput: string;
 
   isAddMode: boolean;
-
+  term;
   addCategoriasForm: FormGroup = this.fb.group({
     ID: [],
     nome: ['', Validators.required],

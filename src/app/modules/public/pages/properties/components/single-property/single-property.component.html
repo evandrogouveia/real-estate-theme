@@ -4,7 +4,7 @@
             <div class="gallerize-example">
                 <div class="wrap-gallery" gallerize>
                     <section class="grid grid-row-2">
-                        <div *ngFor="let img of items; let i = index" class="item item-{{i+1}} ">
+                        <div *ngFor="let img of items | slice:0:5; let i = index" class="item item-{{i+1}} ">
                             <img class="img-grid" [src]="img.data.src">
                         </div>
                     </section>
@@ -160,7 +160,7 @@
                     <h2>Propriedades recentes</h2>
                     <div class="entry-recent-properties">
                         <ul class="list-group list-group-flush">
-                            <ng-container *ngFor="let p of properties$ | async; let i = index">
+                            <ng-container *ngFor="let p of (properties$ | async)?.results; let i = index">
                                 <li class="list-group-item" *ngIf="i < 5">
                                     <a href="javascript:void(0);" class="d-flex align-items-center">
                                         <img src="{{p.imagemDestacada}}">
@@ -189,8 +189,8 @@
                         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{url}}" target="_blank">
                             <i class='bx bxl-linkedin'></i>
                         </a>
-                        <a href="https://www.twitter.com" target="_blank">
-                            <i class='bx bxl-twitter'></i>
+                        <a class="custom" href="https://www.twitter.com" target="_blank">
+                            <i class="custom-icon-twitter"></i>
                         </a>
                         <a href="mailto:real-estate@email.com" target="_blank">
                             <i class='bx bx-envelope'></i>

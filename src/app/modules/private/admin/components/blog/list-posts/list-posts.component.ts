@@ -15,7 +15,7 @@ import { PostService } from '../services/post.service';
 export class ListPostsComponent implements OnInit {
   posts: any = [];
   dataInput: string;
-
+  term; 
   constructor(
     private postService: PostService,
     private modalService: BsModalService,

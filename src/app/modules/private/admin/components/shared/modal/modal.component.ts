@@ -10,6 +10,7 @@ export class ModalComponent implements OnInit {
   @Input() titleModal: string;
   @Input() titlePost: string;
   @Input() typeModal: string;
+  @Input() data: any
 
   constructor(public bsModalRef: BsModalRef) { }
 

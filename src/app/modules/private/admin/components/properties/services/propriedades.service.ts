@@ -12,14 +12,14 @@ export class PropriedadesService {
   constructor(private http: HttpClient) { }
 
   /*** SERVIÇOS DE PROPRIEDADESS ***/
-  newPropriedade(propriedade): Observable<Propriedades> {
+  newPropriedade(propriedade): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/new-propriedade`, propriedade);
   }
   getPropriedadeID(propriedadeID): Observable<Propriedades> {
     return this.http.get<any>(`${environment.API_URL}/propriedade/${propriedadeID}`);
   }
-  getAllPropriedades(): Observable<Propriedades> {
-    return this.http.get<any>(`${environment.API_URL}/all-propriedades`);
+  getAllPropriedades(page: number, limit: number): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/all-propriedades?page=${page}&limit=${limit}`);
   }
   updatePropriedade(propriedadeID, propriedade): Observable<Propriedades> {
     return this.http.patch<any>(`${environment.API_URL}/update-propriedade/${propriedadeID}`, propriedade);

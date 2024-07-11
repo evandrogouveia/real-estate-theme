@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value).subscribe(() => {
         this.loading = false;
-       
       },
         (err) => {
           this.loading = false;

@@ -17,20 +17,16 @@
                     <p>editar foto</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="username">Nome de usuário</label>
-                <input type="text" formControlName="username" class="form-control" id="username" 
-                [readonly]="(currentUser$ | async)?.function == 'Administrador' ? true : false">
-            </div>
-            {{(currentUser$ | async)?.function}}
+
             <div class="row">
-                <div class="col form-group">
-                    <label for="name">Nome</label>
-                    <input type="text" formControlName="name" class="form-control" id="name">
+                <div class="form-group col-lg-4">
+                    <label for="nomeSocial">Nome social</label>
+                    <input type="text" formControlName="nomeSocial" class="form-control" id="nomeSocial"
+                        [readonly]="(currentUser$ | async)?.function == 'Administrador' ? true : false">
                 </div>
-                <div class="col form-group">
-                    <label for="lastname">Sobrenome</label>
-                    <input type="text" formControlName="lastname"  class="form-control" id="lastname">
+                <div class="form-group col-lg-8">
+                    <label for="nomeCompleto">Nome completo</label>
+                    <input type="text" formControlName="nomeCompleto" class="form-control" id="nomeCompleto">
                 </div>
             </div>
             <div class="form-group">
@@ -38,53 +34,23 @@
                 <input type="email" formControlName="email" class="form-control" id="email">
             </div>
             <div class="row">
-                <div class="col-6 form-group">
+                <div class="col-lg-8 form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" formControlName="senha" class="form-control" id="senha">
+                </div>
+                <div class="col-lg-4 form-group">
                     <label for="exampleFormControlSelect1">Função</label>
-                    <select class="form-control" formControlName="function" id="exampleFormControlSelect1">
+                    <select class="form-control" formControlName="tipoUsuario" id="exampleFormControlSelect1">
                         <option value="" disabled>Selecionar função</option>
-                        <option selected value="{{(currentUser$ | async)?.function}}" >
-                            {{(currentUser$ | async)?.function}}
-                        </option>
+
                         <ng-container *ngFor="let f of functions">
-                            <option *ngIf="f !== (currentUser$ | async)?.function"  [ngValue]="f" >{{f}}</option>
+                            <option [ngValue]="f" [selected]="updateProfileForm.controls.tipoUsuario.value == f">{{f}}</option>
                         </ng-container>
                     </select>
                 </div>
             </div>
+            
             <button type="submit" class="btn mb-5">Atualizar</button>
         </form>
-        <hr>
-        <div class="header-profile mt-5">
-            <div class="wrap">
-                <h4>Alterar senha</h4>
-            </div>
-        </div>
-        
-        <form class="form-password" [formGroup]="updatePasswordForm" (ngSubmit)="updatePassword()">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="currentpassword">Senha atual</label>
-                        <input type="{{show1 ? 'text' : 'password'}}" class="form-control" id="currentpassword" 
-                            formControlName="currentpassword">
-                        <i (click)="this.show1 = !this.show1" class="icon-password"
-                        [ngClass]="{'show-pass': show1}"></i>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="form-group">
-                        <label for="newpassword">Nova senha</label>
-                        <input type="{{show2 ? 'text' : 'password'}}" class="form-control" id="newpassword"
-                            formControlName="newpassword">
-                        <i (click)="this.show2 = !this.show2" class="icon-password"
-                        [ngClass]="{'show-pass': show2}"></i>
-                    </div>
-                </div>
-                <div class="col-lg-3">          
-                    <button type="submit" class="btn">Salvar</button>
-                </div>
-            </div>
-        </form>
-
     </div>
 </section>

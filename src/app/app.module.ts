@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorService } from './modules/guards/interceptor.service';
@@ -35,7 +34,7 @@ import { InterceptorService } from './modules/guards/interceptor.service';
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    },
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

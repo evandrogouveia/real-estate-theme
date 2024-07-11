@@ -12,22 +12,11 @@ import { EditThemeService } from '../services/edit-theme.service';
   styleUrls: ['./edit-banner-home.component.scss']
 })
 export class EditBannerHomeComponent implements OnInit {
-  imagemSrc = 'assets/img/placeholder.jpg';
   imagemSrcPaginas = 'assets/img/placeholder.jpg';
-  selectedImage: any = null;
   selectedImagePaginas: any = null;
-
   isAddMode: boolean;
-
   banners$: Observable<any>;
-
-  addBannerHomeForm: FormGroup = this.fb.group({
-    ID: [],
-    imagem: [''],
-    titulo: [''],
-    descricao: [''],
-    link: ['']
-  });
+  bsModalRef?: BsModalRef;
 
   addBannerPaginasForm: FormGroup = this.fb.group({
     ID: [],
@@ -39,24 +28,12 @@ export class EditBannerHomeComponent implements OnInit {
     private editThemeService: EditThemeService,
     private toastr: ToastrService,
     private modalService: BsModalService,
-    public bsModalRef: BsModalRef,
+  
     ) { }
 
   ngOnInit(): void {
     this.isAddMode = true;
     this.getBanners();
-  }
-
-  showPreviewImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => this.imagemSrc = e.target.result;
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
-    } else {
-      this.imagemSrc = 'assets/img/placeholder.jpg';
-      this.selectedImage = null;
-    }
   }
 
   showPreviewImagePaginas(event: any) {
@@ -79,48 +56,6 @@ export class EditBannerHomeComponent implements OnInit {
         this.addBannerPaginasForm.patchValue(banner[0]);
       }
     });
-
-    
-  }
-
-  addUpdadeBannerHome() {
-    const ID = this.addBannerHomeForm.controls.ID.value;
-    const formData = new FormData();
-
-    formData.append('imagem', this.selectedImage);
-    formData.append('formBanners', JSON.stringify(this.addBannerHomeForm.value));
-
-    if (ID) {
-      this.editThemeService.updateBanner(ID, formData).subscribe(() => {
-        this.isAddMode = true;
-        this.reset();
-        this.getBanners();
-        this.toastr.success('Dados atualizado com sucesso', '');
-      }, (err) => {
-        this.toastr.error('Ocorreu um erro ao atualizar dados, tente novamente mais tarde', '');
-      });
-    } else {
-      this.editThemeService.newBanner(formData).subscribe(() => {
-        this.reset();
-        this.getBanners();
-        this.toastr.success('Dados salvo com sucesso', '');
-      }, (err) => {
-        this.toastr.error('Ocorreu um erro ao cadastrar dados, tente novamente mais tarde', '');
-      });
-    }
-  }
-
-  reset() {
-    window.scroll(0, 650);
-    this.addBannerHomeForm.reset();
-    this.imagemSrc = 'assets/img/placeholder.jpg';
-    this.selectedImage = null;
-  }
-
-  setDataBanners(b): void{
-    this.isAddMode = false;
-    window.scroll(0, 0);
-    this.addBannerHomeForm.patchValue(b);
   }
 
   openModalConfirmDelete(b){
@@ -152,13 +87,37 @@ export class EditBannerHomeComponent implements OnInit {
   openModalAddBanner() {
     const initialState = {
       titleModal: 'Adicionar Banner',
-      typeModal: 'add',
+      typeModal: 'ADD_BANNER',
     };
 
     this.bsModalRef = this.modalService.show(
       ModalComponent,
       Object.assign({initialState}, {class: 'modal-add-banner'}),
     );
+
+    this.modalService.onHide.subscribe(() => {
+      this.getBanners();
+      window.scroll(0, 0);
+    });
+  }
+
+  setDataBanners(b): void{
+    this.isAddMode = false;
+    const initialState = {
+      titleModal: 'Atualizar Banner',
+      typeModal: 'EDIT_BANNER',
+      data: b
+    };
+
+    this.bsModalRef = this.modalService.show(
+      ModalComponent,
+      Object.assign({initialState}, {class: 'modal-add-banner'}),
+    );
+
+    this.modalService.onHide.subscribe(() => {
+      this.getBanners();
+      window.scroll(0, 0);
+    });
   }
 
   addUpdadeBannerPaginas() {

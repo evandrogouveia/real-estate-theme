@@ -8,6 +8,8 @@ import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { NgxMaskModule } from 'ngx-mask';
 import localePt from '@angular/common/locales/pt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpCacheInterceptorService } from '../guards/http-cache-interceptor.service';
 
 registerLocaleData(localePt);
 
@@ -31,6 +33,11 @@ registerLocaleData(localePt);
       provide: LOCALE_ID,
       useValue: 'pt',
     },
+    /*{
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpCacheInterceptorService,
+      multi: true
+    },*/
   ]
 })
 export class PublicModule { }

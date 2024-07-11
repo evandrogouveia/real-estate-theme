@@ -15,6 +15,7 @@ import { BlogService } from '../../services/blog.service';
 export class AsideLateralComponent implements OnInit {
   categories$: Observable<Category[]>;
   posts$: Observable<Post>;
+  term;
 
   @Output() eventEmmit = new EventEmitter<Observable<any>>(true);
   @Output() valueToEmit = new EventEmitter<boolean>();

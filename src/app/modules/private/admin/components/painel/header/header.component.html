@@ -13,9 +13,9 @@
     <div class="profile-menu" dropdown>
       <div class="button-drop" dropdownToggle aria-controls="dropdown-animated">
         <div class="profile-img">
-          <img src="{{(currentUser$ | async)?.avatar ? (currentUser$ | async)?.avatar : imageSrc}}" alt="avatar">
+          <img src="{{currentUser?.foto && currentUser?.foto !== 'undefined' ? currentUser?.foto : imageSrc}}" alt="foto">
         </div>
-        <span class="username">{{(currentUser$ | async)?.username}}</span>
+        <span class="username">{{currentUser?.nomeSocial}}</span>
         <span class="down-arrow-header"></span>
       </div>
 
@@ -24,13 +24,13 @@
           <p>Ações</p>
         </li>
         <li class="menuitem">
-          <a routerLink="/private/admin/edit-profile/{{(currentUser$ | async)?.id}}">
+          <a routerLink="/private/admin/edit-profile/{{currentUser?.ID}}">
             <i class="icon-person-profile"></i>
             <span>Meu perfil</span>
           </a>
         </li>
         <li class="menuitem">
-          <a routerLink="javascript:void(0)" (click)="logout()">
+          <a href="javascript:void(0);" (click)="logout()">
             <i class="icon-sair"></i>
             <span>Sair</span>
           </a>

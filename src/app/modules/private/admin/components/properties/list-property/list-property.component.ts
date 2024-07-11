@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'leaflet';
 import { BsModalRef, BsModalService, PageChangedEvent } from 'ngx-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { Propriedades } from '../models/propriedades.model';
 import { PropriedadesService } from '../services/propriedades.service';
+import { delay, last } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-property',
@@ -15,15 +14,18 @@ import { PropriedadesService } from '../services/propriedades.service';
 export class ListPropertyComponent implements OnInit {
 
   dataInput: string;
-  contentArray: any = [];
-  returnedArray: any = [];
-  itemsPerPage = 8;
+  propriedades: any = [];
+
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  totalItems = 0;
+  loading = false;
 
   constructor(
     private propriedadesService: PropriedadesService,
     private modalService: BsModalService,
     public bsModalRef: BsModalRef,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -31,17 +33,18 @@ export class ListPropertyComponent implements OnInit {
   }
 
   getPropriedades() {
-     this.propriedadesService.getAllPropriedades().subscribe((value: any) => {
-        this.contentArray = value;
-        this.returnedArray = this.contentArray.slice(0,8);
+     this.loading = true;
+     this.propriedadesService.getAllPropriedades(this.currentPage, this.itemsPerPage).subscribe((data: any) => {
+        this.propriedades = data.results;
+        this.totalItems = data.totalItems;
+        this.loading = false;
      });
   }
 
   pageChanged(event: PageChangedEvent): void {
     window.scrollTo(0, 200);
-    const startItem = (event.page - 1) * event.itemsPerPage;
-    const endItem = event.page * event.itemsPerPage;
-    this.returnedArray = this.contentArray.slice(startItem, endItem);
+    this.currentPage = event.page;
+    this.getPropriedades();
   }
 
   duplicateItem(p) {

@@ -6,7 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { PropriedadesService } from '../services/propriedades.service';
 import { Endereco, NgxViacepService } from '@brunoc/ngx-viacep';
-import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
 
 
@@ -50,6 +49,10 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
 
   searchAddress: string;
   private geoCoder;
+
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
+  submitted = false;
 
   addPropertyForm: FormGroup = this.fb.group({
     ID: [null],
@@ -106,7 +109,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
       reader.onload = (e: any) => this.highlightedImageDestacada.push(e.target.result);
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImageDestacada = event.target.files[0];
-      this.addPropertyForm.controls.imagemDestacada.patchValue(this.highlightedImageDestacada);
     }
   }
 
@@ -119,7 +121,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
           reader.onload = (e: any) => this.highlightedImagesGallery.push(e.target.result);
           reader.readAsDataURL(event.target.files[i]);
           this.selectedMultiplesImages.push(event.target.files[i]);
-          this.addPropertyForm.controls.imagens.patchValue(this.highlightedImagesGallery);
         }
       } else {
         this.toastr.error('Selecione no máximo 10 imagens', '');
@@ -137,7 +138,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
           reader.onload = (e: any) => this.highlightedImagesPlantas.push(e.target.result);
           reader.readAsDataURL(event.target.files[i]);
           this.selectedMultiplesImagesPlantas.push(event.target.files[i]);
-          this.addPropertyForm.controls.plantas.patchValue(this.highlightedImagesPlantas);
         }
       } else {
         this.toastr.error('Selecione no máximo 10 imagens', '');
@@ -152,7 +152,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
       reader.onload = (e: any) => this.urlVideo.push(e.target.result);
       reader.readAsDataURL(event.target.files[0]);
       this.selectedVideo = event.target.files[0];
-      this.addPropertyForm.controls.video.patchValue(this.urlVideo);
     }
   }
 
@@ -170,7 +169,6 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   removeImageGallery(i) {
     this.highlightedImagesGallery.splice(i, 1);
     this.selectedMultiplesImages.splice(i, 1);
-    this.addPropertyForm.controls.imagens.patchValue(this.highlightedImagesGallery);
   }
 
   removeImagePlantas(i) {
@@ -182,7 +180,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
   removeVideo() {
     this.selectedVideo = null;
     this.urlVideo = [];
-    this.addPropertyForm.controls.video.patchValue(this.urlVideo);
+    this.addPropertyForm.controls.video.patchValue('');
   }
 
   cancelPublication() {
@@ -191,11 +189,24 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
 
   addUpdadePropriedade() {
     this.loading = true;
+    this.submitted = true;
     this.addPropertyForm.controls.categorias.patchValue(this.selectedCategoriasPropriedades);
-
+   
     const formData = new FormData();
-    formData.append('formPropriedades', JSON.stringify(this.addPropertyForm.value));
+    formData.append('imagemDestacada', this.selectedImageDestacada);
+    
+    for (let i in this.selectedMultiplesImages) {
+      formData.append('imagens', this.selectedMultiplesImages[i]);
+    }
 
+    for (let i in this.selectedMultiplesImages) {
+      formData.append('plantas', this.selectedMultiplesImagesPlantas[i]);
+    }
+
+    formData.append('video', this.selectedVideo);
+    
+    formData.append('formPropriedades', JSON.stringify(this.addPropertyForm.value));
+    console.log(this.addPropertyForm.value)
     if (this.isAddMode) {
       //remove as tags html da descrição
       const descricaoFormatada = this.addPropertyForm.value.descricao.replace(/<[^>]*>/g, '');
@@ -206,13 +217,16 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
           this.reset();
           this.toastr.success('Propriedade adicionada com sucesso', '');
           this.router.navigate(['private/admin/list-properties']);
+          this.submitted = false;
         }, (err) => {
           console.log(err)
           this.loading = false;
+          this.submitted = false;
           this.toastr.error('Ocorreu um erro ao adicionar a Propriedade, tente novamente mais tarde', '');
         });
       } else {
         this.loading = false;
+        this.submitted = false;
         this.toastr.error('Preencha os campos obrigatórios', '');
       }
     } else {
@@ -220,8 +234,10 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
         this.reset();
         this.toastr.success('Propriedade atualizada com sucesso', '');
         this.router.navigate(['private/admin/list-properties']);
+        this.submitted = false;
       }, (err) => {
         this.loading = false;
+        this.submitted = false;
         this.toastr.error('Ocorreu um erro ao atualizar a Propriedade, tente novamente mais tarde', '');
       });
     }
@@ -255,6 +271,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
         }
 
         data[0].video ? this.urlVideo = data[0].video : this.urlVideo = [];
+       
 
         this.addPropertyForm.patchValue(data[0]);
         this.addPropertyForm.controls.categorias.patchValue(data[0].categorias);

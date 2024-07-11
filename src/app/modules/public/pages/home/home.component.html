@@ -22,45 +22,55 @@
 <section>
   <div class="section-row-filter">
     <div class="container">
-      <div class="wrap-filter">
+      <form class="wrap-filter" [formGroup]="filterForm" (ngSubmit)="filtrar()">
         <div class="row">
-          <div class="col-lg-3 box-filter">
+          <div class="col-lg-2 box-filter">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Cidade">
+              <select class="form-control" id="estado" formControlName="estado" required>
+                <option value="" selected disabled>Estado</option>
+                <option *ngFor="let c of estados" [value]="c.sigla">{{c.nome}}</option>
+              </select>
             </div>
           </div>
-          <div class="col-lg-3 box-filter">
+          <div class="col-lg-2 box-filter">
             <div class="form-group">
-              <select class="form-control" id="exampleFormControlSelect1">
+              <select class="form-control" id="cidade" formControlName="cidade" required>
+                <option value="" selected disabled>Cidade</option>
+                <option *ngFor="let c of cidades" [value]="c.nome">{{c.nome}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2 box-filter">
+            <div class="form-group">
+              <select class="form-control" id="categoria" formControlName="categoria" required>
                 <option value="" selected disabled>Categoria</option>
                 <option *ngFor="let c of (categorias$ | async)" [value]="c.nome">{{c.nome}}</option>
-              
               </select>
             </div>
           </div>
           <div class="col-lg-2 box-filter">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
+                <span class="input-group-text">R$</span>
               </div>
               <input type="text" class="form-control price" placeholder="Preço Min." mask="separator.2" [decimalMarker]="','"
-              thousandSeparator="." [dropSpecialCharacters]="true" >
+              thousandSeparator="." [dropSpecialCharacters]="true" formControlName="precoMin">
             </div>
           </div>
           <div class="col-lg-2 box-filter">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
+                <span class="input-group-text">R$</span>
               </div>
               <input type="text" class="form-control price" placeholder="Preço Max." mask="separator.2" [decimalMarker]="','"
-              thousandSeparator="." [dropSpecialCharacters]="true">
+              thousandSeparator="." [dropSpecialCharacters]="true" formControlName="precoMax">
             </div>
           </div>
           <div class="col-lg-2 box-filter">
-            <button class="btn btn-filter">Buscar</button>
+            <button type="submit" class="btn btn-filter">Buscar</button>
           </div>
         </div>
-      </div>
+      </form>
 
       <div class="row">
         <div class="col-lg-12">

@@ -33,6 +33,9 @@ export class SinglePropertyComponent implements OnInit {
 
   private geoCoder;
 
+  currentPage: number = 1;
+  itemsPerPage: number = 12;
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private propriedadesService: PropriedadesService,
@@ -42,7 +45,7 @@ export class SinglePropertyComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.properties$ = this.propriedadesService.getAllPropriedades();
+    this.properties$ = this.propriedadesService.getAllPropriedades(this.currentPage, this.itemsPerPage);
     this.url = window.location.href;
     this.getPropriedade();
   }

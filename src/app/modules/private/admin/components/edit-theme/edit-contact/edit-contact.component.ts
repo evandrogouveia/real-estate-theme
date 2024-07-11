@@ -16,6 +16,7 @@ export class EditContactComponent implements OnInit {
   icones = arrayIcones;
 
   isAddMode: boolean;
+  submitted = false;
 
   private geoCoder;
 
@@ -79,21 +80,26 @@ export class EditContactComponent implements OnInit {
   }
 
   addUpdateContato() {
+    this.submitted = true;
     const ID = this.contatoForm.controls.ID.value;
 
     if (ID) {
       this.editThemeService.updateDadosContatos(ID, this.contatoForm.value).subscribe(() => {
         this.setDataForms();
         this.toastr.success('Dados atualizado com sucesso', '');
+        this.submitted = false;
       }, (err) => {
         this.toastr.error('Ocorreu um erro ao atualizar dados, tente novamente mais tarde', '');
+        this.submitted = false;
       });
     } else {
       this.editThemeService.newDadosContatos(this.contatoForm.value).subscribe(() => {
         this.setDataForms();
         this.toastr.success('Dados salvo com sucesso', '');
+        this.submitted = false;
       }, (err) => {
         this.toastr.error('Ocorreu um erro ao salvar dados, tente novamente mais tarde', '');
+        this.submitted = false;
       });
     }
   }

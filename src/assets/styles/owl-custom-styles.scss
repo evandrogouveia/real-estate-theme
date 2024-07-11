@@ -83,7 +83,7 @@
 
 .section-row-testimony{
     .owl-item{
-        height: 300px;
+        height: 350px;
         .caption-carousel{
             position: absolute;
             top: 180px;
@@ -152,7 +152,7 @@
             p{
                 font-size: 15px;
                 line-height: 18px;
-                width: 100%;
+                width: 95%;
             }
             .nav-link{
                 width: 40%;
@@ -166,5 +166,19 @@
         .owl-nav{
             display: none;
         }
+    }
+
+    .section-row-testimony{
+        .owl-item{
+            height: 400px;
+            img{
+                height: auto;
+            }
+            .caption-carousel{
+                p{
+                    width: 90%;
+                }
+            }
+        } 
     }
 }

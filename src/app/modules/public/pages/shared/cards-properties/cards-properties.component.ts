@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageChangedEvent } from 'ngx-bootstrap';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { EditThemeService } from 'src/app/modules/private/admin/components/edit-theme/services/edit-theme.service';
 import { Propriedades } from 'src/app/modules/private/admin/components/properties/models/propriedades.model';
 import { PropriedadesService } from 'src/app/modules/private/admin/components/properties/services/propriedades.service';
+import { FiltroService } from '../../../utils/filtro.service';
 
 
 @Component({
@@ -16,13 +16,17 @@ import { PropriedadesService } from 'src/app/modules/private/admin/components/pr
 export class CardsPropertiesComponent implements OnInit {
   @Input() hasPaginator: boolean;
   @Input() dataHome: any;
-  @Input() itemsPerPage = 8;
-  properties$: Observable<Propriedades>;
+
+  properties = [];
   contentArray: any = [];
   returnedArray: Propriedades[];
   loading = false;
   
+  currentPage: number = 1;
+  @Input() itemsPerPage: number = 8;
+  totalItems = 0;
   home = [];
+  hasParams = false;
 
   themeConfigSkeletonImage = {
     width: '100%',
@@ -66,33 +70,50 @@ export class CardsPropertiesComponent implements OnInit {
   constructor(
     private propriedadesService: PropriedadesService,
     private router: Router,
-    private editThemeService: EditThemeService
+    private route: ActivatedRoute,
+    private editThemeService: EditThemeService,
+    private filtrosService: FiltroService
     ) { }
 
   ngOnInit(): void {
-    this.properties$ = this.propriedadesService.getAllPropriedades();
-    this.getPropertiesPagination();
+    this.getPropriedadesFiltradas();
+    this.getDadosHome();
+  }
 
+  getDadosHome() {
     this.editThemeService.getAllDadosHome().subscribe(home => {
       this.home = home;
     });
   }
 
+  getPropriedadesFiltradas() {
+    this.hasParams = false;
+    this.route.queryParams.subscribe(params => {
+      if(Object.keys(params).length > 0) {
+        this.hasParams = true;
+        this.filtrosService.filtroPropriedades(this.currentPage, this.itemsPerPage, params).subscribe(res => {
+          this.properties = res.results;
+          this.totalItems = res.totalItems;
+        });
+      } else {
+        this.getPropertiesPagination();
+      }
+    });
+  }
+
   getPropertiesPagination() {
     this.loading = true;
-    this.properties$.pipe(
-      map((value: any) => {
-        this.contentArray = value;
-        this.returnedArray = this.contentArray.slice(0,this.itemsPerPage);
-      })
-    ).subscribe(() => this.loading = false);
+    this.propriedadesService.getAllPropriedades(this.currentPage, this.itemsPerPage).subscribe(data => {
+      this.properties = data.results;
+      this.totalItems = data.totalItems;
+      this.loading = false;
+    });
   }
 
   pageChanged(event: PageChangedEvent): void {
     window.scrollTo(0, 1150);
-    const startItem = (event.page - 1) * event.itemsPerPage;
-    const endItem = event.page * event.itemsPerPage;
-    this.returnedArray = this.contentArray.slice(startItem, endItem);
+    this.currentPage = event.page;
+    this.getPropertiesPagination();
   }
 
   routerLinkId(idProperty) {

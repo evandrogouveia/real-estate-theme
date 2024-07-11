@@ -32,7 +32,6 @@ export class LoginService {
         /*this.authService.setDataInLocalStorage('token', res.token);
         this.authService.logged.next(true);
         res.data.tipoUsuario === 'admin' ? this.router.navigate(['private/admin']) : this.router.navigate(['/vereador']);*/
-        console.log(res)
       }),
       catchError(this.handleError)
     );
@@ -46,7 +45,7 @@ export class LoginService {
       map(res => {
         this.authService.setDataInLocalStorage('token', res.token);
         this.authService.logged.next(true);
-        res.data.tipoUsuario === 'admin' ? this.router.navigate(['private/admin']) : null;
+        this.router.navigate(['private/admin']);
       }),
       catchError(this.handleError)
     );
@@ -80,7 +79,7 @@ export class LoginService {
   // SAIR
   logout() {
     this.http.post<any>(`${environment.API_URL}/logout`, {})
-    .subscribe(res => {
+    .subscribe(() => {
       this.authService.clearStorage();
       this.authService.logged.next(false);
       this.router.navigate(['/login']);

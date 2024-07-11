@@ -30,7 +30,7 @@ export class SingleBlogComponent implements OnInit, AfterViewInit {
   getPostId() {
     const postId = this.route.snapshot.paramMap.get('id');
     this.postsService.getPostID(postId).subscribe((post: any) => {
-      post.map(p => p.categorias = JSON.parse(p.categorias));
+      post.map(p => p.categorias = p.categorias);
       this.post = post;
     });
   }
@@ -40,5 +40,11 @@ export class SingleBlogComponent implements OnInit, AfterViewInit {
       this.url = window.location.href;
     }, 1000);
   }
+
+  reloadPost() {
+    this.getPostId();
+  }
+
+
 
 }

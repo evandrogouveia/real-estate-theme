@@ -12,7 +12,7 @@ import { SidebarService } from '../../../services/sidebar.service';
 export class HeaderComponent implements OnInit {
   imageSrc = 'assets/img/icons/user-empty.svg';
 
-  currentUser$: Observable<User>;
+  currentUser: any = [];
 
   constructor(
     private sidebarService: SidebarService,
@@ -20,8 +20,9 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.currentUser$ = this.loginService.getUser();
-
+     this.loginService.getUser().subscribe(user => {
+      this.currentUser = user[0];
+     });
   }
 
   toggleSidebar() {

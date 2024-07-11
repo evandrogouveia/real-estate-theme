@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 import { User } from 'src/app/modules/login/model/user.model';
 import { UserService } from '../service/user.service';
-import * as CryptoJS from 'crypto-js';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,39 +19,34 @@ export class EditProfileComponent implements OnInit {
   show1 = false;
   show2 = false;
 
-  functions: any = ['Administrador', 'Usuário'];
+  functions: any = ['admin', 'usuario'];
 
   updateProfileForm: FormGroup = this.fb.group({
-    'id': [''],
-    'avatar': [''],
-    'username': ['', [Validators.required]],
-    'name': ['', [Validators.required]],
-    'lastname': ['', [Validators.required]],
-    'email': ['', [Validators.required, Validators.email]],
-    'function': [''],
-    'password': [''],
-  });
-
-  updatePasswordForm: FormGroup = this.fb.group({
-    'currentpassword': [''],
-    'newpassword': [''],
+    ID: [''],
+    foto: [''],
+    nomeCompleto: ['', [Validators.required]],
+    nomeSocial: ['', [Validators.required]],
+    email: ['', [Validators.required]],
+    senha: [''],
+    tipoUsuario: [''],
   });
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
-    const userId: string = this.route.snapshot.paramMap.get('id');
-   
-
+    const ID = this.route.snapshot.paramMap.get('id');
+    console.log(ID)
+    this.currentUser$ = this.userService.getUserById(ID);
     this.currentUser$.subscribe(data => {
-      this.updateProfileForm.setValue(data);
-      data.foto ? this.imagemSrc = data.foto : this.imagemSrc = this.imagemSrc;
-    })
+      console.log(data)
+      this.updateProfileForm.patchValue(data[0]);
+      data[0]?.foto && data[0]?.foto !== 'undefined' ? this.imagemSrc = data[0]?.foto : this.imagemSrc = this.imagemSrc;
+    });
   }
 
   showPreviewImage(event: any) {
@@ -71,13 +63,15 @@ export class EditProfileComponent implements OnInit {
 
   updateUser(){
     let user = this.updateProfileForm.value;
-
-    if(this.selectedImage){
-    }
-  }
-
-  updatePassword(){
-   
+    const formData = new FormData();
+    formData.append('foto', this.selectedImage);
+    formData.append('formUsuarios', JSON.stringify(this.updateProfileForm.value))
+    
+    this.userService.updateUser(user.ID, formData).subscribe(res => {
+      this.toastr.success('Usuário atualizado com sucesso!');
+    },() => {
+      this.toastr.error('Ocorreu um erro ao atualizar o usuário');
+    });
   }
 
 }
