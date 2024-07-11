@@ -56,7 +56,6 @@ export class SinglePropertyComponent implements OnInit {
       this.getGalleryTop(p);
       this.getGalleryPlans(p);
       this.propriedadeID = p;
-      console.log(p)
       this.initializeMap(p[0].endereco);
     });
   }
