@@ -106,7 +106,7 @@ export class AddPropertyComponent implements OnInit, AfterViewInit {
     this.highlightedImageDestacada = [];
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (e: any) => this.highlightedImageDestacada.push(e.target.result);
+      reader.onload = (e: any) => this.highlightedImageDestacada = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImageDestacada = event.target.files[0];
     }
