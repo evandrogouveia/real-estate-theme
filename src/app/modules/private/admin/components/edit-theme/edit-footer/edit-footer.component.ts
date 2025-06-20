@@ -91,7 +91,6 @@ export class EditFooterComponent implements OnInit {
   getFooter() {
     this.editFooterService.getFooter().subscribe(footer => {
       if (footer[0]?.ID) {
-        console.log(footer)
         this.imagemSrc = footer[0].logo;
         this.isAddMode = false;
         this.footerForm.patchValue(footer[0]);
